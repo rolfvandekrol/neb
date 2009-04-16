@@ -14,7 +14,7 @@
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function zen_moshpit_preprocess_block_editing(&$vars, $hook) {
+function zen_mothership_preprocess_block_editing(&$vars, $hook) {
   $block = $vars['block'];
 
   // Display 'edit block' for custom blocks.

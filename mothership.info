@@ -1,5 +1,5 @@
 name        = mothership
-description = Theme for cleaning up the html
+description = Theme for cleaning up that drupal html, and provide as a super super clean "theme"
 screenshot  = screenshot.png
 version     = dev 1.1
 core        = 6.x
@@ -10,35 +10,19 @@ engine      = phptemplate
 regions[header]         = header
 regions[content_top]    = content top
 regions[content_bottom] = content bottom
-regions[node_top]       = node top 
-regions[node_bottom]    = node bottom
+regions[node_region_one] = node region one
+regions[node_region_two] = node region two
 regions[left]           = left sidebar
 regions[right]          = right sidebar
 regions[footer]         = footer
    
 ;--------------------- features ----------------------------
-;features[] = logo
+features[] = logo
 features[] = name
 features[] = node_user_picture
 features[] = comment_user_picture
 features[] = search
 features[] = favicon
-;features[] = slogan
+features[] = slogan
 features[] = primary_links
 features[] = secondary_links
-
-;--------------------- styles ------------------------------
-stylesheets[all][]    = style/reset.css
-stylesheets[all][]    = style/drupal.css
-stylesheets[all][]    = style/grid.css
-stylesheets[all][]    = style/typography.css
-stylesheets[all][]    = style/style.css 
-
-;stylesheets[print][]  = style/print.css 
-
-;------------------ conditional styles---------------------
-;conditional-stylesheets[if lt IE 7][all][] = style_ie6.css
-;conditional-stylesheets[if IE 7][all][] = style_ie.css
-
-;--------------------- scripts ----------------------------
-;scripts[] = script.js

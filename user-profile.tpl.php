@@ -43,6 +43,6 @@
  * @see template_preprocess_user_profile()
  */
 ?>
-<div class="profile">
+<div class="userprofile">
   <?php print $user_profile; ?>
 </div>
