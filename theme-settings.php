@@ -87,7 +87,6 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_body_actions'],
   );
   
-  
   // -- node ------------------------------------- */
   $form['cleanup']['node'] = array(
     '#type'          => 'fieldset',
@@ -114,7 +113,6 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_node_promoted'],
   );
   
-
   $form['cleanup']['node']['mothership_class_node_content_type'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('node: content type '),
@@ -140,6 +138,7 @@ function mothership_settings($saved_settings){
     '#collapsible' => TRUE, 
     '#collapsed' => FALSE,    
   );
+  
 
   $form['cleanup']['block']['mothership_class_block_block'] = array(
     '#type'          => 'checkbox',
@@ -153,10 +152,41 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_block_module'],
   );
 
+  $form['cleanup']['block']['mothership_class_block_region_zebra'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add odd / even  in the region region-odd / region-even'),
+    '#default_value' => $settings['mothership_class_block_region_zebra'],
+  );
+
+  $form['cleanup']['block']['mothership_class_block_region_count'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add  region region-count-x'),
+    '#default_value' => $settings['mothership_class_block_region_count'],
+  );
+
+  $form['cleanup']['block']['mothership_class_block_loggedin'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add block-logged-in'),
+    '#default_value' => $settings['mothership_class_block_loggedin'],
+  );
+
+  $form['cleanup']['block']['mothership_class_block_front'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add block-front'),
+    '#default_value' => $settings['mothership_class_block_front'],
+  );
+
+
   $form['cleanup']['block']['mothership_class_block_zebra'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('add odd / even'),
+    '#title'         => t('add odd / even for all blocks'),
     '#default_value' => $settings['mothership_class_block_zebra'],
+  );
+
+  $form['cleanup']['block']['mothership_class_block_count'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add  count for all blocks count-x'),
+    '#default_value' => $settings['mothership_class_block_count'],
   );
 
 
@@ -164,10 +194,74 @@ function mothership_settings($saved_settings){
   // -- comments ------------------------------------- */
   $form['cleanup']['comment'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('comment classes'),
+    '#title'         => t('comments'),
     '#collapsible' => TRUE, 
     '#collapsed' => FALSE,    
   );
+
+  $form['cleanup']['comment']['mothership_class_comment_comment'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add comment'),
+    '#default_value' => $settings['mothership_class_comment_comment'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_new'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add new'),
+    '#default_value' => $settings['mothership_class_comment_new'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_status'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add status'),
+    '#default_value' => $settings['mothership_class_comment_status'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_first'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add first'),
+    '#default_value' => $settings['mothership_class_comment_first'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_last'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add last'),
+    '#default_value' => $settings['mothership_class_comment_last'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_zebra'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add odd even'),
+    '#default_value' => $settings['mothership_class_comment_zebra'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_front'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add front'),
+    '#default_value' => $settings['mothership_class_comment_front'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_comment'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add comment'),
+    '#default_value' => $settings['mothership_class_comment_comment'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_loggedin'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add logged-in'),
+    '#default_value' => $settings['mothership_class_comment_loggedin'],
+  );
+
+  $form['cleanup']['comment']['mothership_class_comment_user'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add user-'),
+    '#default_value' => $settings['mothership_class_comment_user'],
+  );
+
+  
+  
+
 
 
   // -- item list ------------------------------------- */
