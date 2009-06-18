@@ -7,6 +7,7 @@
  */
  
 function mothership_theme_get_default_settings($theme) {
+
   $themes = list_themes();
 
   // Get the default values from the .info file.
@@ -37,6 +38,7 @@ function mothership_theme_get_default_settings($theme) {
 }
 
 
+
 /* =====================================
   SETTINGS
 * ------------------------------------- */
@@ -45,15 +47,25 @@ function mothership_theme_get_default_settings($theme) {
 */
 
 
-function mothership_settings($saved_settings){
+//function phptemplate_settings($saved_settings){
+function mothership_settings($saved_settings, $subtheme_defaults = array(), $theme){
+  dsm($theme);
   // Get the default values from the .info file.
   $defaults = mothership_theme_get_default_settings('mothership');
 
+  // Allow a subtheme to override the default values.
+  $defaults = array_merge($defaults, $subtheme_defaults); //zen stuff
+
   // Merge the saved variables and their default values.
   $settings = array_merge($defaults, $saved_settings);
-  dsm($settings);
+
+
+  // Merge the saved variables and their default values.
+  $settings = array_merge($defaults, $saved_settings);
+  GLOBAL $vars;
+  dsm($vars);
   
-  // -- cleanup ------------------------------------- */
+  // -- cleanup -------------------------------------
   $form['cleanup'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('CSS Cleanup'),
@@ -61,18 +73,12 @@ function mothership_settings($saved_settings){
     '#collapsed' => FALSE,
   );
   
-  // -- body ------------------------------------- */
+  // -- body ------------------------------------- 
   $form['cleanup']['body'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('body classes'),
     '#collapsible' => TRUE, 
     '#collapsed' => FALSE,    
-  );
-
-  $form['cleanup']['body']['mothership_class_body_remove'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove Drupals default body classes'),
-    '#default_value' => $settings['mothership_class_body_remove'],
   );
 
   $form['cleanup']['body']['mothership_class_body_path'] = array(
@@ -87,7 +93,7 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_body_actions'],
   );
   
-  // -- node ------------------------------------- */
+  // -- node -------------------------------------
   $form['cleanup']['node'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('node classes'),
@@ -131,7 +137,7 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_node_node'],
   );
 
-  // -- block ------------------------------------- */
+  // -- block ------------------------------------- 
   $form['cleanup']['block'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('block classes'),
@@ -176,7 +182,6 @@ function mothership_settings($saved_settings){
     '#default_value' => $settings['mothership_class_block_front'],
   );
 
-
   $form['cleanup']['block']['mothership_class_block_zebra'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('add odd / even for all blocks'),
@@ -188,7 +193,6 @@ function mothership_settings($saved_settings){
     '#title'         => t('add  count for all blocks count-x'),
     '#default_value' => $settings['mothership_class_block_count'],
   );
-
 
 
   // -- comments ------------------------------------- */
@@ -265,10 +269,10 @@ function mothership_settings($saved_settings){
 
 
   // -- item list ------------------------------------- */
-  $form['cleanup']['mothership_cleanup_itemlist'] = array(
+  $form['cleanup']['mothership_item_list_first_last'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove first & last classes from item list'),
-    '#default_value' => $settings['mothership_cleanup_item_list'],
+    '#title'         => t('Remove first & last classes from item lists'),
+    '#default_value' => $settings['mothership_item_list_first_last'],
   );
 
 
