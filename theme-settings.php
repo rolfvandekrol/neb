@@ -295,14 +295,14 @@ function mothership_settings($saved_settings, $subtheme_defaults = array()){
     '#default_value' => $settings['mothership_cleanup_views_zebra'],
   );
 
-  $form['views']['mothership_cleanup_views_format_title'] = array(
+  $form['views']['mothership_cleanup_views_format_header'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Change views title fields markup'),
-    '#description'   => t('Detection is based on the label text "Title". .. this is a hack I know! - better solution for this?'),
-    '#default_value' => $settings['mothership_cleanup_views_format_title'],
+    '#description'   => t('Detection is based on the label text "#header". .. this is a hack I know!'),
+    '#default_value' => $settings['mothership_cleanup_views_format_header'],
   );
 
-  $form['views']['mothership_cleanup_views_format_title_header'] = array(
+  $form['views']['mothership_cleanup_views_format_header_markup'] = array(
     '#type'          => 'select',
     '#title'         => t('Title format markup'),
     '#default_value' => $settings['mothership_cleanup_views_format_title_header'],
@@ -316,8 +316,8 @@ function mothership_settings($saved_settings, $subtheme_defaults = array()){
                         ),
   );
 
-  if(!$settings['mothership_cleanup_views_format_title']){
-    $form['views']['mothership_cleanup_views_format_title_header']['#disabled'] = TRUE;    
+  if(!$settings['mothership_cleanup_views_format_header']){
+    $form['views']['mothership_cleanup_views_format_header_markup']['#disabled'] = TRUE;    
   }
 
 
