@@ -1,184 +1,244 @@
 <?php
-/* =====================================
-  mothership
-  template.php
-* ------------------------------------- */
-
-
-
-/* =====================================
-  include template overwrites
-* ------------------------------------- */
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.functions.php';
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.form.php';
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.cck.php';
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.table.php';
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.alternatives.php';
-/* =====================================
-  preprocess
-* ------------------------------------- */
-function mothership_preprocess_page(&$vars, $hook) {
-  // Define the content width
-  //  $vars['column_left_classes'] = $vars['right'] ? 'grid-8' : 'grid-12';
-  // Add HTML tag name for title tag.
-  $vars['site_name_element'] = $vars['is_front'] ? 'h1' : 'div';
-
-  // Classes for body element. Allows advanced theming based on context
-  // (home page, node of certain type, etc.)
-  $body_classes = array($vars['body_classes']);
-  if (!$vars['is_front']) {
-    // Add unique classes for each page and website section
-    $path = drupal_get_path_alias($_GET['q']);
-    list($section, ) = explode('/', $path, 2);
-    $body_classes[] = mothership_id_safe('page-' . $path);
-    $body_classes[] = mothership_id_safe('section-' . $section);
-    if (arg(0) == 'node') {
-      if (arg(1) == 'add') {
-        if ($section == 'node') {
-          array_pop($body_classes); // Remove 'section-node'
-        }
-        $body_classes[] = 'section-node-add'; // Add 'section-node-add'
-      }
-      elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
-        if ($section == 'node') {
-          array_pop($body_classes); // Remove 'section-node'
-        }
-        $body_classes[] = 'section-node-' . arg(2); // Add 'section-node-edit' or 'section-node-delete'
-      }
-    }
-  }
-
-  $vars['body_classes'] = implode(' ', $body_classes); // Concatenate with spaces
-  
-}
-
 /**
- * Override or insert variables into the node templates.
- *
- * @param $vars
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("node" in this case.)
+ * include template overwrites
  */
-/* 
-function mothership_preprocess_node(&$vars, $hook) {
- 
-  // Split out node-specific preprocessors, too.
-  $function = 'mothership_preprocess_node_' . $vars['node']->type;
-  if (function_exists($function)) {
-    $function($vars, $hook);
-  }
- 
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
+
+// Auto-rebuild the theme registry during theme development.
+if (theme_get_setting('mothership_rebuild_registry')) {
+  system_rebuild_theme_data();
 }
-*/
-function mothership_preprocess_node(&$vars, $hook) {
-  // Special classes for nodes
-  $classes =array();
 
-  if ($vars['sticky']) {
-    $classes[] = 'sticky';
-  }
-  if (!$vars['status']) {
-    $classes[] = 'node-unpublished';
-    $vars['unpublished'] = TRUE;
-  }
-  else {
-    $vars['unpublished'] = FALSE;
-  }
-  //teaser or node
-  if ($vars['teaser']) {
-    $classes[] = 'node-teaser';
+
+function mothership_preprocess(&$vars, $hook) {
+  //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
+
+  //---POOR THEMERS HELPER
+  if(theme_get_setting('mothership_poorthemers_helper')){
+    $vars['mothership_poorthemers_helper'] = "<!--";
+    //theme hook suggestions
+    $vars['mothership_poorthemers_helper'] .= "\n theme hook suggestions:"; 
+    $vars['mothership_poorthemers_helper'] .= "\n hook:" . $hook ." \n "; 
+    foreach ($vars['theme_hook_suggestions'] as $key => $value){
+        $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl \n" ;
+   //    $vars['mothership_poorthemers_helper'] .= " * " . str_replace('_', '-', $value) . ".tpl \n" ;
+    }
+
+    $vars['mothership_poorthemers_helper'] .= "-->";
   }else{
-    $classes[] = 'node';
+    $vars['mothership_poorthemers_helper'] ="";
   }
-  // Class for node type: "node-page", "node-story"
-  $classes[] = 'node-' . $vars['type'];
-  
-  $vars['classes'] = implode(' ', $classes);
 
-  //Add regions to a node? 
-  //TODO take this out and add is a part of the documentation
-  if ($vars['page'] == TRUE) {
-    $vars['node_region_one'] = theme('blocks', 'node_region_one');
-    $vars['node_region_two'] = theme('blocks', 'node_region_two');
-  }
+  //  $vars['content'] .= $vars['mothership_poorthemers_helper'];
+
+  //  krumo($vars['content']);  
+
+
+//  krumo($vars);
+ // $vars['elements']['#markup'] .= "ROCK!: " . $vars['mothership_poorthemers_helper'];
+
+
   
-  // quick and easy view of the templates..
- //  dsm($vars['template_files']) ;
+  if ($hook == "html") {
+  // =======================================| HTML |========================================
+    /*
+    Adds 3 css files that the subthemes wanna use.
+    reset.css - eric meyer ftw
+    reset-drupal.css cleans some of the defaults from drupal
+    mothersihp.css - adds css for use with icons & other markup fixes
+    */
+    drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset-drupal.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
+    //add a css file that suports the changes in the markup from mothership
+    drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
+
+    //add modernizr support
+    if (theme_get_setting('mothership_modernizr')) {    
+      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/modernizr.js');
+      //http://ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js      
+      $vars['modernizr'] = 'class="no-js" ';
+    }else{
+      $vars['modernizr'] = '';
+    }
+    //add selectivizr support
+    if (theme_get_setting('mothership_selectivizr')) {    
+      $vars['selectivizr'] = '<!--[if (gte IE 6)&(lte IE 8)]>';
+      $vars['selectivizr'] .= '<script type="text/javascript" src="' . drupal_get_path('theme', 'mothership') . ' /lib/selectivizr.js"></script>';
+      $vars['selectivizr'] .= '<![endif]-->';
+    }else{
+      $vars['selectivizr'] = '';
+    }
+
+    //home screen icon for ipads n stuff
+    global $theme;
+    $path = drupal_get_path('theme', $theme);
+    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">';
+    
+
+    //----- C S S -----------------------------------------------------------------------------------------------
+    //Remove & add cleasses body
+    if (theme_get_setting('mothership_classes_body_html')) {  
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('html')));
+    }
+    
+    if (theme_get_setting('mothership_classes_body_front')) {  
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('not-front')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('front')));        
+    }
+
+    if (theme_get_setting('mothership_classes_body_loggedin')) {  
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('logged-in')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('not-logged-in')));    
+    }
+
+    if (theme_get_setting('mothership_classes_body_layout')) {  
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('two-sidebars')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('one-sidebar sidebar-first')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('one-sidebar sidebar-second')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('no-sidebars')));    
+    }
+    
+    if (theme_get_setting('mothership_classes_body_toolbar')) {      
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('toolbar')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('toolbar-drawer')));
+    }
+
+    if (theme_get_setting('mothership_classes_body_pagenode')) {      
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node-')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node-1')));    
+    }
+
+    if (theme_get_setting('mothership_classes_body_path')) {
+      $path_all = drupal_get_path_alias($_GET['q']);
+      $vars['classes_array'][] = drupal_html_class('path-' . $path_all);
+    }  
+
+    if (theme_get_setting('mothership_classes_body_path_first')) {
+      $path = explode('/', $_SERVER['REQUEST_URI']);
+      if($path['1']){
+        $vars['classes_array'][] = drupal_html_class('pathone-' . $path['1']);  
+      }
+    }  
+
+
+
+
+
+
+  }
+  elseif ( $hook == "page" ) {
+    // =======================================| PAGE |========================================
+      
+    // Add HTML tag name for title tag. so it can shift from a h1 to a div if its the frontpage
+    $vars['site_name_element'] = $vars['is_front'] ? 'h1' : 'div';
+
+    //template suggestion: page--nodetype.tpl.php
+    if ( isset($vars['node']) ){
+      $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
+    }
+    // krumo($vars['theme_hook_suggestions']);
+
+
+  }elseif ( $hook == "node" ) {
+  // =======================================| NODE |========================================
+    if (theme_get_setting('mothership_classes_node')) {      
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
+    }  
+    //css classes
+    //$vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
+    if (theme_get_setting('mothership_classes_node_state')) {      
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-unpublished')));    
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-promoted')));    
+    }
+
+    // css id for the node
+    $vars['id_node'] =  'node-'. $vars['nid'];
+
+    }elseif ( $hook == "region" ) {
+    // =======================================| region |========================================
+      if (theme_get_setting('mothership_classes_region')) {      
+        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
+      }
+
+    }elseif ( $hook == "block" ) {
+    // =======================================| block |========================================
+      if (theme_get_setting('mothership_classes_block')) {      
+        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));        
+      }
+      if (theme_get_setting('mothership_classes_block_contextual')) {      
+        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));              
+      }
+
+
+      if (theme_get_setting('mothership_classes_block_id')) {      
+       $vars['id_block'] = ' id="'. $block_html_id . '"'; 
+      }else{
+        $vars['id_block'] = "";       
+      }
+
+      if (theme_get_setting('mothership_classes_block_contexual_only')) {            
+        $vars['classes_array'] ="";
+        $vars['classes_array'][] = "contextual-links-region";
+      }
+
+
+    }
+
+
+}
+
+function mothership_preprocess_page(&$vars, $hook) {
+  //print_r($vars['theme_hook_suggestions']);
+}
+
+function mothership_preprocess_node(&$vars,$hook) {
 }
 
 function mothership_preprocess_block(&$vars, $hook) {
-  $block = $vars['block'];
-  // classes for blocks.
-  $classes = array('block');
-  $classes[] = 'block-' . $block->module;
-  $classes[] = $vars['zebra'];
+  //  krumo($vars['content']);
+}
 
-  $vars['edit_links_array'] = array();
-  $vars['edit_links'] = '';
-  if (user_access('administer blocks')) {
-    include_once './' . drupal_get_path('theme', 'mothership') . '/template/template.block-editing.php';
-    zen_mothership_preprocess_block_editing($vars, $hook);
-    $classes[] = 'with-block-editing';
+function mothership_preprocess_field(&$vars, $hook) {
+  if (theme_get_setting('mothership_classes_field_field')) {  
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
   }
-  // Render block classes.
-  $vars['classes'] = implode(' ', $classes);
-}
+  //type
+  if (theme_get_setting('mothership_classes_field_type')) {  
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text-with-summary'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-ds'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-image'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-email'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-taxonomy-term-reference'))); 
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field'))); 
+  }  
 
-/* =====================================
-  views
-* ------------------------------------- */
-function mothership_preprocess_views_view_list(&$vars){
-  mothership_preprocess_views_view_unformatted($vars);  
-}
 
-  function mothership_preprocess_views_view_unformatted(&$vars) {
-    $view     = $vars['view'];
-    $rows     = $vars['rows'];
-
-    $vars['classes'] = array();
-    // Set up striping values.
-    // foreach ($rows as $id => $row) {
-    //  $vars['classes'][$id] = 'views-row-' . ($id + 1);
-    //    $vars['classes'][$id] .= ' views-row-' . ($id % 2 ? 'even' : 'odd');
-    //  if ($id == 0) {
-    //    $vars['classes'][$id] .= ' first';
-    //  }
-   // }
-   // $vars['classes'][$id] .= ' last';
+  //label
+  if (theme_get_setting('mothership_classes_field_label')) {    
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
   }
 
-
-/* =====================================
-  Breadcrumb
-* ------------------------------------- */
-function mothership_preprocess(&$variables, $hook) {
-    //Make active page title in breadcrumbs 
-    if(!empty($variables['breadcrumb'])) $variables['breadcrumb'] = '<ul class="breadcrumb">'.$variables['breadcrumb'].'<li>: '.$variables['title'].'</li></ul>';
-}
-
-/*changes the home title to the sitename*/
-function mothership_breadcrumb($breadcrumb) {
-  GLOBAL $base_path;
-  if (strip_tags($breadcrumb[0]) == "Home") {
-    $breadcrumb[0] ='<a href="'.$base_path.'">'.variable_get(site_name,'').'</a>';
+/*  //lets get some template suggestions for teaser fields
+    krumo($vars['element']['#view_mode']);
+  if($vars['element']['#view_mode'] == "teaser"){
+     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_type'] . '_teaser'; 
+     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_name'] . '_teaser'; 
+     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#bundle'] . '_teaser';     
+     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_name'] . '__' . $vars['element']['#bundle'] .'_teaser';     
   }
-
-  if (!empty($breadcrumb)) {
-    return '<li>'. implode('/</li><li>', $breadcrumb) .'</li>';
-  }
+  */
 }
 
-/* =====================================
-  Clean up
-* ------------------------------------- */
-//filter tips http://drupal.org/node/215653
-//TODO this should be moved into a module
-/*
-function mothership_filter_tips($tips, $long = FALSE, $extra = '') {
-  return '';
+function mothership_preprocess_html(&$vars) {
+  //add regions to header & footer so we can actually use these placeholders for something
+  $vars['page_header'] = drupal_render($vars['page']['page_header']);  
+  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);    
 }
-function mothership_filter_tips_more_info () {
-  return '';
-}
-*/

@@ -1,28 +1,48 @@
-name        = mothership
-description = Theme for cleaning up that drupal html, and provide as a super super clean "theme"
-screenshot  = screenshot.png
-version     = dev 1.1
-core        = 6.x
-engine      = phptemplate
+name = Mothership
+description = a basetheme that gives more flexibility for the html/css geeks
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+php = 4.3
 
-
-;--------------------- regions -----------------------------
-regions[header]         = header
-regions[content_top]    = content top
-regions[content_bottom] = content bottom
-regions[node_region_one] = node region one
-regions[node_region_two] = node region two
-regions[left]           = left sidebar
-regions[right]          = right sidebar
-regions[footer]         = footer
-   
-;--------------------- features ----------------------------
+;-------------- F E A T U R E S -------------
 features[] = logo
+features[] = favicon
 features[] = name
+;features[] = slogan
 features[] = node_user_picture
 features[] = comment_user_picture
-features[] = search
-features[] = favicon
-features[] = slogan
-features[] = primary_links
-features[] = secondary_links
+features[] = comment_user_verification
+;features[] = main_menu
+;features[] = secondary_menu
+
+;-------------- R E G I O N S -------------
+;regions_hidden[] = im_a_hidden_but_visibel_for_a_module
+
+;-- Required Regions
+regions[page_top] = Page Top
+regions[content] = Content
+regions[page_bottom] = Page Bottom
+
+;-- Core Regions
+regions[header] = Header
+regions[footer] = Footer
+regions[sidebar_first] = Sidebar First
+regions[sidebar_second] = Sidebar Second
+regions[help] = Help
+regions[highlighted] = Highlighted
+
+;-- In html.tpl
+regions[page_header] = Page Header (in html.tpl)
+regions[page_footer] = Page Footer (in html.tpl)
+
+;-------------- C S S -------------
+;stylesheets[all][] = css/reset.css
+:stylesheets[all][] = css/reset-drupal.css
+
+;-------------- JS -------------
+;scripts[] = js/selectivizr.js
+
+
+;-------------- Default Settings for theme-settings.php -------------
+settings[mothership_rebuild_registry] = 0
