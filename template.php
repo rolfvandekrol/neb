@@ -192,8 +192,19 @@ function mothership_preprocess(&$vars, $hook) {
 
 }
 
+
+function mothership_preprocess_html(&$vars) {
+  //add regions to header & footer so we can actually use these placeholders for something
+  $vars['page_header'] = drupal_render($vars['page']['page_header']);  
+  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);    
+
+
+}
+
+
 function mothership_preprocess_page(&$vars, $hook) {
   //print_r($vars['theme_hook_suggestions']);
+//  krumo($vars);
 }
 
 function mothership_preprocess_node(&$vars,$hook) {
@@ -237,8 +248,3 @@ function mothership_preprocess_field(&$vars, $hook) {
   */
 }
 
-function mothership_preprocess_html(&$vars) {
-  //add regions to header & footer so we can actually use these placeholders for something
-  $vars['page_header'] = drupal_render($vars['page']['page_header']);  
-  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);    
-}

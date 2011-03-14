@@ -10,7 +10,7 @@ if ($id_node) {
 
 
 <div <?php print $id_node . $classes .  $attributes; ?>>
-  <?php print $mothership_poorthemers_helper;  ?>
+  <?php print $mothership_poorthemers_helper; ?>
   
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>

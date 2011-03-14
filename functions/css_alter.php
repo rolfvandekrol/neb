@@ -2,6 +2,41 @@
 /* Nukes the css from drupal core */
 function mothership_css_alter(&$css) {
 
+  //Rename css files & use motherships own versions
+  if(module_exists('aggregator')){
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/aggregator.theme.css', array('group' => CSS_SYSTEM));
+  }
+  $nuke = array(
+     'modules/aggregator/aggregator.css' => FALSE,
+     'modules/block/block.css' => FALSE,
+     'modules/book/book.css' => FALSE,
+     'modules/comment/comment.css' => FALSE,
+     'modules/dashboard/dashboard.css' => FALSE,    
+     'modules/dblog/dblog.css' => FALSE,
+     'modules/forum/forum.css' => FALSE,
+     'modules/help/help.css' => FALSE,
+     'modules/node/node.css' => FALSE,
+     'modules/image/image.css' => FALSE,    
+     'modules/openid/openid.css' => FALSE,
+     'modules/locale/locale.css' => FALSE,    
+     'modules/poll/poll.css' => FALSE,
+     'modules/profile/profile.css' => FALSE,
+     'modules/search/search.css' => FALSE,
+     'modules/statistics/statistics.css' => FALSE,
+     'modules/syslog/syslog.css' => FALSE,
+     'modules/menu/menu.css' => FALSE,
+     'modules/taxonomy/taxonomy.css' => FALSE,
+     'modules/tracker/tracker.css' => FALSE,
+     'modules/update/update.css' => FALSE,
+     'modules/user/user.css' => FALSE,
+     'misc/vertical-tabs.css' => FALSE,    
+   );
+
+   $css = array_diff_key($css, $nuke);
+
+
+
+
   switch (theme_get_setting('nuke_css')) {
     case 'mothership_css_nuke_theme':
       //clean out .theme.css
@@ -58,45 +93,13 @@ function mothership_css_alter(&$css) {
       /*Kills all css files that comes with drupal everything!*/
       $css = " ";
       break;
-
-    case 'mothership_css_nuke_tao':
-      $nuke = array(
-         'modules/aggregator/aggregator.css' => FALSE,
-         'modules/block/block.css' => FALSE,
-         'modules/book/book.css' => FALSE,
-         'modules/comment/comment.css' => FALSE,
-         'modules/dashboard/dashboard.css' => FALSE,    
-         'modules/dblog/dblog.css' => FALSE,
-         'modules/forum/forum.css' => FALSE,
-         'modules/help/help.css' => FALSE,
-         'modules/node/node.css' => FALSE,
-         'modules/image/image.css' => FALSE,    
-         'modules/openid/openid.css' => FALSE,
-         'modules/locale/locale.css' => FALSE,    
-         'modules/poll/poll.css' => FALSE,
-         'modules/profile/profile.css' => FALSE,
-         'modules/search/search.css' => FALSE,
-         'modules/statistics/statistics.css' => FALSE,
-         'modules/syslog/syslog.css' => FALSE,
-         'modules/menu/menu.css' => FALSE,
-         'modules/taxonomy/taxonomy.css' => FALSE,
-         'modules/tracker/tracker.css' => FALSE,
-         'modules/update/update.css' => FALSE,
-         'modules/user/user.css' => FALSE,
-         'misc/vertical-tabs.css' => FALSE,    
-       );
-
-       $css = array_diff_key($css, $nuke);
-      break;
-
-
     
     default:
       # code...
       break;
   }
 
-
+krumo($css);
 }
 
 
