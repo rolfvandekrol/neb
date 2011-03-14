@@ -1,6 +1,4 @@
 <?php
-// $Id: aggregator-item.tpl.php,v 1.2 2008/05/15 21:27:32 dries Exp $
-
 /**
  * @file
  * Default theme implementation to format an individual feed item for display
@@ -22,21 +20,21 @@
 <div class="feed-item">
   <h3><a href="<?php print $feed_url; ?>"><?php print $feed_title; ?></a></h3>
 
-  <div class="feed-item-meta">
+  <div class="meta">
   <?php if ($source_url) : ?>
-    <a href="<?php print $source_url; ?>" class="feed-item-source"><?php print $source_title; ?></a> -
+    <?php print l($source_title, $source_url, array('attributes' => array('class' => ''))); ?>
   <?php endif; ?>
-    <span class="feed-item-date"><?php print $source_date; ?></span>
+    <span class="date"><?php print $source_date; ?></span>
   </div>
 
 <?php if ($content) : ?>
-  <div class="feed-item-body">
+  <div class="body">
     <?php print $content; ?>
   </div>
 <?php endif; ?>
 
 <?php if ($categories) : ?>
-  <div class="feed-item-categories">
+  <div class="categories">
     <?php print t('Categories'); ?>: <?php print implode(', ', $categories); ?>
   </div>
 <?php endif ;?>

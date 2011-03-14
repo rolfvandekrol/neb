@@ -99,7 +99,7 @@ function mothership_css_alter(&$css) {
       break;
   }
 
-krumo($css);
+//krumo($css);
 }
 
 
