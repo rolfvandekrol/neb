@@ -38,7 +38,12 @@ regions[page_footer] = Page Footer (in html.tpl)
 
 ;-------------- C S S -------------
 ;stylesheets[all][] = css/reset.css
-:stylesheets[all][] = css/reset-drupal.css
+;stylesheets[all][] = css/reset-drupal.css
+;kills the call to block.css changes it to block.admin
+stylesheets[all][] = css-drupalcore/block.css
+stylesheets[all][] = css-drupalcore/block.admin.css
+
+
 
 ;-------------- JS -------------
 ;scripts[] = js/selectivizr.js

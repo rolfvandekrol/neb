@@ -64,10 +64,9 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'radios',
     '#title'         => t('NUKE css files') ,
     '#options'       => array(
-                          'mothership_css_nuke_none'  => t('Peace! no css files are nuked') . '',
-                          'mothership_css_nuke_tao'   => t('Tao: nukes the same files as the tao theme'),
-                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes all modulename.theme.css files'),
-                          'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> Nukes all modulename.admin.css files'),
+                          'mothership_css_nuke_none'  => t('Peace! no css files are nuked, touched or anything') . '',
+                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes all module.theme.css files'),
+                          'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> Nukes all module.admin.css files'),
                           'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> Nukes all .theme.css + .theme.css'),
                           'mothership_css_nuke_module'  => t('<strong>Module nuke </strong>Nukes all css files from Drupals modules. keep the themes styles'),
                           'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong> none shall pass removes every css files that comes from drupal'),
