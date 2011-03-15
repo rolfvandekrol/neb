@@ -16,15 +16,36 @@ function mothership_css_alter(&$css) {
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/book.admin.css', array('group' => CSS_SYSTEM));
   } 
 
-  if(module_exists('book')){
+  if(module_exists('comment')){
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/comment.theme.css', array('group' => CSS_SYSTEM));    
   }  
+
+  if(module_exists('contextual')){
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/contextual.base.css', array('group' => CSS_SYSTEM));
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/contextual.theme.css', array('group' => CSS_SYSTEM));
+  } 
+
+  if(module_exists('field')){
+    
+  }
+  
+  if(module_exists('forum')){
+    
+  }
+
+  if(module_exists('local')){
+    
+  }
+  
+
+  
   $nuke = array(
      'modules/aggregator/aggregator.css' => FALSE,
      'modules/block/block.css' => FALSE,
      'modules/book/book.css' => FALSE,
      'modules/comment/comment.css' => FALSE,
-
+     'modules/contextual/contextual.css' => FALSE,     
+/*
      'modules/forum/forum.css' => FALSE,
      'modules/help/help.css' => FALSE,
      'modules/node/node.css' => FALSE,
@@ -42,6 +63,7 @@ function mothership_css_alter(&$css) {
      'modules/update/update.css' => FALSE,
      'modules/user/user.css' => FALSE,
      'misc/vertical-tabs.css' => FALSE,    
+    */ 
    );
 
    $css = array_diff_key($css, $nuke);
@@ -59,31 +81,31 @@ function mothership_css_alter(&$css) {
       }
       break;
 
-      case 'mothership_css_nuke_admin':
-        //clean out .theme.css
-        foreach ($css as $file => $value) {
-          if (strpos($file, '.admin.css') !== FALSE) {
-            unset($css[$file]);
-          }
-        }
-        break;
+    case 'mothership_css_nuke_admin':
+      //clean out .theme.css
+       foreach ($css as $file => $value) {
+         if (strpos($file, '.admin.css') !== FALSE) {
+           unset($css[$file]);
+         }
+       }
+       break;
 
+    case 'mothership_css_nuke_theme_admin':
+       //clean out .theme.css
+       foreach ($css as $file => $value) {
+         if (strpos($file, '.theme.css') !== FALSE) {
+           unset($css[$file]);
+         }
+       }
+       //clean out .admin.css
+       foreach ($css as $file => $value) {
+         if (strpos($file, '.admin.css') !== FALSE) {
+           unset($css[$file]);
+         }
+       }
 
-      case 'mothership_css_nuke_theme_admin':
-        //clean out .theme.css
-        foreach ($css as $file => $value) {
-          if (strpos($file, '.theme.css') !== FALSE) {
-            unset($css[$file]);
-          }
-        }
-        //clean out .admin.css
-        foreach ($css as $file => $value) {
-          if (strpos($file, '.admin.css') !== FALSE) {
-            unset($css[$file]);
-          }
-        }
+       break;
 
-        break;
 
     case 'mothership_css_nuke_module':
       //clean out all modules 
@@ -102,7 +124,7 @@ function mothership_css_alter(&$css) {
       break;
 
     case 'mothership_css_nuke_epic':
-      /*Kills all css files that comes with drupal everything!*/
+      /* Nukes all css files that comes with drupal everything baby! */
       $css = " ";
       break;
     
@@ -110,8 +132,11 @@ function mothership_css_alter(&$css) {
       # code...
       break;
   }
-
-//krumo($css);
+/*  
+print "<pre>";
+print_r($css);
+print "</pre>";
+*/
 }
 
 
