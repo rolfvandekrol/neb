@@ -7,18 +7,24 @@ function mothership_css_alter(&$css) {
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/aggregator.theme.css', array('group' => CSS_SYSTEM));
   } 
 
+  if(module_exists('block')){
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/block.admin.css', array('group' => CSS_SYSTEM));
+  } 
+
   if(module_exists('book')){
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/book.theme.css', array('group' => CSS_SYSTEM));
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/book.admin.css', array('group' => CSS_SYSTEM));
   } 
 
+  if(module_exists('book')){
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/comment.theme.css', array('group' => CSS_SYSTEM));    
+  }  
   $nuke = array(
      'modules/aggregator/aggregator.css' => FALSE,
      'modules/block/block.css' => FALSE,
      'modules/book/book.css' => FALSE,
      'modules/comment/comment.css' => FALSE,
-     'modules/dashboard/dashboard.css' => FALSE,    
-     'modules/dblog/dblog.css' => FALSE,
+
      'modules/forum/forum.css' => FALSE,
      'modules/help/help.css' => FALSE,
      'modules/node/node.css' => FALSE,
