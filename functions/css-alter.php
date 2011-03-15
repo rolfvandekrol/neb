@@ -5,7 +5,13 @@ function mothership_css_alter(&$css) {
   //Rename css files & use motherships own versions
   if(module_exists('aggregator')){
     $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/aggregator.theme.css', array('group' => CSS_SYSTEM));
-  }
+  } 
+
+  if(module_exists('book')){
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/book.theme.css', array('group' => CSS_SYSTEM));
+    $css = drupal_add_css(drupal_get_path('theme', 'mothership') . '/css-drupalcore/book.admin.css', array('group' => CSS_SYSTEM));
+  } 
+
   $nuke = array(
      'modules/aggregator/aggregator.css' => FALSE,
      'modules/block/block.css' => FALSE,

@@ -2,7 +2,7 @@
 /**
  * include template overwrites
  */
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css_alter.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css-alter.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
