@@ -84,14 +84,14 @@ function mothership_css_alter(&$css) {
     $css = drupal_add_css($mothership_path . '/css-drupalcore/search.theme.css', array('group' => CSS_SYSTEM));      
   } 
 
+/*
   if(module_exists('shortcut')){ 
     $css = drupal_add_css($mothership_path . '/css-drupalcore/shortcut.theme.css', array('group' => CSS_SYSTEM));      
   } 
-
   if(module_exists('toolbar')){ 
     $css = drupal_add_css($mothership_path . '/css-drupalcore/toolbar.theme.css', array('group' => CSS_SYSTEM));      
   } 
-
+*/
   if(module_exists('tracker')){ 
     $css = drupal_add_css($mothership_path . '/css-drupalcore/tracker.theme.css', array('group' => CSS_SYSTEM));      
   } 
@@ -122,15 +122,16 @@ function mothership_css_alter(&$css) {
    'modules/poll/poll.css' => FALSE,
    'modules/profile/profile.css' => FALSE,
    'modules/search/search.css' => FALSE,
-   'modules/shortcut/shortcut.css' => FALSE,   
+//   'modules/shortcut/shortcut.css' => FALSE,   
    'modules/syslog/syslog.css' => FALSE,
    'modules/menu/menu.css' => FALSE,
-  'modules/toolbar/toolbar.css' => FALSE,
+//  'modules/toolbar/toolbar.css' => FALSE,
    'modules/tracker/tracker.css' => FALSE,
    'modules/update/update.css' => FALSE,
    'modules/user/user.css' => FALSE,
-  );
 //   'misc/vertical-tabs.css' => FALSE,  
+  );
+
 
   $css = array_diff_key($css, $nuke);
 

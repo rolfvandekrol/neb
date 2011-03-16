@@ -1,3 +1,7 @@
+/*
+Default styles
+* ------------------------------------- */
+
 a img {border:none;}
 a {outline: none;}
 b,strong{font-weight: bold;}
@@ -53,7 +57,9 @@ ul.links li{padding:0 5px 0 0;}
   text-shadow: none;
 }
 
-/*contextual links*/
+/*
+contextual links
+* ------------------------------------- */
 div.contextual-links-active a.contextual-links-trigger {
   background-color: #eee;
   -moz-border-radius: 2px 2px 0 0;
@@ -91,7 +97,6 @@ div.contextual-links-wrapper ul.contextual-links li {
   clear:both;
   border:none;
   background:transparent;
-
 }
 
 ul.contextual-links li a:hover {background-color: #bbb;}
@@ -132,11 +137,9 @@ a.fieldset-title{display:block; display:block;}
 .fieldset-wrapper{background:#eee; border: 1px solid #ddd; border-top:none; padding-left:10px; }
 .fieldset-wrapper fieldset, html.js fieldset.collapsible .fieldset-wrapper .fieldset-legend{width:480px;} 
 .vertical-tabs .fieldset-wrapper
+
 /*icons*/
-
 html.js fieldset.collapsed .fieldset-legend {background:#d0d;}
-
-
 
 /*
 html.js fieldset.collapsible .fieldset-legend a:link.fieldset-title{background: #d0d url("../../misc/menu-collapsed.png"); padding-left:40px;}

@@ -138,40 +138,14 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_body_path_first')
   );
 
-  //NODE
-  $form['classes']['node'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('node classes (node.tpl.php)'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  );
-  $form['classes']['node']['mothership_classes_node'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .node'),
-    '#default_value' => theme_get_setting('mothership_classes_node')
-  );
-
-
-  $form['classes']['node']['mothership_classes_node_state'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the node publishing classes (.node-sticky | .node-unpublished | .node-promoted)'),
-    '#default_value' => theme_get_setting('mothership_classes_node_state')
-  );
-
-  $form['classes']['node']['mothership_classes_node_id'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Add the node-id as an id (#node-$id)'),
-    '#default_value' => theme_get_setting('mothership_classes_node_id')
-  );
-
+  //region
   $form['classes']['region'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Region classes (region.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-  
-  //region
+
   $form['classes']['region']['mothership_classes_region'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the region class from the a region'),
@@ -202,6 +176,33 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'checkbox',
     '#title'         => t('zap everything only keep the .contextual-links-region'),
     '#default_value' => theme_get_setting('mothership_classes_block_contexual_only')
+  );
+
+
+  //NODE
+  $form['classes']['node'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('node classes (node.tpl.php)'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['classes']['node']['mothership_classes_node'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .node'),
+    '#default_value' => theme_get_setting('mothership_classes_node')
+  );
+
+
+  $form['classes']['node']['mothership_classes_node_state'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the node publishing classes (.node-sticky | .node-unpublished | .node-promoted)'),
+    '#default_value' => theme_get_setting('mothership_classes_node_state')
+  );
+
+  $form['classes']['node']['mothership_classes_node_id'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Add the node-id as an id (#node-$id)'),
+    '#default_value' => theme_get_setting('mothership_classes_node_id')
   );
 
 
