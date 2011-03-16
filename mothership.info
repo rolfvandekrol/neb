@@ -39,15 +39,39 @@ regions[page_footer] = Page Footer (in html.tpl)
 ;-------------- C S S -------------
 ;stylesheets[all][] = css/reset.css
 ;stylesheets[all][] = css/reset-drupal.css
-;kills the call to block.css changes it to block.admin
-stylesheets[all][] = css-drupalcore/block.css
-stylesheets[all][] = css-drupalcore/block.admin.css
-
 
 
 ;-------------- JS -------------
-;scripts[] = js/selectivizr.js
 
 
 ;-------------- Default Settings for theme-settings.php -------------
 settings[mothership_rebuild_registry] = 0
+settings[mothership_poorthemers_helper] = 0
+
+settings[mothership_css_reset] = 1
+settings[mothership_css_reset_drupal] = 1
+settings[mothership_css_mothershipstyles] = 1
+
+settings[mothership_nuke_css]= mothership_css_nuke_theme
+
+settings[mothership_classes_body_html] = 1
+settings[mothership_classes_body_front] = 0
+settings[mothership_classes_body_loggedin] = 1
+settings[mothership_classes_body_layout] = 0
+settings[mothership_classes_body_toolbar] = 0
+settings[mothership_classes_body_pagenode] = 1
+settings[mothership_classes_body_path] = 1
+settings[mothership_classes_body_path_first] = 1
+
+settings[mothership_classes_region] = 0
+settings[mothership_classes_block] = 0
+settings[mothership_classes_block_id] = 0
+settings[mothership_classes_block_contexual_only] = 0
+
+settings[mothership_classes_node] = 0
+settings[mothership_classes_node_state] = 0
+settings[mothership_classes_node_id] = 0
+
+settings[mothership_classes_field_field] = 0
+settings[mothership_classes_field_type] = 0
+settings[mothership_classes_field_label] = 1

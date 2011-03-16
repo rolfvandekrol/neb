@@ -60,7 +60,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
-  $form['css']['nuke']['nuke_css'] = array(
+  $form['css']['nuke']['mothership_nuke_css'] = array(
     '#type'          => 'radios',
     '#title'         => t('NUKE css files') ,
     '#options'       => array(
@@ -71,7 +71,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
                           'mothership_css_nuke_module'  => t('<strong>Module css nuking </strong>Nukes ALL css files provided from modules, but keep the themes css files'),
                           'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong> none shall pass! Removes every css file that comes from modules & thmemes'),
                         ),
-    '#default_value' => theme_get_setting('nuke_css'),
+    '#default_value' => theme_get_setting('mothership_nuke_css'),
   );
 
 
@@ -220,11 +220,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_field_field')
   );
 
-  $form['classes']['field']['mothership_classes_field_field'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the field class '),
-    '#default_value' => theme_get_setting('mothership_classes_field_field')
-  );
 
   $form['classes']['field']['mothership_classes_field_type'] = array(
     '#type'          => 'checkbox',
