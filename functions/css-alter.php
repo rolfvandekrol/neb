@@ -125,7 +125,7 @@ function mothership_css_alter(&$css) {
    'modules/shortcut/shortcut.css' => FALSE,   
    'modules/syslog/syslog.css' => FALSE,
    'modules/menu/menu.css' => FALSE,
-   'modules/toolbar/toolbar.css' => FALSE,
+  'modules/toolbar/toolbar.css' => FALSE,
    'modules/tracker/tracker.css' => FALSE,
    'modules/update/update.css' => FALSE,
    'modules/user/user.css' => FALSE,
