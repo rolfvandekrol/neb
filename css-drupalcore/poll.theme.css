@@ -33,20 +33,14 @@
 .poll .vote-form .choices .title {
   font-weight: bold;
 }
-.node-form #edit-poll-more {
-  margin: 0;
-}
-.node-form #poll-choice-table .form-text {
-  display: inline;
-  width: auto;
-}
-.node-form #poll-choice-table td.choice-flag {
-  white-space: nowrap;
-  width: 4em;
-}
+
+
+/*
+are these even used in D7
 td.poll-chtext {
   width: 80%;
 }
 td.poll-chvotes .form-text {
   width: 85%;
 }
+*/
