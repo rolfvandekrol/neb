@@ -176,9 +176,9 @@ function mothership_preprocess(&$vars, $hook) {
 
 
       if (theme_get_setting('mothership_classes_block_id')) {      
-       $vars['id_block'] = ' id="'. $block_html_id . '"'; 
+        $vars['id_block'] = " remove ";
       }else{
-        $vars['id_block'] = "";       
+        $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"'; 
       }
 
       if (theme_get_setting('mothership_classes_block_contexual_only')) {            

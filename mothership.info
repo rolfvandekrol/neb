@@ -1,15 +1,15 @@
 name = Mothership
-description = a basetheme that gives more flexibility for the html/css geeks
+description = Basetheme for cleaning up the css & markup + other nifty stuff  
 screenshot = screenshot.png
 engine = phptemplate
 core = 7.x
-php = 4.3
+php = 5.3
 
 ;-------------- F E A T U R E S -------------
 features[] = logo
 features[] = favicon
 features[] = name
-;features[] = slogan
+features[] = slogan
 features[] = node_user_picture
 features[] = comment_user_picture
 features[] = comment_user_verification
@@ -40,9 +40,7 @@ regions[page_footer] = Page Footer (in html.tpl)
 ;stylesheets[all][] = css/reset.css
 ;stylesheets[all][] = css/reset-drupal.css
 
-
 ;-------------- JS -------------
-
 
 ;-------------- Default Settings for theme-settings.php -------------
 settings[mothership_rebuild_registry] = 0

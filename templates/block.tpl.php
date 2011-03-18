@@ -13,6 +13,7 @@ if ($classes) {
   $classes = ' class="'. $classes . ' "';
 }
 ?>
+
 <div <?php print $id_block . $classes .  $attributes; ?>>
 
   <?php print $mothership_poorthemers_helper;  ?>

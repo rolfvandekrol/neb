@@ -64,11 +64,12 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'radios',
     '#title'         => t('NUKE css files') ,
     '#options'       => array(
-                          'mothership_css_nuke_none'  => t('Peace! No .css are nuked, touched or anything.'),
-                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes all "modulename".theme.css files'),
+                          'mothership_css_nuke_none'  => t('Peace! the .css isnt touched.'),
+                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes "modulename".theme.css files, but keeps various drupal stuff'),
+                          'mothership_css_nuke_theme_full' => t('<strong>.theme.css all</strong> Nukes "modulename".theme.css files'),
                           'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> Nukes all "modulename".admin.css files'),
                           'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> Nukes all .theme.css + .theme.css'),
-                          'mothership_css_nuke_module'  => t('<strong>Module css nuking </strong>Nukes ALL css files provided from modules, but keep the themes css files'),
+                          'mothership_css_nuke_module'  => t('<strong>Module css nuking</strong>Nukes ALL the css files provided by modules, but keeps the themes css files'),
                           'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong> none shall pass! Removes every css file that comes from modules & thmemes'),
                         ),
     '#default_value' => theme_get_setting('mothership_nuke_css'),
@@ -168,7 +169,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('remove the block-id (#block-$id)'),
+    '#title'         => t('Remove the block-id (#block-$id)'),
     '#default_value' => theme_get_setting('mothership_classes_block_id')
   );
 

@@ -8,7 +8,7 @@ if ($id_node) {
 }
 ?>
 
-
+<!--node-->
 <div <?php print $id_node . $classes .  $attributes; ?>>
   <?php print $mothership_poorthemers_helper; ?>
   

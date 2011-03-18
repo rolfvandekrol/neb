@@ -1,12 +1,14 @@
 /*
 Default styles
 * ------------------------------------- */
-
-a img {border:none;}
 a {outline: none;}
+a img {border:none;}
+a, a:link, a:visited, a:active {text-decoration: none;}
+  a:hover, a:focus {text-decoration: underline;}
+:focus{outline:0}
+
 b,strong{font-weight: bold;}
 em, i{font-style: italic;}
-:focus{outline:0}
 
 /*
 List
@@ -59,6 +61,8 @@ ul.links li{padding:0 5px 0 0;}
 
 /*
 contextual links
+changing em a big to a more neutral state
++ adding some defaults so the theme dosnt end up overwriting
 * ------------------------------------- */
 div.contextual-links-active a.contextual-links-trigger {
   background-color: #eee;
@@ -92,22 +96,22 @@ div.contextual-links-wrapper ul.contextual-links li {
   line-height: 12px;
   list-style: none;
   list-style-image: none;
+  font-weight: normal;
   margin: 0!important;
   padding: 0!important;
+  font-weight: bold!important;
   clear:both;
   border:none;
   background:transparent;
+  height:auto!important;
 }
 
 ul.contextual-links li a:hover {background-color: #bbb;}
 
-/*admin toolbar fix*/
-body.toolbar div#admin-toolbar.vertical {top:30px;}
-body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
-
 
 /*
-block &contextual fix
+block & contextual fix 
+yup its a recap of the clearfix trick, but we dont wanna go an do class="clearfix" all over again 
 ----------------------------*/
 .block .content:after {
   content: ".";
@@ -117,10 +121,6 @@ block &contextual fix
   visibility: hidden;
 }
 
-/* IE6 */
-* html .block {
-  height: 1%;
-}
 /* IE7 */
 *:first-child + html .block {
   min-height: 1%;
@@ -146,4 +146,28 @@ html.js fieldset.collapsible .fieldset-legend a:link.fieldset-title{background: 
 /*
 html.js fieldset.collapsed .fieldset-legend a:link.fieldset-title{background: #00F url("../../misc/menu-collapsed.png"); padding-left:40px;}
 
+
+/*
+MODULES
+----------------------------*/
+
+/*
+admin toolbar fix if its used with the toolbar
+----------------------------*/
+body.toolbar div#admin-toolbar.vertical {top:30px;}
+body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
+
+
+body.context-editing div.draggable:hover a.context-block-remove,
+body.context-editing div.draggable:hover a.context-block-handle {
+  left:0px;
+  top:-5px;
+  z-index:100;
+  }
+
+body.context-editing div.draggable:hover a.context-block-remove {
+  background-position:-40px 0px;
+  cursor:pointer;
+  left:40px;
+  }
 
