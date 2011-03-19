@@ -134,7 +134,7 @@ fieldset{padding-bottom:10px; }
 html.js fieldset.collapsible .fieldset-legend, a:link.fieldset-title, .fieldset-legend{height:25px; display:block; background-color:#ddd; color:#444; font-weight:bold;}
 html.js fieldset.collapsible .fieldset-legend, span.fieldset-legend{padding-left:10px;}
 a.fieldset-title{display:block; display:block;}
-.fieldset-wrapper{background:#eee; border: 1px solid #ddd; border-top:none; padding-left:10px; }
+/*.fieldset-wrapper{background:#eee; border: 1px solid #ddd; border-top:none; padding-left:10px;} */
 .fieldset-wrapper fieldset, html.js fieldset.collapsible .fieldset-wrapper .fieldset-legend{width:480px;} 
 .vertical-tabs .fieldset-wrapper
 

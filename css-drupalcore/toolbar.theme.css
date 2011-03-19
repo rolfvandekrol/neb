@@ -24,7 +24,7 @@ body.toolbar-drawer {
   text-align: left;
   list-style: none;
 }
-4
+
 /**
  * Base styles.
  *
@@ -80,7 +80,7 @@ body.toolbar-drawer {
   width: 11px;
   height: 14px;
   display: block;
-  background: url(toolbar.png) no-repeat 0 -45px;
+  background: url(/modules/toolbar/toolbar.png) no-repeat 0 -45px;
   text-indent: -9999px;
   margin: 3px 0px;
 }
@@ -98,7 +98,7 @@ body.toolbar-drawer {
   right: 10px;
   bottom: 0;
   cursor: pointer;
-  background: url(toolbar.png) 0 -20px no-repeat;
+  background: url(/modules/toolbar/toolbar.png) 0 -20px no-repeat;
   text-indent: -9999px;
   overflow: hidden;
   width: 25px;
@@ -136,7 +136,7 @@ background-position:  -75px -20px;
 #toolbar div.toolbar-menu ul li a.active,
 #toolbar div.toolbar-menu ul li.active-trail a {
   text-shadow: #333 0 1px 0;
-  background: url(toolbar.png) 0 0 repeat-x;
+  background: url(/modules/toolbar/toolbar.png) 0 0 repeat-x;
 }
 
 /**

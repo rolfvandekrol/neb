@@ -65,7 +65,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('NUKE css files') ,
     '#options'       => array(
                           'mothership_css_nuke_none'  => t('Peace! the .css isnt touched.'),
-                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes "modulename".theme.css files, but keeps various drupal stuff'),
+                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes "modulename".theme.css files, but keeps "various" drupal css files'),
                           'mothership_css_nuke_theme_full' => t('<strong>.theme.css all</strong> Nukes "modulename".theme.css files'),
                           'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> Nukes all "modulename".admin.css files'),
                           'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> Nukes all .theme.css + .theme.css'),

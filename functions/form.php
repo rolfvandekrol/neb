@@ -1,29 +1,70 @@
 <?php 
-/*
-killing
-from a legend span class="fieldset-legend"
+/**
+  * hook_file
+  * @param $variables
+  * set the size for a file upload to 20 instead of the default 60
 */
-/*
-function mothership_fieldset($variables) {
+function mothership_file($variables) {
   $element = $variables['element'];
-  element_set_attributes($element, array('id'));
-  _form_set_class($element, array('form-wrapper'));
+//  $element['#size'] = '30';  
+  $element['#attributes']['type'] = 'file';
+//  element_set_attributes($element, array('id', 'name', 'size'));
+  element_set_attributes($element, array('id', 'name'));
+  _form_set_class($element, array('form-file'));
 
-  $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
-  if (!empty($element['#title'])) {
-    // Always wrap fieldset legends in a SPAN for CSS positioning.
-    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+
+function mothership_password($variables) {
+  $element = $variables['element'];
+  $element['#size'] = '10';  
+  $element['#attributes']['type'] = 'password';
+  element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
+//  element_set_attributes($element, array('id', 'name',  'maxlength'));
+  _form_set_class($element, array('form-text'));
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+
+function mothership_textfield($variables) {
+  $element = $variables['element'];
+  $element['#size'] = '100';  
+  
+  $element['#attributes']['type'] = 'text';
+  element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength'));
+//  element_set_attributes($element, array('id', 'name', 'value', '', 'maxlength'));  
+  _form_set_class($element, array('form-text'));
+
+  $extra = '';
+  if ($element['#autocomplete_path'] && drupal_valid_path($element['#autocomplete_path'])) {
+    drupal_add_library('system', 'drupal.autocomplete');
+    $element['#attributes']['class'][] = 'form-autocomplete';
+
+    $attributes = array();
+    $attributes['type'] = 'hidden';
+    $attributes['id'] = $element['#attributes']['id'] . '-autocomplete';
+    $attributes['value'] = url($element['#autocomplete_path'], array('absolute' => TRUE));
+    $attributes['disabled'] = 'disabled';
+    $attributes['class'][] = 'autocomplete';
+    $extra = '<input' . drupal_attributes($attributes) . ' />';
   }
-  $output .= '<div class="fieldset-wrapper">';
-  if (!empty($element['#description'])) {
-    $output .= '<div class="fieldset-description">' . $element['#description'] . '</div>';
-  }
+
+  $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
+
+  return $output . $extra;
+}
+
+
+function mothership_text_format_wrapper($variables) {
+  $element = $variables['element'];
+  $output = '<div class="text-format-wrapper">';
   $output .= $element['#children'];
-  if (isset($element['#value'])) {
-    $output .= $element['#value'];
+  if (!empty($element['#description'])) {
+    $output .= '<div class="description">' . $element['#description'] . '</div>';
   }
-  $output .= '</div>';
-  $output .= "</fieldset>\n";
+  $output .= "</div>\n";
+
   return $output;
 }
-*/
