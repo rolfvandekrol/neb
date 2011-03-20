@@ -11,7 +11,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['development']['mothership_poorthemers_helper'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('the Poor Themers Helper'),
+    '#title'         => t('the Poor Themers Helper - Experimental!'),
     '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
     '#description'   => t('Adds a comments in block, node, regions etc with the suggested theme hooks'),
   );
@@ -205,6 +205,51 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Add the node-id as an id (#node-$id)'),
     '#default_value' => theme_get_setting('mothership_classes_node_id')
   );
+
+  //Views
+  $form['classes']['view'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('view classes (views-view.tpl.php)'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['classes']['view']['mothership_classes_view'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view'),
+    '#default_value' => theme_get_setting('mothership_classes_view_view')
+  );
+  $form['classes']['view']['mothership_classes_view_name'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .$viewname'),
+    '#default_value' => theme_get_setting('mothership_classes_view_name')
+  );
+  $form['classes']['view']['mothership_classes_view_view_id'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
+    '#default_value' => theme_get_setting('mothership_classes_view_view_id')
+  );
+  $form['classes']['view']['mothership_classes_view_row'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row')
+  );
+  $form['classes']['view']['mothership_classes_view_row_count'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row-$count'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_count')
+  );
+  $form['classes']['view']['mothership_classes_view_row_first_last'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row-first & .view-row-last'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_first_last')
+  );
+  $form['classes']['view']['mothership_classes_view_row_rename'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
+  );
+
+  
 
 
   //field
