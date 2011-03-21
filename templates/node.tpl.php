@@ -1,4 +1,6 @@
 <?php
+//kpr(get_defined_vars());
+//http://drupalcontrib.org/api/drupal/drupal--modules--node--node.tpl.php
 if ($classes) {
   $classes = ' class="'. $classes . ' "';
 }
@@ -18,11 +20,30 @@ if ($id_node) {
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
-  <?php
-    hide($content['comments']);
-    hide($content['links']);
-    print render($content);
-  ?>
+  <div class="meta">
+    <?php print $user_picture; ?>
+    <span class="date">
+      Date <?php print $date; ?>
+    </span>
+    <span class="author">
+      by <?php print $name; ?>
+    </span>
+    <div class="type">    
+      Type:<?php print $type; ?>
+    </div>
+    <div class="comments">    
+      Comments: <?php print $comment_count; ?>
+    </div>
+  </div>
+
+  <div class="content">
+    <?php
+      hide($content['comments']);
+      hide($content['links']);
+      print render($content);
+    ?>
+  </div>
+
 
   <?php print render($content['links']); ?>
 

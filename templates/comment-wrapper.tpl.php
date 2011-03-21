@@ -27,15 +27,18 @@
  * @see template_preprocess_comment_wrapper()
  */
 ?>
+<!-- comments-wrapper -->
 <div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+
   <?php if ($node->type != 'forum'): ?>
-    <h2 class="title"><?php print t('Comments'); ?></h2>
+    <h3><?php print t('Comments'); ?></h2>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
 
   <?php if ($content['comment_form']): ?>
-    <h2 class="title comment-form"><?php print t('Add new comment'); ?></h2>
+    <h3><?php print t('Add new comment'); ?></h2>
     <?php print render($content['comment_form']); ?>
   <?php endif; ?>
+
 </div>

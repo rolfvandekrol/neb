@@ -58,6 +58,7 @@
  * @see template_process()
  */
 ?>
+<!-- comments -->
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php print $picture; ?>
 

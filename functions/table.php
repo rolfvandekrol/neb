@@ -1,11 +1,15 @@
 <?php 
-/*removes the <img> from tables*/
+/**
+  * file theme_tablesort_indicator
+  * Removes the <img> from a tables order 
+*/
 function mothership_tablesort_indicator($variables) {
   if ($variables['style'] == "asc") {
-    return theme('image', array('path' => 'misc/arrow-asc.png', 'alt' => t('sort ascending'), 'title' => t('sort ascending')));
+    return '<div class="table-order-asc"></div>';
   }
   else {
-    return theme('image', array('path' => 'misc/arrow-desc.png', 'alt' => t('sort descending'), 'title' => t('sort descending')));
+    return '<div class="table-order-desc"></div>';
+
   }
 
 }
@@ -95,9 +99,10 @@ function mothership_table($variables) {
     $i = 0; //header count      
     foreach ($header as $cell) {
       // adds odd even, count and name for a th
-      $zebra = $i % 2 ? 'even' : 'odd';
+      $zebra = $i % 2 ? ' even ' : ' odd ';
       /*add classnames + a count*/
-      $zebra .= " column-" . $i . ' name-' . drupal_html_class($cell); 
+
+      $zebra .= " column-" . $i . ' name-' . drupal_html_class($cell['class']); 
       if (is_array($cell)) {
         //print_r($cell['data']);
         if (isset($cell['class'])) {
@@ -111,11 +116,8 @@ function mothership_table($variables) {
         $cell = array('data' => $cell, 'class' => $zebra);
       }
 
-
-
-
-
-
+//      kpr($cell['class']);
+      
       $cell = tablesort_header($cell, $header, $ts);
       $output .= _theme_table_cell($cell, TRUE);
       
@@ -174,4 +176,5 @@ function mothership_table($variables) {
   $output .= "</table>\n";
   return $output;
 }
+
 

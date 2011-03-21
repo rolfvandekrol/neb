@@ -30,6 +30,11 @@ li.expanded,
 li.collapsed{
   list-style: none outside none;
 }
+/*
+pager
+*/
+.pager li{float:left;}
+
 /*add default list for body content */
 .field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
 .field-name-body ul li {list-style: square inside}
@@ -131,7 +136,9 @@ FIELDSETS & LEGEND
 ----------------------------*/
 fieldset, html.js fieldset.collapsible .fieldset-legend, .fieldset-legend{width:500px;}
 fieldset{padding-bottom:10px; }
-html.js fieldset.collapsible .fieldset-legend, a:link.fieldset-title, .fieldset-legend{height:25px; display:block; background-color:#ddd; color:#444; font-weight:bold;}
+html.js fieldset.collapsible .fieldset-legend, a:link.fieldset-title, .fieldset-legend{
+  height:25px; display:block; /* background-color:#ddd; color:#444; font-weight:bold; */
+}
 html.js fieldset.collapsible .fieldset-legend, span.fieldset-legend{padding-left:10px;}
 a.fieldset-title{display:block; display:block;}
 /*.fieldset-wrapper{background:#eee; border: 1px solid #ddd; border-top:none; padding-left:10px;} */
@@ -141,10 +148,6 @@ a.fieldset-title{display:block; display:block;}
 /*icons*/
 html.js fieldset.collapsed .fieldset-legend {background:#d0d;}
 
-/*
-html.js fieldset.collapsible .fieldset-legend a:link.fieldset-title{background: #d0d url("../../misc/menu-collapsed.png"); padding-left:40px;}
-/*
-html.js fieldset.collapsed .fieldset-legend a:link.fieldset-title{background: #00F url("../../misc/menu-collapsed.png"); padding-left:40px;}
 
 
 /*
@@ -163,11 +166,11 @@ body.context-editing div.draggable:hover a.context-block-handle {
   left:0px;
   top:-5px;
   z-index:100;
-  }
+}
 
 body.context-editing div.draggable:hover a.context-block-remove {
   background-position:-40px 0px;
   cursor:pointer;
   left:40px;
-  }
+}
 

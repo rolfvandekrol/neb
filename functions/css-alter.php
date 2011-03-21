@@ -2,72 +2,73 @@
 /* Nukes the css from drupal core */
 function mothership_css_alter(&$css) {
   if(theme_get_setting('mothership_nuke_css') != "mothership_css_nuke_none" ){
-
-    //Lets start by clearing up the css file names so the follows the BAT 
-    $mothership_path = drupal_get_path('theme', 'mothership') . '/css-drupalcore/';
+    //Lets start by clearing up the css file names so the follows the BAT definitions 
+    //
+    $mothership_csscore_path = drupal_get_path('theme', 'mothership') . '/css-drupalcore/';
+    $mothership_cssmodules_path = drupal_get_path('theme', 'mothership') . '/css-modules/';
 
     if(module_exists('aggregator')){
-      $css = drupal_add_css($mothership_path . 'aggregator.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'aggregator.theme.css', array('group' => CSS_SYSTEM));
     } 
 
     if(module_exists('block')){
-      $css = drupal_add_css($mothership_path . 'block.admin.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'block.admin.css', array('group' => CSS_SYSTEM));
     } 
 
     if(module_exists('book')){
-      $css = drupal_add_css($mothership_path . 'book.theme.css', array('group' => CSS_SYSTEM));
-      $css = drupal_add_css($mothership_path . 'book.admin.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
     } 
 
     if(module_exists('comment')){
-      $css = drupal_add_css($mothership_path . 'comment.theme.css', array('group' => CSS_SYSTEM));  
+      $css = drupal_add_css($mothership_csscore_path . 'comment.theme.css', array('group' => CSS_SYSTEM));  
     } 
 
     if(module_exists('contextual')){
-      $css = drupal_add_css($mothership_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
-      $css = drupal_add_css($mothership_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($mothership_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
     } 
 
     if(module_exists('field')){
-      $css = drupal_add_css($mothership_path . 'field.theme.css', array('group' => CSS_SYSTEM));  
-      $css = drupal_add_css($mothership_path . 'field_ui.admin.css', array('group' => CSS_SYSTEM));    
+      $css = drupal_add_css($mothership_csscore_path . 'field.theme.css', array('group' => CSS_SYSTEM));  
+      $css = drupal_add_css($mothership_csscore_path . 'field_ui.admin.css', array('group' => CSS_SYSTEM));    
     }
 
     if(module_exists('file')){
-      $css = drupal_add_css($mothership_path . 'file.theme.css', array('group' => CSS_SYSTEM));  
+      $css = drupal_add_css($mothership_csscore_path . 'file.theme.css', array('group' => CSS_SYSTEM));  
     }
  
     if(module_exists('filter')){
-      $css = drupal_add_css($mothership_path . 'filter.theme.css', array('group' => CSS_SYSTEM));    
+      $css = drupal_add_css($mothership_csscore_path . 'filter.theme.css', array('group' => CSS_SYSTEM));    
     }
 
     if(module_exists('forum')){
-      $css = drupal_add_css($mothership_path . 'forum.theme.css', array('group' => CSS_SYSTEM));    
+      $css = drupal_add_css($mothership_csscore_path . 'forum.theme.css', array('group' => CSS_SYSTEM));    
     }
 
     if(module_exists('help')){
-      $css = drupal_add_css($mothership_path . 'help.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'help.theme.css', array('group' => CSS_SYSTEM));      
     }
 
     if(module_exists('image')){
-      $css = drupal_add_css($mothership_path . 'image.theme.css', array('group' => CSS_SYSTEM));        
+      $css = drupal_add_css($mothership_csscore_path . 'image.theme.css', array('group' => CSS_SYSTEM));        
     } 
 
     if(module_exists('local')){
-       $css = drupal_add_css($mothership_path . 'local.theme.css', array('group' => CSS_SYSTEM));          
+       $css = drupal_add_css($mothership_csscore_path . 'local.theme.css', array('group' => CSS_SYSTEM));          
     } 
 
     if(module_exists('menu')){
-      $css = drupal_add_css($mothership_path . 'menu.admin.css', array('group' => CSS_SYSTEM));            
+      $css = drupal_add_css($mothership_csscore_path . 'menu.admin.css', array('group' => CSS_SYSTEM));            
     } 
 
     if(module_exists('node')){
-      $css = drupal_add_css($mothership_path . 'node.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'node.theme.css', array('group' => CSS_SYSTEM));      
     }   
 
     if(module_exists('openid')){
-      $css = drupal_add_css($mothership_path . 'openid.base.css', array('group' => CSS_SYSTEM));      
-      $css = drupal_add_css($mothership_path . 'openid.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'openid.base.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'openid.theme.css', array('group' => CSS_SYSTEM));      
     }   
     /* TODO overlay
     if(module_exists('overlay')){
@@ -75,31 +76,31 @@ function mothership_css_alter(&$css) {
     }
     */
     if(module_exists('poll')){
-      $css = drupal_add_css($mothership_path . 'poll.admin.css', array('group' => CSS_SYSTEM));      
-      $css = drupal_add_css($mothership_path . 'poll.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'poll.admin.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'poll.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
     if(module_exists('poll')){ 
-      $css = drupal_add_css($mothership_path . 'profile.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'profile.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
     if(module_exists('search')){ 
-      $css = drupal_add_css($mothership_path . 'search.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'search.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
     if(module_exists('shortcut')){ 
-      $css = drupal_add_css($mothership_path . 'shortcut.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'shortcut.theme.css', array('group' => CSS_SYSTEM));      
     } 
     if(module_exists('toolbar')){ 
-      $css = drupal_add_css($mothership_path . 'toolbar.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'toolbar.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
     if(module_exists('tracker')){ 
-      $css = drupal_add_css($mothership_path . 'tracker.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'tracker.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
     if(module_exists('update')){ 
-      $css = drupal_add_css($mothership_path . 'update.theme.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_csscore_path . 'update.theme.css', array('group' => CSS_SYSTEM));      
     }
 
     /* TODO vertical-tabs
@@ -117,6 +118,13 @@ function mothership_css_alter(&$css) {
     /* TODO taxonomy
     
     */
+
+    //modules
+    if(module_exists('views')){ 
+      $css = drupal_add_css($mothership_cssmodules_path . 'views.base.css', array('group' => CSS_SYSTEM));      
+      $css = drupal_add_css($mothership_cssmodules_path . 'views.theme.css', array('group' => CSS_SYSTEM));      
+    }
+
 
    //nuke the original css files
    $nuke = array(
@@ -146,14 +154,22 @@ function mothership_css_alter(&$css) {
      'modules/tracker/tracker.css' => FALSE,
      'modules/update/update.css' => FALSE,
      'modules/user/user.css' => FALSE,
-  //   'misc/vertical-tabs.css' => FALSE,  
+      //'misc/vertical-tabs.css' => FALSE, 
+      //modules/overlay/overlay-parent.css
+      //modules/system/system.menus.css
+      //modules/system/system.messages.css
+      
+      //modules
+      drupal_get_path('module', 'views') . '/css/views.css' => FALSE,
+      drupal_get_path('module', 'ctools') . '/css/ctools.css' => FALSE,
     );
 
-  $css = array_diff_key($css, $nuke);
 
+    $css = array_diff_key($css, $nuke);
+//    kpr($css);
   }
 
- switch (theme_get_setting('mothership_nuke_css')) {
+  switch (theme_get_setting('mothership_nuke_css')) {
   case 'mothership_css_nuke_theme_full':
    //clean out .theme.css
    foreach ($css as $file => $value) {
@@ -177,6 +193,7 @@ function mothership_css_alter(&$css) {
         }
       }
     }
+
     break;
 
 
