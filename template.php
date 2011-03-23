@@ -169,6 +169,9 @@ function mothership_preprocess(&$vars, $hook) {
 
     }elseif ( $hook == "block" ) {
     // =======================================| block |========================================
+      //block-subject should be called title so it actually makes sence...
+      //  $vars['title'] = $block->subject;
+
       if (theme_get_setting('mothership_classes_block')) {      
         $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));        
       }
@@ -176,9 +179,8 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));              
       }
 
-
       if (theme_get_setting('mothership_classes_block_id')) {      
-        $vars['id_block'] = " remove ";
+        $vars['id_block'] = " ";
       }else{
         $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"'; 
       }
@@ -188,7 +190,8 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = "contextual-links-region";
       }
 
-
+      //adds title class to the block ... OMG!
+      $vars['title_attributes_array']['class'][] = 'title';
     }
 
 

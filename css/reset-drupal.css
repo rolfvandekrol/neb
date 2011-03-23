@@ -71,6 +71,7 @@ changing em a big to a more neutral state
 * ------------------------------------- */
 div.contextual-links-active a.contextual-links-trigger {
   background-color: #eee;
+  background-color: rgba(255, 255, 255, 0.8);  
   -moz-border-radius: 2px 2px 0 0;
   -webkit-border-bottom-left-radius: 0;
   -webkit-border-bottom-right-radius: 0;
@@ -79,6 +80,7 @@ div.contextual-links-active a.contextual-links-trigger {
 
 div.contextual-links-wrapper ul.contextual-links {
   background-color: #eee;
+  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
   display: none;
   margin: 0;
@@ -88,30 +90,40 @@ div.contextual-links-wrapper ul.contextual-links {
   text-align: left;
   top: 18px;
   white-space: nowrap;
-  -moz-border-radius: 1px 0 1px 1px; /* LTR */
+  -moz-border-radius: 2px 0 2px 2px; /* LTR */
   -webkit-border-bottom-left-radius: 2px;
   -webkit-border-bottom-right-radius: 2px;
   -webkit-border-top-right-radius: 0; /* LTR */
   -webkit-border-top-left-radius: 2px; /* LTR */
   border-radius: 2px 0 2px 2px; /* LTR */
+     -moz-box-shadow: 1px 2px 4px #333; 
+  -webkit-box-shadow: 1px 2px 4px #333; 
+          box-shadow: 1px 2px 4px #333;  
 }
 
-div.contextual-links-wrapper ul.contextual-links li {
-  font-size:10px;
-  line-height: 12px;
-  list-style: none;
-  list-style-image: none;
-  font-weight: normal;
-  margin: 0!important;
-  padding: 0!important;
-  font-weight: bold!important;
-  clear:both;
-  border:none;
-  background:transparent;
-  height:auto!important;
-}
+  div.contextual-links-wrapper ul.contextual-links li {
+    list-style: none;
+    list-style-image: none;
+    font-weight: normal;
+    margin: 0!important;
+    padding: 0!important;
+    clear:both;
+    border:none;
+    background:transparent;
+    height:auto!important;
+  }
 
-ul.contextual-links li a:hover {background-color: #bbb;}
+  ul.contextual-links li a{
+    font-family: "Courier New", Courier, monospace;
+    font-size:11px;
+    line-height: 12px;
+    font-weight: normal!important;  
+  }
+  
+  ul.contextual-links li a:hover {
+    background-color: rgba(150, 150, 150, 0.8);  
+    background-color: #aaa;
+  }
 
 
 /*

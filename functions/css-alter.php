@@ -154,6 +154,7 @@ function mothership_css_alter(&$css) {
      'modules/tracker/tracker.css' => FALSE,
      'modules/update/update.css' => FALSE,
      'modules/user/user.css' => FALSE,
+     'modules/system/system.menus.css' => FALSE,     
       //'misc/vertical-tabs.css' => FALSE, 
       //modules/overlay/overlay-parent.css
       //modules/system/system.menus.css

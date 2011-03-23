@@ -179,6 +179,14 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block_contexual_only')
   );
 
+  $form['classes']['block']['mothership_classes_block_contentdiv'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the &lt;div class=&quot;content&quot;&gt; from the block.tpl'),
+    '#default_value' => theme_get_setting('mothership_classes_block_contentdiv')
+  );
+
+
+
 
   //NODE
   $form['classes']['node'] = array(

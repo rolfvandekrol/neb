@@ -18,7 +18,7 @@ function mothership_file($variables) {
 
 function mothership_password($variables) {
   $element = $variables['element'];
-  $element['#size'] = '10';  
+  $element['#size'] = '30';  
   $element['#attributes']['type'] = 'password';
   element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
 //  element_set_attributes($element, array('id', 'name',  'maxlength'));
@@ -30,7 +30,7 @@ function mothership_password($variables) {
 
 function mothership_textfield($variables) {
   $element = $variables['element'];
-  $element['#size'] = '100';  
+  $element['#size'] = '30';  
   
   $element['#attributes']['type'] = 'text';
   element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength'));
