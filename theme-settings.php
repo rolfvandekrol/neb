@@ -24,6 +24,20 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
 
+  $form['development']['mothership_localhost_test'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Sets a development class to the body if the server is on 127.0.0.1, local or localhost'),
+    '#default_value' => theme_get_setting('mothership_localhost_test'),
+    '#description'   => t('Handy so you know where you are'),
+  );
+  $form['development']['mothership_localhost_test_whitelist'] = array(
+    '#title'         => t('Whitelist comma seperated:'),
+    '#type'          => 'textfield',
+    '#default_value' => theme_get_setting('mothership_localhost_test_whitelist'),
+    '#description'   => t('Default: 127.0.0.1, .local, .localhost'),    
+  );
+
+
 
   //CSS Files 
   $form['css'] = array(
@@ -169,9 +183,17 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the block-id (#block-$id)'),
+    '#title'         => t('Add block-id (#block-$id)'),
     '#default_value' => theme_get_setting('mothership_classes_block_id')
   );
+
+  $form['classes']['block']['mothership_classes_block_id_as_class'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Add the #block-$id as a class)'),
+    '#default_value' => theme_get_setting('mothership_classes_block_id_as_class')
+  );
+
+
 
   $form['classes']['block']['mothership_classes_block_contexual_only'] = array(
     '#type'          => 'checkbox',
@@ -256,6 +278,22 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
+
+  //markup
+  $form['classes']['view']['mothership_views_fields_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the wrapper div around fields (.views-field)'),
+    '#default_value' => theme_get_setting('mothership_views_fields_wrapper')
+  );
+
+
+  $form['classes']['view']['mothership_views_field_content_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the wrapper div .field-content'),
+    '#default_value' => theme_get_setting('mothership_views_field_content_wrapper')
+  );
+
+
 
   
 

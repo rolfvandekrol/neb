@@ -1,5 +1,5 @@
 <div class="more-link">
-<?php 
-  l($link_text, $more_url, array('attributes' => array('class' => array('more'), 'title' => $link_text)));
-?>
+  <a href="<?php print $more_url ?>">
+    <?php print $link_text; ?>
+  </a>
 </div>

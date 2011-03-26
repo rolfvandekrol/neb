@@ -69,7 +69,8 @@ contextual links
 changing em a big to a more neutral state
 + adding some defaults so the theme dosnt end up overwriting
 * ------------------------------------- */
-div.contextual-links-active a.contextual-links-trigger {
+.contextual-links-active a.contextual-links-trigger {
+  background: url("images/gear-select.png") no-repeat scroll 2px 0 transparent!important;
   background-color: #eee;
   background-color: rgba(255, 255, 255, 0.8);  
   -moz-border-radius: 2px 2px 0 0;
@@ -78,7 +79,7 @@ div.contextual-links-active a.contextual-links-trigger {
   border-radius: 2px 2px 0 0;
 }
 
-div.contextual-links-wrapper ul.contextual-links {
+.contextual-links-wrapper ul.contextual-links {
   background-color: #eee;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #ccc;
@@ -165,6 +166,9 @@ html.js fieldset.collapsed .fieldset-legend {background:#d0d;}
 /*
 MODULES
 ----------------------------*/
+
+/* development indicator*/
+body.development #toolbar div.toolbar-menu{background:#5A4525;}
 
 /*
 admin toolbar fix if its used with the toolbar

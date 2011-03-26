@@ -125,7 +125,15 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = drupal_html_class('pathone-' . $path['1']);  
       }
     }  
-
+    
+    //test if were on .local or .localhost or 127.0.0.01 then add local to the body
+    if (theme_get_setting('mothership_localhost_test')) {
+      //mothership_classes_development_whitelist
+      $whitelist = array('localhost', 'local', '127.0.0.1');
+      if(! in_array($whitelist, $_SERVER['HTTP_HOST'])){
+        $vars['classes_array'][] = "development";
+      }
+    }
 
 
 
@@ -146,28 +154,37 @@ function mothership_preprocess(&$vars, $hook) {
 
 
   }elseif ( $hook == "node" ) {
-  // =======================================| NODE |========================================
+    // =======================================| NODE |========================================
     if (theme_get_setting('mothership_classes_node')) {      
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
     }  
     //css classes
     //$vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
+    
     if (theme_get_setting('mothership_classes_node_state')) {      
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky')));    
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-unpublished')));    
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-promoted')));    
     }
 
-    // css id for the node
-    $vars['id_node'] =  'node-'. $vars['nid'];
+    if (isset($vars['preview'])) {
+      $vars['classes_array'][] = 'node-preview';
+    }
 
-    }elseif ( $hook == "region" ) {
+    // css id for the node
+    if (theme_get_setting('mothership_classes_node_id')) {      
+      $vars['id_node'] =  'node-'. $vars['nid'];
+    }
+
+    
+  }elseif ( $hook == "region" ) {
     // =======================================| region |========================================
       if (theme_get_setting('mothership_classes_region')) {      
         $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
       }
 
-    }elseif ( $hook == "block" ) {
+  }elseif ( $hook == "block" ) {
+
     // =======================================| block |========================================
       //block-subject should be called title so it actually makes sence...
       //  $vars['title'] = $block->subject;
@@ -180,9 +197,11 @@ function mothership_preprocess(&$vars, $hook) {
       }
 
       if (theme_get_setting('mothership_classes_block_id')) {      
-        $vars['id_block'] = " ";
-      }else{
         $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"'; 
+      }
+
+      if (theme_get_setting('mothership_classes_block_id_as_class')) {
+        $vars['classes_array'][] = $vars['block_html_id']; 
       }
 
       if (theme_get_setting('mothership_classes_block_contexual_only')) {            
@@ -192,6 +211,10 @@ function mothership_preprocess(&$vars, $hook) {
 
       //adds title class to the block ... OMG!
       $vars['title_attributes_array']['class'][] = 'title';
+      $vars['content_attributes_array']['class'][] = 'block-content';
+
+   //   $vars['title'] = $block->subject;
+
     }
 
 

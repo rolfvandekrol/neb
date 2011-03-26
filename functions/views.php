@@ -116,14 +116,13 @@ function mothership_preprocess_views_view_fields(&$vars) {
           $class .=  $classes;
         }
         
-        if($class){
-          $css_class = 'class="' . $class . '"' ;          
+        if(theme_get_setting('mothership_views_field_content_wrapper')){
+          $field_output =  $field_output;
         }else{
-          $css_class = '';
+          $field_output = '<' . $object->element_type . ' class="' . $class . '">' . $field_output . '</' . $object->element_type . '>';        
         }
 
-//        $field_output = '<' . $object->element_type . ' class="' . $class . '">WTF' . $field_output . '</' . $object->element_type . '>';
-          $field_output = '<' . $object->element_type . ' ' . $css_class . '">' . $field_output . '</' . $object->element_type . '>';
+
       }
 
       // Protect ourself somewhat for backward compatibility. This will prevent
