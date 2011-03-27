@@ -27,10 +27,12 @@
  * @see template_process()
  */
 ?>
-
-<?php if ($content): ?>
+<!--region-->
+<?php if ($content AND (!theme_get_setting('mothership_region_wrapper'))){ ?>
   <div class="<?php print $classes; ?>">
     <?php print $mothership_poorthemers_helper;  ?>
     <?php print $content; ?>
   </div>
-<?php endif; ?>
+<?php }else{ ?>
+    <?php print $content; ?>  
+<?php } ?>

@@ -30,16 +30,18 @@
   <?php if (!empty($field->separator)): ?>
     <?php print $field->separator; ?>
   <?php endif; ?>
-
+  <!--prefix-->
   <?php 
   if(! theme_get_setting('mothership_views_field_content_wrapper')){
-    print $field->wrapper_prefix;     
+   print $field->wrapper_prefix;     
   }
   ?>
+  <!--/prefix-->
   <?php print $field->label_html; ?>
 
+  <!--content-->
   <?php print $field->content; ?>
-
+  <!--/content-->
   <?php 
   if(! theme_get_setting('mothership_views_field_content_wrapper')){
     print $field->wrapper_suffix; 

@@ -163,9 +163,16 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['region']['mothership_classes_region'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the region class from the a region'),
+    '#title'         => t('Remove .region'),
     '#default_value' => theme_get_setting('mothership_classes_region')
   );
+
+  $form['classes']['region']['mothership_region_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the wrapper divs around regions'),
+    '#default_value' => theme_get_setting('mothership_region_wrapper')
+  );
+
 
   //block
   $form['classes']['block'] = array(
@@ -183,7 +190,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Add block-id (#block-$id)'),
+    '#title'         => t('Remove #block-$id'),
     '#default_value' => theme_get_setting('mothership_classes_block_id')
   );
 

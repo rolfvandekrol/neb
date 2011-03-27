@@ -6,7 +6,7 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css-alt
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/views/views.php';
 
 
 // Auto-rebuild the theme registry during theme development.
@@ -126,11 +126,12 @@ function mothership_preprocess(&$vars, $hook) {
       }
     }  
     
+    
     //test if were on .local or .localhost or 127.0.0.01 then add local to the body
     if (theme_get_setting('mothership_localhost_test')) {
       //mothership_classes_development_whitelist
       $whitelist = array('localhost', 'local', '127.0.0.1');
-      if(! in_array($whitelist, $_SERVER['HTTP_HOST'])){
+      if(! in_array($_SERVER['HTTP_HOST'], $whitelist)){
         $vars['classes_array'][] = "development";
       }
     }
@@ -155,6 +156,9 @@ function mothership_preprocess(&$vars, $hook) {
 
   }elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
+
+    $vars['id_node'] ="";
+    
     if (theme_get_setting('mothership_classes_node')) {      
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
     }  
@@ -188,7 +192,7 @@ function mothership_preprocess(&$vars, $hook) {
     // =======================================| block |========================================
       //block-subject should be called title so it actually makes sence...
       //  $vars['title'] = $block->subject;
-
+      $vars['id_block'] = "";
       if (theme_get_setting('mothership_classes_block')) {      
         $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));        
       }

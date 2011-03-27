@@ -112,12 +112,13 @@ changing em a big to a more neutral state
     border:none;
     background:transparent;
     height:auto!important;
+    float:none;
   }
 
   ul.contextual-links li a{
-    font-family: "Courier New", Courier, monospace;
-    font-size:11px;
-    line-height: 12px;
+    font-family: "Courier New", Courier, monospace!important;
+    font-size:11px!important;
+    line-height: 12px!important;
     font-weight: normal!important;  
   }
   
