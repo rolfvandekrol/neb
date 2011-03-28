@@ -77,7 +77,7 @@ function mothership_preprocess(&$vars, $hook) {
     //home screen icon for ipads n stuff
     global $theme;
     $path = drupal_get_path('theme', $theme);
-    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">';
+    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png" />';
     
 
     //----- C S S -----------------------------------------------------------------------------------------------
@@ -138,8 +138,6 @@ function mothership_preprocess(&$vars, $hook) {
 
 
 
-
-
   }
   elseif ( $hook == "page" ) {
     // =======================================| PAGE |========================================
@@ -152,6 +150,13 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
     }
     // krumo($vars['theme_hook_suggestions']);
+
+
+  }elseif ( $hook == "region" ) {
+    // =======================================| region |========================================
+      if (theme_get_setting('mothership_classes_region')) {      
+        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
+      }
 
 
   }elseif ( $hook == "node" ) {
@@ -179,13 +184,7 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_classes_node_id')) {      
       $vars['id_node'] =  'node-'. $vars['nid'];
     }
-
-    
-  }elseif ( $hook == "region" ) {
-    // =======================================| region |========================================
-      if (theme_get_setting('mothership_classes_region')) {      
-        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
-      }
+  
 
   }elseif ( $hook == "block" ) {
 

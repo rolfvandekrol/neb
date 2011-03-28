@@ -37,7 +37,7 @@
   }
   ?>
   <!--/prefix-->
-  <?php print $field->label_html; ?>
+  <?php  print $field->label_html; ?>
 
   <!--content-->
   <?php print $field->content; ?>

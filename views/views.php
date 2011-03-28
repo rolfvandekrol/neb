@@ -23,9 +23,12 @@ function mothership_preprocess_views_view_list(&$vars){
   mothership_preprocess_views_view_unformatted($vars);
 }
 
-/*views list css classes */
+/*
+  views list css classes 
+  options for renaming classes & removing em
+*/
 function mothership_preprocess_views_view_unformatted(&$vars) {  
-//renaming classes
+  //renaming classes
   if(theme_get_setting('mothership_classes_view_row_rename')){
     $row_first = "first";
     $row_last  = "last";
