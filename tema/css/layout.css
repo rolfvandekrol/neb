@@ -1,0 +1,329 @@
+/* This file is generated with less.app: look in "theme"/less/layout.less */
+/* look at http://gridulator.com for a quick fix  */
+/* @group grid */
+.gc .test {
+  background: transparent url(../images/grid-978.png) repeat-y;
+}
+.gc {
+  width: 978px;
+  margin: 0 auto;
+}
+.gf {
+  margin-left: 0!important;
+  clear: left;
+}
+.g1 {
+  width: 54px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g2 {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g3 {
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g4 {
+  width: 306px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g5 {
+  width: 390px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g6 {
+  width: 474px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g7 {
+  width: 558px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g8 {
+  width: 642px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g9 {
+  width: 726px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g10 {
+  width: 810px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g11 {
+  width: 894px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.g12 {
+  width: 978px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+  margin-left: 0;
+  clear: both;
+}
+.gp1 {
+  padding-left: 84px;
+}
+.gp2 {
+  padding-left: 168px;
+}
+.gp3 {
+  padding-left: 252px;
+}
+.gp4 {
+  padding-left: 336px;
+}
+.gp5 {
+  padding-left: 420px;
+}
+.gp6 {
+  padding-left: 504px;
+}
+.gp7 {
+  padding-left: 588px;
+}
+.gp8 {
+  padding-left: 672px;
+}
+.gp9 {
+  padding-left: 756px;
+}
+.gp10 {
+  padding-left: 840px;
+}
+.gp11 {
+  padding-left: 924px;
+  margin-left: 0;
+}
+/* @end */
+/* @group width bases */
+.half {
+  width: 50%;
+  float: left;
+}
+.third {
+  width: 33%;
+  float: left;
+}
+.quater {
+  width: 25%;
+  float: left;
+  margin-left: 30px;
+}
+.fifth {
+  width: 20%;
+  float: left;
+  margin-left: 30px;
+}
+/* @end */
+/* @group mothership bases  */
+/*set base grids*/
+#container {
+  width: 978px;
+  margin: 0 auto;
+}
+#page {
+  width: 978px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+  margin-left: 0;
+  clear: both;
+}
+/* @group Drupal sidebars widths  */
+body.no-sidebar #main-content {
+  width: 978px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+  margin-left: 0;
+  clear: both;
+}
+/* sidebars */
+body.one-sidebar #main-content {
+  width: 810px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.sidebar-second #main-content {
+  margin-left: 0!important;
+  clear: left;
+  width: 810px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.one-sidebar .region-sidebar-first {
+  margin-left: 0!important;
+  clear: left;
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.one-sidebar .region-sidebar-second {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars .region-sidebar-first {
+  margin-left: 0!important;
+  clear: left;
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars #main-content {
+  width: 642px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars .region-sidebar-second {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+/*3 columns*/
+body.no-sidebar .region-content-firstcolumn {
+  margin-left: 0!important;
+  clear: left;
+  width: 306px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.no-sidebar .region-content-secondcolum {
+  width: 306px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.no-sidebar .region-content-thirdcolumn {
+  width: 306px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.one-sidebar .region-content-firstcolumn {
+  margin-left: 0!important;
+  clear: left;
+}
+body.one-sidebar .region-content-secondcolum {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.one-sidebar .region-content-thirdcolumn {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars .region-content-firstcolumn {
+  margin-left: 0!important;
+  clear: left;
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars .region-content-secondcolum {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+body.two-sidebars .region-content-thirdcolumn {
+  width: 138px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+/* @end */
+.region-half-first {
+  margin-left: 0!important;
+  clear: left;
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.region-half-second {
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.region-footer-firstcolumn {
+  margin-left: 0!important;
+  clear: left;
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.region-footer-secondcolumn {
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.region-footer-thirdcolumn {
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.region-footer-fourthcolumn {
+  width: 222px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+}
+.pre {
+  width: 978px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+  margin-left: 0;
+  clear: both;
+}
+.post {
+  width: 978px;
+  margin-left: 30px;
+  min-height: 1px;
+  float: left;
+  margin-left: 0;
+  clear: both;
+}

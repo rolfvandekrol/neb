@@ -1,0 +1,119 @@
+/* *
+ * @file
+ * form.css
+ */
+
+/* comment form is in  the node.tpl */
+
+/* FORM
+------------------------------------- */
+form{}
+form p{clear:left;}
+.form-item {margin:5px 0; clear:left;}
+.form-text{width:260px;}
+.form-file{width:auto; }
+.password-field{}
+.form-textarea{width:400px;}
+.form-text:focus, .form-textarea:focus{ }
+
+/* label */
+.form-item  label {font-weight:bold;}
+.form-type-textfield  label,
+.form-type-file  label,
+.form-type-managed-file label,
+.form-type-password label,
+.form-type-select label{
+  float:left; text-align:right; width:120px; padding-right:5px;
+}
+
+.form-item .description {}
+.form-type-select .description {padding-left:130px}
+.form-type-textfield .description {padding-left:130px}
+
+/* radio */
+.form-type-radios{}
+  .form-type-radios .form-radios{padding-left:30px;}
+  .form-type-radios > .description{padding-left:40px;}
+
+/*
+html help
+*/
+.filter-guidelines{display:none;}
+
+input.form-item-item{}
+
+span.form-required{}
+
+
+
+
+
+.form-item label.option {}
+.form-radios {}
+.form-radios .form-item {}
+.form-checkboxes{}
+.form-checkboxes .form-item{}
+
+.marker{} 
+
+.form-required {}
+.form-item input.error, .form-item textarea.error, .form-item select.error{}
+.form-item input.error, .form-item textarea.error, .form-item select.error {}
+
+/* widgits
+------------------------------------- */
+.form-managed-file{}
+.form-managed-file input{float:left;}
+
+
+/* SUBMIT & CANCEL 
+------------------------------------- */
+/* submit */
+  input.form-submit{}
+  .edit-submit{}
+  input#edit-submit{}
+
+/*preview*/
+div.form-button.edit-preview{}
+  div.edit-preview input.form-submit{}
+  input#edit-preview{}
+
+
+/*
+RESIZABLE TEXT AREAS
+----------------------------*/
+.resizable-textarea {}
+.resizable-textarea .grippie {}
+html.js .resizable-textarea textarea {}
+
+
+/*
+ AUTOCOMPLETE STYLES
+----------------------------*/
+#autocomplete {}
+#autocomplete ul {}
+#autocomplete li {}
+#autocomplete li.selected {}
+/* Animated throbber */
+html.js input.form-autocomplete {}
+html.js input.throbbing {}
+
+
+
+dl.multiselect dd.b, dl.multiselect dd.b .form-item, dl.multiselect dd.b select {}
+dl.multiselect dd.a, dl.multiselect dd.a .form-item {}
+dl.multiselect dt, dl.multiselect dd {}
+dl.multiselect .form-item {}
+
+/*
+PROGRESSBAR STYLES
+----------------------------*/
+.progress {}
+.progress .bar {}
+.progress .filled {}
+.progress .percentage {}
+.progress-disabled {}
+.ahah-progress {}
+.ahah-progress .throbber {}
+tr .ahah-progress .throbber {}
+.ahah-progress-bar {}

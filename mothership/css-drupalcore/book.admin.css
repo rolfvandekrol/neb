@@ -1,0 +1,25 @@
+#book-outline {
+  min-width: 56em;
+}
+.book-outline-form .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+html.js #edit-book-pick-book {
+  display: none;
+}
+.form-item-book-bid .description {
+  clear: both;
+}
+#book-admin-edit select {
+  margin-right: 24px;
+}
+#book-admin-edit select.progress-disabled {
+  margin-right: 0;
+}
+#book-admin-edit tr.ajax-new-content {
+  background-color: #ffd;
+}
+#book-admin-edit .form-item {
+  float: left;
+}

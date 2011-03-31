@@ -1,0 +1,36 @@
+/* $Id: contextual.css,v 1.9 2011/01/03 07:04:48 webchick Exp $ */
+
+/**
+ * Contextual links regions.
+ */
+.contextual-links-region {
+  outline: none;
+  position: relative;
+}
+
+/**
+ * Contextual links.
+ */
+ a.contextual-links-trigger {
+   border: 1px solid transparent;
+   display: none;
+   overflow: hidden;
+ } 
+ 
+div.contextual-links-wrapper {
+  display: none;
+  font-size: 90%;
+  position: absolute;
+  right: 5px; /* LTR */
+  top: 2px;
+  z-index: 999;
+}
+html.js div.contextual-links-wrapper {
+  display: block;
+}
+
+.contextual-links-region:hover a.contextual-links-trigger,
+div.contextual-links-active a.contextual-links-trigger,
+div.contextual-links-active ul.contextual-links {
+  display: block;
+}

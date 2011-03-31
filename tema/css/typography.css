@@ -1,0 +1,42 @@
+/* $Id$ */ 
+/* *
+ * @file
+ * motherload.css
+ */
+
+/* BASIC TYPOGRAPGHY
+------------------------------------- */        
+/*
+font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+font-family: "Helvetica Neue", Helvetica, Arial sans-serif; ;color: #111;
+font-family: 'Droid Sans', Helvetica, arial, sans-serif;
+font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+font-family:georgia, serif;
+*/
+body {}
+body, caption, th, td, input, textarea, select, option, legend, fieldset {font-family: 'Droid Sans', Helvetica, arial, sans-serif; font-size:13px; line-height:18px; font-weight: normal; color: #000;}
+pre, code{font-family:  "Droid Sans Mono", Monaco, monospace;}
+h1, h2, h3, h4, h5, h6{font-family: 'Covered By Your Grace', helvetica, arial, serif; color:#fff;}
+h1 {font-size: 40px; line-height:45px; padding:0 0 10px 0;}
+h2 {font-size: 30px; line-height:34px; padding:0 0 10px 0;}
+h3 {font-size: 20px; line-height:24px;}
+h4 {font-size: 16px; font-weight: bold;}
+h5 {font-size: 13px; font-weight: bold;}
+h6 {font-size: 12px; font-weight: bold;}
+
+.block h2.title{font-size: 20px; line-height:24px; }
+
+
+p {margin-bottom: 10px;}
+hr{display: block;position: relative;padding: 0;margin: 8px auto;height: 0;max-height: 0;width: 100%;clear: both;border: none;border-top: 1px solid #AAA;border-bottom: 1px solid #FFF;font-size: 1px;line-height: 0}
+blockquote{padding:0 0 0 20px;}
+
+
+/* LINKS 
+------------------------------------- */
+a, a:link, a:visited, a:active {text-decoration: none; color: #fff;}
+  a:hover, a:focus {color: #BFE0FF;}
+  
+h2 a:link, h2 a:link, h2 a:visited,  h2 a:active {font-family: 'Chewy', arial, serif; color: #fff; text-transform: capitalize;}
+  h2 a:hover, h2 a:focus { color: #BFE0FF;}
+
