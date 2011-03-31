@@ -10,6 +10,8 @@ a, a:link, a:visited, a:active {text-decoration: none;}
 b,strong{font-weight: bold;}
 em, i{font-style: italic;}
 
+.active{font-weight:bold;}
+
 /*
 List
 * ------------------------------------- */
@@ -35,11 +37,15 @@ pager
 */
 .pager li{float:left;}
 
-ul.taps{background:#000;}
-ul.tabs li{display:inline; border: 1px solid #f0f; padding:0 20px 0 0;}
+/*
+List
+* ------------------------------------- */
+
+
+ul.tabs li{display:inline; padding:0 10px}
 ul.primary{border-bottom:1px solid #fff; padding:3px 0; margin:4px 0 ;}
-ul.primary li{background:#000;}
-ul.secondary li{background:#333;}
+ul.primary li{}
+ul.secondary li{border-left: 1px solid #fff; }
 
 /*add default list for body content */
 .field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}

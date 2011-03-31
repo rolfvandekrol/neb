@@ -1,0 +1,31 @@
+#default{
+  .link(@color1:#3678ad,@color2:#999)
+  {
+    a{color:@color1; text-decoration: none;}
+    a:link{color:@color1; text-decoration: none;}
+    a:hover {color:@color2; text-decoration: underline;}
+    a:focus{background:@color2; color:@color1;}
+    a:active{}
+  }
+  /*TODO*/
+  .fontsize(@fontsize)
+  {
+    font-size: (@fontsize) ;
+    line-height: (@fontsize * @vertical);
+    margin-top: @fontsize / 2;
+    margin-bottom: @fontsize / 2;
+    background:#efefef url('../images/baseline-18px.png');
+  }  
+  
+}
+
+
+.box(@width, @height, @padding, @margin, @border-width, @border-style, @border-color){
+  width: @width; 
+  height: @height;
+  border: @border-width @border-style @border-color;
+  margin: @margin;
+  padding: @padding;
+}
+
+

@@ -1,0 +1,59 @@
+/* *
+ * @file
+ * region.css
+ */
+.region-header{}
+  .region-header h2{display:none;}
+  .region-header {}
+  .region-header ul li{float:left; padding:0 20px 5px 0; display:inline; font-family: 'Covered By Your Grace', helvetica, arial, serif; font-weight:bold; font-size:18px; text-transform: uppercase; font-size:20px;}
+  .region-header ul li.first{padding-left:20px;}  
+  .region-header ul li.last{float:none;}  
+  .region-header ul li a.active-trail{}
+  .region-header a,
+  .region-header a:link,
+  .region-header a:visited, 
+  .region-header a:active {text-decoration: none; color: #fff; font-weight:bold;}
+  .region-header a:hover,
+  .region-header a:focus {color: #eee;}
+  .region-header a.active, 
+  .region-header a.active-trail{}
+
+.region-header-second{text-transform: uppercase; font-size:14px;}
+  .region-header-second h2{display:none;}
+  .region-header-second ul li{float:left; padding:0px 20px; }
+  .region-header-second ul li.last{float:none;}
+  .region-header-second ul li a,
+  .region-header-second ul li a:link,
+  .region-header-second ul li a:visited, 
+  .region-header-second ul li a:active {text-decoration: none; color: #fff; font-weight:bold; padding-top:10px; display:block;}
+  .region-header-second ul li a:hover,.region-header-second  a:focus {}
+  .region-header-second ul li a.active, 
+  .region-header-second ul li a.active-trail{}
+  
+
+.region-sidebar-first{}
+  .region-sidebar-first .block{border-top:1px dashed rgba(255, 255, 255, 0.4); border-bottom:1px dashed rgba(0, 0, 0, 0.2);}
+  .region-sidebar-first .block > div{ border-top:1px dashed rgba(0, 0, 0, 0.2);}
+  .region-sidebar-first .block h2.title{}
+  .region-sidebar-first .block ul li{font-family: 'Covered By Your Grace', helvetica, arial, serif; font-weight:bold; font-size:18px; padding:5px 0; border-top:1px dashed rgba(255, 255, 255, 0.4); border-bottom:1px dashed rgba(0, 0, 0, 0.2);}
+  .region-sidebar-first .block ul li.last{border-bottom:none;}
+
+  .region-sidebar-first a,
+  .region-sidebar-first a:link,
+  .region-sidebar-first a:visited{} 
+  .region-sidebar-first a:active,
+  .region-sidebar-first a:hover,
+  .region-sidebar-first a:focus {}
+
+.region-sidebar-second{}
+  .region-sidebar-second a,
+  .region-sidebar-second a:link,
+  .region-sidebar-second a:visited{} 
+  .region-sidebar-second a:active,
+  .region-sidebar-second a:hover,
+  .region-sidebar-second a:focus {}
+
+#main-content{}
+.region-content-pre{}
+.region-content()
+.region-content-post{}

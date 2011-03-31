@@ -1,0 +1,60 @@
+.radius(@radius:3px){
+   -moz-border-radius: @radius; 
+-webkit-border-radius: @radius; 
+        border-radius: @radius; 
+}
+
+
+.shadow(@vertical:1px, @horizontal:1px, @blur:2px, @spread:2px, @color:#333){
+   -moz-box-shadow: @vertical @horizontal @blur @spread @color;
+-webkit-box-shadow: @vertical @horizontal @blur @spread @color;
+        box-shadow: @vertical @horizontal @blur @spread @color;
+}
+
+.gradient(@top:#999,@bottom:#fff){
+  background-color: @top;
+  background-image: -moz-linear-gradient(top,@top, @bottom);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, @top),color-stop(1, @bottom));
+}
+
+.rotate(@degrees:2deg){
+   -moz-transform: rotate(@degrees);  
+     -o-transform: rotate(@degrees);  
+-webkit-transform: rotate(@degrees);  
+    -ms-transform: rotate(@degrees);  
+        transform: rotate(@degrees);  
+}
+
+.opacity(@opacity:85){
+    filter:alpha(opacity=@opacity);
+    -moz-opacity:@opacity/100;
+    -khtml-opacity:@opacity/100;
+    opacity:@opacity/100;
+}
+
+
+/*Transformations*/
+.skew(@angle_x:35, @angle_y:0){
+    -webkit-transform: skew(formatstring("{0}deg", @angle_x), formatstring("{0}deg", @angle_y));
+    -moz-transform: skew(formatstring("{0}deg", @angle_x), formatstring("{0}deg", @angle_y));
+    -o-transform: skew(formatstring("{0}deg", @angle_x), formatstring("{0}deg", @angle_y));
+    -ms-transform: skew(formatstring("{0}deg", @angle_x), formatstring("{0}deg", @angle_y));
+    transform: skew(formatstring("{0}deg", @angle_x), formatstring("{0}deg", @angle_y));
+}
+ 
+.scale(@scale_x: 1){
+    -webkit-transform: scale(@scale_x);
+    -moz-transform: scale(@scale_x);
+    -o-transform: scale(@scale_x);
+    -ms-transform: scale(@scale_x);
+    transform: scale(@scale_x);
+}
+ 
+ 
+.translate(@move_x: 10px, @move_y: 10px){
+    -webkit-transform: translate(@move_x, @move_y);
+    -moz-transform: translate(@move_x, @move_y);
+    -o-transform: translate(@move_x, @move_y);
+    -ms-transform:translate(@move_x, @move_y);
+    transform: translate(@move_x, @move_y);
+}
