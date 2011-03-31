@@ -33,39 +33,27 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] ="";
   }
 
-  //  $vars['content'] .= $vars['mothership_poorthemers_helper'];
-  //  krumo($vars['content']);  
-  //  krumo($vars);
-  // $vars['elements']['#markup'] .= "ROCK!: " . $vars['mothership_poorthemers_helper'];
-
-
   
   if ($hook == "html") {
   // =======================================| HTML |========================================
     /*
     Adds 3 css files that the subthemes wanna use.
-    reset.css - eric meyer ftw
+    reset.css - eric meyer ftw  
     defaults.css cleans some of the defaults from drupal
     mothership.css - adds css for use with icons & other markup fixes
     */
-    if (theme_get_setting('mothership_modernizr')) {    
+    if (theme_get_setting('mothership_css_reset')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-    if (theme_get_setting('mothership_modernizr')) {    
+    if (theme_get_setting('mothership_css_default')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
-    if (theme_get_setting('mothership_modernizr')) {    
+    if (theme_get_setting('mothership_css_mothershipstyles')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
     }
 
-    if (theme_get_setting('mothership_uniform')) {    
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/lib/uniform/css/uniform.default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => 0));
-      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/jquery.uniform.js');
-      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/uniform.js');
-    }
-
-    
-    
+  
+    //LIBS
     //add modernizr support
     if (theme_get_setting('mothership_modernizr')) {    
       drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/modernizr.js');
@@ -82,6 +70,14 @@ function mothership_preprocess(&$vars, $hook) {
     }else{
       $vars['selectivizr'] = '';
     }
+
+    if (theme_get_setting('mothership_uniform')) {    
+      drupal_add_css(drupal_get_path('theme', 'mothership') . '/lib/uniform/css/uniform.default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => 0));
+      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/jquery.uniform.js');
+      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/uniform.js');
+    }
+
+
 
     //home screen icon for ipads n stuff
     global $theme;
