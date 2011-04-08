@@ -8,14 +8,12 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => TRUE,
   );
 
-
   $form['development']['mothership_poorthemers_helper'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('the Poor Themers Helper - Experimental!'),
     '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
     '#description'   => t('Adds a comments in block, node, regions etc with the suggested theme hooks'),
   );
-
 
   $form['development']['mothership_rebuild_registry'] = array(
     '#type'          => 'checkbox',
@@ -30,6 +28,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_localhost_test'),
     '#description'   => t('Handy so you know where you are'),
   );
+
+  $form['development']['mothership_test'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Adds a .test class to the body tag'),
+    '#default_value' => theme_get_setting('mothership_test'),
+  );
+
 
   //CSS Files 
   $form['css'] = array(
@@ -79,7 +84,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
    $form['css']['add']['mothership_css_default'] = array(
       '#type'          => 'checkbox',
       '#title'         => t('Add default.css clean defaults for basic elements'),
-      '#default_value' => theme_get_setting('mothership_css_reset_drupal')
+      '#default_value' => theme_get_setting('mothership_css_default')
     );
 
   $form['css']['add']['mothership_css_mothershipstyles'] = array(

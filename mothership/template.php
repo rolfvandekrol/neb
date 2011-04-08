@@ -25,7 +25,6 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] .= "\n hook:" . $hook ." \n "; 
     foreach ($vars['theme_hook_suggestions'] as $key => $value){
         $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl \n" ;
-   //    $vars['mothership_poorthemers_helper'] .= " * " . str_replace('_', '-', $value) . ".tpl \n" ;
     }
 
     $vars['mothership_poorthemers_helper'] .= "-->";
@@ -54,6 +53,7 @@ function mothership_preprocess(&$vars, $hook) {
 
   
     //LIBS
+    //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
     //add modernizr support
     if (theme_get_setting('mothership_modernizr')) {    
       drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/modernizr.js');
@@ -76,8 +76,6 @@ function mothership_preprocess(&$vars, $hook) {
       drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/jquery.uniform.js');
       drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/uniform.js');
     }
-
-
 
     //home screen icon for ipads n stuff
     global $theme;
@@ -140,6 +138,9 @@ function mothership_preprocess(&$vars, $hook) {
       }
     }
 
+    if (theme_get_setting('mothership_test')) {
+        $vars['classes_array'][] = "test";
+    }
 
 
   }

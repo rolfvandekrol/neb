@@ -1,6 +1,7 @@
 /*
 styles to the changes the mothership does to the markup
 */
+body.test .gc{background: transparent url(../images/grid.png) repeat-y}
 
 /*
 feed icon 
