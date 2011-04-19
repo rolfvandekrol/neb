@@ -6,7 +6,7 @@ body.test .gc{background: transparent url(../images/grid.png) repeat-y}
 /*
 feed icon 
 * ------------------------------------- */
-.feed {text-indent: -9999em;  float:left;}
+.feed {text-indent: -9999em;}
   .feed a.feed-icon{background:transparent url(/misc/feed.png); width:16px; height:16px; display:block;}
 
 /*ical icon*/

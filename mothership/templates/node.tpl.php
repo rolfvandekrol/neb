@@ -31,9 +31,11 @@ if ($id_node) {
     <div class="type">    
       Type:<?php print $type; ?>
     </div>
+    <?php if(module_exists('comment')): ?>
     <div class="comments">    
       Comments: <?php print $comment_count; ?>
     </div>
+    <?php endif; ?>
   </div>
 
   <div class="content">
