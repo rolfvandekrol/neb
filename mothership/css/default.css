@@ -4,7 +4,7 @@ Default styles
 a {outline: none;}
 a img {border:none;}
 a, a:link, a:visited, a:active {text-decoration: none;}
-  a:hover, a:focus {text-decoration: underline;}
+a:hover, a:focus {text-decoration: underline;}
 :focus{outline:0}
 
 b,strong{font-weight: bold;}
@@ -40,8 +40,6 @@ pager
 /*
 List
 * ------------------------------------- */
-
-
 ul.tabs li{display:inline; padding:0 10px}
 ul.primary{border-bottom:1px solid #fff; padding:3px 0; margin:4px 0 ;}
 ul.primary li{}
@@ -59,7 +57,7 @@ ul.links li{padding:0 5px 0 0;}
 /* 
   forms
 * ------------------------------------- */
-.form-item {margin:5px 0;}
+.form-item {margin:0;}
 
 
 /* 
@@ -167,19 +165,23 @@ input[type="search"] {
 /*
 FIELDSETS & LEGEND
 ----------------------------*/
-fieldset, html.js fieldset.collapsible .fieldset-legend, .fieldset-legend{width:500px;}
-fieldset{padding-bottom:10px; }
-html.js fieldset.collapsible .fieldset-legend, a:link.fieldset-title, .fieldset-legend{
-  height:25px; display:block; /* background-color:#ddd; color:#444; font-weight:bold; */
-}
-html.js fieldset.collapsible .fieldset-legend, span.fieldset-legend{padding-left:10px;}
-a.fieldset-title{display:block; display:block;}
-/*.fieldset-wrapper{background:#eee; border: 1px solid #ddd; border-top:none; padding-left:10px;} */
-.fieldset-wrapper fieldset, html.js fieldset.collapsible .fieldset-wrapper .fieldset-legend{width:480px;} 
-.vertical-tabs .fieldset-wrapper
+fieldset, 
+html.js fieldset.collapsible .fieldset-legend{
 
-/*icons*/
-html.js fieldset.collapsed .fieldset-legend {background:#d0d;}
+}
+
+fieldset, 
+html.js fieldset.collapsible .fieldset-legend, 
+span.fieldset-legend{
+  min-width:500px; 
+}
+
+html.js fieldset.collapsible .fieldset-legend, 
+a:link.fieldset-title, .fieldset-legend{
+  display:block; height:25px; font-weight:bold; padding-bottom:0;
+}
+
+
 
 
 
