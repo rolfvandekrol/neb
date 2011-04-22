@@ -206,7 +206,7 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));              
       }
 
-      if (theme_get_setting('mothership_classes_block_id')) {      
+      if (!theme_get_setting('mothership_classes_block_id')) {      
         $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"'; 
       }
 
@@ -219,9 +219,17 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = "contextual-links-region";
       }
 
+    //  if (theme_get_setting('mothership_classes_block_contentdiv')) {            
+    //    $vars['classes_array'][] = 'block-content';        
+    //  }
+
+
       //adds title class to the block ... OMG!
       $vars['title_attributes_array']['class'][] = 'title';
-      $vars['content_attributes_array']['class'][] = 'block-content';
+      $vars['content_attributes_array']['class'][] = 'block-content';        
+      
+
+//      mothership_classes_block_contentdiv
 
    //   $vars['title'] = $block->subject;
 
