@@ -80,7 +80,9 @@ function mothership_preprocess(&$vars, $hook) {
     //home screen icon for ipads n stuff
     global $theme;
     $path = drupal_get_path('theme', $theme);
-    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png" />';
+    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
+	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
+	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
     
 
     //----- C S S CLASSES  -----------------------------------------------------------------------------------------------
