@@ -30,13 +30,13 @@
   <?php if (!empty($field->separator)): ?>
     <?php print $field->separator; ?>
   <?php endif; ?>
-
+  
   <?php 
   if(! theme_get_setting('mothership_views_field_content_wrapper')){
    print $field->wrapper_prefix;     
   }
   ?>
-  <?php  print $field->label_html; ?>
+  <?php print $field->label_html; ?>
   <?php print $field->content; ?>
   <?php 
   if(! theme_get_setting('mothership_views_field_content_wrapper')){

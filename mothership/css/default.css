@@ -20,8 +20,6 @@ li,
 ul li, 
 .item-list ul
 .item-list ul li, 
-.block ul, 
-.block ul li, 
 ul.menu,
 ul.menu li{
   list-style: none; margin:0; padding:0;
@@ -211,4 +209,7 @@ body.context-editing div.draggable:hover a.context-block-remove {
   cursor:pointer;
   left:40px;
 }
+
+
+body.admin-vertical div#admin-toolbar.vertical {top:20px;}
 

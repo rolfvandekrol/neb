@@ -50,7 +50,7 @@ if ($classes) {
   $classes = ' class="'. $classes . ' "';
 }
 ?>
-<!--block-->
+
 <div <?php print $id_block . $classes .  $attributes; ?>>
   <?php print $mothership_poorthemers_helper;  ?>
 

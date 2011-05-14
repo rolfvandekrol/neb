@@ -232,12 +232,12 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
+
   $form['classes']['node']['mothership_classes_node'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .node'),
     '#default_value' => theme_get_setting('mothership_classes_node')
   );
-
 
   $form['classes']['node']['mothership_classes_node_state'] = array(
     '#type'          => 'checkbox',
@@ -304,14 +304,9 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['view']['mothership_views_field_content_wrapper'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the wrapper div .field-content'),
+    '#title'         => t('Remove the wrapper div around a field (view.field-content)'),
     '#default_value' => theme_get_setting('mothership_views_field_content_wrapper')
   );
-
-
-
-  
-
 
   //field
   $form['classes']['field'] = array(
