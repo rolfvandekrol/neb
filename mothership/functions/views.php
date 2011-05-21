@@ -5,6 +5,8 @@ template_preprocess_views_view
 options to remove css classes from the view
 */
 function mothership_preprocess_views_view(&$vars){
+//    kpr($vars['classes_array']);
+    
   if (theme_get_setting('mothership_classes_view')) {  
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('view')));
   }

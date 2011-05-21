@@ -6,7 +6,7 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css-alt
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/views/views.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
 
 
 // Auto-rebuild the theme registry during theme development.

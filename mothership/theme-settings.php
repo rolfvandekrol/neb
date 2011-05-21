@@ -261,7 +261,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .view'),
-    '#default_value' => theme_get_setting('mothership_classes_view_view')
+    '#default_value' => theme_get_setting('mothership_classes_view')
   );
   $form['classes']['view']['mothership_classes_view_name'] = array(
     '#type'          => 'checkbox',
@@ -273,6 +273,8 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
     '#default_value' => theme_get_setting('mothership_classes_view_view_id')
   );
+  
+  
   $form['classes']['view']['mothership_classes_view_row'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .view-row'),
@@ -293,7 +295,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
-
+/*
   //markup
   $form['classes']['view']['mothership_views_fields_wrapper'] = array(
     '#type'          => 'checkbox',
@@ -307,7 +309,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Remove the wrapper div around a field (view.field-content)'),
     '#default_value' => theme_get_setting('mothership_views_field_content_wrapper')
   );
-
+*/
   //field
   $form['classes']['field'] = array(
     '#type'          => 'fieldset',
