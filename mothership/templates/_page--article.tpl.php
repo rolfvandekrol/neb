@@ -56,7 +56,7 @@ $site_name_element = "h1";
 
     <div id="drupal-messages">
       <?php print render($page['help']); ?>
-      <?php print render($page['highlight']); ?>
+      <?php print render($page['highlighted']); ?>
       <?php print $messages; ?>
     </div>
 
