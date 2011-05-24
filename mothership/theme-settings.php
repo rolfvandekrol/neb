@@ -344,7 +344,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('External Libraries'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('These are libraries you need to download, because of the different licenses. Add them to mothership/lib/'),
+    '#description'   => t('These are libraries you need to download, because of the different licenses. Add them to sites/all/libraries/'),
   );
 
 

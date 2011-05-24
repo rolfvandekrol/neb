@@ -56,7 +56,7 @@ function mothership_preprocess(&$vars, $hook) {
     //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
     //add modernizr support
     if (theme_get_setting('mothership_modernizr')) {    
-      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/modernizr.js');
+      drupal_add_js('sites/all/libraries/modernizr/modernizr.js');
       //http://ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js      
       $vars['modernizr'] = 'class="no-js" ';
     }else{
@@ -65,16 +65,16 @@ function mothership_preprocess(&$vars, $hook) {
     //add selectivizr support
     if (theme_get_setting('mothership_selectivizr')) {    
       $vars['selectivizr'] = '<!--[if (gte IE 6)&(lte IE 8)]>';
-      $vars['selectivizr'] .= '<script type="text/javascript" src="' . drupal_get_path('theme', 'mothership') . ' /lib/selectivizr.js"></script>';
+      $vars['selectivizr'] .= '<script type="text/javascript" src="/sites/all/libraries/selectivizr/selectivizr.js"></script>';
       $vars['selectivizr'] .= '<![endif]-->';
     }else{
       $vars['selectivizr'] = '';
     }
-
+    //add uniform support
     if (theme_get_setting('mothership_uniform')) {    
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/lib/uniform/css/uniform.default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => 0));
-      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/jquery.uniform.js');
-      drupal_add_js(drupal_get_path('theme', 'mothership') . '/lib/uniform/uniform.js');
+      drupal_add_css('sites/all/libraries/uniform/css/uniform.default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => 0));
+      drupal_add_js('sites/all/libraries/uniform/jquery.uniform.js');
+      drupal_add_js('sites/all/libraries/uniform/uniform.js');
     }
 
     //home screen icon for ipads n stuff
