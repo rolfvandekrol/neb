@@ -360,7 +360,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'checkbox',
     '#title'         => t('Add selectivizr love'),
     '#default_value' => theme_get_setting('mothership_selectivizr'),
-    '#description'   => t('<a href="!link">Download modernizr</a>', array('!link' => 'http://selectivizr.com')),
+    '#description'   => t('<a href="!link">Download selectivizr</a>', array('!link' => 'http://selectivizr.com')),
   );
 
   $form['Libraries']['mothership_uniform'] = array(
