@@ -8,7 +8,6 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.ph
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
 
-
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('mothership_rebuild_registry')) {
   system_rebuild_theme_data();
@@ -238,7 +237,6 @@ function mothership_preprocess(&$vars, $hook) {
 
 }
 
-
 function mothership_preprocess_html(&$vars) {
   //add regions to header & footer so we can actually use these placeholders for something
   $vars['page_header'] = drupal_render($vars['page']['page_header']);  
@@ -246,7 +244,6 @@ function mothership_preprocess_html(&$vars) {
 
 
 }
-
 
 function mothership_preprocess_page(&$vars, $hook) {
   //print_r($vars['theme_hook_suggestions']);
@@ -292,5 +289,51 @@ function mothership_preprocess_field(&$vars, $hook) {
      $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_name'] . '__' . $vars['element']['#bundle'] .'_teaser';     
   }
   */
+}
+
+
+/**
+ * Implements hook_preprocess_html_tag().
+ * - Remove the type attribute from the <script>, <style> and <link> elements.
+ * - Remove the CDATA comments from inline JavaScript and CSS.
+ */
+function mothership_process_html_tag(&$vars) {
+  if(theme_get_setting('mothership_html5')){
+    $element = &$vars['element'];
+  
+    // Remove the "type" attribute.
+    if (in_array($element['#tag'], array('script', 'link', 'style'))) {
+      unset($element['#attributes']['type']);
+      // Remove CDATA comments.
+      if (isset($element['#value_prefix']) && ($element['#value_prefix'] == "\n<!--//--><![CDATA[//><!--\n" || $element['#value_prefix'] == "\n<!--/*--><![CDATA[/*><!--*/\n")) {
+        unset($element['#value_prefix']);
+      }
+      if (isset($element['#value_suffix']) && ($element['#value_suffix'] == "\n//--><!]]>\n" || $element['#value_suffix'] == "\n/*]]>*/-->\n")) {
+        unset($element['#value_suffix']);
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_html_head_alter().
+ * - Simplify the meta charset element.
+ */
+function mothership_html_head_alter(&$head_elements) {
+  if(theme_get_setting('mothership_html5')){
+    $head_elements['system_meta_content_type']['#attributes'] = array(
+      'charset' => 'utf-8',
+    );
+    // Force IE to always run the latest rendering engine.
+    $head_elements['x-ua-compatible'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'X-UA-Compatible',
+        'content' => 'IE=edge,chrome=1',
+      ),
+    );
+  }
 }
 

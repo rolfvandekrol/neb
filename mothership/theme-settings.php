@@ -180,8 +180,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
-
-
   //block
   $form['classes']['block'] = array(
     '#type'          => 'fieldset',
@@ -295,21 +293,8 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
-/*
-  //markup
-  $form['classes']['view']['mothership_views_fields_wrapper'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the wrapper div around fields (.views-field)'),
-    '#default_value' => theme_get_setting('mothership_views_fields_wrapper')
-  );
 
 
-  $form['classes']['view']['mothership_views_field_content_wrapper'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the wrapper div around a field (view.field-content)'),
-    '#default_value' => theme_get_setting('mothership_views_field_content_wrapper')
-  );
-*/
   //field
   $form['classes']['field'] = array(
     '#type'          => 'fieldset',
@@ -370,6 +355,14 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('<a href="!link">Download Uniform</a>', array('!link' => 'http://uniformjs.com')),
   );
   
+  $form['mothership_html5'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('HTML5 Love'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t(''),
+  );
+
+
 
 
 }
