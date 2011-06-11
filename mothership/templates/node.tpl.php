@@ -1,6 +1,8 @@
 <?php
 //kpr(get_defined_vars());
 //http://drupalcontrib.org/api/drupal/drupal--modules--node--node.tpl.php
+
+//node--[CONTENT TYPE].tpl.php
 if ($classes) {
   $classes = ' class="'. $classes . ' "';
 }

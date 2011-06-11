@@ -41,6 +41,8 @@
  * @see template_preprocess_field()
  * @see theme_field()
  */
+
+//field--image.tpl.php
 ?>
 
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
