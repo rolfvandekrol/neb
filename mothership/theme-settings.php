@@ -363,6 +363,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
+    $form['mothership_frontpage_default_message'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Remove the frontpage "No front page content has been created yet.Add new content" default message'),
+      '#default_value' => theme_get_setting('mothership_frontpage_default_message'),
+      '#description'   => t(''),
+    );
+
 
 
 }

@@ -246,11 +246,17 @@ function mothership_preprocess_html(&$vars) {
 }
 
 function mothership_preprocess_page(&$vars, $hook) {
-  //print_r($vars['theme_hook_suggestions']);
-//  krumo($vars);
+  /*
+  Enougn with the default message "  No front page content has been created yet. Add new content"
+  
+  */
+  if(theme_get_setting('mothership_frontpage_default_message')){
+    unset($vars['page']['content']['system_main']['default_message']);
+  }
 }
 
 function mothership_preprocess_node(&$vars,$hook) {
+
 }
 
 function mothership_preprocess_block(&$vars, $hook) {
