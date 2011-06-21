@@ -9,8 +9,7 @@ a:hover, a:focus {text-decoration: underline;}
 
 b,strong{font-weight: bold;}
 em, i{font-style: italic;}
-
-.active{font-weight:bold;}
+a.active, a.active-trail{font-weight:bold;}
 
 /*
 List
@@ -178,8 +177,6 @@ html.js fieldset.collapsible .fieldset-legend,
 a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
-
-
 
 
 
