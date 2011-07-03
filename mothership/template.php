@@ -74,12 +74,6 @@ function mothership_preprocess(&$vars, $hook) {
     }else{
       $vars['selectivizr'] = '';
     }
-    //add uniform support
-    if (theme_get_setting('mothership_uniform')) {    
-      drupal_add_css('sites/all/libraries/uniform/css/uniform.default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => 0));
-      drupal_add_js('sites/all/libraries/uniform/jquery.uniform.js');
-      drupal_add_js('sites/all/libraries/uniform/uniform.js');
-    }
 
     //home screen icon for ipads n stuff
     global $theme;
@@ -88,8 +82,6 @@ function mothership_preprocess(&$vars, $hook) {
 	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
 	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
-
-    
 
     //----- C S S CLASSES  -----------------------------------------------------------------------------------------------
     //Remove & add cleasses body

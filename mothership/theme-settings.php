@@ -45,17 +45,26 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['html5']['mothership_html5'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('HTML5 for extra awesomeness <doctype!>'),
+    '#title'         => t('HTML5'),
     '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t('Change the header to be html5'),
+    '#description'   => t(''),
   );
 
   $form['html5']['mothership_html5'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('HTML5 for extra awesomeness ;)'),
+    '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
     '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t(''),
+    '#description'   => t('Change the header to be html5'),
   );
+
+  $form['html5']['mothership_viewport'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add Viewport'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
+  );
+
+
 
 
 
@@ -377,15 +386,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_selectivizr'),
     '#description'   => t('<a href="!link">Download selectivizr</a>', array('!link' => 'http://selectivizr.com')),
   );
-
-  $form['Libraries']['mothership_uniform'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Add uniform love'),
-    '#default_value' => theme_get_setting('mothership_uniform'),
-    '#description'   => t('<a href="!link">Download Uniform</a>', array('!link' => 'http://uniformjs.com')),
-  );
-  
-
 
 
     $form['mothership_frontpage_default_message'] = array(
