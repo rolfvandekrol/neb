@@ -37,12 +37,17 @@ function mothership_preprocess(&$vars, $hook) {
     /*
     Adds 3 css files that the subthemes wanna use.
     reset.css - eric meyer ftw  
+    reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
     defaults.css cleans some of the defaults from drupal
     mothership.css - adds css for use with icons & other markup fixes
     */
     if (theme_get_setting('mothership_css_reset')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
+    if (theme_get_setting('mothership_css_reset_html5')) {    
+      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset-html5.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    }    
+    
     if (theme_get_setting('mothership_css_default')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
@@ -82,6 +87,8 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
 	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
 	  $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
+
+
     
 
     //----- C S S CLASSES  -----------------------------------------------------------------------------------------------
@@ -251,7 +258,6 @@ function mothership_preprocess_page(&$vars, $hook) {
   Enougn with the default message "  No front page content has been created yet. Add new content"
   
   */
-
   
   if(theme_get_setting('mothership_frontpage_default_message')){
     unset($vars['page']['content']['system_main']['default_message']);

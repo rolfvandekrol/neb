@@ -37,8 +37,6 @@ regions[page_header] = Page Header (in html.tpl)
 regions[page_footer] = Page Footer (in html.tpl)
 
 ;-------------- C S S -------------
-;stylesheets[all][] = css/reset.css
-;stylesheets[all][] = css/reset-drupal.css
 
 ;-------------- JS -------------
 

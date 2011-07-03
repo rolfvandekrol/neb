@@ -35,6 +35,29 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_test'),
   );
 
+  $form['html5'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('HTML 5 '),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+
+  $form['html5']['mothership_html5'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('HTML5 for extra awesomeness <doctype!>'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t('Change the header to be html5'),
+  );
+
+  $form['html5']['mothership_html5'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('HTML5 for extra awesomeness ;)'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t(''),
+  );
+
+
 
   //CSS Files 
   $form['css'] = array(
@@ -80,6 +103,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
      '#title'         => t('Add reset.css Resets the browser eric meyer style'),
      '#default_value' => theme_get_setting('mothership_css_reset')
    );
+
+   $form['css']['add']['mothership_css_reset_html5'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Add html5 reset css (html5doctor) '),
+      '#default_value' => theme_get_setting('mothership_css_reset_html5')
+    );
+
 
    $form['css']['add']['mothership_css_default'] = array(
       '#type'          => 'checkbox',
@@ -355,12 +385,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('<a href="!link">Download Uniform</a>', array('!link' => 'http://uniformjs.com')),
   );
   
-  $form['mothership_html5'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('HTML5 Love'),
-    '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t(''),
-  );
+
 
 
     $form['mothership_frontpage_default_message'] = array(
