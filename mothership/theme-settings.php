@@ -362,7 +362,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
     
 
-
   $form['Libraries'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('External Libraries'),
@@ -370,7 +369,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => FALSE,
     '#description'   => t('These are libraries you need to download, because of the different licenses. Add them to sites/all/libraries/'),
   );
-
 
   //libaries stuff
   $form['Libraries']['mothership_modernizr'] = array(
@@ -387,14 +385,12 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('<a href="!link">Download selectivizr</a>', array('!link' => 'http://selectivizr.com')),
   );
 
-
-    $form['mothership_frontpage_default_message'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Remove the frontpage "No front page content has been created yet.Add new content" default message'),
-      '#default_value' => theme_get_setting('mothership_frontpage_default_message'),
-      '#description'   => t(''),
-    );
-
+  $form['mothership_frontpage_default_message'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the frontpage "No front page content has been created yet.Add new content" default message'),
+    '#default_value' => theme_get_setting('mothership_frontpage_default_message'),
+    '#description'   => t(''),
+  );
 
 
 }
