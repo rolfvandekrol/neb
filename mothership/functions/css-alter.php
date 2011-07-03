@@ -119,12 +119,6 @@ function mothership_css_alter(&$css) {
     
     */
 
-    //modules
-    if(module_exists('views')){ 
-      $css = drupal_add_css($mothership_cssmodules_path . 'views.base.css', array('group' => CSS_SYSTEM));      
-      $css = drupal_add_css($mothership_cssmodules_path . 'views.theme.css', array('group' => CSS_SYSTEM));      
-    }
-
 
    //nuke the original css files
    $nuke = array(
@@ -159,10 +153,7 @@ function mothership_css_alter(&$css) {
       //modules/overlay/overlay-parent.css
       //modules/system/system.menus.css
       //modules/system/system.messages.css
-      
-      //modules
-      drupal_get_path('module', 'views') . '/css/views.css' => FALSE,
-      drupal_get_path('module', 'ctools') . '/css/ctools.css' => FALSE,
+    
     );
 
 

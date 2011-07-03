@@ -34,7 +34,7 @@ $site_name_element = "h1";
     <?php print render($page['sidebar_first']); ?>
     <?php print render($page['sidebar_second']); ?>
 
-    <div id="main">
+    <div id="main" role="main">
       <?php //title ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?>
