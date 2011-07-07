@@ -54,7 +54,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'checkbox',
     '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
     '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t('Change the header to be html5'),
+    '#description'   => t('Change the header to be html5, remove the anonymous div from form'),
   );
 
   $form['html5']['mothership_viewport'] = array(
@@ -79,7 +79,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['nuke'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Dude! Nuke em'),
+    '#title'         => t('CSS Nuke - BAT style'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
@@ -87,7 +87,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['nuke']['mothership_nuke_css'] = array(
     '#type'          => 'radios',
-    '#title'         => t('NUKE css files BAT style') ,
     '#options'       => array(
                           'mothership_css_nuke_none'  => t('Peace! the css isnt touched, just as Drupal wants it to be ...'),
                           'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes modulename.theme.css files, keeps "various" drupal css files'),
@@ -351,7 +350,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['field']['mothership_classes_field_type'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the field type class '),
+    '#title'         => t('Remove the input field type class: .form-radio, form-checkbox '),
     '#default_value' => theme_get_setting('mothership_classes_field_type')
   );
   
@@ -360,7 +359,67 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Remove the label status class '),
     '#default_value' => theme_get_setting('mothership_classes_field_label')
   );
+
+ //Form    
+  $form['classes']['form'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Forms'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
     
+  $form['classes']['form']['mothership_classes_form_wrapper_formitem'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the .form-item wrapper class '),
+    '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formitem')
+  );
+
+  $form['classes']['form']['mothership_classes_form_wrapper_formtype'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the .form-type-[type] wrapper class'),
+    '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formtype')
+  );
+
+  $form['classes']['form']['mothership_classes_form_wrapper_formname'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the .form-type-[name]-x wrapper class'),
+    '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formname')
+  );
+
+  $form['classes']['form']['mothership_classes_form_label'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the class .option from label'),
+    '#default_value' => theme_get_setting('mothership_classes_form_label')
+  );
+
+  $form['classes']['form']['mothership_classes_form_input'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the type class from an input field'),
+    '#default_value' => theme_get_setting('mothership_classes_form_input')
+  );
+
+  $form['classes']['form']['mothership_classes_form_description'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('change the &lt;div class=&quot;description&quot;&gt; to a cleaner &lt;p&gt; '),
+    '#default_value' => theme_get_setting('mothership_classes_form_description')
+  );
+
+  $form['classes']['form']['mothership_form_required'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t(' Field required. remove the * and add a class field-required to the label instead'),
+    '#default_value' => theme_get_setting('mothership_form_required')
+  );
+
+  $form['classes']['form']['mothership_form_labelwrap'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Wrap checkboxes & radios into the label tag'),
+    '#default_value' => theme_get_setting('mothership_form_labelwrap')
+  );
+
+  
+
+
+
 
   $form['Libraries'] = array(
     '#type'          => 'fieldset',

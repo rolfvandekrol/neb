@@ -1,15 +1,23 @@
 <?php if(theme_get_setting('mothership_html5')){  ?>
 <!DOCTYPE html>
-<html <?php print $modernizr; ?> lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
+<html <?php print $modernizr; ?> lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>>
 <?php }else{ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html <?php print $modernizr; ?> xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 <?php } ?>
 
-
 <?php print $mothership_poorthemers_helper; ?>
-<head profile="<?php print $grddl_profile; ?>">
+<?php 
+/*
+TODO a test if we use rdf to add in the profile
+*/
+
+if(theme_get_setting('mothership_html5')){  ?>
+  <head>
+<?php }else{ ?>
+  <head profile="<?php print $grddl_profile; ?>">
+<?php } ?>  
 
 <title><?php print $head_title; ?></title>
 

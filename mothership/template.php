@@ -287,15 +287,6 @@ function mothership_preprocess_field(&$vars, $hook) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
   }
 
-/*  //lets get some template suggestions for teaser fields
-    krumo($vars['element']['#view_mode']);
-  if($vars['element']['#view_mode'] == "teaser"){
-     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_type'] . '_teaser'; 
-     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_name'] . '_teaser'; 
-     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#bundle'] . '_teaser';     
-     $vars['theme_hook_suggestions'][] = 'field__' . $vars['element']['#field_name'] . '__' . $vars['element']['#bundle'] .'_teaser';     
-  }
-  */
 }
 
 
@@ -331,15 +322,6 @@ function mothership_html_head_alter(&$head_elements) {
   if(theme_get_setting('mothership_html5')){
     $head_elements['system_meta_content_type']['#attributes'] = array(
       'charset' => 'utf-8',
-    );
-    // Force IE to always run the latest rendering engine.
-    $head_elements['x-ua-compatible'] = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-        'http-equiv' => 'X-UA-Compatible',
-        'content' => 'IE=edge,chrome=1',
-      ),
     );
   }
 }
