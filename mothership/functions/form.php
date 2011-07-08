@@ -33,7 +33,7 @@ function mothership_form($variables) {
 
 /*
 remove the classes from the div wrapper around each field 
-use p instead of div if were goint html5 love
+change the div=desription to small
 */
 function mothership_form_element($variables) {
   $element = &$variables['element'];
@@ -107,6 +107,17 @@ function mothership_form_element($variables) {
         $output .= ' ' . $prefix .  $element['#children'] . $suffix . "\n";
       }
 
+      if (!empty($element['#description'])) {
+        //we dont really need a class for desctioption so lets add small instead
+        if(!theme_get_setting('mothership_classes_form_description')){    
+          $output .= "\n" . '<div class="description">' . $element['#description'] . "</div>\n";      
+        }else{
+          $output .= "\n" . '<small>' . $element['#description'] . "</small>\n";
+        }  
+      }
+
+
+
       break;
 
     case 'after':
@@ -129,6 +140,7 @@ function mothership_form_element($variables) {
             $output .= "\n" . '<small>' . $element['#description'] . "</small>\n";
           }  
         }
+
       }
       break;
 
@@ -171,7 +183,7 @@ function mothership_form_element_label($variables) {
     $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
   }else{
     if(!empty($element['#required'])){
-      $attributes['class'] = 'form-required';      
+      $attributes['class'] = 'form-field-required';      
     }
   }
  
@@ -193,8 +205,21 @@ function mothership_form_element_label($variables) {
   // in html5 we need an element for the for id items & check TODO: clean this up
   if (!empty($element['#id'])){
     //not every element in drupal comes with an #id that we can use for the for="#id"
-    if( theme_get_setting('mothership_html5') AND $element['#type'] != "item" && $element['#type'] != "checkboxes" && $element['#type'] != "radios" && $element['#type'] != "managed_file"){
-      $attributes['for'] = $element['#id'];              
+
+//       AND     
+    if(
+      //if its html5 & is not an item, checkboxradios or manged file
+      theme_get_setting('mothership_html5') AND 
+      $element['#type'] != "item" && 
+      $element['#type'] != "checkboxes" && 
+      $element['#type'] != "radios" && 
+      $element['#type'] != "managed_file")
+    {
+        $attributes['for'] = $element['#id'];              
+    }elseif(theme_get_setting('mothership_form_labelwrap')){
+//        $attributes['for'] = $element['#id'];              
+    }else{
+      $attributes['for'] = $element['#id'];                    
     }
   }
 
@@ -269,6 +294,8 @@ function mothership_textfield($variables) {
   //is this element requred then lest add the required element into the input
   if(theme_get_setting('mothership_html5')){  
     $required = !empty($element['#required']) ? ' required' : '';
+  }else{
+    $required ="";
   }
 
   //dont need to set type in html5 its default so lets remove it because we can
@@ -333,8 +360,9 @@ function mothership_file($variables) {
   $element['#attributes']['type'] = 'file';
 //  element_set_attributes($element, array('id', 'name', 'size'));
   element_set_attributes($element, array('id', 'name'));
-  _form_set_class($element, array('form-file'));
-
+  if(!theme_get_setting('mothership_classes_form_input')){  
+    _form_set_class($element, array('form-file'));
+  }
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
@@ -393,8 +421,6 @@ http://api.drupal.org/api/drupal/includes--form.inc/function/theme_textfield
 set the size to 30 instead of 60
 remove form-text class
 */
-
-
 function mothership_text_format_wrapper($variables) {
   $element = $variables['element'];
   $output = '<div class="text-format-wrapper">';
@@ -405,4 +431,65 @@ function mothership_text_format_wrapper($variables) {
   $output .= "</div>\n";
 
   return $output;
+}
+
+
+function mothership_button($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'submit';
+  element_set_attributes($element, array('id', 'name', 'value'));
+
+  if(!theme_get_setting('mothership_classes_form_input')){  
+    $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
+    if (!empty($element['#attributes']['disabled'])) {
+      $element['#attributes']['class'][] = 'form-button-disabled';
+    }
+  }
+
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/*
+remove form-wrapper
+*/
+function mothership_fieldset($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id'));
+  
+  if(!theme_get_setting('mothership_classes_form_input')){  
+    _form_set_class($element, array('form-wrapper'));
+  }
+  
+  $output = '<fieldset' . drupal_attributes($element['#attributes']) . '>';
+  if (!empty($element['#title'])) {
+    // Always wrap fieldset legends in a SPAN for CSS positioning.
+    $output .= '<legend><span class="fieldset-legend">' . $element['#title'] . '</span></legend>';
+  }
+  $output .= '<div class="fieldset-wrapper">';
+  if (!empty($element['#description'])) {
+    $output .= '<div class="fieldset-description">' . $element['#description'] . '</div>';
+  }
+  $output .= $element['#children'];
+  if (isset($element['#value'])) {
+    $output .= $element['#value'];
+  }
+  $output .= '</div>';
+  $output .= "</fieldset>\n";
+  return $output;
+}
+
+function mothership_container($variables) {
+  $element = $variables['element'];
+
+  // Special handling for form elements.
+  if (isset($element['#array_parents'])) {
+    // Assign an html ID.
+    if (!isset($element['#attributes']['id'])) {
+      $element['#attributes']['id'] = $element['#id'];
+    }
+    // Add the 'form-wrapper' class.
+//    $element['#attributes']['class'][] = 'form-wrapper';
+  }
+
+  return '<div' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</div>';
 }

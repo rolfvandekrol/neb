@@ -101,8 +101,9 @@ function mothership_table($variables) {
       // adds odd even, count and name for a th
       $zebra = $i % 2 ? ' even ' : ' odd ';
       /*add classnames + a count*/
-
-      $zebra .= " column-" . $i . ' name-' . drupal_html_class($cell['class']); 
+//      $cell = array();
+      
+//      $zebra .= " column-" . $i . ' name-' . drupal_html_class($cell['class']); 
       if (is_array($cell)) {
         //print_r($cell['data']);
         if (isset($cell['class'])) {

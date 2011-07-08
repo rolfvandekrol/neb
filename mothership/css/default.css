@@ -54,8 +54,28 @@ ul.links li{padding:0 5px 0 0;}
 /* 
   forms
 * ------------------------------------- */
-.form-item {margin:0;}
+.form-type-textfield{}
+.form-type-checkbox {margin:0;}
+.form-type-radio {margin:0;}
+.form-type-textarea{margin:0;}
+.form-type-managed-file{margin:0;}
 
+fieldset{}
+label {display: inline; font-weight: bold;}
+textarea{background:#ddd;}
+input{border: 1px solid #000!important; padding:10px; margin:10px;}
+  input[type="radio"]     { vertical-align: middle; }
+  input[type="checkbox"]  { vertical-align: middle}
+    .ie7 input[type="checkbox"] { vertical-align: baseline; }
+  input[type="file"]     { vertical-align: middle; }
+
+
+form small{font-size:12px; color:#666; display:block; text-align: left:10px;}
+
+.form-field-required {background:#900;}
+input:focus   { border: 2px solid #6C6; }
+input:invalid { border: 2px solid #900; }
+form small{display:block; color:#999;}
 
 /* 
   admin styles for blocks

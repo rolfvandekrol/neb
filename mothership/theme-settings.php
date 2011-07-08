@@ -388,19 +388,19 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['form']['mothership_classes_form_label'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the class .option from label'),
+    '#title'         => t('Remove the class .option from label use .form-type-checkbox label{} instead'),
     '#default_value' => theme_get_setting('mothership_classes_form_label')
   );
 
   $form['classes']['form']['mothership_classes_form_input'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the type class from an input field'),
+    '#title'         => t('input fields Remove the class from it class="form-[type] use input[type="radio"] instead for the css" '),
     '#default_value' => theme_get_setting('mothership_classes_form_input')
   );
 
   $form['classes']['form']['mothership_classes_form_description'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('change the &lt;div class=&quot;description&quot;&gt; to a cleaner &lt;p&gt; '),
+    '#title'         => t('change the &lt;div class=&quot;description&quot;&gt; to a smaller &lt;small&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_form_description')
   );
 
@@ -412,7 +412,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['form']['mothership_form_labelwrap'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Wrap checkboxes & radios into the label tag'),
+    '#title'         => t('Wrap checkboxes & radios into the label tag &lt;label&gt;foo &lt;item&gt;&lt;/label&gt;'),
     '#default_value' => theme_get_setting('mothership_form_labelwrap')
   );
 
