@@ -290,39 +290,4 @@ function mothership_preprocess_field(&$vars, $hook) {
 }
 
 
-/**
- * Implements hook_preprocess_html_tag().
- * - Remove the type attribute from the <script>, <style> and <link> elements.
- * - Remove the CDATA comments from inline JavaScript and CSS.
- */
-function mothership_process_html_tag(&$vars) {
-  if(theme_get_setting('mothership_html5')){
-    $element = &$vars['element'];
-  
-    // Remove the "type" attribute.
-    if (in_array($element['#tag'], array('script', 'link', 'style'))) {
-      unset($element['#attributes']['type']);
-      // Remove CDATA comments.
-      if (isset($element['#value_prefix']) && ($element['#value_prefix'] == "\n<!--//--><![CDATA[//><!--\n" || $element['#value_prefix'] == "\n<!--/*--><![CDATA[/*><!--*/\n")) {
-        unset($element['#value_prefix']);
-      }
-      if (isset($element['#value_suffix']) && ($element['#value_suffix'] == "\n//--><!]]>\n" || $element['#value_suffix'] == "\n/*]]>*/-->\n")) {
-        unset($element['#value_suffix']);
-      }
-    }
-  }
-}
-
-
-/**
- * Implements hook_html_head_alter().
- * - Simplify the meta charset element.
- */
-function mothership_html_head_alter(&$head_elements) {
-  if(theme_get_setting('mothership_html5')){
-    $head_elements['system_meta_content_type']['#attributes'] = array(
-      'charset' => 'utf-8',
-    );
-  }
-}
 

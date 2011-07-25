@@ -1,7 +1,7 @@
 /*
-styles to the changes the mothership does to the markup
+  styles for changes the mothership does to the markup
 */
-body.test .gc{background: transparent url(../images/grid.png) repeat-y}
+body.test{background: transparent url(../images/grid.png) repeat-y}
 
 /*
 feed icon 
@@ -36,4 +36,3 @@ Tables
 .table-order-asc, .table-order-desc{width:16px; height:16px; float:right}
 .table-order-asc{background: transparent url(/misc/arrow-asc.png) no-repeat center top;}
 .table-order-desc{background: transparent url(/misc/arrow-desc.png) no-repeat center top;}
-

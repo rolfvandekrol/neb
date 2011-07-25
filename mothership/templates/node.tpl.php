@@ -10,6 +10,10 @@ if ($classes) {
 if ($id_node) {
   $id_node = ' id="'. $id_node . '"'; 
 }
+
+hide($content['comments']);
+hide($content['links']);
+
 ?>
 
 <!--node-->
@@ -42,8 +46,6 @@ if ($id_node) {
 
   <div class="content">
     <?php
-      hide($content['comments']);
-      hide($content['links']);
       print render($content);
     ?>
   </div>

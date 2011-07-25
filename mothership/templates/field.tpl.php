@@ -44,7 +44,7 @@
 
 //field--image.tpl.php
 ?>
-
+<!-- field.tpl -->
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php print $mothership_poorthemers_helper;  ?>  
   <?php if (!$label_hidden) : ?>

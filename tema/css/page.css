@@ -11,7 +11,7 @@ look at layout.css for the grid systems
 /* PAGE
 ------------------------------------- */
 html{background: #2d93de url(../images/bg.png) repeat center center}
-body{background: transparent url(../images/bg-top.png) repeat-x}
+body{}
 #container{}
  #container-inner{}
 

@@ -29,20 +29,16 @@ li.expanded,
 li.collapsed{
   list-style: none outside none;
 }
-/*
-pager
-*/
+/* pager */
 .pager li{float:left;}
 
-/*
-List
-* ------------------------------------- */
+/*Tabs*/
 ul.tabs li{display:inline; padding:0 10px}
 ul.primary{border-bottom:1px solid #fff; padding:3px 0; margin:4px 0 ;}
 ul.primary li{}
 ul.secondary li{border-left: 1px solid #fff; }
 
-/*add default list for body content */
+/* Default list for body content */
 .field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
 .field-name-body ul li {list-style: square inside}
 ul.links li{padding:0 5px 0 0;}
@@ -52,7 +48,7 @@ ul.links li{padding:0 5px 0 0;}
   ul.breadcrumb li{display:inline; margin:0 0 0 10px;}
 
 /* 
-  forms
+  FORMS
 * ------------------------------------- */
 .form-type-textfield{}
 .form-type-checkbox {margin:0;}
@@ -68,14 +64,33 @@ input{border: 1px solid #000!important; padding:10px; margin:10px;}
   input[type="checkbox"]  { vertical-align: middle}
     .ie7 input[type="checkbox"] { vertical-align: baseline; }
   input[type="file"]     { vertical-align: middle; }
-
+  input[type="search"] {-webkit-appearance: textfield;}
 
 form small{font-size:12px; color:#666; display:block; text-align: left:10px;}
 
 .form-field-required {background:#900;}
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
-form small{display:block; color:#999;}
+
+
+/* FIELDSETS & LEGEND */
+fieldset, 
+html.js fieldset.collapsible .fieldset-legend{
+
+}
+
+fieldset, 
+html.js fieldset.collapsible .fieldset-legend, 
+span.fieldset-legend{
+  min-width:500px; 
+}
+
+html.js fieldset.collapsible .fieldset-legend, 
+a:link.fieldset-title, .fieldset-legend{
+  display:block; height:25px; font-weight:bold; padding-bottom:0;
+}
+
+
 
 /* 
   admin styles for blocks
@@ -172,33 +187,6 @@ yup its a recap of the clearfix trick, but we dont wanna go an do class="clearfi
   min-height: 1%;
 }
 
-/*
-  FORMS
-----------------------------*/
-input[type="search"] {
-  -webkit-appearance: textfield;
-}
-
-/*
-FIELDSETS & LEGEND
-----------------------------*/
-fieldset, 
-html.js fieldset.collapsible .fieldset-legend{
-
-}
-
-fieldset, 
-html.js fieldset.collapsible .fieldset-legend, 
-span.fieldset-legend{
-  min-width:500px; 
-}
-
-html.js fieldset.collapsible .fieldset-legend, 
-a:link.fieldset-title, .fieldset-legend{
-  display:block; height:25px; font-weight:bold; padding-bottom:0;
-}
-
-
 
 /*
 MODULES
@@ -213,7 +201,7 @@ admin toolbar fix if its used with the toolbar
 body.toolbar div#admin-toolbar.vertical {top:30px;}
 body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
 
-
+/*
 body.context-editing div.draggable:hover a.context-block-remove,
 body.context-editing div.draggable:hover a.context-block-handle {
   left:0px;
@@ -230,3 +218,4 @@ body.context-editing div.draggable:hover a.context-block-remove {
 
 body.admin-vertical div#admin-toolbar.vertical {top:20px;}
 
+*/

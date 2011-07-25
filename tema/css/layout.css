@@ -4,9 +4,10 @@
 .gc .test {
   background: transparent url(../images/grid-978.png) repeat-y;
 }
-.gc {
+body {
   width: 978px;
   margin: 0 auto;
+  background: transparent url(../images/grid-978.png) repeat-y;
 }
 .gf {
   margin-left: 0!important;

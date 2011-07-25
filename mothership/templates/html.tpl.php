@@ -29,7 +29,16 @@ if(theme_get_setting('mothership_html5')){  ?>
 <?php } ?>
 
 <?php print $styles; ?>
+
 <?php print $scripts; ?>
+
+<?php 
+  if(module_exists('html5_tools')){
+    print $html5shiv;     
+  }
+?>
+
+
 <?php print $selectivizr; ?>
 
 </head>

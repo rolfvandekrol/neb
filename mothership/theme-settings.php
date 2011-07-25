@@ -145,7 +145,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('body classes (html.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modifies the classes Drupal puts into  &lt;body class=""&gt;'),
+    '#description'   => t('Modifies the classes Drupal puts into  &lt;body class="html logged-in front sidebar toolbar page-node"&gt;'),
   );
 
   $form['classes']['body']['mothership_classes_body_html'] = array(
@@ -203,6 +203,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Region classes (region.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#description'   => t('Modify the div & style &lt;div class="region"&gt; & &lt;div&gt ')    
   );
 
   $form['classes']['region']['mothership_classes_region'] = array(
@@ -224,12 +225,14 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('block classes (block.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#description'   => t('Modify the div wrappers style &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; ')
   );
   
   $form['classes']['block']['mothership_classes_block'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .block'),
-    '#default_value' => theme_get_setting('mothership_classes_block')
+    '#default_value' => theme_get_setting('mothership_classes_block'),
+    '#description'   => t('Dont remove this if you using context!')
   );
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
@@ -244,8 +247,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block_id_as_class')
   );
 
-
-
   $form['classes']['block']['mothership_classes_block_contexual_only'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('zap everything only keep the .contextual-links-region'),
@@ -254,12 +255,9 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['block']['mothership_classes_block_contentdiv'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the &lt;div class=&quot;content&quot;&gt; from the block.tpl - but keeps it in a block-block'),
+    '#title'         => t('Remove the &lt;div class=&quot;content&quot;&gt; from the block.tpl.php - Keeps it in a custom text block (block-block)'),
     '#default_value' => theme_get_setting('mothership_classes_block_contentdiv')
   );
-
-
-
 
   //NODE
   $form['classes']['node'] = array(
@@ -267,6 +265,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('node classes (node.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#description'   => t('Modify the div wrapper & style &lt;div id="#node-id" class="node  node-[status] "&gt; ')    
   );
 
   $form['classes']['node']['mothership_classes_node'] = array(
