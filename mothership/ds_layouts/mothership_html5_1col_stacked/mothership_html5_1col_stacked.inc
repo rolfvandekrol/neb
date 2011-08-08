@@ -2,7 +2,7 @@
 //http://drupalcode.org/viewvc/drupal/contributions/modules/ds/ds.api.php?revision=1.1.2.4&view=markup&pathrev=DRUPAL-7--1
 // from around line 122
 
-function ds_mothership_html5_2col_stacked() {
+function ds_mothership_html5_1col_stacked() {
   return array(
     'label' => t('HTML5 1 col stacked - mothership'),
     'regions' => array(
