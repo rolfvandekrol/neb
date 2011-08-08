@@ -23,18 +23,26 @@
     </hgroup>
   <?php endif; ?>
 
+
   <?php if ($top): ?>
     <div  <?php if($$top_classes){ ?>class="<?php print $$top_classes; ?>"<?php } ?>>
       <?php print $top; ?>
     </div>
   <?php endif; ?>
-
+  
 <div class="clearfix">
   <?php if ($left): ?>
     <div <?php if($left_classes){ ?>class="<?php print $left_classes; ?>"<?php } ?>>
       <?php print $left; ?>
     </div>
   <?php endif; ?>
+
+  <?php if ($middle): ?>
+    <div <?php if($middle_classes){ ?>class="<?php print $middle_classes; ?>"<?php } ?>>
+      <?php print $middle; ?>
+    </div>
+  <?php endif; ?>
+
 
   <?php if ($right): ?>
     <div <?php if($right_classes){ ?>class="<?php print $right_classes; ?>"<?php } ?>>
