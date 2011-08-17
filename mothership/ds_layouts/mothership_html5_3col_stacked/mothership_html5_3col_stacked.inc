@@ -4,7 +4,7 @@
 
 function ds_mothership_html5_3col_stacked() {
   return array(
-    'label' => t('HTML5 2 col stacked - mothership'),
+    'label' => t('HTML5 3 col stacked - mothership'),
     'regions' => array(
       // The key of this region name is also the variable used in
       // the template to print the content of that region.
