@@ -33,8 +33,9 @@ function mothership_form($variables) {
 
 /*
 remove the classes from the div wrapper around each field 
-change the div=desription to small
+change the div class="description" to <small>
 */
+
 function mothership_form_element($variables) {
   $element = &$variables['element'];
 
@@ -108,7 +109,7 @@ function mothership_form_element($variables) {
       }
 
       if (!empty($element['#description'])) {
-        //we dont really need a class for desctioption so lets add small instead
+        //we dont really need a class for description so lets add small instead
         if(!theme_get_setting('mothership_classes_form_description')){    
           $output .= "\n" . '<div class="description">' . $element['#description'] . "</div>\n";      
         }else{
