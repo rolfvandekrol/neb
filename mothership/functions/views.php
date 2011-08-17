@@ -78,8 +78,12 @@ function mothership_preprocess_views_view_unformatted(&$vars) {
       $vars['classes'][$id][] = $row_class;
     }
 
+    $vars['classes'][$id][] = '';
+
+
     // Flatten the classes to a string for each row for the template file.
     $vars['classes_array'][$id] = implode(' ', $vars['classes'][$id]);
+
   }
 
 }
