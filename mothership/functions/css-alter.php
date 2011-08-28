@@ -72,7 +72,6 @@ function mothership_css_alter(&$css) {
     }   
     /* TODO overlay
     if(module_exists('overlay')){
-
     }
     */
     if(module_exists('poll')){
@@ -80,7 +79,7 @@ function mothership_css_alter(&$css) {
       $css = drupal_add_css($mothership_csscore_path . 'poll.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
-    if(module_exists('poll')){ 
+    if(module_exists('profile')){ 
       $css = drupal_add_css($mothership_csscore_path . 'profile.theme.css', array('group' => CSS_SYSTEM));      
     } 
 
@@ -91,6 +90,7 @@ function mothership_css_alter(&$css) {
     if(module_exists('shortcut')){ 
       $css = drupal_add_css($mothership_csscore_path . 'shortcut.theme.css', array('group' => CSS_SYSTEM));      
     } 
+
     if(module_exists('toolbar')){ 
       $css = drupal_add_css($mothership_csscore_path . 'toolbar.theme.css', array('group' => CSS_SYSTEM));      
     } 

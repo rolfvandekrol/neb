@@ -12,7 +12,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'checkbox',
     '#title'         => t('the Poor Themers Helper - Experimental!'),
     '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
-    '#description'   => t('Adds a comments in block, node, regions etc with the suggested theme hooks'),
+    '#description'   => t('Add a comment tag in block, node, regions with the suggested theme hooks'),
   );
 
   $form['development']['mothership_rebuild_registry'] = array(
@@ -22,16 +22,9 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
   );
 
-  $form['development']['mothership_localhost_test'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Sets a development class to the body if the server is on 127.0.0.1, local or localhost'),
-    '#default_value' => theme_get_setting('mothership_localhost_test'),
-    '#description'   => t('Handy so you know where you are'),
-  );
-
   $form['development']['mothership_test'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Adds a .test class to the body tag'),
+    '#title'         => t('Add a test class to &lt;body&gt;'),
     '#default_value' => theme_get_setting('mothership_test'),
   );
 
@@ -65,9 +58,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
-
-
-
   //CSS Files 
   $form['css'] = array(
     '#type'          => 'fieldset',
@@ -79,7 +69,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['nuke'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('CSS Nuke - BAT style'),
+    '#title'         => t('CSS Files Nuking - BAT style'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
@@ -88,13 +78,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['css']['nuke']['mothership_nuke_css'] = array(
     '#type'          => 'radios',
     '#options'       => array(
-                          'mothership_css_nuke_none'  => t('Peace! the css isnt touched, just as Drupal wants it to be ...'),
-                          'mothership_css_nuke_theme' => t('<strong>.theme.css</strong> Nukes modulename.theme.css files, keeps "various" drupal css files'),
-                          'mothership_css_nuke_theme_full' => t('<strong>All .theme.css </strong> Nukes all modulename.theme.css files'),
-                          'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> Nukes all "modulename".admin.css files'),
-                          'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> Nukes all .theme.css + .theme.css'),
-                          'mothership_css_nuke_module'  => t('<strong>Module Nuke</strong>Nukes ALL css files provided by any module, but keeps the themes css files'),
-                          'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong> none shall pass! Removes every css file that comes from modules & themes'),
+                          'mothership_css_nuke_none'  => t('<strong>Peace!</strong> <br> the CSS isnt touched, just as Drupal wants it to be'),
+                          'mothership_css_nuke_theme' => t('<strong>.theme.css (selected)</strong> <br> Nukes all .theme.css files, but keeps these files: <br>toolbar.theme.css,shortcut.theme.css, contextual.theme.css'),
+                          'mothership_css_nuke_theme_full' => t('<strong>.theme.css </strong> <br>Nukes all .theme.css files'),
+                          'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> <br>Nukes all .admin.css files'),
+                          'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> <br>Nukes all .theme.css + .theme.css'),
+                          'mothership_css_nuke_module'  => t('<strong>the Nuke</strong> <br>Nukes ALL css files provided by any module, but keeps all .theme.css files'),
+                          'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong><br> None shall pass! Removes every css file that comes from modules & themes'),
                         ),
     '#default_value' => theme_get_setting('mothership_nuke_css'),
   );

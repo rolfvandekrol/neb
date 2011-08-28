@@ -129,15 +129,6 @@ function mothership_preprocess(&$vars, $hook) {
       }
     }  
     
-    
-    //test if were on .local or .localhost or 127.0.0.01 then add local to the body
-    if (theme_get_setting('mothership_localhost_test')) {
-      $whitelist = array('localhost', 'local', '127.0.0.1');
-      if(! in_array($_SERVER['HTTP_HOST'], $whitelist)){
-        $vars['classes_array'][] = "development";
-      }
-    }
-
     if (theme_get_setting('mothership_test')) {
         $vars['classes_array'][] = "test";
     }
