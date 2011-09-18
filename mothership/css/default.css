@@ -9,26 +9,9 @@ a:hover, a:focus {text-decoration: underline;}
 
 b,strong{font-weight: bold;}
 em, i{font-style: italic;}
-a.active, a.active-trail{font-weight:bold;}
+.active, .active-trail{font-weight:bold;}
 
-/*
-List
-* ------------------------------------- */
-ul,
-li, 
-ul li, 
-.item-list ul
-.item-list ul li, 
-ul.menu,
-ul.menu li{
-  list-style: none; margin:0; padding:0;
-}
 
-li.leaf,
-li.expanded,
-li.collapsed{
-  list-style: none outside none;
-}
 /* pager */
 .pager li{float:left;}
 
@@ -89,7 +72,6 @@ html.js fieldset.collapsible .fieldset-legend,
 a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
-
 
 
 /* 
@@ -172,7 +154,7 @@ changing em a big to a more neutral state
 
 /*
 block & contextual fix 
-yup its a recap of the clearfix trick, but we dont wanna go an do class="clearfix" all over again 
+yup its a recap of the clearfix trick, but we dont wanna go an do class="clearfix" all over again the <div blocks
 ----------------------------*/
 .block .content:after {
   content: ".";

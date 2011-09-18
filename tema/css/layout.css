@@ -4,10 +4,9 @@
 .gc .test {
   background: transparent url(../images/grid-978.png) repeat-y;
 }
-body {
+.gc {
   width: 978px;
   margin: 0 auto;
-  background: transparent url(../images/grid-978.png) repeat-y;
 }
 .gf {
   margin-left: 0!important;
@@ -122,6 +121,17 @@ body {
   margin-left: 0;
 }
 /* @end */
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  margin: 0px auto;
+  float: none;
+  text-align: center;
+}
 /* @group width bases */
 .half {
   width: 50%;
@@ -142,20 +152,6 @@ body {
   margin-left: 30px;
 }
 /* @end */
-/* @group mothership bases  */
-/*set base grids*/
-#container {
-  width: 978px;
-  margin: 0 auto;
-}
-#page {
-  width: 978px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-  margin-left: 0;
-  clear: both;
-}
 /* @group Drupal sidebars widths  */
 body.no-sidebar #main-content {
   width: 978px;
@@ -194,6 +190,7 @@ body.one-sidebar .region-sidebar-second {
   min-height: 1px;
   float: left;
 }
+/* 2 columns*/
 body.two-sidebars .region-sidebar-first {
   margin-left: 0!important;
   clear: left;
@@ -214,7 +211,7 @@ body.two-sidebars .region-sidebar-second {
   min-height: 1px;
   float: left;
 }
-/*3 columns*/
+/* 3 columns*/
 body.no-sidebar .region-content-firstcolumn {
   margin-left: 0!important;
   clear: left;
@@ -272,59 +269,3 @@ body.two-sidebars .region-content-thirdcolumn {
   float: left;
 }
 /* @end */
-.region-half-first {
-  margin-left: 0!important;
-  clear: left;
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.region-half-second {
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.region-footer-firstcolumn {
-  margin-left: 0!important;
-  clear: left;
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.region-footer-secondcolumn {
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.region-footer-thirdcolumn {
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.region-footer-fourthcolumn {
-  width: 222px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-}
-.pre {
-  width: 978px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-  margin-left: 0;
-  clear: both;
-}
-.post {
-  width: 978px;
-  margin-left: 30px;
-  min-height: 1px;
-  float: left;
-  margin-left: 0;
-  clear: both;
-}

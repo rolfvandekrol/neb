@@ -32,7 +32,6 @@
 
 .gc{ width: @width; margin:0 auto;} 
 .gf{margin-left: 0!important;  clear: left;} 
-
 .g1{.grid(1,0)}
 .g2{.grid(2,1)} 
 .g3{.grid(3,2)}
@@ -59,6 +58,11 @@
 .gp11{.grid-pre(11); margin-left:0;}
 /* @end */
 
+.left{text-align:left;}
+.right{text-align:right;}
+.center{margin:0px auto; float:none; text-align:center;}
+
+
 /* @group width bases */
 .half {width:50%; float:left;}
 .third{width:33%; float:left;}
@@ -66,24 +70,6 @@
 .fifth{width:20%; float:left; margin-left:@gutter-width}
 /* @end */
 
-/* @group mothership bases  */
-
-
-/*set base grids*/
-#container{.gc}
-  #container-inner{}
-    #page {.g12}
-      #page-inner{}
-      #pageheader{}
-        #pageheader-inner{}
-        h1.title-page {}
-      #pagebody{} 
-        #pagebody-inner{}
-
-      #pagefooter{}
-        #pagefooter-inner{}
-      #footer{}
-       #footer-inner{}
 
 /* @group Drupal sidebars widths  */
 body.no-sidebar #main-content{.g12}
@@ -93,11 +79,11 @@ body.one-sidebar #main-content{.g10}
 body.sidebar-second #main-content{.gf; .g10}  
 body.one-sidebar .region-sidebar-first{.gf; .g2}
 body.one-sidebar .region-sidebar-second{.g2}
-
+/* 2 columns*/
 body.two-sidebars .region-sidebar-first{.gf; .g2}
 body.two-sidebars #main-content{.g8;}
 body.two-sidebars .region-sidebar-second{.g2}
-/*3 columns*/
+/* 3 columns*/
 body.no-sidebar .region-content-firstcolumn{.gf; .g4}
 body.no-sidebar .region-content-secondcolum{.g4}
 body.no-sidebar .region-content-thirdcolumn{.g4}
@@ -107,19 +93,4 @@ body.one-sidebar .region-content-thirdcolumn{.g2}
 body.two-sidebars .region-content-firstcolumn{.gf; .g2}
 body.two-sidebars .region-content-secondcolum{.g2}
 body.two-sidebars .region-content-thirdcolumn{.g2}
-
 /* @end */
-
-
-
-.region-half-first{.gf; .g3}
-.region-half-second{.g3} 
-
-.region-footer-firstcolumn{.gf; .g3}
-.region-footer-secondcolumn{.g3}
-.region-footer-thirdcolumn{.g3}
-.region-footer-fourthcolumn{.g3}
-
-
-.pre{.g12}
-.post{.g12}
