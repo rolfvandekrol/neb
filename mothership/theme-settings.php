@@ -36,12 +36,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
-  $form['html5']['mothership_html5'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('HTML5'),
-    '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t(''),
-  );
 
   $form['html5']['mothership_html5'] = array(
     '#type'          => 'checkbox',
@@ -407,6 +401,54 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   
 
+  $form['classes']['menu'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Menus'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+    
+  $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the .menu wrapper class on the ul '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the .menu wrapper class on the ul '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_items'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the all classes from the li '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_items')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_items_firstlast'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the first & last class from the li '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_items_firstlast')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_items_active'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the active & active-trail from the li '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_items_active')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_collapsed'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove collapsed, expandable & expanded from the li '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_collapsed')
+  );
+
+  $form['classes']['menu']['mothership_classes_menu_leaf'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove leaf from the li '),
+    '#default_value' => theme_get_setting('mothership_classes_menu_leaf')
+  );
 
 
 

@@ -7,6 +7,7 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.p
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
 
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('mothership_rebuild_registry')) {
@@ -15,7 +16,11 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-
+/*
+  print "<pre>";
+  print_r($vars['theme_hook_suggestions']);
+  print "</pre>";
+*/
   //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
@@ -23,6 +28,7 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] .= "\n theme hook suggestions:"; 
     $vars['mothership_poorthemers_helper'] .= "\n hook:" . $hook ." \n "; 
     foreach ($vars['theme_hook_suggestions'] as $key => $value){
+        $value = str_replace('_','-',$value);
         $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl \n" ;
     }
 
@@ -255,6 +261,11 @@ function mothership_preprocess_block(&$vars, $hook) {
   //  krumo($vars['content']);
 }
 
+/*
+Remove the standard classes from a field
+TODO remove all classes
+TODO remove the "field-name-" prefix from a styles name
+*/
 function mothership_preprocess_field(&$vars, $hook) {
   if (theme_get_setting('mothership_classes_field_field')) {  
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));

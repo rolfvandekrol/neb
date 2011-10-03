@@ -24,7 +24,7 @@
   <?php endif; ?>
 
   <?php if ($top): ?>
-    <div  <?php if($top_classes){ ?>class="<?php print $$top_classes; ?>"<?php } ?>>
+    <div  <?php if($top_classes){ ?>class="<?php print $top_classes; ?>"<?php } ?>>
       <?php print $top; ?>
     </div>
   <?php endif; ?>
