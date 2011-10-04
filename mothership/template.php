@@ -53,6 +53,10 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_css_reset_html5')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset-html5.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }    
+    if (theme_get_setting('mothership_css_normalize')) {    
+      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    }
+
     
     if (theme_get_setting('mothership_css_default')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
@@ -60,6 +64,7 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_css_mothershipstyles')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
     }
+
 
   
     //LIBS

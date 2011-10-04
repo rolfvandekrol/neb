@@ -1,4 +1,7 @@
 <?php
+
+//TODO remove classes from the <a>
+
 //kill of the <ul class="menu" around the menues
 //we already have the menu-block-wrapper that adds a <nav tag
 function mothership_menu_tree($variables) {
@@ -18,28 +21,30 @@ function mothership_menu_link(array $variables) {
 //  $remove = array('first','last','leaf','collapsed','expanded','expandable');
   $remove = array();
   if(theme_get_setting('mothership_classes_menu_items_firstlast')){  
-    $remove[] .= first;
-    $remove[] .= last;
+    $remove[] .= "first";
+    $remove[] .= "last";
   }
   if(theme_get_setting('mothership_classes_menu_leaf')){  
-    $remove[] = leaf;
+    $remove[] = "leaf";
   }
   if(theme_get_setting('mothership_classes_menu_collapsed')){
-    $remove[] .= collapsed;
-    $remove[] .= expanded;
-    $remove[] .= expandable;
+    $remove[] .= "collapsed";
+    $remove[] .= "expanded";
+    $remove[] .= "expandable";
   }
 
   if(theme_get_setting('mothership_classes_menu_items_active')){  
     $remove[] .= "active-trail"; 
     $remove[] .= "active";
   }
+  
   if($remove){
     $variables['element']['#attributes']['class'] = array_diff($variables['element']['#attributes']['class'],$remove);
   }
   
   
-  //TODO 
+  //TODO: Remove thee menu-mlid-[NUMBER]
+  
 
   //if we wanna remove the class for realz so nozing passes
   if(theme_get_setting('mothership_classes_menu_items')){

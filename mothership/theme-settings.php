@@ -57,7 +57,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'fieldset',
     '#title'         => t('css files'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => FALSE,
       '#description'   => t('If you choose to change the css files, then Mothership splits up the drupalcore css files, into base, admin & theme files. So its easy to remove css definitions your theme dosnt need, all the files are in mothership/css-drupalcore'),    
   );
 
@@ -92,26 +92,37 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   
   $form['css']['add']['mothership_css_reset'] = array(
      '#type'          => 'checkbox',
-     '#title'         => t('Add reset.css Resets the browser eric meyer style'),
+     '#title'         => t('Add reset.css'),
+     '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')), 
      '#default_value' => theme_get_setting('mothership_css_reset')
    );
 
    $form['css']['add']['mothership_css_reset_html5'] = array(
       '#type'          => 'checkbox',
-      '#title'         => t('Add html5 reset css (html5doctor) '),
+      '#title'         => t('Add reset-html5.css'),
+     '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')), 
       '#default_value' => theme_get_setting('mothership_css_reset_html5')
     );
+
+    $form['css']['add']['mothership_css_normalize'] = array(
+       '#type'          => 'checkbox',
+       '#title'         => t('Add normalize.css:'),
+       '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')), 
+         '#default_value' => theme_get_setting('mothership_css_normalize')
+     );
+
 
 
    $form['css']['add']['mothership_css_default'] = array(
       '#type'          => 'checkbox',
-      '#title'         => t('Add default.css clean defaults for basic elements'),
+      '#title'         => t('Add default.css clean defaults for basic Drupal elements elements'),
       '#default_value' => theme_get_setting('mothership_css_default')
     );
 
   $form['css']['add']['mothership_css_mothershipstyles'] = array(
      '#type'          => 'checkbox',
-     '#title'         => t('Add mothership.css. Base styles for the markup changes that mothership provides'),
+     '#title'         => t('Add mothership.css '),
+     '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'), 
      '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
    );
 
@@ -129,7 +140,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('body classes (html.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modifies the classes Drupal puts into  &lt;body class="html logged-in front sidebar toolbar page-node"&gt;'),
+    '#description'   => t('Modifies the classes Drupal puts into  <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b>'),
   );
 
   $form['classes']['body']['mothership_classes_body_html'] = array(
@@ -187,7 +198,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Region classes (region.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div & style &lt;div class="region"&gt; & &lt;div&gt ')    
+    '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> ')    
   );
 
   $form['classes']['region']['mothership_classes_region'] = array(
@@ -209,7 +220,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('block classes (block.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div wrappers style &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; ')
+    '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
   );
   
   $form['classes']['block']['mothership_classes_block'] = array(
@@ -249,7 +260,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('node classes (node.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div wrapper & style &lt;div id="#node-id" class="node  node-[status] "&gt; ')    
+    '#description'   => t('Modify the div wrapper & style <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b>')    
   );
 
   $form['classes']['node']['mothership_classes_node'] = array(
@@ -290,6 +301,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view_view_id'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
+   '#description'   => t('You dont wanna do this is your wanna use the ajax pagination - just saying'), 
     '#default_value' => theme_get_setting('mothership_classes_view_view_id')
   );
   
@@ -312,6 +324,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view_row_rename'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
+    '#description'   => t('The reason for this is so we have .first & .last all over the site'),     
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
 
@@ -404,49 +417,44 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['menu'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Menus'),
+   '#description'   => t('Modifies the stuff that drupal wraps around the menu ul & li tags'), 
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
     
   $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the .menu wrapper class on the ul '),
-    '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
-  );
-
-  $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the .menu wrapper class on the ul '),
+    '#title'         => t('Remove the .menu wrapper class on the &lt;ul&gt; menustuff &lt;/ul&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
   );
 
   $form['classes']['menu']['mothership_classes_menu_items'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the all classes from the li '),
+    '#title'         => t('Kill all the classes from the &lt;ul&gt; &lt;li class=&quot;menuclasseds&quot;&gt;&lt;a ...'),
     '#default_value' => theme_get_setting('mothership_classes_menu_items')
   );
 
   $form['classes']['menu']['mothership_classes_menu_items_firstlast'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the first & last class from the li '),
+    '#title'         => t('Remove .first & .last class from the li '),
     '#default_value' => theme_get_setting('mothership_classes_menu_items_firstlast')
   );
 
   $form['classes']['menu']['mothership_classes_menu_items_active'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the active & active-trail from the li '),
+    '#title'         => t('Remove .active & .active-trail from the li '),
     '#default_value' => theme_get_setting('mothership_classes_menu_items_active')
   );
 
   $form['classes']['menu']['mothership_classes_menu_collapsed'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove collapsed, expandable & expanded from the li '),
+    '#title'         => t('Remove .collapsed, .expandable & .expanded from the li '),
     '#default_value' => theme_get_setting('mothership_classes_menu_collapsed')
   );
 
   $form['classes']['menu']['mothership_classes_menu_leaf'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove leaf from the li '),
+    '#title'         => t('Remove .leaf from the li '),
     '#default_value' => theme_get_setting('mothership_classes_menu_leaf')
   );
 

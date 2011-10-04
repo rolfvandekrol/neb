@@ -1,9 +1,4 @@
 /*
-  styles for changes the mothership does to the markup
-*/
-body.test{background: transparent url(../images/grid.png) repeat-y}
-
-/*
 feed icon 
 * ------------------------------------- */
 .feed {text-indent: -9999em;}
