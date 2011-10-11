@@ -9,7 +9,7 @@ function ds_mothership_html5_1col_stacked() {
       // The key of this region name is also the variable used in
       // the template to print the content of that region.
       'header' => t('header'),
-      'hgroup' => t('hgroup'),
+      'hgroup' => t('hgroup (only h1-h6)'),
       'top' => t('top'),
       'main' => t('main'), 
       'bottom' => t('bottom'),

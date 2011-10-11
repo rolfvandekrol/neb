@@ -50,7 +50,7 @@ function mothership_menu_link(array $variables) {
   if(theme_get_setting('mothership_classes_menu_items')){
     unset($variables['element']['#attributes']['class']);
   }
- // dpr($variables['element']['#attributes']);
+//  dpr($variables['element']['#attributes']);
 
   $element = $variables['element'];
 

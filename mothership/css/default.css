@@ -42,7 +42,7 @@ ul.links li{padding:0 5px 0 0;}
 fieldset{}
 label {display: inline; font-weight: bold;}
 textarea{background:#ddd;}
-input{padding:10px; margin:10px;}
+input{padding:5px; margin:5px;}
   input[type="radio"]     { vertical-align: middle; }
   input[type="checkbox"]  { vertical-align: middle}
     .ie7 input[type="checkbox"] { vertical-align: baseline; }
@@ -154,7 +154,8 @@ changing em a big to a more neutral state
 
 /*
 block & contextual fix 
-yup its a recap of the clearfix trick, but we dont wanna go an do class="clearfix" all over again the <div blocks
+yup its a recap of the clearfix trick, 
+but we dont wanna go an do class="clearfix" all over again the <div blocks
 ----------------------------*/
 .block .content:after {
   content: ".";
@@ -180,24 +181,6 @@ body.development #toolbar div.toolbar-menu{background:#5A4525;}
 /*
 admin toolbar fix if its used with the toolbar
 ----------------------------*/
-body.toolbar div#admin-toolbar.vertical {top:30px;}
+body.toolbar div#admin-toolbar.vertical {top:130px;}
 body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
-
-/*
-body.context-editing div.draggable:hover a.context-block-remove,
-body.context-editing div.draggable:hover a.context-block-handle {
-  left:0px;
-  top:-5px;
-  z-index:100;
-}
-
-body.context-editing div.draggable:hover a.context-block-remove {
-  background-position:-40px 0px;
-  cursor:pointer;
-  left:40px;
-}
-
-
-body.admin-vertical div#admin-toolbar.vertical {top:20px;}
-
-*/
+#admin-toolbar{top: 20px!important;}

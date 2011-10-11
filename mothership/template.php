@@ -16,11 +16,10 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-/*
-  print "<pre>";
-  print_r($vars['theme_hook_suggestions']);
-  print "</pre>";
-*/
+
+  //    dsm($vars['classes_array']);
+
+
   //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
@@ -29,19 +28,19 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] .= "\n hook:" . $hook ." \n "; 
     foreach ($vars['theme_hook_suggestions'] as $key => $value){
         $value = str_replace('_','-',$value);
-        $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl \n" ;
+        $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl.php \n" ;
     }
 
     $vars['mothership_poorthemers_helper'] .= "-->";
   }else{
     $vars['mothership_poorthemers_helper'] ="";
   }
-
+  //---/POOR THEMERS HELPER
   
   if ($hook == "html") {
   // =======================================| HTML |========================================
     /*
-    Adds 3 css files that the subthemes wanna use.
+    Adds reset css files that the sub themes might wanna use.
     reset.css - eric meyer ftw  
     reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
     defaults.css cleans some of the defaults from drupal
@@ -56,7 +55,6 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_css_normalize')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-
     
     if (theme_get_setting('mothership_css_default')) {    
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
@@ -65,8 +63,6 @@ function mothership_preprocess(&$vars, $hook) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
     }
 
-
-  
     //LIBS
     //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
     //add modernizr support
@@ -144,11 +140,13 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = "test";
     }
 
-
+    //freeform css class killing
+    $remove_class_body = explode(", ", theme_get_setting('mothership_classes_body_freeform'));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_body));
+  
   }
   elseif ( $hook == "page" ) {
     // =======================================| PAGE |========================================
-      
     // Add HTML tag name for title tag. so it can shift from a h1 to a div if its the frontpage
     $vars['site_name_element'] = $vars['is_front'] ? 'h1' : 'div';
 
@@ -156,17 +154,28 @@ function mothership_preprocess(&$vars, $hook) {
     if ( isset($vars['node']) ){
       $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
     }
-    // krumo($vars['theme_hook_suggestions']);
+
+    // Remove the block template wrapper from the main content block.
+    if (!empty($vars['page']['content']['system_main']) AND theme_get_setting('mothership_content_block_wrapper')) {
+      $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
+    }
+
+
+    //unset regions in the frontpage
+    if (drupal_is_front_page() AND theme_get_setting('mothership_frontpage_regions')) {
+      unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
+    }
 
 
   }elseif ( $hook == "region" ) {
     // =======================================| region |========================================
-      if (theme_get_setting('mothership_classes_region')) {      
-        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
-      }
 
+    if (theme_get_setting('mothership_classes_region')) {      
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));        
+    }
 
-  }elseif ( $hook == "node" ) {
+      
+  } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
 
     $vars['id_node'] ="";
@@ -174,8 +183,6 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_classes_node')) {      
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
     }  
-    //css classes
-    //$vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));    
     
     if (theme_get_setting('mothership_classes_node_state')) {      
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky')));    
@@ -186,6 +193,10 @@ function mothership_preprocess(&$vars, $hook) {
     if (isset($vars['preview'])) {
       $vars['classes_array'][] = 'node-preview';
     }
+
+    //freeform css class killing
+    $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
 
     // css id for the node
     if (theme_get_setting('mothership_classes_node_id')) {      
@@ -219,6 +230,11 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = "contextual-links-region";
       }
 
+      //freeform css class killing
+      $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
+
+
     //  if (theme_get_setting('mothership_classes_block_contentdiv')) {            
     //    $vars['classes_array'][] = 'block-content';        
     //  }
@@ -248,18 +264,14 @@ function mothership_preprocess_html(&$vars) {
 }
 
 function mothership_preprocess_page(&$vars, $hook) {
-  /*
-  Enougn with the default message "  No front page content has been created yet. Add new content"
-  
-  */
-  
+  //  Enough with the default message "  No front page content has been created yet. Add new content"
   if(theme_get_setting('mothership_frontpage_default_message')){
-    unset($vars['page']['content']['system_main']['default_message']);
+//    unset($vars['page']['content']['system_main']['default_message']);
   }
 }
 
 function mothership_preprocess_node(&$vars,$hook) {
-
+  //  krumo($vars['content']);
 }
 
 function mothership_preprocess_block(&$vars, $hook) {
@@ -272,9 +284,14 @@ TODO remove all classes
 TODO remove the "field-name-" prefix from a styles name
 */
 function mothership_preprocess_field(&$vars, $hook) {
+
   if (theme_get_setting('mothership_classes_field_field')) {  
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
   }
+  //freeform css class killing
+  $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
+  $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
+
   //type
   if (theme_get_setting('mothership_classes_field_type')) {  
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text'))); 
@@ -294,7 +311,5 @@ function mothership_preprocess_field(&$vars, $hook) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
   }
 
+ 
 }
-
-
-

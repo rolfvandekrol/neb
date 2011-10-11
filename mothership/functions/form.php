@@ -59,6 +59,7 @@ function mothership_form_element($variables) {
     }
 //  }
 
+  $attributes['class'] = array();
   //base class form-item - do we need it ? ...
   if(! theme_get_setting('mothership_classes_form_wrapper_formitem')){
     $attributes['class'] = array('form-item');    
@@ -81,6 +82,10 @@ function mothership_form_element($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-disabled';
   }
+
+  //freeform css class killing
+  $remove_class_form = explode(", ", theme_get_setting('mothership_classes_form_freeform'));
+  $attributes['class'] = array_values(array_diff($attributes['class'],$remove_class_form));
 
   //test to see if we have any attributes aka classes here 
   if($attributes){
