@@ -17,9 +17,9 @@ em, i{font-style: italic;}
 
 /*Tabs*/
 ul.tabs li{display:inline; padding:0 10px}
-ul.primary{border-bottom:1px solid #fff; padding:3px 0; margin:4px 0 ;}
+ul.primary{padding:3px 0; margin:4px 0 ;}
 ul.primary li{}
-ul.secondary li{border-left: 1px solid #fff; }
+ul.secondary li{}
 
 /* Default list for body content */
 .field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
@@ -41,7 +41,7 @@ ul.links li{padding:0 5px 0 0;}
 
 fieldset{}
 label {display: inline; font-weight: bold;}
-textarea{background:#ddd;}
+textarea{}
 input{padding:5px; margin:5px;}
   input[type="radio"]     { vertical-align: middle; }
   input[type="checkbox"]  { vertical-align: middle}
@@ -49,9 +49,10 @@ input{padding:5px; margin:5px;}
   input[type="file"]     { vertical-align: middle; }
   input[type="search"]   {-webkit-appearance: textfield;}
 
-form small{font-size:12px; color:#666; display:block; text-align: left:10px;}
+form small, form .description{font-size:12px; color:#666; display:block; text-align: left:10px;}
 
 .form-field-required {background:#900;}
+
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
 
@@ -61,11 +62,16 @@ fieldset,
 html.js fieldset.collapsible .fieldset-legend{
 
 }
-
+/*
 fieldset, 
 html.js fieldset.collapsible .fieldset-legend, 
 span.fieldset-legend{
   min-width:500px; 
+}
+*/
+fieldset legend{
+  *margin-left:-7px; 
+  width:100%;
 }
 
 html.js fieldset.collapsible .fieldset-legend, 
@@ -73,6 +79,8 @@ a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
 
+
+ul li{list-style: none}
 
 /* 
   admin styles for blocks
