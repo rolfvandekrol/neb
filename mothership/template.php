@@ -65,22 +65,34 @@ function mothership_preprocess(&$vars, $hook) {
 
     //LIBS
     //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
-    //add modernizr support
-    if (theme_get_setting('mothership_modernizr')) {    
-      drupal_add_js('sites/all/libraries/modernizr/modernizr.js');
-      //http://ajax.cdnjs.com/ajax/libs/modernizr/1.7/modernizr-1.7.min.js      
-      $vars['modernizr'] = 'class="no-js" ';
-    }else{
-      $vars['modernizr'] = '';
+
+    //modernizr love CDN style for the lazy ones
+    if (theme_get_setting('mothership_modernizr')) {
+      drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js', 'external');
     }
+
     //add selectivizr support
     if (theme_get_setting('mothership_selectivizr')) {    
       $vars['selectivizr'] = '<!--[if (gte IE 6)&(lte IE 8)]>';
       $vars['selectivizr'] .= '<script type="text/javascript" src="/sites/all/libraries/selectivizr/selectivizr.js"></script>';
+ //     $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>';
       $vars['selectivizr'] .= '<![endif]-->';
     }else{
       $vars['selectivizr'] = '';
     }
+
+    //TODO: do we wanna add external libs directly in the theme settings
+    //if a user wanna add some external css file 
+    //well then lets rock n roll
+    /*
+    if (theme_get_setting('mothership_css_external')) {
+      drupal_add_css('http://foobar.css', array('type' => 'external'));
+    }
+    
+    if (theme_get_setting('mothership_js_external')) {
+      drupal_add_js('http://foobar.js', 'external');
+    }
+    */
 
     //home screen icon for ipads n stuff
     global $theme;
@@ -266,7 +278,7 @@ function mothership_preprocess_html(&$vars) {
 function mothership_preprocess_page(&$vars, $hook) {
   //  Enough with the default message "  No front page content has been created yet. Add new content"
   if(theme_get_setting('mothership_frontpage_default_message')){
-//    unset($vars['page']['content']['system_main']['default_message']);
+    unset($vars['page']['content']['system_main']['default_message']);
   }
 }
 
@@ -277,6 +289,8 @@ function mothership_preprocess_node(&$vars,$hook) {
 function mothership_preprocess_block(&$vars, $hook) {
   //  krumo($vars['content']);
 }
+
+
 
 /*
 Remove the standard classes from a field

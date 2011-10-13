@@ -193,10 +193,10 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   $form['classes']['body']['mothership_classes_body_freeform'] = array(
-    '#type'          => 'textfield',
+    '#type'          => 'textarea',
     '#title'         => t('Remove css classes from the body tag'),
     '#default_value' => theme_get_setting('mothership_classes_body_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+    '#description'   => t('Format is comma seperated: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
 
 
@@ -209,7 +209,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> ')    
   );
 
-  $form['classes']['block']['mothership_classes_region_freeform'] = array(
+  $form['classes']['region']['mothership_classes_region_freeform'] = array(
     '#type'          => 'textfield',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_region_freeform'),
@@ -239,7 +239,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
   
   $form['classes']['block']['mothership_classes_block_freeform'] = array(
-    '#type'          => 'textfield',
+    '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
@@ -251,13 +251,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block'),
     '#description'   => t('Dont remove this if you using context!')
   );
-
-  $form['classes']['block']['mothership_classes_block_freeform'] = array(
-    '#type'          => 'textfield',
-    '#title'         => t('Kill the css classes:'),
-    '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );  
 
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
@@ -295,7 +288,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   $form['classes']['node']['mothership_classes_node_freeform'] = array(
-    '#type'          => 'textfield',
+    '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_node_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
@@ -377,7 +370,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   $form['classes']['field']['mothership_classes_field_freeform'] = array(
-    '#type'          => 'textfield',
+    '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_field_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
@@ -412,7 +405,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
     
   $form['classes']['form']['mothership_classes_form_freeform'] = array(
-    '#type'          => 'textfield',
+    '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_form_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
@@ -513,23 +506,26 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_menu_leaf')
   );
 
-
-
+  //libaries stuff
   $form['Libraries'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('External Libraries'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('These are libraries you need to download, because of the different licenses. Add them to sites/all/libraries/'),
+    '#description'   => t('External libs for you styling pleasure & last night debugging'),
   );
 
-  //libaries stuff
   $form['Libraries']['mothership_modernizr'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Add modernizr love'),
+    '#title'         => t('Modernizr 2 love '),
     '#default_value' => theme_get_setting('mothership_modernizr'),
-    '#description'   => t('<a href="!link">Download modernizr</a>', array('!link' => 'http://modernizr.com')),
+    '#description'   => t('adds the modernizr 2 lib from CDN 
+    You should offcourse build a custom modernizr for you site - were all about removing the crap- remember...<br>
+    anyway this will enable<br>
+    http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js
+    <br> <br><a href="!link">Custom Build modernizr</a>', array('!link' => 'http://modernizr.com')),
   );
+
 
   $form['Libraries']['mothership_selectivizr'] = array(
     '#type'          => 'checkbox',
@@ -538,26 +534,35 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('<a href="!link">Download selectivizr</a>', array('!link' => 'http://selectivizr.com')),
   );
 
-  $form['mothership_frontpage_default_message'] = array(
+  $form['misc'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('misc stuff'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+
+  $form['misc']['mothership_frontpage_default_message'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the frontpage "No front page content has been created yet.Add new content" default message'),
     '#default_value' => theme_get_setting('mothership_frontpage_default_message'),
     '#description'   => t(''),
   );
 
-  $form['mothership_content_block_wrapper'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove wrapper around the main content'),
-    '#default_value' => theme_get_setting('mothership_content_block_wrapper'),
-    '#description'   => t('remove the &lt;div class=&quot;block-system &quot;&gt; around our content region'),
-  );
-
-  $form['mothership_frontpage_regions'] = array(
+  $form['misc']['mothership_frontpage_regions'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove Regions from the frontpage'),
     '#default_value' => theme_get_setting('mothership_frontpage_regions'),
     '#description'   => t('This will remove the sidebar_first, sidebar_last & content region from the frontpage'),
   );
+
+  $form['misc']['mothership_content_block_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove wrapper around the main content'),
+    '#default_value' => theme_get_setting('mothership_content_block_wrapper'),
+    '#description'   => t('remove the &lt;div class=&quot;block-system &quot;&gt; around our $content region in the page.tpl.php'),
+  );
+
 
 
 }
