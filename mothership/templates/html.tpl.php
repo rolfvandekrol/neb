@@ -36,6 +36,7 @@ if(theme_get_setting('mothership_html5')){  ?>
 //  if(module_exists('html5_tools')){
 //    print $html5shiv;     
 //  }
+//TODO: some kinda setting for shiv - modenizr etc settings
 ?>
 
 <?php if(theme_get_setting('mothership_html5')){  ?>

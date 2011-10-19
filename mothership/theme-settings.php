@@ -472,16 +472,16 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     
   $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the .menu wrapper class on the &lt;ul&gt; menustuff &lt;/ul&gt; '),
+    '#title'         => t('Remove the .menu-wrapper class on the &lt;ul class="menu-wrapper" &gt; menustuff &lt;/ul&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
   );
-
+/*
   $form['classes']['menu']['mothership_classes_menu_items'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Kill all the classes from the &lt;ul&gt; &lt;li class=&quot;menuclasseds&quot;&gt;&lt;a ...'),
     '#default_value' => theme_get_setting('mothership_classes_menu_items')
   );
-
+*/
   $form['classes']['menu']['mothership_classes_menu_items_firstlast'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .first & .last class from the li '),

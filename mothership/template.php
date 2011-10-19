@@ -215,7 +215,8 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['id_node'] =  'node-'. $vars['nid'];
     }
   
-
+  //  kpr($vars['classes_array']);
+    
   }elseif ( $hook == "block" ) {
 
     // =======================================| block |========================================
@@ -327,3 +328,32 @@ function mothership_preprocess_field(&$vars, $hook) {
 
  
 }
+
+
+function mothership_class_killer(&$vars){
+  $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
+  $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
+  $vars['classes'] = "";
+
+//  kpr($vars['classes_array']);  
+ // return $vars;
+}
+
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function mothership_theme_registry_alter(&$theme_registry) {
+  //enough of this bull lets kill em classes
+  $theme_registry['node']['preprocess functions'][] = 'mothership_class_killer';
+
+/*
+  // Kill the next/previous forum topic navigation links.
+  foreach ($theme_registry['forum_topic_navigation']['preprocess functions'] as $key => $value) {
+    if ($value = 'template_preprocess_forum_topic_navigation') {
+      unset($theme_registry['forum_topic_navigation']['preprocess functions'][$key]);
+    }
+  }
+*/
+}
+

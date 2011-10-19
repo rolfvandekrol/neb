@@ -48,8 +48,9 @@
 <!-- field.tpl -->
 <div <?php if($classes) {?>class="<?php print $classes; ?>"<?php } ?><?php print $attributes; ?>>
   <?php print $mothership_poorthemers_helper;  ?>  
+
   <?php if (!$label_hidden) : ?>
-    <span<?php print $title_attributes; ?>><?php print $label ?>:&nbsp;</span>
+    <label<?php print $title_attributes; ?>><?php print $label ?>:&nbsp;</label>
   <?php endif; ?>
 
   <?php if(count($items) > 1 ){ ?>

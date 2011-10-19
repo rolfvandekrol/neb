@@ -49,9 +49,10 @@ input{padding:5px; margin:5px;}
   input[type="file"]     { vertical-align: middle; }
   input[type="search"]   {-webkit-appearance: textfield;}
 
-form small, form .description{font-size:12px; color:#666; display:block; text-align: left:10px;}
+form small, form .description{font-size:12px; color:#444; display:block; text-align: left;}
 
-.form-field-required {background:#900;}
+.form-field-required {}
+.form-field-required:after{content:" * "}  
 
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
@@ -182,9 +183,6 @@ but we dont wanna go an do class="clearfix" all over again the <div blocks
 /*
 MODULES
 ----------------------------*/
-
-/* development indicator*/
-body.development #toolbar div.toolbar-menu{background:#5A4525;}
 
 /*
 admin toolbar fix if its used with the toolbar
