@@ -9,15 +9,12 @@
 
   <?php if ($header OR $hgroup): ?>
     <header <?php if($header_classes){ ?>class="<?php print $header_classes; ?>"<?php } ?>>
-
+    <?php print $header; ?>
       <?php if($hgroup){ ?>
         <hgroup <?php if($hgroup_classes){ ?>class="<?php print $hgroup_classes; ?>"<?php } ?>>
         <?php print $hgroup; ?>
         </hgroup>
       <?php } ?>
-
-      <?php print $header; ?>
-
     </header>
   <?php endif; ?>
 
