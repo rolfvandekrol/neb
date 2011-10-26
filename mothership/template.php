@@ -344,6 +344,7 @@ function mothership_class_killer(&$vars){
  * Implements hook_theme_registry_alter().
  */
 function mothership_theme_registry_alter(&$theme_registry) {
+//  kpr($theme_registry);
   //enough of this bull lets kill em classes
   $theme_registry['node']['preprocess functions'][] = 'mothership_class_killer';
 

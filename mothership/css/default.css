@@ -67,9 +67,10 @@ html.js fieldset.collapsible .fieldset-legend{
 fieldset, 
 html.js fieldset.collapsible .fieldset-legend, 
 span.fieldset-legend{
-  min-width:500px; 
+
 }
 */
+
 fieldset legend{
   *margin-left:-7px; 
   width:100%;
@@ -79,7 +80,6 @@ html.js fieldset.collapsible .fieldset-legend,
 a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
-
 
 ul li{list-style: none}
 

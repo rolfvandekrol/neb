@@ -1,4 +1,5 @@
 <?php
+
 function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['development'] = array(
@@ -6,60 +7,119 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Theme Development'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
+    '#weight'=> -20
   );
 
-  $form['development']['mothership_poorthemers_helper'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('the Poor Themers Helper - Experimental!'),
-    '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
-    '#description'   => t('Add a comment tag in block, node, regions with the suggested theme hooks'),
-  );
+    $form['development']['mothership_poorthemers_helper'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('the Poor Themers Helper - Experimental!'),
+      '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
+      '#description'   => t('Add a comment tag in block, node, regions with the suggested theme hooks'),
+    );
 
-  $form['development']['mothership_rebuild_registry'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Rebuild theme registry on every page.'),
-    '#default_value' => theme_get_setting('mothership_rebuild_registry'),
-    '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
-  );
+    $form['development']['mothership_rebuild_registry'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Rebuild theme registry on every page.'),
+      '#default_value' => theme_get_setting('mothership_rebuild_registry'),
+      '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
+    );
 
-  $form['development']['mothership_test'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Add a test class to &lt;body&gt;'),
-    '#default_value' => theme_get_setting('mothership_test'),
-  );
+    $form['development']['mothership_test'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Add a test class to &lt;body&gt;'),
+      '#default_value' => theme_get_setting('mothership_test'),
+    );
 
   $form['html5'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('HTML 5 '),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#weight'=> -19    
   );
 
+      $form['html5']['mothership_html5'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
+        '#default_value' => theme_get_setting('mothership_html5'),
+        '#description'   => t('Change the header to be html5, remove the anonymous div from form'),
+      );
+
+      $form['html5']['mothership_viewport'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('add Viewport'),
+        '#default_value' => theme_get_setting('mothership_html5'),
+        '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
+      );
 
 
-  $form['html5']['mothership_html5'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
-    '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t('Change the header to be html5, remove the anonymous div from form'),
-  );
 
-  $form['html5']['mothership_viewport'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('add Viewport'),
-    '#default_value' => theme_get_setting('mothership_html5'),
-    '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
-  );
-
+    //Get all the posible css files that drupal can spit out
+    //and generate the $css_files_from_modules var
+    $result = db_query("SELECT * FROM {system} WHERE type = 'module' AND status = 1");
+    foreach ($result as $module) {
+      $module_path = pathinfo($module->filename, PATHINFO_DIRNAME);      
+      $css_files = file_scan_directory($module_path, '/.*\.css$/');
+      foreach((array)$css_files as $key => $file) {
+        $css_files_from_modules[] = $module_path . "/" . $file->filename ;
+      }
+    }
 
   //CSS Files 
   $form['css'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('css files'),
+    '#title'         => t('CSS Files - Resets & Stripping the !count css files', array('!count' => count($css_files_from_modules))),         
+
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-      '#description'   => t('If you choose to change the css files, then Mothership splits up the drupalcore css files, into base, admin & theme files. So its easy to remove css definitions your theme dosnt need, all the files are in mothership/css-drupalcore'),    
+    '#description'   => t('If you choose to change the css files, then Mothership splits up the drupalcore css files, into base, admin & theme files. So its easy to remove css definitions your theme dosnt need, all the files are in mothership/css-drupalcore'),    
+    '#weight'=> -15
   );
+
+
+  $form['css']['add'] = array(
+     '#type'          => 'fieldset',
+     '#title'         => t('css defaults & reset'),
+     '#collapsible' => TRUE,
+     '#collapsed' => FALSE,
+   );
+
+   $form['css']['add']['mothership_css_reset'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Add reset.css'),
+      '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')), 
+      '#default_value' => theme_get_setting('mothership_css_reset')
+    );
+
+    $form['css']['add']['mothership_css_reset_html5'] = array(
+       '#type'          => 'checkbox',
+       '#title'         => t('Add reset-html5.css'),
+      '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')), 
+       '#default_value' => theme_get_setting('mothership_css_reset_html5')
+     );
+
+     $form['css']['add']['mothership_css_normalize'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Add normalize.css:'),
+        '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')), 
+          '#default_value' => theme_get_setting('mothership_css_normalize')
+      );
+
+
+    $form['css']['add']['mothership_css_default'] = array(
+       '#type'          => 'checkbox',
+       '#title'         => t('Add default.css clean defaults for basic Drupal elements elements'),
+       '#default_value' => theme_get_setting('mothership_css_default')
+     );
+
+   $form['css']['add']['mothership_css_mothershipstyles'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Add mothership.css '),
+      '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'), 
+      '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
+    );
+
+
 
   $form['css']['nuke'] = array(
     '#type'          => 'fieldset',
@@ -77,54 +137,91 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
                           'mothership_css_nuke_theme_full' => t('<strong>.theme.css </strong> <br>Nukes all .theme.css files'),
                           'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> <br>Nukes all .admin.css files'),
                           'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> <br>Nukes all .theme.css + .theme.css'),
-                          'mothership_css_nuke_module'  => t('<strong>the Nuke</strong> <br>Nukes ALL css files provided by any module, but keeps all .theme.css files'),
+                          'mothership_css_nuke_module'  => t('<strong>the Nuke</strong> <br>Nukes ALL css files provided by any module, but keeps all themes css files'),
                           'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong><br> None shall pass! Removes every css file that comes from modules & themes'),
                         ),
     '#default_value' => theme_get_setting('mothership_nuke_css'),
   );
 
-  $form['css']['add'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('css defaults & reset'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  );
-  
-  $form['css']['add']['mothership_css_reset'] = array(
-     '#type'          => 'checkbox',
-     '#title'         => t('Add reset.css'),
-     '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')), 
-     '#default_value' => theme_get_setting('mothership_css_reset')
+
+
+    //remove the css thats already remove by BAT
+    foreach ($css_files_from_modules as $file => $value) {
+
+      switch (theme_get_setting('mothership_nuke_css')) {
+        //full
+          case 'mothership_css_nuke_theme_full':
+            if (strpos($value, 'theme.css') !== FALSE) {
+              unset($css_files_from_modules[$file]);
+            } 
+          break;
+        //theme.css
+        case 'mothership_css_nuke_theme':
+          if (strpos($value, 'theme.css') !== FALSE) {
+            unset($css_files_from_modules[$file]);
+          } 
+          break;
+
+        case 'mothership_css_nuke_admin':
+          if (strpos($value, 'admin.css') !== FALSE) {
+            unset($css_files_from_modules[$file]);
+          } 
+          break;
+
+        case 'mothership_css_nuke_theme_admin':
+          if (strpos($value, 'theme.css') !== FALSE) {
+            unset($css_files_from_modules[$file]);
+          } 
+          if (strpos($value, 'admin.css') !== FALSE) {
+            unset($css_files_from_modules[$file]);
+          } 
+          
+          break;
+
+        case 'mothership_css_nuke_module':
+          if (strpos($value, 'module') !== FALSE) {
+            unset($css_files_from_modules[$file]);
+          } 
+
+          break;
+
+        case 'mothership_css_nuke_epic':
+            unset($css_files_from_modules);
+          break;
+
+        default:
+          # code...
+          break;
+      }
+    }
+    
+    //now that we have cleared up from the BAT its time for some freeform removing :)
+
+
+   $form['css']['mothership_css_freeform'] = array(
+     '#type'          => 'textarea',
+     '#title'         => t('The amazing Style Stripper'),
+     '#default_value' => theme_get_setting('mothership_css_freeform'),
+     '#description'   => t('add each file you wanna remove from ever beeing able to load in your theme')
    );
 
-   $form['css']['add']['mothership_css_reset_html5'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Add reset-html5.css'),
-     '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')), 
-      '#default_value' => theme_get_setting('mothership_css_reset_html5')
-    );
-
-    $form['css']['add']['mothership_css_normalize'] = array(
-       '#type'          => 'checkbox',
-       '#title'         => t('Add normalize.css:'),
-       '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')), 
-         '#default_value' => theme_get_setting('mothership_css_normalize')
-     );
 
 
+    //list of css files with links
 
-   $form['css']['add']['mothership_css_default'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Add default.css clean defaults for basic Drupal elements elements'),
-      '#default_value' => theme_get_setting('mothership_css_default')
-    );
+      global $base_url;  
+       // kpr($vars);
+        foreach ($css_files_from_modules as $value){
+        //  print '<a href=" ' .  $base_url . $value . ' ">' . $base_url .' *** ' . $value . '</a><br>';
+        }
 
-  $form['css']['add']['mothership_css_mothershipstyles'] = array(
-     '#type'          => 'checkbox',
-     '#title'         => t('Add mothership.css '),
-     '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'), 
-     '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
-   );
+       $form['css']['css_list'] = array(
+         '#type'          => 'fieldset',
+        '#title'         => t('CSS file list - !count CSS Files now active in the Drupal system', array('!count' => count($css_files_from_modules))),     
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+         '#description'   => '<b>'.t('one line pr file you wanna remove') . "</b><br>"  .  implode('<br> ', $css_files_from_modules ) 
+       );
 
 
 
@@ -133,6 +230,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('CSS Classes'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#weight'=> -15    
   );
   //BODY
   $form['classes']['body'] = array(
@@ -513,6 +611,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description'   => t('External libs for you styling pleasure & last night debugging'),
+    '#weight'=> -15
   );
 
   $form['Libraries']['mothership_modernizr'] = array(
@@ -539,6 +638,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('misc stuff'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#weight'=> -10
   );
 
 
@@ -566,3 +666,4 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
 
 }
+

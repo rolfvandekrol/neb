@@ -158,7 +158,6 @@ function mothership_css_alter(&$css) {
 
 
     $css = array_diff_key($css, $nuke);
-//    kpr($css);
   }
 
   switch (theme_get_setting('mothership_nuke_css')) {
@@ -169,6 +168,7 @@ function mothership_css_alter(&$css) {
      unset($css[$file]);
     }
    }
+   
    break;
 
   case 'mothership_css_nuke_theme':
@@ -242,7 +242,35 @@ function mothership_css_alter(&$css) {
   default:
    # code...
    break;
- }
+  }
+/*
+  //kill the rest of em
+  $css_kill_list = array(
+    'messages.css',
+    'views.css',
+    'ctools',
+    'css-drupalcore'
+    
+  ); 
+*/
+  //freeform css class killing :)
+  $css_kill_list = explode("\n", theme_get_setting('mothership_css_freeform'));
+
+  //grap the css and run through em
+
+  foreach ($css as $file => $value) {
+    //grap the kill list and do that on each file
+    foreach ($css_kill_list as $key => $cssfilemustdie) {
+//      print $file ."<br>";
+      if (strpos($file, $cssfilemustdie) !== FALSE) {
+       unset($css[$file]);
+      }
+
+    }
+  }
+  
+kpr($css);
+
 }
 
 

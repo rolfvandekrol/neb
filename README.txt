@@ -1,9 +1,67 @@
 ----------------------------------------------------
     Mothership 
     Fixing everything that is wrong (tm)
-    
 ----------------------------------------------------
-The mothershop theme is a basetheme for the modern markup enthuthiast.
+                      __    __                            __                    
+                     /\ \__/\ \                          /\ \      __           
+      ___ ___     ___\ \ ,_\ \ \___      __   _ __   ____\ \ \___ /\_\  _____   
+    /' __` __`\  / __`\ \ \/\ \  _ `\  /'__`\/\`'__\/',__\\ \  _ `\/\ \/\ '__`\ 
+    /\ \/\ \/\ \/\ \L\ \ \ \_\ \ \ \ \/\  __/\ \ \//\__, `\\ \ \ \ \ \ \ \ \L\ \
+    \ \_\ \_\ \_\ \____/\ \__\\ \_\ \_\ \____\\ \_\\/\____/ \ \_\ \_\ \_\ \ ,__/
+     \/_/\/_/\/_/\/___/  \/__/ \/_/\/_/\/____/ \/_/ \/___/   \/_/\/_/\/_/\ \ \/ 
+        Fixing everything that is wrong (tm)                              \ \_\ 
+                                                                           \/_/
+
+The mothership theme is a basetheme that once and for all will drop Drupals obscure love for wrapping everything into divs & slapping on 3 css classes everywhere its possible.
+This theme will not make your site look neat - but it will clean up the html that Drupal provides out of the box, give you tools so you can remove the css classes that you dont need, without using countless of hours to clean up.
+
+If you really like the markup & css options that Drupal Provides ... 
+This theme is probably not for you, and thats perfectly ok ... 
+  Just abuse the html & css thats okay, no one is watching the markup anyway right? 
+  Lots of divs means lots of freedom we all know that...
+  No reason to think about poor bandwith for mobile users (gasp mobile -the web 2.5 users)...
+  Its nice to alway have a class that you can slap that color:#900 on...
+  Remember you never look in the source code to correct that obscure bug in ie7...
+  
+
+
+Glorious HTML5
+  
+
+
+BAT support
+
+
+Reset CSS
+
+
+Default css
+
+
+Class War
+
+
+Markup Cleaning
+
+
+Stuff that is annoying
+
+
+Plays well with others ?
+
+
+Installation
+
+
+
+Drupal7
+
+
+
+Drupal6
+only very minimal work will be done here aka security bug fixes etc. 
+if you would like to battle it out with d6 well be my guest please contact me :)
+
 The themes main function is to clean up & make it quicker an easier to develop themes by removing (or give the opertunity to remove) markup from drupal. 
 By removing classes & markup from drupal a themer gets better working conditions & dont have to use to much time to digh through the dirt of divitis & class overload, that can be very frustrating. 
 The markup is basically simpler to read & Quicker to execute for the enduser.
