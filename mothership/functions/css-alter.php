@@ -257,19 +257,20 @@ function mothership_css_alter(&$css) {
   $css_kill_list = explode("\n", theme_get_setting('mothership_css_freeform'));
 
   //grap the css and run through em
+  if(theme_get_setting('mothership_css_freeform')){
+    foreach ($css as $file => $value) {
+      //grap the kill list and do that on each file
+      foreach ($css_kill_list as $key => $cssfilemustdie) {
+  //      print $file ."<br>";
+        if (strpos($file, $cssfilemustdie) !== FALSE) {
+         unset($css[$file]);
+        }
 
-  foreach ($css as $file => $value) {
-    //grap the kill list and do that on each file
-    foreach ($css_kill_list as $key => $cssfilemustdie) {
-//      print $file ."<br>";
-      if (strpos($file, $cssfilemustdie) !== FALSE) {
-       unset($css[$file]);
       }
-
     }
+
   }
   
-kpr($css);
 
 }
 
