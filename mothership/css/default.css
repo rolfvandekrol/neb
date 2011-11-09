@@ -57,17 +57,14 @@ form small, form .description{font-size:12px; color:#444; display:block; text-al
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
 
-
 /* FIELDSETS & LEGEND */
 fieldset, 
 html.js fieldset.collapsible .fieldset-legend{
-
 }
 /*
 fieldset, 
 html.js fieldset.collapsible .fieldset-legend, 
 span.fieldset-legend{
-
 }
 */
 
@@ -190,3 +187,42 @@ admin toolbar fix if its used with the toolbar
 body.toolbar div#admin-toolbar.vertical {top:130px;}
 body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
 #admin-toolbar{top: 20px!important;}
+
+
+
+/* navigation
+books
+* ------------------------------------- */
+.book-navigation .menu {
+  border-top: 1px solid #D6D6D6;
+  padding: 1em 0 0 3em; /* LTR */
+}
+
+
+.book-navigation .pager {
+  border-bottom: 1px solid #D6D6D6;
+  border-top: 1px solid #D6D6D6;
+  margin:0;
+  padding: 0.5em;
+}
+
+.pager li{
+  float:left;
+  list-style-type: none;
+}
+
+.pager .page-previous {
+  float: left; /* LTR */
+  text-align: left;
+  width: 42%;
+}
+.pager .page-up {
+  float: left; /* LTR */
+  margin: 0 5%;
+  width: 4%;
+}
+.pager .page-next {
+  float: right;
+  text-align: right;
+  width: 42%;
+}
