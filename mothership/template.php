@@ -178,6 +178,12 @@ function mothership_preprocess(&$vars, $hook) {
       unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
     }
 
+    //remove the content not found yadi yadi on the frontpage
+    if(theme_get_setting('mothership_frontpage_default_message')){
+      unset($vars['page']['content']['system_main']['default_message']);
+    }
+
+
 
   }elseif ( $hook == "region" ) {
     // =======================================| region |========================================
@@ -275,13 +281,14 @@ function mothership_preprocess_html(&$vars) {
 //  kpr($vars);
 
 }
-
+/*
 function mothership_preprocess_page(&$vars, $hook) {
   //  Enough with the default message "  No front page content has been created yet. Add new content"
   if(theme_get_setting('mothership_frontpage_default_message')){
     unset($vars['page']['content']['system_main']['default_message']);
   }
 }
+*/
 
 function mothership_preprocess_node(&$vars,$hook) {
   //  krumo($vars['content']);
