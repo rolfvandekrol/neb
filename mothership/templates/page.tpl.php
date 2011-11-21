@@ -3,24 +3,31 @@
 //dsm($theme_hook_suggestions);
 // template naming
 //page--[CONTENT TYPE].tpl.php
-
-$site_name_element = "h1";
 ?>
 <!--page.tpl.php-->
 <?php print $mothership_poorthemers_helper; ?>
 
-
-<header>
-  <<?php print $site_name_element; ?> id="site-name">
-    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-      <?php print $site_name; ?>
-    </a>
-  </<?php print $site_name_element; ?>>
-
-  <?php print render($page['header']); ?>
-</header>
-
 <div class="page">
+
+  <div class="topbar">
+    <div class="">
+
+    </div>
+    <div class="search">
+      search
+    </div>
+    <div class="useraccount">
+      login stuff
+    </div>
+  </div>
+
+
+
+  <header>
+    <?php print render($page['header']); ?>
+    <?php print render($page['header_second']); ?>
+  </header>
+
   <?php print $breadcrumb; ?>
 
   <?php if ($action_links): ?>
@@ -31,30 +38,42 @@ $site_name_element = "h1";
     <nav class="tabs"><?php print render($tabs); ?></nav>
   <?php endif; ?>
 
+  <?php if ($page['sidebar_first']): ?>
+    <div class="sidebar-first">
+    <?php print render($page['sidebar_first']); ?>
+    </div>
+  <?php endif; ?>
 
-  <?php print render($page['sidebar_first']); ?>
-  <?php print render($page['sidebar_second']); ?>
-
-  <div role="main">
+  <div role="main" class="main">
     <?php //title ?>
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
-      <h1 id="page-title"><?php print $title; ?></h1>
+      <h1><?php print $title; ?></h1>
     <?php endif; ?>
     <?php print render($title_suffix); ?>
     <?php //title ?>
 
-    <?php if($page['help'] OR $page['highlighted'] OR $messages){ ?><div class="drupal-messages"><?php } ?>
+    <?php if($page['help'] OR $page['highlighted'] OR $messages){ ?>
+      <div class="drupal-messages">
       <?php print render($page['help']); ?>
       <?php print render($page['highlighted']); ?>
       <?php print $messages; ?>
-    <?php if($page['help'] OR $page['highlighted'] OR $messages){ ?></div><?php } ?>
+      </div>
+    <?php } ?>
 
     <?php print render($page['content']); ?>
+
   </div><!--/main-->
+
+  <?php if ($page['sidebar_second']): ?>
+    <div class="sidebar-second">
+      <?php print render($page['sidebar_second']); ?>
+    </div>
+  <?php endif; ?>
+
+  <footer>
+    <?php print render($page['footer']); ?>
+  </footer>
 
 </div><!--/page-->
 
-<footer>
-  <?php print render($page['footer']); ?>
-</footer>
