@@ -1,7 +1,7 @@
 <?php
-
 function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
+  /* ----------------------------- DEVELOPMENT ----------------------------- */
   $form['development'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Theme Development'),
@@ -10,241 +10,267 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#weight'=> -20
   );
 
-    $form['development']['mothership_poorthemers_helper'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('the Poor Themers Helper - Experimental!'),
-      '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
-      '#description'   => t('Add a comment tag in block, node, regions with the suggested theme hooks'),
-    );
-
-    $form['development']['mothership_rebuild_registry'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Rebuild theme registry on every page.'),
-      '#default_value' => theme_get_setting('mothership_rebuild_registry'),
-      '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
-    );
-
-    $form['development']['mothership_test'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Add a test class to &lt;body&gt;'),
-      '#default_value' => theme_get_setting('mothership_test'),
-    );
-
-  $form['html5'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('HTML 5 '),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#weight'=> -19    
+  $form['development']['mothership_poorthemers_helper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('the Poor Themers Helper - Experimental!'),
+    '#default_value' => theme_get_setting('mothership_poorthemers_helper'),
+    '#description'   => t('Add a comment tag in block, node, regions with the suggested theme hooks'),
   );
 
-      $form['html5']['mothership_html5'] = array(
-        '#type'          => 'checkbox',
-        '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
-        '#default_value' => theme_get_setting('mothership_html5'),
-        '#description'   => t('Change the header to be html5, remove the anonymous div from form'),
-      );
+  $form['development']['mothership_rebuild_registry'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Rebuild theme registry on every page.'),
+    '#default_value' => theme_get_setting('mothership_rebuild_registry'),
+    '#description'   => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
+  );
 
-      $form['html5']['mothership_viewport'] = array(
-        '#type'          => 'checkbox',
-        '#title'         => t('add Viewport'),
-        '#default_value' => theme_get_setting('mothership_html5'),
-        '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
-      );
+  $form['development']['mothership_test'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Add a test class to &lt;body&gt;'),
+    '#default_value' => theme_get_setting('mothership_test'),
+  );
 
+  /* ----------------------------- HTML 5  ----------------------------- */
+  $form['html5'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('HTML 5 settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#weight'=> -19
+  );
 
+  $form['html5']['mothership_html5'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('HTML5 for extra awesomeness <doctype!> ;)'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t('Change the header to be html5, remove the anonymous div from form & add a shiv html5.js for old browsers'),
+  );
 
-    //Get all the posible css files that drupal can spit out
-    //and generate the $css_files_from_modules var
-    $result = db_query("SELECT * FROM {system} WHERE type = 'module' AND status = 1");
-    foreach ($result as $module) {
-      $module_path = pathinfo($module->filename, PATHINFO_DIRNAME);      
-      $css_files = file_scan_directory($module_path, '/.*\.css$/');
-      foreach((array)$css_files as $key => $file) {
-        $css_files_from_modules[] = $module_path . "/" . $file->filename ;
-      }
-    }
+  $form['html5']['mothership_viewport'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('add Viewport'),
+    '#default_value' => theme_get_setting('mothership_html5'),
+    '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
+  );
 
-  //CSS Files 
+  /* ----------------------------- LIBRARIES  ----------------------------- */
+  //libaries stuff
+  $form['Libraries'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('External Libraries'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#description'   => t('External libs for the Styling pleasure & very Late night debugging'),
+    '#weight'=> -17
+  );
+
+  $form['Libraries']['mothership_modernizr'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Modernizr2 Love (CDN)'),
+    '#default_value' => theme_get_setting('mothership_modernizr'),
+    '#description'   => t('adds modernizr2 lib from the CDN 
+    <a href="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js">http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js</a>
+    <br>
+    You should offcourse build a custom modernizr js file for you site! <br>
+    Were all about removing the crap- remember...<br>
+    anyway this will enable<br>
+    <a href="!link">Custom Build modernizr</a>', array('!link' => 'http://modernizr.com')),
+  );
+
+  $form['Libraries']['mothership_selectivizr'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Selectivizr Love (CDN)'),
+    '#default_value' => theme_get_setting('mothership_selectivizr'),
+    '#description'   => t('Add the <a href="!link">Selectivizr</a> library - from CDN: 
+    <a href="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js">http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js</a>
+    ', array('!link' => 'http://selectivizr.com')),
+  );
+  
+
+  /* ----------------------------- CSS FILES  ----------------------------- */
   $form['css'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('CSS Files - Resets & Stripping the !count css files', array('!count' => count($css_files_from_modules))),         
-
+    '#title'         => t('CSS Files'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#description'   => t('If you choose to change the css files, then Mothership splits up the drupalcore css files, into base, admin & theme files. So its easy to remove css definitions your theme dosnt need, all the files are in mothership/css-drupalcore'),    
+    '#collapsed' => TRUE,
+    '#description'   => t('Different Resets & CSS file nuking'),
     '#weight'=> -15
   );
 
-
+  /* ----------------------------- CSS FILES  ADD ----------------------------- */
   $form['css']['add'] = array(
      '#type'          => 'fieldset',
-     '#title'         => t('css defaults & reset'),
+     '#title'         => t('Reset.css & Default files. '),
      '#collapsible' => TRUE,
-     '#collapsed' => FALSE,
+     '#collapsed' => TRUE,
    );
 
    $form['css']['add']['mothership_css_reset'] = array(
       '#type'          => 'checkbox',
       '#title'         => t('Add reset.css'),
-      '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')), 
+      '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')),
       '#default_value' => theme_get_setting('mothership_css_reset')
     );
 
     $form['css']['add']['mothership_css_reset_html5'] = array(
        '#type'          => 'checkbox',
        '#title'         => t('Add reset-html5.css'),
-      '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')), 
+      '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')),
        '#default_value' => theme_get_setting('mothership_css_reset_html5')
      );
 
      $form['css']['add']['mothership_css_normalize'] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Add normalize.css:'),
-        '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')), 
+        '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')),
           '#default_value' => theme_get_setting('mothership_css_normalize')
       );
 
-
     $form['css']['add']['mothership_css_default'] = array(
        '#type'          => 'checkbox',
-       '#title'         => t('Add default.css clean defaults for basic Drupal elements elements'),
+       '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/default.css</a> for basic Drupal elements', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/default.css')),
        '#default_value' => theme_get_setting('mothership_css_default')
      );
 
    $form['css']['add']['mothership_css_mothershipstyles'] = array(
       '#type'          => 'checkbox',
-      '#title'         => t('Add mothership.css '),
-      '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'), 
+      '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership.css</a>', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership.css')),
+      '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'),
       '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
     );
 
-
+  /* ----------------------------- CSS FILES  NUKE ----------------------------- */
+  //Get all the posible css files that drupal could spit out
+  //generate the $css_files_from_modules
+  $result = db_query("SELECT * FROM {system} WHERE type = 'module' AND status = 1");
+  foreach ($result as $module) {
+    $module_path = pathinfo($module->filename, PATHINFO_DIRNAME);
+    $css_files = file_scan_directory($module_path, '/.*\.css$/');
+    foreach((array)$css_files as $key => $file) {
+      $css_files_from_modules[] = $module_path . "/" . $file->filename ;
+    }
+  }
+  //let sort em
+  asort($css_files_from_modules);
 
   $form['css']['nuke'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('CSS Files Nuking - BAT style'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#type'         => 'fieldset',
+    '#title'        => t('CSS Files Nuking - BAT style'),
+    '#collapsible'  => TRUE,
+    '#collapsed'    => TRUE,
   );
-
 
   $form['css']['nuke']['mothership_nuke_css'] = array(
     '#type'          => 'radios',
     '#options'       => array(
                           'mothership_css_nuke_none'  => t('<strong>Peace!</strong> <br> the CSS isnt touched, just as Drupal wants it to be'),
-                          'mothership_css_nuke_theme' => t('<strong>.theme.css (selected)</strong> <br> Nukes all .theme.css files, but keeps these files: <br>toolbar.theme.css,shortcut.theme.css, contextual.theme.css'),
-                          'mothership_css_nuke_theme_full' => t('<strong>.theme.css </strong> <br>Nukes all .theme.css files'),
-                          'mothership_css_nuke_admin' => t('<strong>.admin.css</strong> <br>Nukes all .admin.css files'),
-                          'mothership_css_nuke_theme_admin' => t('<strong>.theme.css & .admin.css</strong> <br>Nukes all .theme.css + .theme.css'),
-                          'mothership_css_nuke_module'  => t('<strong>the Nuke</strong> <br>Nukes ALL css files provided by any module, but keeps all themes css files'),
-                          'mothership_css_nuke_epic'  => t('<strong>Epic nuke</strong><br> None shall pass! Removes every css file that comes from modules & themes'),
+                          'mothership_css_nuke_theme' => t('<strong>Remove theme.css & include basic Drupal</strong> <br> Nukes all .theme.css files, but keeps these files: <br>toolbar.theme.css,shortcut.theme.css, contextual.theme.css'),
+                          'mothership_css_nuke_theme_full' => t('<strong>Remove theme.css </strong> <br>Nukes all .theme.css files'),
+                          'mothership_css_nuke_admin' => t('<strong>Remove admin.css</strong> <br>Nukes all .admin.css files'),
+                          'mothership_css_nuke_theme_admin' => t('<strong>Remove both theme.css & admin.css file</strong> <br>Nukes all .theme.css & .admin.css files'),
+                          'mothership_css_nuke_module'  => t('<strong>the small Nuke</strong> <br>Nukes ALL css files provided by any module'),
+                          'mothership_css_nuke_epic'  => t('<strong>the Epic nuke</strong><br> None shall pass! Removes every css file that comes from modules & themes'),
                         ),
     '#default_value' => theme_get_setting('mothership_nuke_css'),
   );
 
+  //remove the css thats already remove by BAT
+  foreach ($css_files_from_modules as $file => $value) {
 
+    switch (theme_get_setting('mothership_nuke_css')) {
+      //full
+      case 'mothership_css_nuke_theme_full':
+        if (strpos($value, 'theme.css') !== FALSE) {
+          unset($css_files_from_modules[$file]);
+        }
+      break;
+      //theme.css
+      case 'mothership_css_nuke_theme':
+        if (strpos($value, 'theme.css') !== FALSE) {
+          unset($css_files_from_modules[$file]);
+        }
+        break;
 
-    //remove the css thats already remove by BAT
-    foreach ($css_files_from_modules as $file => $value) {
+      case 'mothership_css_nuke_admin':
+        if (strpos($value, 'admin.css') !== FALSE) {
+          unset($css_files_from_modules[$file]);
+        }
+        break;
 
-      switch (theme_get_setting('mothership_nuke_css')) {
-        //full
-          case 'mothership_css_nuke_theme_full':
-            if (strpos($value, 'theme.css') !== FALSE) {
-              unset($css_files_from_modules[$file]);
-            } 
-          break;
-        //theme.css
-        case 'mothership_css_nuke_theme':
-          if (strpos($value, 'theme.css') !== FALSE) {
-            unset($css_files_from_modules[$file]);
-          } 
-          break;
+      case 'mothership_css_nuke_theme_admin':
+        if (strpos($value, 'theme.css') !== FALSE) {
+          unset($css_files_from_modules[$file]);
+        }
+        if (strpos($value, 'admin.css') !== FALSE) {
+          unset($css_files_from_modules[$file]);
+        }
+        break;
 
-        case 'mothership_css_nuke_admin':
-          if (strpos($value, 'admin.css') !== FALSE) {
-            unset($css_files_from_modules[$file]);
-          } 
-          break;
-
-        case 'mothership_css_nuke_theme_admin':
-          if (strpos($value, 'theme.css') !== FALSE) {
-            unset($css_files_from_modules[$file]);
-          } 
-          if (strpos($value, 'admin.css') !== FALSE) {
-            unset($css_files_from_modules[$file]);
-          } 
-          
-          break;
-
-        case 'mothership_css_nuke_module':
-          if (strpos($value, 'module') !== FALSE) {
-            unset($css_files_from_modules[$file]);
-          } 
-
-          break;
-
-        case 'mothership_css_nuke_epic':
-            unset($css_files_from_modules);
-          break;
-
-        default:
-          # code...
-          break;
-      }
-    }
-    
-    //now that we have cleared up from the BAT its time for some freeform removing :)
-
-
-   $form['css']['mothership_css_freeform'] = array(
-     '#type'          => 'textarea',
-     '#title'         => t('The amazing Style Stripper'),
-     '#default_value' => theme_get_setting('mothership_css_freeform'),
-     '#description'   => t('add each file you wanna remove from ever beeing able to load in your theme')
-   );
-
-
-
-    //list of css files with links
-
-      global $base_url;  
-       // kpr($vars);
-        foreach ($css_files_from_modules as $value){
-        //  print '<a href=" ' .  $base_url . $value . ' ">' . $base_url .' *** ' . $value . '</a><br>';
+      case 'mothership_css_nuke_module':
+        if (strpos($value, 'module') !== FALSE) {
+          unset($css_files_from_modules[$file]);
         }
 
-       $form['css']['css_list'] = array(
-         '#type'          => 'fieldset',
-        '#title'         => t('CSS file list - !count CSS Files now active in the Drupal system', array('!count' => count($css_files_from_modules))),     
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-         '#description'   => '<b>'.t('one line pr file you wanna remove') . "</b><br>"  .  implode('<br> ', $css_files_from_modules ) 
-       );
+        break;
 
+      case 'mothership_css_nuke_epic':
+          unset($css_files_from_modules);
+        break;
 
+      default:
+        # code...
+        break;
+    }
+  }
 
-  $form['classes'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('CSS Classes'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#weight'=> -15    
+  //now that we have cleared up from the BAT its time for some freeform removing :)
+
+  /* ----------------------------- STYLE STRIPPING ----------------------------- */
+  $form['css']['stylestripper'] = array(
+     '#type'          => 'fieldset',
+     '#title'         => t('Style stripper - The last chance to remove a css from Drupal'),
+     '#collapsible' => TRUE,
+     '#collapsed' => TRUE,
+   );
+
+  $form['css']['stylestripper']['mothership_css_freeform'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('The amazing Style Stripper'),
+    '#default_value' => theme_get_setting('mothership_css_freeform'),
+    '#description'   => t('add the files you want removed from the css file list - this list dosnt account for the BAT removal, will come in a later release'),
+    '#suffix'       => '<strong>css file list</strong><br>'.  implode('<br> ', $css_files_from_modules )
   );
+
+  //list of css files with links
+  global $base_url;
+
+  //foreach ($css_files_from_modules as $value){
+  //  print '<a href=" ' .  $base_url . $value . ' ">' . $base_url .' *** ' . $value . '</a><br>';
+  //}
+
+
+  /* ----------------------------- CSS CLASSES ----------------------------- */
+  $form['classes'] = array(
+      '#type'          => 'fieldset',
+      '#title'         => t('CSS Classes'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight'=> -15
+  );
+
   //BODY
   $form['classes']['body'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('body classes (html.tpl.php)'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#description'   => t('Modifies the classes Drupal puts into  <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b>'),
+      '#type'          => 'fieldset',
+      '#title'         => t('body classes (html.tpl.php)'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#description'   => t('Modifies the classes Drupal puts into  <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b>'),
   );
 
   $form['classes']['body']['mothership_classes_body_html'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .html'),
-    '#default_value' => theme_get_setting('mothership_classes_body_html')
+      '#type'          => 'checkbox',
+      '#title'         => t('Remove .html'),
+      '#default_value' => theme_get_setting('mothership_classes_body_html')
   );
 
   $form['classes']['body']['mothership_classes_body_loggedin'] = array(
@@ -292,7 +318,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['classes']['body']['mothership_classes_body_freeform'] = array(
     '#type'          => 'textarea',
-    '#title'         => t('Remove css classes from the body tag'),
+    '#title'         => t('Kill css classes from the body tag'),
     '#default_value' => theme_get_setting('mothership_classes_body_freeform'),
     '#description'   => t('Format is comma seperated: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
@@ -304,7 +330,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Region classes (region.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> ')    
+    '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> ')
   );
 
   $form['classes']['region']['mothership_classes_region_freeform'] = array(
@@ -326,7 +352,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_region_wrapper')
   );
 
-
   //block
   $form['classes']['block'] = array(
     '#type'          => 'fieldset',
@@ -335,21 +360,20 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => FALSE,
     '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
   );
-  
+
   $form['classes']['block']['mothership_classes_block_freeform'] = array(
     '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );  
-  
+  );
+
   $form['classes']['block']['mothership_classes_block'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .block'),
     '#default_value' => theme_get_setting('mothership_classes_block'),
     '#description'   => t('Dont remove this if you using context!')
   );
-
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
     '#type'          => 'checkbox',
@@ -375,14 +399,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block_contentdiv')
   );
 
-
   //NODE
   $form['classes']['node'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('node classes (node.tpl.php)'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div wrapper & style <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b>')    
+    '#description'   => t('Modify the div wrapper & style <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b>')
   );
 
   $form['classes']['node']['mothership_classes_node_freeform'] = array(
@@ -390,8 +413,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_node_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );  
-  
+  );
 
   $form['classes']['node']['mothership_classes_node'] = array(
     '#type'          => 'checkbox',
@@ -431,11 +453,10 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view_view_id'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
-   '#description'   => t('You dont wanna do this is your wanna use the ajax pagination - just saying'), 
+   '#description'   => t('You dont wanna do this is your wanna use the ajax pagination - just saying'),
     '#default_value' => theme_get_setting('mothership_classes_view_view_id')
   );
-  
-  
+
   $form['classes']['view']['mothership_classes_view_row'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .view-row'),
@@ -454,7 +475,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view_row_rename'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
-    '#description'   => t('The reason for this is so we have .first & .last all over the site'),     
+    '#description'   => t('The reason for this is so we have .first & .last all over the site'),
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
 
@@ -487,29 +508,29 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Remove the input field type class: .form-radio, form-checkbox '),
     '#default_value' => theme_get_setting('mothership_classes_field_type')
   );
-  
+
   $form['classes']['field']['mothership_classes_field_label'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the label status class '),
     '#default_value' => theme_get_setting('mothership_classes_field_label')
   );
 
- //Form    
+ //Form
   $form['classes']['form'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Forms'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-    
+
   $form['classes']['form']['mothership_classes_form_freeform'] = array(
     '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_form_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
-    
-    
+
+
   $form['classes']['form']['mothership_classes_form_wrapper_formitem'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the .form-item wrapper class '),
@@ -558,28 +579,23 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_form_labelwrap')
   );
 
-  
+
 
   $form['classes']['menu'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Menus'),
-   '#description'   => t('Modifies the stuff that drupal wraps around the menu ul & li tags'), 
+   '#description'   => t('Modifies the stuff that drupal wraps around the menu ul & li tags'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-    
+
   $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the .menu-wrapper class on the &lt;ul class="menu-wrapper" &gt; menustuff &lt;/ul&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_menu_wrapper')
   );
-/*
-  $form['classes']['menu']['mothership_classes_menu_items'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Kill all the classes from the &lt;ul&gt; &lt;li class=&quot;menuclasseds&quot;&gt;&lt;a ...'),
-    '#default_value' => theme_get_setting('mothership_classes_menu_items')
-  );
-*/
+
+
   $form['classes']['menu']['mothership_classes_menu_items_firstlast'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .first & .last class from the li '),
@@ -604,40 +620,12 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_menu_leaf')
   );
 
-  //libaries stuff
-  $form['Libraries'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('External Libraries'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#description'   => t('External libs for you styling pleasure & last night debugging'),
-    '#weight'=> -15
-  );
-
-  $form['Libraries']['mothership_modernizr'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Modernizr 2 love '),
-    '#default_value' => theme_get_setting('mothership_modernizr'),
-    '#description'   => t('adds the modernizr 2 lib from CDN 
-    You should offcourse build a custom modernizr for you site - were all about removing the crap- remember...<br>
-    anyway this will enable<br>
-    http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js
-    <br> <br><a href="!link">Custom Build modernizr</a>', array('!link' => 'http://modernizr.com')),
-  );
-
-
-  $form['Libraries']['mothership_selectivizr'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Add selectivizr love'),
-    '#default_value' => theme_get_setting('mothership_selectivizr'),
-    '#description'   => t('<a href="!link">Download selectivizr</a>', array('!link' => 'http://selectivizr.com')),
-  );
 
   $form['misc'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('misc stuff'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#weight'=> -10
   );
 

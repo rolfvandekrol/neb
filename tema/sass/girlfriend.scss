@@ -1,0 +1,136 @@
+// ------------------------------------------------------
+// the grid & gridpre classes for direct input in the html as classes
+// ------------------------------------------------------
+
+@mixin gridgenerator($grid-count: 12, $column-width: 54px,$gutter-width: 30px, $direction:left){
+  //first grid base
+  .g1{
+    float: #{$direction};
+    margin-#{$direction}: $gutter-width;
+    min-height:1%;
+    word-wrap: break-word;  //word break
+
+  }
+
+
+  //create the widths for all the grids
+  @for $i from 1 through $grid-count {
+    .g#{$i} {
+      width: ( ($column-width * $i) + ($gutter-width * ($i - 1) ) ) ;
+
+      //last grid add a clear both
+      @if $i == $grid-count{
+        clear: both;
+        float:left;
+      }
+
+    }
+  }
+
+  //give all the g's the base float etc. by extending em all
+  @for $i from 1 through $grid-count {
+    //add g2 g3 etc to the grids base
+
+    @if $grid-count > $i {
+      .g#{$i} {
+        @extend .g1;
+      }
+    }
+
+  }
+
+  // -- grid pre --
+  @for $i from 1 through $grid-count {
+    .gp#{$i} {
+      @if $i != $grid-count{
+        margin-#{$direction}: ($column-width + $gutter-width) * $i !important;
+      }
+    }
+  }
+
+  // -- grid pre --
+  @for $i from 1 through $grid-count {
+    .gpost#{$i} {
+      @if $i != $grid-count{
+        margin-right: ($column-width + $gutter-width) * $i !important;
+        background:#d0d;
+      }
+    }
+  }
+
+
+  .gfull{
+    width: ( ($column-width * $grid-count) + ($gutter-width * ($grid-count - 1) ) ) ;
+    clear: both;
+    min-height: 1px;
+    float: #{$direction};
+  }
+
+  .gf{ margin-#{$direction}: 0!important; clear: #{$direction}; }
+  .clear{float:none;}
+  .left{ text-align:left; }
+  .right{ text-align:right; }
+  .center{ margin:0px auto; float:none; text-align:center; }
+
+  /* clearfix... */
+  .cf:before,.cf:after {content:""; display:table;}
+  .cf:after {clear:both;}
+  .cf {zoom:1;}  /* For IE 6/7 (trigger hasLayout) */
+
+}
+
+//calculate the whole pagewidth
+@mixin pagewidth($grid-count: 12, $column-width: 54px,$gutter-width: 30px){
+  width: ( ($column-width * $grid-count) + ($gutter-width * ($grid-count - 1) ) ) ;
+}
+
+//generate the widths
+@function grid-width($grid: 1, $column-width: 53px, $gutter-width: 30px) {
+  $width : ($column-width * $grid) + ($gutter-width * ($grid )) ;
+  @return $width;
+}
+@function grid-push($grid: 1, $column-width: 53px, $gutter-width: 30px) {
+  $width : ($column-width * $grid) + ($gutter-width * ($grid - 1) ) ;
+  @return $width;
+}
+
+
+
+// ------------------------------------------------------
+// töols n fixes
+// ------------------------------------------------------
+@mixin boxwidth($width:100px,$padding-left:0,$padding-right:0 ,$margin-left:0, $margin-right:0){
+  width: ($width - ($padding-left + $padding-right + $margin-left + $margin-right)) ;
+  @if $padding-left > 0 {
+    padding-left: $padding-left;
+  }
+  @if $padding-right > 0 {
+    padding-right: $padding-right;
+  }
+  @if $margin-left > 0 {
+    margin-left: $margin-left;
+  }
+  @if $margin-right > 0 {
+    margin-right:$margin-right;
+  }
+}
+
+@function boxwidth($width,$padding-left:0,$padding-right:0 ,$margin-left:0, $margin-right:0){
+  @return $width - ($padding-left + $padding-right);
+}
+
+@mixin boxheight($height:100px,$padding-top:0,$padding-bottom:0 ,$margin-top:0, $margin-bottom:0){
+  height: ($height - ($padding-top + $padding-bottom + $margin-top + $margin-bottom)) ;
+  @if $padding-top > 0 {
+    padding-top: $padding-top;
+  }
+  @if $padding-bottom > 0 {
+    padding-bottom: $padding-bottom;
+  }
+  @if $margin-top > 0 {
+    margin-top: $margin-top;
+  }
+  @if $margin-bottom > 0 {
+    margin-bottom:$margin-bottom;
+  }
+}

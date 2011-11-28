@@ -1,0 +1,63 @@
+//create the grid
+html{
+  background: $color-bg;
+}
+body{
+  @include pagewidth($grid-count, $column-width, $gutter-width);
+  margin:0 auto; //center
+}
+body.admin-menu{
+  background-position: 0 21px!important;
+}
+body.admin-menu header.top{
+  margin-top:25px;
+}
+body.test .page{
+  @include grid-background($grid-count, $column-width, $gutter-width, $baseline,0, #ececec, #f2f2f2); /*, #f2f2f2,#ececec, #c9e2e8*/
+  //grid-background($total,     $column,      $gutter,  $baseline, $offset, $column-color, $gutter-color, $baseline-color, $force-fluid)
+}
+
+//layout
+
+.page{
+  @extend .gfull;
+}
+
+//sidebar first
+body.one-sidebar.sidebar-first{
+  .sidebar-first{
+    @extend .gf;
+    @extend .g3;
+  }
+  .main{
+   @extend .g9;
+  }
+}
+
+//sidebar second
+body.one-sidebar.sidebar-second{
+  .sidebar-second{
+    @extend .g3;
+  }
+  .main{
+    @extend .gf;
+    @extend .g9;
+  }
+  footer{
+    @extend .g12;
+  }
+}
+
+//both sidebars
+body.two-sidebars{
+  .sidebar-first{
+    @extend .gf;
+    @extend .g3;
+  }
+  .sidebar-second{
+    @extend .g3;
+  }
+  .main{
+   @extend .g6;
+  }
+}

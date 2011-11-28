@@ -1,0 +1,63 @@
+//effects
+.shade{
+  @include box-shadow(0px 1px 0px 0px rgba(219, 219, 219, 1),0px 2px 0px 0px rgba(255, 255, 255, 1));
+//  .ie7 border-bottom:1px solid #ddd;
+
+}
+
+@mixin image-shadow($width : '100px', $margin: '0 0 0 20px', $border: '1px solid white', $color:'', $hoff:'', $voff:'', $blur:'', $spread:''){
+  @include single-box-shadow($color, $hoff, $voff, $blur, $spread);
+  width:$width;
+  min-height:$width / 2;
+  margin:$margin;
+  @if($border){
+    border:$border;
+  }
+  display:block;
+}
+
+
+// ---------------------------
+//  pretty stuff
+// ---------------------------
+.thumpnail-list{
+  border-bottom:1px dashed green;
+  @extend .g10;
+
+  margin:10px 0;
+
+  padding:5px 0;
+  @extend .shade;
+//  @extend .gclearfix;
+
+  h2{
+    margin:10px 0;
+    @extend .shade;
+  }
+
+
+  ul li, li{
+    list-style:none;
+    padding:5px 0;
+    @extend .g2;
+
+    &:first-child{
+      @extend .gf;
+    }
+    a{
+      display:block;
+      margin:0 4px;
+    }
+    img{
+      @include image-shadow(132px, 0 0 0 2px, 2px solid white, gray, 0, 0, 5px, 0);
+      margin:0 0 5px 0px;
+    }
+    a img{
+      @include image-shadow(132px, 0 0 0 2px, 2px solid white, gray, 0, 0, 5px, 0);
+      margin:0 0 5px -4px;
+    }
+
+
+  }
+
+}

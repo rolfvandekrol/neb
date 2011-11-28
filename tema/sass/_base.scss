@@ -1,0 +1,61 @@
+//includes
+@import "compass/css3";
+@import "compass/layout/grid-background";
+@import "compass/typography";
+@import "compass/typography/links/link-colors";
+
+@import "girlfriend";
+
+//girlfriend's grid definition
+$grid-count     : 12;
+$column-width   : 54px;
+$gutter-width   : 30px;
+$direction      : left; //left or right
+
+//typography
+$basefont : 13px ;
+$baseline : 20px ;
+$grid-background-baseline-color : #ddd;
+
+$font-base            : "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-alternative     : "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-header          : "Georgia", Times New Roman, Times, serif;
+$font-monospace       : "Monaco", Courier New, monospace;
+
+//colors
+$color-bg     : #f6f6f6;
+$color-text   : #444444;
+$color-header : #444444;
+
+//link colors
+$link-color         : #0069d6;
+$link-color-hover   : darken($link-color, 30);
+$link-bgcolor-hover : lighten($link-color, 50);
+$link-color-clicked : darken($link-color, 30);
+
+//grays
+$black  : #000000 ;
+$gray25 : lighten($black, 25%);
+$gray50 : lighten($black, 50%);
+$gray75 : lighten($black, 75%);
+$gray90 : lighten($black, 90%);
+$white  : #fff;
+
+// Accent Colors
+$blue:              #049CDB;
+$blueDark:          #0064CD;
+$green:             #46a546;
+$red:               #9d261d;
+$yellow:            #ffc40d;
+$orange:            #f89406;
+$pink:              #c3325f;
+$purple:            #7a43b6;
+
+//Forms
+$form-label-width : grid-width(2);
+$form-radios-push : grid-width(0.25);
+
+
+
+
+@include gridgenerator($grid-count, $column-width,$gutter-width, $direction);

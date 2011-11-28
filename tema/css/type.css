@@ -1,11 +1,11 @@
 /*
 Syntax error: Undefined variable: "$baseline".
-        on line 2 of /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/typography.scss
+        on line 2 of /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/type.scss
 
-1: /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/typography.scss
+1: /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/type.scss
 
 Backtrace:
-/Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/typography.scss:2
+/Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/type.scss:2
 /Library/Ruby/Gems/1.8/gems/sass-3.1.4/lib/sass/../sass/script/variable.rb:45:in `_perform'
 /Library/Ruby/Gems/1.8/gems/sass-3.1.4/lib/sass/../sass/script/node.rb:40:in `perform'
 /Library/Ruby/Gems/1.8/gems/sass-3.1.4/lib/sass/../sass/script/operation.rb:66:in `_perform'
@@ -55,15 +55,15 @@ Backtrace:
 /Library/Ruby/Gems/1.8/gems/compass-0.11.5/lib/compass/compiler.rb:122:in `timed'
 /Library/Ruby/Gems/1.8/gems/compass-0.11.5/lib/compass/compiler.rb:96:in `run'
 /Library/Ruby/Gems/1.8/gems/compass-0.11.5/lib/compass/commands/watch_project.rb:142:in `recompile'
-/Library/Ruby/Gems/1.8/gems/compass-0.11.5/lib/compass/commands/watch_project.rb:94:in `perform'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/rubygems/custom_require.rb:31:in `to_proc'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/path.rb:73:in `call'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/path.rb:73:in `run_callback'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/path.rb:55:in `callback_action'
-/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/path.rb:39:in `delete'
-/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:32:in `deleted'
-/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:31:in `each'
-/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:31:in `deleted'
-/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:16:in `refresh'
+/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/path.rb:31:in `create'
+/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:26:in `created'
+/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:25:in `each'
+/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:25:in `created'
+/Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/state/directory.rb:17:in `refresh'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/backends/polling.rb:17:in `run'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/backends/polling.rb:17:in `each'
 /Library/Ruby/Gems/1.8/gems/fssm-0.2.7/lib/fssm/backends/polling.rb:17:in `run'
@@ -85,4 +85,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$baseline\".\A         on line 2 of /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/typography.scss\A \A 1: /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/typography.scss"; }
+  content: "Syntax error: Undefined variable: \"$baseline\".\A         on line 2 of /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/type.scss\A \A 1: /Users/mortendk/Dropbox/websites/drupal7/sites/all/themes/mothership/tema/sass/type.scss"; }

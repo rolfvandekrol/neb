@@ -8,7 +8,7 @@ function mothership_menu_tree($variables) {
   if(theme_get_setting('mothership_classes_menu_wrapper')){
     return '<ul>' . $variables['tree'] . '</ul>';
   }else{
-    return '<ul class="menu">' . $variables['tree'] . '</ul>';  
+    return '<ul class="menu">' . $variables['tree'] . '</ul>';
   }
 }
 
@@ -17,14 +17,14 @@ walk through each menu link and kill the classes we dont want
 */
 function mothership_menu_link(array $variables) {
   //clean up the classes
-  
+
 //  $remove = array('first','last','leaf','collapsed','expanded','expandable');
   $remove = array();
-  if(theme_get_setting('mothership_classes_menu_items_firstlast')){  
+  if(theme_get_setting('mothership_classes_menu_items_firstlast')){
     $remove[] .= "first";
     $remove[] .= "last";
   }
-  if(theme_get_setting('mothership_classes_menu_leaf')){  
+  if(theme_get_setting('mothership_classes_menu_leaf')){
     $remove[] .= "leaf";
   }
   if(theme_get_setting('mothership_classes_menu_collapsed')){
@@ -33,18 +33,18 @@ function mothership_menu_link(array $variables) {
     $remove[] .= "expandable";
   }
 
-  if(theme_get_setting('mothership_classes_menu_items_active')){  
-    $remove[] .= "active-trail"; 
+  if(theme_get_setting('mothership_classes_menu_items_active')){
+    $remove[] .= "active-trail";
     $remove[] .= "active";
   }
-  
+
   if($remove){
     $variables['element']['#attributes']['class'] = array_diff($variables['element']['#attributes']['class'],$remove);
   }
-  
-  
+
+
   //TODO: Remove thee menu-mlid-[NUMBER]
-  
+
 
   //if we wanna remove the class for realz so nozing passes
   if(theme_get_setting('mothership_classes_menu_items')){
@@ -55,8 +55,8 @@ function mothership_menu_link(array $variables) {
   $element = $variables['element'];
 
   if($variables['element']['#attributes'])
-  
-           
+
+
   $sub_menu = '';
 
   if ($element['#below']) {
@@ -73,12 +73,13 @@ function mothership_menu_link(array $variables) {
 
 /*
   @hook_pager
-we rewrites this so we can get shorter class names 
+we rewrites this so we can get shorter class names
 Remove all the pager- prefixes classes we dont need this the pager have the pager class on the ul
 pager-first & pager-last removed we use the css :first-child instead
 
 we add a daddy item (whos your daddy) so the wrapper item_list gets an idea who called it
 */
+
 function mothership_pager($variables) {
 
   $tags = $variables['tags'];
@@ -122,13 +123,13 @@ function mothership_pager($variables) {
   if ($pager_total[$element] > 1) {
     if ($li_first) {
       $items[] = array(
-     //   'class' => array('first'), 
+     //   'class' => array('first'),
         'data' => $li_first,
       );
     }
     if ($li_previous) {
       $items[] = array(
-        'class' => array('previous'), 
+        'class' => array('previous'),
         'data' => $li_previous,
       );
     }
@@ -137,7 +138,7 @@ function mothership_pager($variables) {
     if ($i != $pager_max) {
       if ($i > 1) {
         $items[] = array(
-          'class' => array('ellipsis'), 
+          'class' => array('ellipsis'),
           'data' => '…',
         );
       }
@@ -145,26 +146,26 @@ function mothership_pager($variables) {
       for (; $i <= $pager_last && $i <= $pager_max; $i++) {
         if ($i < $pager_current) {
           $items[] = array(
-//            'class' => array('pager-item'), 
+//            'class' => array('pager-item'),
             'data' => theme('pager_previous', array('text' => $i, 'element' => $element, 'interval' => ($pager_current - $i), 'parameters' => $parameters)),
           );
         }
         if ($i == $pager_current) {
           $items[] = array(
-            'class' => array('current'), 
+            'class' => array('current'),
             'data' => $i,
           );
         }
         if ($i > $pager_current) {
           $items[] = array(
-          //  'class' => array('pager-item'), 
+          //  'class' => array('pager-item'),
             'data' => theme('pager_next', array('text' => $i, 'element' => $element, 'interval' => ($i - $pager_current), 'parameters' => $parameters)),
           );
         }
       }
       if ($i < $pager_max) {
         $items[] = array(
-          'class' => array('ellipsis'), 
+          'class' => array('ellipsis'),
           'data' => '…',
         );
       }
@@ -172,19 +173,19 @@ function mothership_pager($variables) {
     // End generation.
     if ($li_next) {
       $items[] = array(
-        'class' => array('next'), 
+        'class' => array('next'),
         'data' => $li_next,
       );
     }
     if ($li_last) {
       $items[] = array(
-//        'class' => array('last'), 
+//        'class' => array('last'),
         'data' => $li_last,
       );
     }
-  //we wrap this in *gasp* so   
+  //we wrap this in *gasp* so
     return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
-      'items' => $items, 
+      'items' => $items,
       'attributes' => array('class' => array('pager') ),
       'daddy' => 'pager'
     ));
@@ -260,7 +261,7 @@ function mothership_views_mini_pager($vars) {
         'title' => NULL,
         'type' => 'ul',
         'attributes' => array('class' => array('pager')),
-        'daddy' => 'pager'        
+        'daddy' => 'pager'
       )
     );
   }
@@ -269,9 +270,10 @@ function mothership_views_mini_pager($vars) {
 
 /*
 the non saying item-list class haw now added an -daddy element
-so if the theme that calls the itemlist adds an 'daddy' => '-pager' to the theme call 
-the item list haves an idea of what it is 
+so if the theme that calls the itemlist adds an 'daddy' => '-pager' to the theme call
+the item list haves an idea of what it is
 */
+
 function mothership_item_list($variables) {
   $items = $variables['items'];
   $title = $variables['title'];
@@ -282,7 +284,7 @@ function mothership_item_list($variables) {
   if(isset($variables['daddy'])){
     $wrapperclass = "item-list-" . $variables['daddy'];
   }else{
-    $wrapperclass = "item-list";  
+    $wrapperclass = "item-list";
   }
 
   $output = '<div class="'. $wrapperclass .'">';

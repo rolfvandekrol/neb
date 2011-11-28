@@ -2,6 +2,7 @@
 /**
  * include template overwrites
  */
+
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css-alter.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
@@ -16,9 +17,7 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-
-  //    dsm($vars['classes_array']);
-
+  //kpr($vars['classes_array']);
 
   //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
@@ -74,8 +73,7 @@ function mothership_preprocess(&$vars, $hook) {
     //add selectivizr support
     if (theme_get_setting('mothership_selectivizr')) {
       $vars['selectivizr'] = '<!--[if (gte IE 6)&(lte IE 8)]>';
-      $vars['selectivizr'] .= '<script type="text/javascript" src="/sites/all/libraries/selectivizr/selectivizr.js"></script>';
- //     $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>';
+      $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>';
       $vars['selectivizr'] .= '<![endif]-->';
     }else{
       $vars['selectivizr'] = '';
@@ -171,7 +169,10 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     // Remove the block template wrapper from the main content block.
-   if (!empty($vars['page']['content']['system_main']) AND theme_get_setting('mothership_content_block_wrapper') AND is_array($vars['page']['content']['system_main']['#theme_wrappers']) ) {
+    if (!empty($vars['page']['content']['system_main']) AND
+        theme_get_setting('mothership_content_block_wrapper') AND
+        is_array($vars['page']['content']['system_main']['#theme_wrappers'])
+    ) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
 
