@@ -1,9 +1,9 @@
 name = tema
-description = TEMA
+description = this is the TEMA theme
 screenshot = screenshot.png
 engine = phptemplate
 core = 7.x
-php = 4.3
+php = 4.2
 base theme = mothership
 
 ;-------------- F E A T U R E S -------------

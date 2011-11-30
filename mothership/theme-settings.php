@@ -93,51 +93,39 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('CSS Files'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#description'   => t('Different Resets & CSS file nuking'),
+    '#description'   => t('Control which CSS files that will be included'),
     '#weight'=> -15
   );
 
-  /* ----------------------------- CSS FILES  ADD ----------------------------- */
-  $form['css']['add'] = array(
+  /* ----------------------------- CSS FILES  RESET ----------------------------- */
+
+  $form['css']['reset'] = array(
      '#type'          => 'fieldset',
-     '#title'         => t('Reset.css & Default files. '),
+     '#title'         => t('Reset'),
      '#collapsible' => TRUE,
      '#collapsed' => TRUE,
    );
 
-   $form['css']['add']['mothership_css_reset'] = array(
+   $form['css']['reset']['mothership_css_reset'] = array(
       '#type'          => 'checkbox',
       '#title'         => t('Add reset.css'),
       '#description'   => t('<a href="!link"> Mr. Eric Meyer style v2.0</a>', array('!link' => 'http://meyerweb.com/eric/tools/css/reset/')),
       '#default_value' => theme_get_setting('mothership_css_reset')
     );
 
-    $form['css']['add']['mothership_css_reset_html5'] = array(
+    $form['css']['reset']['mothership_css_reset_html5'] = array(
        '#type'          => 'checkbox',
        '#title'         => t('Add reset-html5.css'),
       '#description'   => t('<a href="!link">Delivered from the good html5doctor v1.6.1</a>', array('!link' => 'http://html5doctor.com/html-5-reset-stylesheet/')),
        '#default_value' => theme_get_setting('mothership_css_reset_html5')
      );
 
-     $form['css']['add']['mothership_css_normalize'] = array(
+     $form['css']['reset']['mothership_css_normalize'] = array(
         '#type'          => 'checkbox',
         '#title'         => t('Add normalize.css:'),
         '#description'   => t('<a href="!link">normalize.css info</a>', array('!link' => 'https://github.com/necolas/normalize.css')),
           '#default_value' => theme_get_setting('mothership_css_normalize')
       );
-
-    $form['css']['add']['mothership_css_default'] = array(
-       '#type'          => 'checkbox',
-       '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/default.css</a> for basic Drupal elements', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/default.css')),
-       '#default_value' => theme_get_setting('mothership_css_default')
-     );
-
-   $form['css']['add']['mothership_css_mothershipstyles'] = array(
-      '#type'          => 'checkbox',
-      '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership.css</a>', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership.css')),
-      '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'),
-      '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
-    );
 
   /* ----------------------------- CSS FILES  NUKE ----------------------------- */
   //Get all the posible css files that drupal could spit out
@@ -226,19 +214,19 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //now that we have cleared up from the BAT its time for some freeform removing :)
 
   /* ----------------------------- STYLE STRIPPING ----------------------------- */
-  $form['css']['stylestripper'] = array(
+  $form['css']['nuke']['stylestripper'] = array(
      '#type'          => 'fieldset',
-     '#title'         => t('Style stripper - The last chance to remove a css from Drupal'),
+     '#title'         => t('CSS File Stripping ') . sizeof($css_files_from_modules). ' CSS Files',
      '#collapsible' => TRUE,
      '#collapsed' => TRUE,
    );
 
-  $form['css']['stylestripper']['mothership_css_freeform'] = array(
+  $form['css']['nuke']['stylestripper']['mothership_css_freeform'] = array(
     '#type'          => 'textarea',
-    '#title'         => t('The amazing Style Stripper'),
+    '#title'         => t('Path to the CSS files thats gonna be stripped '),
     '#default_value' => theme_get_setting('mothership_css_freeform'),
-    '#description'   => t('add the files you want removed from the css file list - this list dosnt account for the BAT removal, will come in a later release'),
-    '#suffix'       => '<strong>css file list</strong><br>'.  implode('<br> ', $css_files_from_modules )
+    '#description'   => t('The whole path to the file(s) that should be removed from the theme, on pr line. <br>this list dosnt account for the BAT removal, will come in a later release'),
+    '#suffix'       => '<strong>CSS file paths, based on the modules loaded in you Drupal setup</strong><br>'.  implode('<br> ', $css_files_from_modules )
   );
 
   //list of css files with links
@@ -249,22 +237,45 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //}
 
 
+    /* ----------------------------- CSS FILES DEFAULTS ----------------------------- */
+    $form['css']['defaults'] = array(
+       '#type'          => 'fieldset',
+       '#title'         => t('Defaults'),
+       '#collapsible' => TRUE,
+       '#collapsed' => TRUE,
+     );
+
+    $form['css']['defaults']['mothership_css_default'] = array(
+       '#type'          => 'checkbox',
+       '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/default.css</a> for basic Drupal elements', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/default.css')),
+       '#default_value' => theme_get_setting('mothership_css_default')
+     );
+
+   $form['css']['defaults']['mothership_css_mothershipstyles'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership.css</a>', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership.css')),
+      '#description'   => t('Styles for the markup changes that mothership "fixes" Icons n stuff'),
+      '#default_value' => theme_get_setting('mothership_css_mothershipstyles')
+    );
+
+
+
   /* ----------------------------- CSS CLASSES ----------------------------- */
   $form['classes'] = array(
       '#type'          => 'fieldset',
       '#title'         => t('CSS Classes'),
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
+      '#collapsed' => FALSE,
       '#weight'=> -15
   );
 
-  //BODY
+  //---------------- BODY
   $form['classes']['body'] = array(
       '#type'          => 'fieldset',
-      '#title'         => t('body classes (html.tpl.php)'),
+      '#title'         => t('&lt;body class=" ... "&gt;'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
-      '#description'   => t('Modifies the classes Drupal puts into  <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b>'),
+      '#description'   => t('Modifies the css classes in the body tag <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b> html.tpl.php'),
   );
 
   $form['classes']['body']['mothership_classes_body_html'] = array(
@@ -317,52 +328,53 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
   $form['classes']['body']['mothership_classes_body_freeform'] = array(
-    '#type'          => 'textarea',
+    '#type'          => 'textfield',
     '#title'         => t('Kill css classes from the body tag'),
     '#default_value' => theme_get_setting('mothership_classes_body_freeform'),
     '#description'   => t('Format is comma seperated: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
 
 
-  //region
+  //---------------- Region
   $form['classes']['region'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Region classes (region.tpl.php)'),
+    '#title'         => t('&lt;div class="region ..."&gt;'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> ')
-  );
-
-  $form['classes']['region']['mothership_classes_region_freeform'] = array(
-    '#type'          => 'textfield',
-    '#title'         => t('Kill the css classes:'),
-    '#default_value' => theme_get_setting('mothership_classes_region_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );
-
-  $form['classes']['region']['mothership_classes_region'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .region'),
-    '#default_value' => theme_get_setting('mothership_classes_region')
+    '#description'   => t('Modify the div & style <b> &lt;div class="region"&gt; </b> in the region.tpl.php')
   );
 
   $form['classes']['region']['mothership_region_wrapper'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the wrapper div in region.tpl'),
+    '#title'         => t('Remove the wrapper &lt;div class="region ..."&gt; ...&lt;/div&gt; thats defined in region.tpl<br> This means that we remove the region wrapper completely -yea :)'),
     '#default_value' => theme_get_setting('mothership_region_wrapper')
   );
 
-  //block
+ 
+  $form['classes']['region']['mothership_classes_region'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the class="region" from the div wrapper'),
+    '#default_value' => theme_get_setting('mothership_classes_region')
+  );
+
+ $form['classes']['region']['mothership_classes_region_freeform'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Kill the css classes that can be defined inside the region'),
+    '#default_value' => theme_get_setting('mothership_classes_region_freeform'),
+    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+  );
+
+  //---------------- Block
   $form['classes']['block'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('block classes (block.tpl.php)'),
+    '#title'         => t('&lt;div class="block  ..."&gt;'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
   );
 
   $form['classes']['block']['mothership_classes_block_freeform'] = array(
-    '#type'          => 'textarea',
+    '#type'          => 'textfield',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
@@ -399,20 +411,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block_contentdiv')
   );
 
-  //NODE
+  //---------------- NODE
   $form['classes']['node'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('node classes (node.tpl.php)'),
+    '#title'         => t('&lt;div class="node..."&gt; '),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
-    '#description'   => t('Modify the div wrapper & style <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b>')
-  );
-
-  $form['classes']['node']['mothership_classes_node_freeform'] = array(
-    '#type'          => 'textarea',
-    '#title'         => t('Kill the css classes:'),
-    '#default_value' => theme_get_setting('mothership_classes_node_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+    '#description'   => t('Modify the styles <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b> node.tpl.php')
   );
 
   $form['classes']['node']['mothership_classes_node'] = array(
@@ -433,7 +438,52 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_node_id')
   );
 
-  //Views
+  $form['classes']['node']['mothership_classes_node_freeform'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Kill the css classes:'),
+    '#default_value' => theme_get_setting('mothership_classes_node_freeform'),
+    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+  );
+
+
+  //field
+  $form['classes']['field'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Fields'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+//classes (field.tpl.php)
+
+  $form['classes']['field']['mothership_classes_field_field'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the field class '),
+    '#default_value' => theme_get_setting('mothership_classes_field_field')
+  );
+
+
+  $form['classes']['field']['mothership_classes_field_type'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the input field type class: .form-radio, form-checkbox '),
+    '#default_value' => theme_get_setting('mothership_classes_field_type')
+  );
+
+  $form['classes']['field']['mothership_classes_field_label'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the label status class '),
+    '#default_value' => theme_get_setting('mothership_classes_field_label')
+  );
+
+  $form['classes']['field']['mothership_classes_field_freeform'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Kill the css classes:'),
+    '#default_value' => theme_get_setting('mothership_classes_field_freeform'),
+    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+  );
+
+
+
+  //---------------- Views
   $form['classes']['view'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('view classes (views-view.tpl.php)'),
@@ -479,41 +529,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
 
-
-  //field
-  $form['classes']['field'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('Field classes (field.tpl.php)'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  );
-
-  $form['classes']['field']['mothership_classes_field_freeform'] = array(
-    '#type'          => 'textarea',
-    '#title'         => t('Kill the css classes:'),
-    '#default_value' => theme_get_setting('mothership_classes_field_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );
-
-
-  $form['classes']['field']['mothership_classes_field_field'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the field class '),
-    '#default_value' => theme_get_setting('mothership_classes_field_field')
-  );
-
-
-  $form['classes']['field']['mothership_classes_field_type'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the input field type class: .form-radio, form-checkbox '),
-    '#default_value' => theme_get_setting('mothership_classes_field_type')
-  );
-
-  $form['classes']['field']['mothership_classes_field_label'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the label status class '),
-    '#default_value' => theme_get_setting('mothership_classes_field_label')
-  );
 
  //Form
   $form['classes']['form'] = array(
