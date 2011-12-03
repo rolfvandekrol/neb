@@ -1,8 +1,8 @@
 <?php if(theme_get_setting('mothership_html5')){  ?>
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
-<!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
-<!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
+<!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="<?php print $language->language; ?>"><![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="<?php print $language->language; ?>"><![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="<?php print $language->language; ?>"> <!--<![endif]-->
 <?php }else{ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
@@ -15,7 +15,7 @@
 <head>
 <?php }else{ ?>
   <head profile="<?php print $grddl_profile; ?>">
-<?php } ?>  
+<?php } ?>
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $appletouchicon; ?>
@@ -25,30 +25,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php } ?>
 
-<?php print $styles; ?>
-<?php print $scripts; ?>
+  <style type="text/css" media="screen">
+    @import url("/<?php print $path; ?>/css/style.css");
+  </style>
 
 <?php if(theme_get_setting('mothership_html5')){  ?>
 <!--[if lt IE 9]>
   <script src="<?php print drupal_get_path('theme', 'mothership'); ?>/js/html5.js"></script>
 <![endif]-->
 <?php } ?>
-
 <?php print $selectivizr; ?>
 </head>
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
-  <div id="skip-link">
-    <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
-  </div>
 
-  <?php print $page_top; //stuff from modules always render first ?>
+  <?php if (!empty($logo)): ?>
+    <a href="<?php print $base_path; ?>" title="<?php print t('Home'); ?>" rel="home">
+      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+    </a>
+  <?php endif; ?>
 
-  <?php // print $page_header; // comes from template.php preprocess page?>
-  <?php print $page; // uses the page.tpl ?>
-  <?php // print $page_footer;  // comes from template.php preprocess page ?>
 
-  <?php print $page_bottom; //stuff from modules always render last ?>
-  
+ <h1><?php print $title; ?></h1>
+ <?php print $messages; ?>
+<h2><?php print $site_name; ?> </h2>
+ <?php print $site_slogan; ?>
+ <?php print $content; ?>
+
+
 </body>
 </html>
+
+

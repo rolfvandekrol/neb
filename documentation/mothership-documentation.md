@@ -15,6 +15,22 @@ This theme will not make your site look neat - but it will clean up the html tha
 If you really like the markup & css options that Drupal Provides - This theme is probably not for you, and thats perfectly ok, this theme won't do anything for you.
 If you on the other hand cares about the markup & css This could be a good start solution.
 
+## Basic concept
+
+* Remove div wrappers   
+if you are tired of the   
+`<div><div><div><div><div><div><div><div>huh….`
+* Remove class overload   
+`<div class="baseclass anotherbaseclass yetanotherclass andonemorejustbecausewemightneedit "`
+* Remove css file overload   
+* Removal of hardcoded image files
+Drupal7 still comes with harcoded image files (omgwtfbbq)  
+`<img src="wtf-is-this.png">`   
+Change images directly in the markup is off course not ideal - it should be in the css instead.
+* Fix everything thats wrong (™)   
+this is a tool for theme development for those that really cares about the markup & not quick n "easy" solutions & at the same time digg through the drupalcore,clean up so it can be easy for new frontend developers to use drupal & less wtf why is that div doing there.    
+
+
 #Installation
 The Mothership is a basetheme so you can build themes on top of it & inherit all the glorious cleanup that the mothership brings you.
 
@@ -23,6 +39,9 @@ themename.info
 
 ![image](5-info-file.png)   
 _tema.info file_
+
+#Set up a new theme
+
 
 #Settings
 The heart of the mothership is the markup & css cleaning.  
@@ -36,16 +55,18 @@ Look in the theme suggestion for those (more about that in the theme development
 ##Theme Development
 ![image](6-development.png)
 **Poor themers helper**   
-is a little hack where you can get the theme hook suggestions written out in a comment in the markup
+This is a little snippet where mothership puts the hook suggestions out as a comment in the markup. This only works for page.tpl,node.tpl,block.tpl, field.tpl
 
-![image](http://)   
+![image](9-poor-themers helper.png)   
 _poor themes to the rescue_
 
 **Rebuilding the theme**   
-when you get tired of doing _drush cc all_ day    
+when you get tired of doing _drush cc all_ day  
+Thank you zen theme for providing this cool little feature  
 
 **.test class**   
-It can be very practical during developerment to have a test class in the body tag for showing a grid.png etc
+It can be very practical during developerment to have a test class in the body tag for showing a grid.png etc, so you can quickly remove it again if so needed.   
+body.test{ background:pink }
 
 
 ##HTML5 Settings
@@ -53,8 +74,15 @@ It can be very practical during developerment to have a test class in the body t
 **HTML5**
 This will change the &lt;!doctype&gt; and make sure that we load a shiv (html5.js) so lesser browsers can understand nav, header, footer etc. 
 
+**viewport**    
+Info about the viewport:
 
-##Adding Libraries for browserfun
+* http://www.html5rocks.com/en/mobile/mobifying.html#toc-meta-viewport
+* http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html
+
+
+
+##Adding Libraries for browserfixing
 ![image](8-libraries.png)
 
 Quick & easy loading of libraries that can be very helpfull
@@ -70,35 +98,173 @@ Its loaded from a CDN so we don't have to carry it around.
 
 
 ##CSS Files 
+A Drupal site usually have many css files (its probably only Drupal sites that breaks the 31 css file max in ie8 & lower)
+Usually a Module comes with a couple of files containing defaults & other goodies, its not always that the default css is something that the theme needs.    
+It can be a "little bit" annoying to use time & resources to overwrite each modules css, just to keep you theme clean. 
+Not to mention the unpleasant surprise if a module comes with badly writing css 
 
+Therefor the Mothership comes with a couple of tools to clean the amount of css files.
 
+###Reset options
+Quick options for the lazy themer choose you favorite css reset:
+![image](cssfile-reset.png)
 
+###BAT Cleanup & CSS Files Removal
+In Drupal seven the BAT naming scheme were introduced - which splits up the css files for a module into 3 diffent files:
 
+1. modulename.**base**.css   
+the bare minimum for the module to function 
+2. modulename.**admin**.css   
+the css needed for the Administration 
+3. modulename.**theme**.css   
+the css to make it look pretty
 
-##class cleanup from the markup 
+Unfortunately this was introduced very late in the Drupal7 development, so it was only the system module that really made it before the final release - oooh well the mothership takes care of business ;)
+All core css files are copied over & split up for quick cleanup.
+
+In Drupal8 theres a huge effort to get this in as clean n mean as possible.
+
+* http://drupal.org/html5
+* http://morten.dk/blog/bat-naming-scheme
+
+![image](cssfile-bat.png)
+
+####Stylestripper
+Not all modules do the BAT thing (yet!)    
+To remove a file you can instead add the path to it in the stripper (inspired by the drupal6 module: style stripper)
+
+![image](cssfile-stripping.png)
+
+### Default
+Removing all the styles can be a problem, so to make it easier  for us theres to files to look at for possible inclusion
+![image](cssfile-default.png)
+
+Default css have basic Drupal stuff in it
+
+the mothership.css file is where all css changes that can be done to the markup will be kept
+
+##Class War
+The core principle in mothership is that if a thingie (class, markup, id whatever) isn't needed don't load it, get rid of it. We want markup that we can easy read + no reason to complicate the css by x number of classes that could complicate the styles.
 
 ### &lt;body class="…
-![image](1-body.png)
+![image](1-body.png)   
+Simply click off the classes you don't wants in the body tag:   
+![image](1-body-markup.png)
+
+####Helper classes
+
+* .part-$path    
+This will add a class based on the path of the page so url: section/foo/bar would give you the class    
+**.path-section-foo-bar{ …. }**    
+* .partone-$path    
+will only print out the first part of the url 
+**.path-section{ …. }**    
+
+####Extra Removal
+You will never know what a module might wanna add to you body.   
+remove classes manually by adding each class separated by commas.
+
 
 ### &lt;div class="region …
 ![image](2-region.png)
+If you don't need the regions you can easily remove them from you theme.   
+Remove the region class + off course remove unused defined classes in the region
+![image](2-region-control.png)
 
 ### &lt;div id="block-[module]" class="block …
-![image](3-block.png)
+![image](3-block.png)   
+Options for removing the .block class and change the id to a class   
+![image](3-block-control.png)
 
 ### &lt;div id="node-[nid]" class="node …
-![image](3-block.png)
+![image](4-node.png)
+
+![image](4-node-control.png)
+
+###Fields
+_**Insert markup screenshot from 2 fields**_
+![image](fields.png)
+
+###Forms
+_**Insert markup screenshot from a form field**_
+![image](forms.png)    
+
+** Markup changes: **   
+
+* Removed the inner div from the forms:   
+`<form><div>…</div></form>` -> `<form><div>…`    
+In HTML5 theres no need for an inner div it to validate.
+
+###Menus
+_**Insert markup screenshot from menu**_
+![image](menus.png)
+** Markup changes: **   
+uses the `<nav> … </nav>` as wrappers instead of `<div class="….">`
+
+###Misc
+![image](misc.png)
+
+#Requirements
+Mothership don't have any hardcoded variable inside the tpl files.
+It simply dosn't make any sense that everything in Drupal is a block, but the tabs, messages, search, rss feeds, titles, logo & menus are all hardcoded in the page.tpl
+
+###Blockify
+page.tpl.php in mothership has cleaned out all the hardcoded variables
+To enable tabs, messages, search, rss feeds, titles, logo & menus (phew)   
+[Download Blockify ](http://drupal.org/project/blockify)
 
 
-## Drupal6 - Drupal7
-Drupal6
+
+#&lt;/&gt; markup changes
+
+### book
+markup & css cleaned up (the same as in Drupal8)
+
+* aggregator-item.tpl.php* block--blocktheme--clean.tpl.php* block--blocktheme--minimal.tpl.php* block.tpl.php* book-navigation.tpl.php* comment-wrapper.tpl.php* comment.tpl.php* eva-display-entity-view.tpl.php* field.tpl.php* html.tpl.php* menu-block-wrapper.tpl.php* node--nodeblock.tpl.php* node.tpl.php* page.tpl.php* region.tpl.php* taxonomy-term.tpl.php* views-view-list.tpl.php* views-view.tpl.php
+
+###html.tpl
+
+###page.tpl
+
+###node.tpl
+
+###comments.tpl
+
+
+
+
+
+
+#Supported modules
+###blocktheme
+
+###menu-block
+add `<nav> … </nav>`
+
+###Views
+
+
+### views eva
+
+###Display Suite
+
+### 
+
+# Drupal Versions
+###Drupal6
 only very minimal work will be done here aka security bug fixes etc. 
 if you would like to battle it out with d6 well be my guest please contact me :)
-
+###Drupal7
 All main work goes into Drupal7 as of today D7 have been out in almost a year.
+###Drupal8
+It all Depends on how much divitis & markup overload thats going into Drupalcore ;)
+Right now theres a lot of work going in to make it a lean n mean markup machine. So hopefully i can kill of 80% of the mothership … well thats the hope anyway :)
+
+Some of the things that are going into the theme layer in Drupal8 is gonna be back ported here asap 
+
 
 ## Bug Reports etc
-Just to make it clear the Mothership is NEVER to blame - its always drupals fault!
+Just to make it clear the Mothership is NEVER to blame - its always drupals fault (this haven't been confirmed 101% yet by the @drupalthruth though)   
 … if it should happend that theres actually a bug somewhere, please use the mothership issueque for this. 
 I won't answer emails about it only in the issueque
 

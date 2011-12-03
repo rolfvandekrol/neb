@@ -1,13 +1,20 @@
 
+/**
+ * @file
+ * RTL styling for the book module.
+ */
 
-.book-navigation .menu {
-  padding: 1em 3em 0 0;
-}
-
-.book-navigation .page-previous {
+/**
+ * Book navigation.
+ */
+.book-pager .previous {
   float: right;
+  text-align: right;
 }
-.book-navigation .page-up {
-  float: right;
+.book-pager .up {
+  *float: right;
 }
-
+.book-pager .next {
+  float: left;
+  text-align: left;
+}

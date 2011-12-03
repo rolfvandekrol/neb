@@ -2,8 +2,6 @@
 
 function tema_preprocess_html(&$vars, $hook) {
   //get some fancy fonts
-  drupal_add_css('http://fonts.googleapis.com/css?family=Bevan', array('group' => CSS_THEME, 'every_page' => TRUE));
-  drupal_add_css('http://fonts.googleapis.com/css?family=Petrona', array('group' => CSS_THEME, 'every_page' => TRUE));
 
   //Test to see if we have the modules we needs,
   if(!module_exists('blockify')){

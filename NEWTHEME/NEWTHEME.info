@@ -1,9 +1,10 @@
-name = Mothership
-description = The Motheship is a basetheme for cleaning up crufty markup
+name = STARTERKIT
+description = Hi im Starterkit for mothership
 screenshot = screenshot.png
 engine = phptemplate
 core = 7.x
 php = 5.2
+base theme = mothership
 
 ;-------------- F E A T U R E S -------------
 features[] = logo
@@ -37,11 +38,12 @@ regions[page_header] = Page Header (in html.tpl)
 regions[page_footer] = Page Footer (in html.tpl)
 
 ;-------------- C S S -------------
-;stylesheets[all][] = css/design.css
+stylesheets[all][] = css/style.css
 
 ;-------------- JS -------------
+scripts[] = js/script.js
 
-;-------------- Default Settings for theme-settings.php -------------
+;-------------- Default Mothership Settings  -------------
 settings[mothership_rebuild_registry] = 0
 settings[mothership_poorthemers_helper] = 0
 settings[mothership_test] = 0

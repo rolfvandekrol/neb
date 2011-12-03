@@ -1,9 +1,10 @@
 <?php
+
 /**
  * include template overwrites
  */
 
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css-alter.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.inc';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
@@ -18,8 +19,26 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
   //kpr($vars['classes_array']);
+  
+  // FAVEICON STUFF
+  global $theme;
+  $path = drupal_get_path('theme', $theme);
+  $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
+  $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
+  $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
+  
+  //selectivizr
+  $selectivizr = '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
+  $selectivizr .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
+  $selectivizr .= '<![endif]-->' . "\n";;
 
-  //---POOR THEMERS HELPER
+
+/*
+  print "<br><pre>";
+  print_r($hook);
+  print "</pre>";
+ */ 
+   //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
     //theme hook suggestions
@@ -36,8 +55,35 @@ function mothership_preprocess(&$vars, $hook) {
   }
   //---/POOR THEMERS HELPER
 
+
+
+
+
   if ($hook == "html") {
   // =======================================| HTML |========================================
+ 
+    //custom 403/404
+    $headers = drupal_get_http_header();
+    
+    if(theme_get_setting('mothership_404')){
+      if($headers['status'] == '404 Not Found'){
+        $vars['theme_hook_suggestions'][] = 'html__404';
+      }
+    }
+    
+//      if($headers['status'] == '403 Forbidden'){
+//        $vars['theme_hook_suggestions'][] = 'html__403';
+//      }
+    
+/*
+    print "<pre>";
+    print_r($headers['status']);
+    print "<br>";
+    print_r($vars['theme_hook_suggestions']);
+    print "</pre>";
+*/
+
+
     /*
     Adds reset css files that the sub themes might wanna use.
     reset.css - eric meyer ftw
@@ -71,34 +117,19 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     //add selectivizr support
-    if (theme_get_setting('mothership_selectivizr')) {
-      $vars['selectivizr'] = '<!--[if (gte IE 6)&(lte IE 8)]>';
-      $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>';
-      $vars['selectivizr'] .= '<![endif]-->';
-    }else{
-      $vars['selectivizr'] = '';
+    $vars['selectivizr'] = $selectivizr;
+
+
+    //html5 fix
+    $vars['html5iefix'] = '';
+    if(theme_get_setting('mothership_html5')) {
+      $vars['html5iefix'] .= '<!--[if lt IE 9]>';
+      $vars['html5iefix'] .= '<script src="' . drupal_get_path('theme', 'mothership') . '/js/html5.js"></script>';
+      $vars['html5iefix'] .= '<![endif]-->';
     }
 
-    //TODO: do we wanna add external libs directly in the theme settings
-    //if a user wanna add some external css file
-    //well then lets rock n roll
-    /*
-    if (theme_get_setting('mothership_css_external')) {
-      drupal_add_css('http://foobar.css', array('type' => 'external'));
-    }
 
-    if (theme_get_setting('mothership_js_external')) {
-      drupal_add_js('http://foobar.js', 'external');
-    }
-    */
-
-    //home screen icon for ipads n stuff
-    global $theme;
-    $path = drupal_get_path('theme', $theme);
-    $vars['appletouchicon'] = '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
-    $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
-    $vars['appletouchicon'] .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
-
+    $vars['appletouchicon'] = $appletouchicon;
 //    <!-- For Nokia -->
 //    <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
 
@@ -160,13 +191,31 @@ function mothership_preprocess(&$vars, $hook) {
   }
   elseif ( $hook == "page" ) {
     // =======================================| PAGE |========================================
-    // Add HTML tag name for title tag. so it can shift from a h1 to a div if its the frontpage
-    $vars['site_name_element'] = $vars['is_front'] ? 'h1' : 'div';
+
+    //Test for expected modules
+    if (theme_get_setting('mothership_expectedmodules')) {
+      //test to see if blockify is installed
+      if(!module_exists('blockify')){
+        print_r('Tema use the blockify module - so you can move the logo, title, taps where you wants to & makes the page.tpl easier to work with: <a href="http://drupal.org/project/blockify">Download</a>');
+      }
+    }
+
 
     //template suggestion: page--nodetype.tpl.php
     if ( isset($vars['node']) ){
       $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
     }
+
+    //custom 404/404
+    $headers = drupal_get_http_header();
+
+    if (isset($headers['status'])) {
+      if($headers['status'] == '404 Not Found'){
+        $vars['theme_hook_suggestions'][] = 'page__404';
+      }
+
+    }
+
 
     // Remove the block template wrapper from the main content block.
     if (!empty($vars['page']['content']['system_main']) AND
@@ -182,7 +231,7 @@ function mothership_preprocess(&$vars, $hook) {
       unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
     }
 
-    //remove the content not found yadi yadi on the frontpage
+    //remove the content not found on the frontpage
     if(theme_get_setting('mothership_frontpage_default_message')){
       unset($vars['page']['content']['system_main']['default_message']);
     }
@@ -230,76 +279,54 @@ function mothership_preprocess(&$vars, $hook) {
   }elseif ( $hook == "block" ) {
 
     // =======================================| block |========================================
-      //block-subject should be called title so it actually makes sence...
-      //  $vars['title'] = $block->subject;
-      $vars['id_block'] = "";
-      if (theme_get_setting('mothership_classes_block')) {
-        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));
-      }
-      if (theme_get_setting('mothership_classes_block_contextual')) {
-        $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));
-      }
-
-      if (!theme_get_setting('mothership_classes_block_id')) {
-        $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"';
-      }
-
-      if (theme_get_setting('mothership_classes_block_id_as_class')) {
-        $vars['classes_array'][] = $vars['block_html_id'];
-      }
-
-      if (theme_get_setting('mothership_classes_block_contexual_only')) {
-        $vars['classes_array'] ="";
-        $vars['classes_array'][] = "contextual-links-region";
-      }
-
-      //freeform css class killing
-      $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
-
-
-    //  if (theme_get_setting('mothership_classes_block_contentdiv')) {
-    //    $vars['classes_array'][] = 'block-content';
-    //  }
-
-
-      //adds title class to the block ... OMG!
-      $vars['title_attributes_array']['class'][] = 'title';
-      $vars['content_attributes_array']['class'][] = 'block-content';
-
-
-//      mothership_classes_block_contentdiv
-
-   //   $vars['title'] = $block->subject;
-
+    //block-subject should be called title so it actually makes sence...
+    //  $vars['title'] = $block->subject;
+    $vars['id_block'] = "";
+    if (theme_get_setting('mothership_classes_block')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));
+    }
+    if (theme_get_setting('mothership_classes_block_contextual')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));
     }
 
+    if (!theme_get_setting('mothership_classes_block_id')) {
+      $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"';
+    }
+
+    if (theme_get_setting('mothership_classes_block_id_as_class')) {
+      $vars['classes_array'][] = $vars['block_html_id'];
+    }
+
+    //freeform css class killing
+    $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
+
+
+    //adds title class to the block ... OMG!
+    $vars['title_attributes_array']['class'][] = 'title';
+    $vars['content_attributes_array']['class'][] = 'block-content';
+
+   }elseif ( $hook == "maintenance_page" ) {
+
+    // =======================================| maintenance page |========================================    
+
+    $vars['path'] = $path;
+    $vars['appletouchicon'] = $appletouchicon;
+    $vars['selectivizr'] = $selectivizr;
+    
+    $vars['theme_hook_suggestions'][] = 'static__maintenance';
+   }
+
 
 }
 
-function mothership_preprocess_html(&$vars) {
-  //add regions to header & footer so we can actually use these placeholders for something
-  $vars['page_header'] = drupal_render($vars['page']['page_header']);
-  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);
 
-}
-
-/*
-function mothership_preprocess_page(&$vars, $hook) {
-  //  Enough with the default message "  No front page content has been created yet. Add new content"
-  if(theme_get_setting('mothership_frontpage_default_message')){
-    unset($vars['page']['content']['system_main']['default_message']);
-  }
-}
-*/
-
-function mothership_preprocess_node(&$vars,$hook) {
-  //  krumo($vars['content']);
-}
-
-function mothership_preprocess_block(&$vars, $hook) {
-  //  krumo($vars['content']);
-}
+//function mothership_preprocess_html(&$vars) {
+//  add regions to header & footer so we can actually use these placeholders for something
+//  $vars['page_header'] = drupal_render($vars['page']['page_header']);
+//  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);
+//
+//}
 
 
 
@@ -348,6 +375,8 @@ function mothership_class_killer(&$vars){
 //  kpr($vars['classes_array']);
  // return $vars;
 }
+
+
 
 
 /**

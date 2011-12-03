@@ -1,10 +1,13 @@
 <?php
+
 /* Nukes the css from drupal core */
 function mothership_css_alter(&$css) {
+  /*
+    Clearing up the css file names so the follows the BAT definitions
+    Hopefully this will be fixed in drupalcore in a later version of Drupal7
+    all files are copied over from core
+  */
   if(theme_get_setting('mothership_nuke_css') != "mothership_css_nuke_none" ){
-    //Lets start by clearing up the css file names so the follows the BAT definitions
-    //hopefully this will be fixed in drupalcore in a later version of Drupal7
-    //all files are copied over from core so we can do whatever we wanna do with em.
     $mothership_csscore_path = drupal_get_path('theme', 'mothership') . '/css-drupalcore/';
     $mothership_cssmodules_path = drupal_get_path('theme', 'mothership') . '/css-modules/';
 
@@ -114,7 +117,8 @@ function mothership_css_alter(&$css) {
     TODO taxonomy
   */
 
-   //nuke the original css files
+   //remove all the the original css files
+   //now that they are all in out css-drupalcore
    $nuke = array(
      'modules/aggregator/aggregator.css' => FALSE,
      'modules/block/block.css' => FALSE,
@@ -152,18 +156,30 @@ function mothership_css_alter(&$css) {
     $css = array_diff_key($css, $nuke);
   }
 
-  /*
-    Removes only the theme.css files
-  */
   switch (theme_get_setting('mothership_nuke_css')) {
+
+  /*
+    Removes theme.css files
+  */
   case 'mothership_css_nuke_theme_full':
-   //Remove all the  .theme.css files
-   foreach ($css as $file => $value) {
-    if (strpos($file, '.theme.css') !== FALSE) {
-     unset($css[$file]);
+    foreach ($css as $file => $value) {
+      if (strpos($file, '.theme.css') !== FALSE) {
+        unset($css[$file]);
+      }
     }
-   }
    break;
+
+  /*
+    Remove all the  .admin.css files
+  */
+  case 'mothership_css_nuke_admin':
+    foreach ($css as $file => $value) {
+      if (strpos($file, '.admin.css') !== FALSE) {
+        unset($css[$file]);
+      }
+    }
+  break;
+
 
   /*
     Remove all the  .theme.css files
@@ -184,16 +200,8 @@ function mothership_css_alter(&$css) {
     }
     break;
 
-  /*
-    Remove all the  .admin.css files
-  */
-  case 'mothership_css_nuke_admin':
-    foreach ($css as $file => $value) {
-     if (strpos($file, '.admin.css') !== FALSE) {
-      unset($css[$file]);
-     }
-    }
-    break;
+
+
   /*
     Remove   .admin.css  &  .theme.css
   */
@@ -204,7 +212,7 @@ function mothership_css_alter(&$css) {
       unset($css[$file]);
      }
     }
-   //Remove all the  .theme.css files
+    //Remove all the  .theme.css files
     foreach ($css as $file => $value) {
      if (strpos($file, '.admin.css') !== FALSE) {
       unset($css[$file]);
@@ -260,6 +268,12 @@ function mothership_css_alter(&$css) {
 
   }
 
+
+print "<br><pre>";
+print_r(theme_get_setting('mothership_nuke_css'));
+print "<br><br>";
+print_r(array_keys($css));
+print "</pre>";  
 
 }
 

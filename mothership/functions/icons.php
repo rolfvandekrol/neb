@@ -1,5 +1,4 @@
 <?php 
-
 /*
 removes the <img> tag and puts the icon into a css class
 */

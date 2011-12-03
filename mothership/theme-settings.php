@@ -92,8 +92,8 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'fieldset',
     '#title'         => t('CSS Files'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#description'   => t('Control which CSS files that will be included'),
+    '#collapsed' => FALSE,
+    '#description'   => t('control the css loaded '),
     '#weight'=> -15
   );
 
@@ -101,7 +101,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['reset'] = array(
      '#type'          => 'fieldset',
-     '#title'         => t('Reset'),
+     '#title'         => t('Reseting'),
      '#collapsible' => TRUE,
      '#collapsed' => TRUE,
    );
@@ -143,24 +143,60 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['nuke'] = array(
     '#type'         => 'fieldset',
-    '#title'        => t('CSS Files Nuking - BAT style'),
+    '#title'        => t('Remove CSS Files'),
     '#collapsible'  => TRUE,
-    '#collapsed'    => TRUE,
+    '#collapsed'    => FALSE,
   );
 
-  $form['css']['nuke']['mothership_nuke_css'] = array(
-    '#type'          => 'radios',
-    '#options'       => array(
-                          'mothership_css_nuke_none'  => t('<strong>Peace!</strong> <br> the CSS isnt touched, just as Drupal wants it to be'),
-                          'mothership_css_nuke_theme' => t('<strong>Remove theme.css & include basic Drupal</strong> <br> Nukes all .theme.css files, but keeps these files: <br>toolbar.theme.css,shortcut.theme.css, contextual.theme.css'),
-                          'mothership_css_nuke_theme_full' => t('<strong>Remove theme.css </strong> <br>Nukes all .theme.css files'),
-                          'mothership_css_nuke_admin' => t('<strong>Remove admin.css</strong> <br>Nukes all .admin.css files'),
-                          'mothership_css_nuke_theme_admin' => t('<strong>Remove both theme.css & admin.css file</strong> <br>Nukes all .theme.css & .admin.css files'),
-                          'mothership_css_nuke_module'  => t('<strong>the small Nuke</strong> <br>Nukes ALL css files provided by any module'),
-                          'mothership_css_nuke_epic'  => t('<strong>the Epic nuke</strong><br> None shall pass! Removes every css file that comes from modules & themes'),
-                        ),
-    '#default_value' => theme_get_setting('mothership_nuke_css'),
-  );
+  
+  $form['css']['nuke']['mothership_css_nuke_contextual'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('change contextual.css & use contextual .base.css & .theme.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_contextual')
+   );
+
+
+  $form['css']['nuke']['mothership_css_nuke_theme'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove .theme.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_theme')
+   );
+  $form['css']['nuke']['mothership_css_nuke_admin'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove .admin.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_admin')
+   );
+  $form['css']['nuke']['mothership_css_nuke_module_contrib'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove .css from contrib modules (sites/all/modules/xxx etc)'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_module_contrib')
+   );
+  $form['css']['nuke']['mothership_css_nuke_module_all'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove all css from core Modules'),
+     '#description'   => t('keeps the base.css, contextual, overlay, system & toolbar'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_module_all')
+   );
+
+  $form['css']['nuke']['mothership_css_nuke_systemtoolbar'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove toolbar css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_systemtoolbar')
+   );
+  
+  $form['css']['nuke']['mothership_css_nuke_system_message'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove system.messages.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_system_message')
+   );
+
+  $form['css']['nuke']['mothership_css_nuke_system_menus'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('Remove system.menus.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_system_menus')
+   );
+  
+
 
   //remove the css thats already remove by BAT
   foreach ($css_files_from_modules as $file => $value) {
@@ -383,27 +419,23 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['block']['mothership_classes_block'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .block'),
-    '#default_value' => theme_get_setting('mothership_classes_block'),
-    '#description'   => t('Dont remove this if you using context!')
+    '#default_value' => theme_get_setting('mothership_classes_block')
   );
 
   $form['classes']['block']['mothership_classes_block_id'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove #block-$id'),
-    '#default_value' => theme_get_setting('mothership_classes_block_id')
+    '#default_value' => theme_get_setting('mothership_classes_block_id'),
+        '#description'   => t('')
   );
 
   $form['classes']['block']['mothership_classes_block_id_as_class'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Add the #block-$id as a class)'),
+    '#title'         => t('Add the #block-$id as a class instead'),
     '#default_value' => theme_get_setting('mothership_classes_block_id_as_class')
   );
 
-  $form['classes']['block']['mothership_classes_block_contexual_only'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('zap everything only keep the .contextual-links-region'),
-    '#default_value' => theme_get_setting('mothership_classes_block_contexual_only')
-  );
+
 
   $form['classes']['block']['mothership_classes_block_contentdiv'] = array(
     '#type'          => 'checkbox',
@@ -642,6 +674,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#weight'=> -10
+  );
+
+  $form['misc']['mothership_404'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('custom 404 page template'),
+    '#default_value' => theme_get_setting('mothership_404'),
+    '#description'   => t('Overwrites the html.tpl.php with html--404.tpl.php'),
   );
 
 
