@@ -3,7 +3,6 @@
 /**
  * include template overwrites
  */
-
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.inc';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
@@ -19,8 +18,14 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
   //kpr($vars['classes_array']);
-  
-  // FAVEICON STUFF
+
+/*
+  print "<br><pre>";
+  print_r($hook);
+  print "</pre>";
+*/
+   
+  //Faveicon
   global $theme;
   $path = drupal_get_path('theme', $theme);
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
@@ -32,13 +37,7 @@ function mothership_preprocess(&$vars, $hook) {
   $selectivizr .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
   $selectivizr .= '<![endif]-->' . "\n";;
 
-
-/*
-  print "<br><pre>";
-  print_r($hook);
-  print "</pre>";
- */ 
-   //---POOR THEMERS HELPER
+  //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
     //theme hook suggestions
@@ -57,8 +56,6 @@ function mothership_preprocess(&$vars, $hook) {
 
 
 
-
-
   if ($hook == "html") {
   // =======================================| HTML |========================================
  
@@ -71,25 +68,20 @@ function mothership_preprocess(&$vars, $hook) {
       }
     }
     
-//      if($headers['status'] == '403 Forbidden'){
-//        $vars['theme_hook_suggestions'][] = 'html__403';
-//      }
-    
-/*
-    print "<pre>";
-    print_r($headers['status']);
-    print "<br>";
-    print_r($vars['theme_hook_suggestions']);
-    print "</pre>";
-*/
-
+    /*
+    if(theme_get_setting('mothership_403')){
+      if($headers['status'] == '403 Forbidden'){
+        $vars['theme_hook_suggestions'][] = 'html__403';
+      }
+    }
+    */
 
     /*
-    Adds reset css files that the sub themes might wanna use.
-    reset.css - eric meyer ftw
-    reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
-    defaults.css cleans some of the defaults from drupal
-    mothership.css - adds css for use with icons & other markup fixes
+      Adds reset css files that the sub themes might wanna use.
+      reset.css - eric meyer ftw
+      reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
+      defaults.css cleans some of the defaults from drupal
+      mothership.css - adds css for use with icons & other markup fixes
     */
     if (theme_get_setting('mothership_css_reset')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
@@ -119,7 +111,6 @@ function mothership_preprocess(&$vars, $hook) {
     //add selectivizr support
     $vars['selectivizr'] = $selectivizr;
 
-
     //html5 fix
     $vars['html5iefix'] = '';
     if(theme_get_setting('mothership_html5')) {
@@ -127,7 +118,6 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['html5iefix'] .= '<script src="' . drupal_get_path('theme', 'mothership') . '/js/html5.js"></script>';
       $vars['html5iefix'] .= '<![endif]-->';
     }
-
 
     $vars['appletouchicon'] = $appletouchicon;
 //    <!-- For Nokia -->
@@ -228,7 +218,7 @@ function mothership_preprocess(&$vars, $hook) {
 
     //unset regions in the frontpage
     if (drupal_is_front_page() AND theme_get_setting('mothership_frontpage_regions')) {
-      unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
+    //  unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
     }
 
     //remove the content not found on the frontpage
@@ -246,6 +236,55 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
 
+  }elseif ( $hook == "block" ) {
+
+    // =======================================| block |========================================
+    //block-subject should be called title so it actually makes sence...
+    //  $vars['title'] = $block->subject;
+    $vars['id_block'] = "";
+    if (theme_get_setting('mothership_classes_block')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));
+    }
+
+    if (theme_get_setting('mothership_classes_block_contextual')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));
+    }
+
+    if (!theme_get_setting('mothership_classes_block_id')) {
+      $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"';
+    }
+
+    if (theme_get_setting('mothership_classes_block_id_as_class')) {
+      $vars['classes_array'][] = $vars['block_html_id'];
+    }
+
+    //freeform css class killing
+    $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
+
+
+    //adds title class to the block ... OMG!
+    $vars['title_attributes_array']['class'][] = 'title';
+    $vars['content_attributes_array']['class'][] = 'block-content';
+
+    //add a theme suggestion to block--menu.tpl so we dont have create a ton of blocks with <nav>
+    if(
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "navigation") OR 
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "main-menu") OR 
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "user-menu") OR 
+      ($vars['elements']['#block']->module == "admin" AND $vars['elements']['#block']->delta == "menu") OR 
+      $vars['elements']['#block']->module == "menu_block"
+    ){
+      $vars['theme_hook_suggestions'][] = 'block__menu';
+    }
+/*
+    print "<pre>";
+    print_r($vars['elements']['#block']->module);
+    print "<br>";
+    print_r($vars['elements']['#block']->delta);    
+    print_r($vars['theme_hook_suggestions']);
+    print "</pre>";    
+*/
   } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
 
@@ -273,40 +312,62 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_classes_node_id')) {
       $vars['id_node'] =  'node-'. $vars['nid'];
     }
-
-  //  kpr($vars['classes_array']);
-
-  }elseif ( $hook == "block" ) {
-
-    // =======================================| block |========================================
-    //block-subject should be called title so it actually makes sence...
-    //  $vars['title'] = $block->subject;
-    $vars['id_block'] = "";
-    if (theme_get_setting('mothership_classes_block')) {
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));
+   
+    //remove inline class from the ul links
+    if (theme_get_setting('mothership_classes_node_links_inline')) {
+      $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
     }
-    if (theme_get_setting('mothership_classes_block_contextual')) {
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));
-    }
+    
 
-    if (!theme_get_setting('mothership_classes_block_id')) {
-      $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"';
-    }
+  } elseif ( $hook == "comment" ) {
+    // =======================================| COMMENT |========================================
+      $vars['classes_array'][] = 'wooho';
 
-    if (theme_get_setting('mothership_classes_block_id_as_class')) {
-      $vars['classes_array'][] = $vars['block_html_id'];
-    }
+      if ($vars['elements']['#comment']->new){
+        $vars['classes_array'][] = ' comment-unpublished';
+      }
 
+      //remove inline class from the ul links
+      if (theme_get_setting('mothership_classes_node_links_inline')) {
+        $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
+      }
+      
+      
+
+  }elseif ( $hook == "field" ) {
+    // =======================================| FIELD |========================================
+    if (theme_get_setting('mothership_classes_field_field')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
+    }
+    
     //freeform css class killing
-    $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
+    $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
+  
+    //type
+    if (theme_get_setting('mothership_classes_field_type')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text-with-summary')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-ds')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-image')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-email')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-taxonomy-term-reference')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field')));
+    }
+  
+    //label
+    if (theme_get_setting('mothership_classes_field_label')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
+  
+    }
 
 
-    //adds title class to the block ... OMG!
-    $vars['title_attributes_array']['class'][] = 'title';
-    $vars['content_attributes_array']['class'][] = 'block-content';
 
-   }elseif ( $hook == "maintenance_page" ) {
+
+  }elseif ( $hook == "maintenance_page" ) {
 
     // =======================================| maintenance page |========================================    
 
@@ -315,18 +376,11 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['selectivizr'] = $selectivizr;
     
     $vars['theme_hook_suggestions'][] = 'static__maintenance';
-   }
 
 
+  }
 }
 
-
-//function mothership_preprocess_html(&$vars) {
-//  add regions to header & footer so we can actually use these placeholders for something
-//  $vars['page_header'] = drupal_render($vars['page']['page_header']);
-//  $vars['page_footer'] = drupal_render($vars['page']['page_footer']);
-//
-//}
 
 
 
@@ -335,11 +389,13 @@ Remove the standard classes from a field
 TODO remove all classes
 TODO remove the "field-name-" prefix from a styles name
 */
+/*
 function mothership_preprocess_field(&$vars, $hook) {
 
   if (theme_get_setting('mothership_classes_field_field')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
   }
+  
   //freeform css class killing
   $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
@@ -355,17 +411,18 @@ function mothership_preprocess_field(&$vars, $hook) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field')));
   }
 
-
   //label
   if (theme_get_setting('mothership_classes_field_label')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
+    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
+
   }
 
 
 }
-
+*/
 
 function mothership_class_killer(&$vars){
   $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));

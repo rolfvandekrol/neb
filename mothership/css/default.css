@@ -10,21 +10,69 @@ a:hover, a:focus {text-decoration: underline;}
 b,strong{font-weight: bold;}
 em, i{font-style: italic;}
 .active, .active-trail{font-weight:bold;}
+ul li{list-style: none}
 
+/*clearfix*/
+.cf:before,.cf:after { 
+  content:""; display:table;
+}
+.cf:after { clear:both;}
+.cf { zoom:1;}
+
+.clearfix{
+  background-color: pink;
+}
+/*
+Layout
+----------------------------*/
+body{ background-color: #fcfcfc;}
+
+body > header{
+  background-color: #f8f8f8;
+  width: 90%;
+  margin: 20px auto;
+  border-bottom: 1px solid #eee;    
+}
+body > header figure{float: left; width: 20%}  
+body > header hgroup{float: left; width: 40%}
+body > header .header{float: left;width: 40%}
+body > header .header-menu{width: 100%; float: left;}
+body > header nav ul li{ display: inline-block;}  
+body > footer{ background-color: #eee;}
+
+
+.page{
+  background-color: #fff;
+  border-left: 1px solid #eee;  
+  border-right: 1px solid #eee;    
+  width: 90%;
+  margin: 0 auto;
+}
+.sidebar-first{ width: 20%; float: left; padding:0 0 0 1%}
+.main{ width: 50%;  float: left;  border-left: 1px solid #eee; border-right: 1px solid #eee; padding:0 1%}
+.sidebar-second{ width: 20%; float: left;  padding:0 1% 0 1%}
+footer{  width: 100%;  }
+
+
+/* menu */
+nav ul{ margin: 0; padding: 0;}
+nav ul li{ padding-left: 20px;}
+nav ul li:first-child{padding-left: 0px;}
 
 /* pager */
 .pager li{float:left;}
 
 /*Tabs*/
-ul.tabs li{display:inline; padding:0 10px}
-ul.primary{padding:3px 0; margin:4px 0 ;}
-ul.primary li{}
-ul.secondary li{}
+.tabs li{display:inline; padding:0 10px}
+.primary{padding:3px 0; margin:4px 0 ;}
+.primary li{}
+.secondary li{}
 
 /* Default list for body content */
 .field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
 .field-name-body ul li {list-style: square inside}
-ul.links li{padding:0 5px 0 0;}
+.links li{display: inline;}
+
 
 /*breadcrumb*/
 .breadcrumb {margin:0;}
@@ -42,7 +90,7 @@ ul.links li{padding:0 5px 0 0;}
 fieldset{}
 label {display: inline; font-weight: bold;}
 textarea{}
-input{padding:5px; margin:5px;}
+
   input[type="radio"]     { vertical-align: middle; }
   input[type="checkbox"]  { vertical-align: middle}
     .ie7 input[type="checkbox"] { vertical-align: baseline; }
@@ -58,18 +106,8 @@ input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
 
 /* FIELDSETS & LEGEND */
-fieldset, 
-html.js fieldset.collapsible .fieldset-legend{
-}
-/*
-fieldset, 
-html.js fieldset.collapsible .fieldset-legend, 
-span.fieldset-legend{
-}
-*/
-
 fieldset legend{
-  *margin-left:-7px; 
+  .ie7 margin-left:-7px; 
   width:100%;
 }
 
@@ -78,7 +116,7 @@ a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
 
-ul li{list-style: none}
+
 
 /* 
   admin styles for blocks
@@ -94,72 +132,8 @@ ul li{list-style: none}
   text-shadow: none;
 }
 
-/*
-contextual links
-changing em a big to a more neutral state
-+ adding some defaults so the theme dosnt end up overwriting
-* ------------------------------------- */
-.contextual-links-active a.contextual-links-trigger {
-  background: url("images/gear-select.png") no-repeat scroll 2px 0 transparent!important;
-  background-color: #eee!important;
-  background-color: rgba(255, 255, 255, 0.8)!important;  
-  -moz-border-radius: 2px 2px 0 0!important;
-  -webkit-border-bottom-left-radius: 0!important;
-  -webkit-border-bottom-right-radius: 0!important;
-  border-radius: 2px 2px 0 0!important;
-}
-
-.contextual-links-wrapper ul.contextual-links {
-  background-color: #eee;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ccc;
-  display: none;
-  margin: 0;
-  padding: 0.25em 0;
-  position: absolute;
-  right: 0;
-  text-align: left;
-  top: 18px;
-  white-space: nowrap;
-  -moz-border-radius: 2px 0 2px 2px; /* LTR */
-  -webkit-border-bottom-left-radius: 2px;
-  -webkit-border-bottom-right-radius: 2px;
-  -webkit-border-top-right-radius: 0; /* LTR */
-  -webkit-border-top-left-radius: 2px; /* LTR */
-  border-radius: 2px 0 2px 2px; /* LTR */
-     -moz-box-shadow: 1px 2px 4px #333; 
-  -webkit-box-shadow: 1px 2px 4px #333; 
-          box-shadow: 1px 2px 4px #333;  
-}
-
-  div.contextual-links-wrapper ul.contextual-links li {
-    list-style: none;
-    list-style-image: none;
-    font-weight: normal;
-    margin: 0!important;
-    padding: 0!important;
-    clear:both;
-    border:none;
-    background:transparent;
-    height:auto!important;
-    float:none;
-  }
-
-  ul.contextual-links li a{
-    font-family: "Courier New", Courier, monospace!important;
-    font-size:11px!important;
-    line-height: 12px!important;
-    font-weight: normal!important;  
-  }
-  
-  ul.contextual-links li a:hover {
-    background-color: rgba(150, 150, 150, 0.8);  
-    background-color: #aaa;
-  }
-
 
 /*
-block & contextual fix 
 yup its a recap of the clearfix trick, 
 but we dont wanna go an do class="clearfix" all over again the <div blocks
 ----------------------------*/
@@ -187,42 +161,3 @@ admin toolbar fix if its used with the toolbar
 body.toolbar div#admin-toolbar.vertical {top:130px;}
 body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
 #admin-toolbar{top: 20px!important;}
-
-
-
-/* navigation
-books
-* ------------------------------------- */
-.book-navigation .menu {
-  border-top: 1px solid #D6D6D6;
-  padding: 1em 0 0 3em; /* LTR */
-}
-
-
-.book-navigation .pager {
-  border-bottom: 1px solid #D6D6D6;
-  border-top: 1px solid #D6D6D6;
-  margin:0;
-  padding: 0.5em;
-}
-
-.pager li{
-  float:left;
-  list-style-type: none;
-}
-
-.pager .page-previous {
-  float: left; /* LTR */
-  text-align: left;
-  width: 42%;
-}
-.pager .page-up {
-  float: left; /* LTR */
-  margin: 0 5%;
-  width: 4%;
-}
-.pager .page-next {
-  float: right;
-  text-align: right;
-  width: 42%;
-}

@@ -1,11 +1,12 @@
-<?php 
+<?php
 //kpr(get_defined_vars());
  ?>
 <article <?php if($classes){ ?>class="<?php print $classes;?>"<?php } ?>>
-  <?php if (isset($title_suffix['contextual_links'])): ?>
-  <?php print render($title_suffix['contextual_links']); ?>
-  <?php endif; ?>
-
+  <?php
+    if (isset($title_suffix['contextual_links'])){
+       print render($title_suffix['contextual_links']);
+   }
+  ?>
 
   <?php if ($header OR $hgroup): ?>
     <header <?php if($header_classes){ ?>class="<?php print $header_classes; ?>"<?php } ?>>
@@ -21,10 +22,10 @@
   <?php if ($top): ?>
     <?php if($top_classes){ ?><div class="<?php print $top_classes; ?>"><?php } ?>
       <?php print $top; ?>
-    <?php if($top_classes){ ?></div><?php } ?>   
+    <?php if($top_classes){ ?></div><?php } ?>
   <?php endif; ?>
 
-  <div class="clearfix">
+  <div class="content">
     <?php if ($left): ?>
       <div <?php if($left_classes){ ?>class="<?php print $left_classes; ?>"<?php } ?>>
         <?php print $left; ?>
@@ -54,4 +55,4 @@
 
 
 
- 
+

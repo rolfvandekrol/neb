@@ -1,3 +1,4 @@
+
 <?php
 // $Id: field.tpl.php,v 1.13 2010/03/26 17:14:45 dries Exp $
 
@@ -42,15 +43,15 @@
  * @see theme_field()
  */
 
-//field--image.tpl.php
 ?>
 
 <!-- field.tpl -->
+
 <div <?php if($classes) {?>class="<?php print $classes; ?>"<?php } ?><?php print $attributes; ?>>
-  <?php print $mothership_poorthemers_helper;  ?>  
+  <?php print $mothership_poorthemers_helper;  ?>
 
   <?php if (!$label_hidden) : ?>
-    <label<?php print $title_attributes; ?>><?php print $label ?>:&nbsp;</label>
+    <label<?php print $title_attributes; ?>><?php print $label ?></label>
   <?php endif; ?>
 
   <?php if(count($items) > 1 ){ ?>
@@ -62,6 +63,6 @@
   <?php }else{ ?>
       <?php foreach ($items as $delta => $item) : ?>
         <?php print render($item); ?>
-      <?php endforeach; ?>      
+      <?php endforeach; ?>
   <?php } ?>
 </div>

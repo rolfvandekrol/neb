@@ -92,7 +92,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#type'          => 'fieldset',
     '#title'         => t('CSS Files'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#description'   => t('control the css loaded '),
     '#weight'=> -15
   );
@@ -103,7 +103,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
      '#type'          => 'fieldset',
      '#title'         => t('Reseting'),
      '#collapsible' => TRUE,
-     '#collapsed' => TRUE,
+     '#collapsed' => FALSE,
    );
 
    $form['css']['reset']['mothership_css_reset'] = array(
@@ -409,13 +409,6 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
   );
 
-  $form['classes']['block']['mothership_classes_block_freeform'] = array(
-    '#type'          => 'textfield',
-    '#title'         => t('Kill the css classes:'),
-    '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
-    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
-  );
-
   $form['classes']['block']['mothership_classes_block'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .block'),
@@ -435,13 +428,20 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_block_id_as_class')
   );
 
-
-
   $form['classes']['block']['mothership_classes_block_contentdiv'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the &lt;div class=&quot;content&quot;&gt; from the block.tpl.php - Keeps it in a custom text block (block-block)'),
     '#default_value' => theme_get_setting('mothership_classes_block_contentdiv')
   );
+
+  $form['classes']['block']['mothership_classes_block_freeform'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Kill the css classes:'),
+    '#default_value' => theme_get_setting('mothership_classes_block_freeform'),
+    '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
+  );
+
+
 
   //---------------- NODE
   $form['classes']['node'] = array(
@@ -477,90 +477,47 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
 
+  $form['classes']['node']['mothership_classes_node_links_inline'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the inline class from &lt;ul class="links"&gt;'),
+    '#default_value' => theme_get_setting('mothership_classes_node_links_inline')
+  );
 
-  //field
+  
+
+
+  //--------------------- FIELD
   $form['classes']['field'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Fields'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-//classes (field.tpl.php)
 
   $form['classes']['field']['mothership_classes_field_field'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the field class '),
+    '#title'         => t('Remove .field from the field wrapper '),
     '#default_value' => theme_get_setting('mothership_classes_field_field')
   );
 
-
   $form['classes']['field']['mothership_classes_field_type'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the input field type class: .form-radio, form-checkbox '),
+    '#title'         => t('Remove type class: .field-type-text, .field-type-image ...'),
     '#default_value' => theme_get_setting('mothership_classes_field_type')
   );
 
   $form['classes']['field']['mothership_classes_field_label'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the label status class '),
+    '#title'         => t('Remove the label status class (.field-label-above, field-label-inline)'),
     '#default_value' => theme_get_setting('mothership_classes_field_label')
   );
 
   $form['classes']['field']['mothership_classes_field_freeform'] = array(
     '#type'          => 'textarea',
-    '#title'         => t('Kill the css classes:'),
+    '#title'         => t('Remove css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_field_freeform'),
     '#description'   => t('Format: foo, bar, baz <br> If you dont wanna do all the click click click, just add the classes you want to remove.'),
   );
-
-
-
-  //---------------- Views
-  $form['classes']['view'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('view classes (views-view.tpl.php)'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-  );
-  $form['classes']['view']['mothership_classes_view'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .view'),
-    '#default_value' => theme_get_setting('mothership_classes_view')
-  );
-  $form['classes']['view']['mothership_classes_view_name'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .$viewname'),
-    '#default_value' => theme_get_setting('mothership_classes_view_name')
-  );
-  $form['classes']['view']['mothership_classes_view_view_id'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
-   '#description'   => t('You dont wanna do this is your wanna use the ajax pagination - just saying'),
-    '#default_value' => theme_get_setting('mothership_classes_view_view_id')
-  );
-
-  $form['classes']['view']['mothership_classes_view_row'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .view-row'),
-    '#default_value' => theme_get_setting('mothership_classes_view_row')
-  );
-  $form['classes']['view']['mothership_classes_view_row_count'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .view-row-$count'),
-    '#default_value' => theme_get_setting('mothership_classes_view_row_count')
-  );
-  $form['classes']['view']['mothership_classes_view_row_first_last'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove .view-row-first & .view-row-last'),
-    '#default_value' => theme_get_setting('mothership_classes_view_row_first_last')
-  );
-  $form['classes']['view']['mothership_classes_view_row_rename'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
-    '#description'   => t('The reason for this is so we have .first & .last all over the site'),
-    '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
-  );
-
 
  //Form
   $form['classes']['form'] = array(
@@ -620,12 +577,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_form_required')
   );
 
+/*
   $form['classes']['form']['mothership_form_labelwrap'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Wrap checkboxes & radios into the label tag &lt;label&gt;foo &lt;item&gt;&lt;/label&gt;'),
     '#default_value' => theme_get_setting('mothership_form_labelwrap')
   );
-
+*/
 
 
   $form['classes']['menu'] = array(
@@ -667,6 +625,53 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('mothership_classes_menu_leaf')
   );
 
+
+
+  //---------------- Views
+  $form['classes']['view'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('view classes (views-view.tpl.php)'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['classes']['view']['mothership_classes_view'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view'),
+    '#default_value' => theme_get_setting('mothership_classes_view')
+  );
+  $form['classes']['view']['mothership_classes_view_name'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .$viewname'),
+    '#default_value' => theme_get_setting('mothership_classes_view_name')
+  );
+  $form['classes']['view']['mothership_classes_view_view_id'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-id-$viewname & .view-display-id-$viewname'),
+   '#description'   => t('You dont wanna do this is your wanna use the ajax pagination - just saying'),
+    '#default_value' => theme_get_setting('mothership_classes_view_view_id')
+  );
+
+  $form['classes']['view']['mothership_classes_view_row'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row')
+  );
+  $form['classes']['view']['mothership_classes_view_row_count'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row-$count'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_count')
+  );
+  $form['classes']['view']['mothership_classes_view_row_first_last'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .view-row-first & .view-row-last'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_first_last')
+  );
+  $form['classes']['view']['mothership_classes_view_row_rename'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
+    '#description'   => t('The reason for this is so we have .first & .last all over the site'),
+    '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
+  );
 
   $form['misc'] = array(
     '#type'          => 'fieldset',
