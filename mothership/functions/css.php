@@ -92,6 +92,7 @@ function mothership_css_alter(&$css) {
       //first check those css files we DONT wanna remove
       if (
         strpos($file, 'admin.') == FALSE AND
+        strpos($file, 'admin_menu') == FALSE AND
         strpos($file, '.base.css') == FALSE AND
         strpos($file, 'contextual.css') == FALSE AND
         strpos($file, 'overlay-parent.css') == FALSE AND

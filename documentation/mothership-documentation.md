@@ -44,7 +44,7 @@ Change images directly in the markup is cumbersome - its now be in css. (css/mot
 Don't do anything visually- We don't wanna have to deal with more css that isn't needed (is comes with a design.css for some common defaults but can be turned off)
 
 ### HTML5 öwesome
-Mothership is (bustard alert) now a HTL5 only theme 
+Mothership is now a HTL5 only theme 7.x-2.0
 
 
 ### Drupal8 pre ready ;)
@@ -77,13 +77,13 @@ Graphic files for the screenshots & icons* tema
 am example theme thats pretty soon it gonna be moved to its own project.
 
 
-##Get you theme to use Motherships settings
+##Mothership takes over the markup
 The Mothership is a basetheme so you can build themes on top of it & inherit all the glorious cleanup that the mothership brings you.
 
 themename.info   
 **base theme = mothership **   
 
-![image](5-info-file.png)   
+![image](files/5-info-file.png)   
 _tema.info file_
 
 ##Create a new theme with Möthership

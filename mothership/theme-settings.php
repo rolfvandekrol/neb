@@ -79,7 +79,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   $form['css']['reset'] = array(
      '#type'          => 'fieldset',
-     '#title'         => t('Reseting'),
+     '#title'         => t('CSS Reset'),
      '#collapsible' => TRUE,
      '#collapsed' => FALSE,
    );
@@ -253,16 +253,27 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     /* ----------------------------- CSS FILES DEFAULTS ----------------------------- */
     $form['css']['defaults'] = array(
        '#type'          => 'fieldset',
-       '#title'         => t('Defaults'),
+       '#title'         => t('CSS Defaults'),
        '#collapsible' => TRUE,
        '#collapsed' => TRUE,
      );
 
     $form['css']['defaults']['mothership_css_default'] = array(
        '#type'          => 'checkbox',
-       '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership-default.css</a> for basic Drupal elements', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership-default.css')),
+       '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership-default.css</a> ', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership-default.css')),
+       '#description'   => t('All the Basic Drupal elements'),
        '#default_value' => theme_get_setting('mothership_css_default')
+
      );
+
+     $form['css']['defaults']['mothership_css_layout'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Add <a href="!link" taget="_blank">mothership/css/mothership-layout.css</a> for a basic 3 column layout', array('!link' => '/' . drupal_get_path('theme', 'mothership').'/css/mothership-layout.css')),
+        '#default_value' => theme_get_setting('mothership_css_layout')
+      );
+
+
+
 
    $form['css']['defaults']['mothership_css_mothershipstyles'] = array(
       '#type'          => 'checkbox',
@@ -751,7 +762,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['misc']['mothership_viewport'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('add Viewport'),
-    '#default_value' => theme_get_setting('mothership_html5'),
+    '#default_value' => theme_get_setting('mothership_viewport'),
     '#description'   => t('meta name="viewport" content="width=device-width, initial-scale=1.0"'),
   );
 

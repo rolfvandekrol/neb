@@ -33,10 +33,6 @@ function mothership_preprocess(&$vars, $hook) {
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
-  //selectivizr
-  $selectivizr = '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
-  $selectivizr .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
-  $selectivizr .= '<![endif]-->' . "\n";;
 
   //---POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
@@ -97,6 +93,9 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_css_default')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
+    if (theme_get_setting('mothership_css_layout')) {
+      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-layout.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -14));
+    }
     if (theme_get_setting('mothership_css_mothershipstyles')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
     }
@@ -109,8 +108,15 @@ function mothership_preprocess(&$vars, $hook) {
       drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js', 'external');
     }
 
-    //add selectivizr support
-    $vars['selectivizr'] = $selectivizr;
+    //selectivizr
+    $vars['selectivizr'] = '';
+    if(theme_get_setting('mothership_selectivizr')) {
+      $vars['selectivizr'] .= '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
+      $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
+      $vars['selectivizr'] .= '<![endif]-->' . "\n";;
+
+    }
+
 
     //html5 fix
     $vars['html5iefix'] = '';

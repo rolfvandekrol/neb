@@ -1,0 +1,26 @@
+
+/*
+Layout
+----------------------------*/
+body{ background-color: #fcfcfc;}
+
+body > header{background-color: #f8f8f8; width: 90%; margin: 20px auto; border-bottom: 1px solid #eee;}
+  body > header figure{float: left; width: 20%}
+  body > header hgroup{float: left; width: 40%}
+  body > header .header{float: left;width: 40%}
+  body > header .header-menu{width: 100%; float: left;}
+  body > header nav ul li{ display: inline-block;}
+
+.page{ background-color: #fff;  border-left: 1px solid #eee;  border-right: 1px solid #eee;  width: 90%;  margin: 0 auto;}
+.sidebar-one{ width: 20%; float: left; padding:0 0 0 1%}
+.sidebar-first .main{width:75%;}
+.sidebar-second .main{width:75%;}
+.main{ width: 50%;  float: left;  border-left: 1px solid #eee; border-right: 1px solid #eee; padding:0 1%}
+.sidebar-two{ width: 20%; float: left;  padding:0 1% 0 1%}
+body > footer{background-color: #eee; width: 90%;}
+
+/* menus */
+nav ul{ margin: 0; padding: 0;}
+nav ul li{ padding-left: 20px;}
+nav ul li:first-child{padding-left: 0px;}
+
