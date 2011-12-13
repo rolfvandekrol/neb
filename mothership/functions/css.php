@@ -24,30 +24,27 @@ function mothership_css_alter(&$css) {
 */
 
 
-    //book
-    //add base
-    $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
-    $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
-    foreach ($css as $file => $value) {
-      if (strpos($file, 'book.css') !== FALSE) {
-        unset($css[$file]);
-      }
+  //book
+  //add base
+  $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
+  $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
+  foreach ($css as $file => $value) {
+    if (strpos($file, 'book.css') !== FALSE) {
+      unset($css[$file]);
     }
-
-
-
+  }
 
   //contectual
   if(theme_get_setting('mothership_css_nuke_contextual')){
     //add base
     $css = drupal_add_css($mothership_csscore_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
-    $css = drupal_add_css($mothership_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));  
+    $css = drupal_add_css($mothership_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
     foreach ($css as $file => $value) {
       if (strpos($file, 'contextual.css') !== FALSE) {
         unset($css[$file]);
       }
     }
-  
+
   }
 
   //theme.css
@@ -57,7 +54,7 @@ function mothership_css_alter(&$css) {
       if (
         //these exits in the css-core shift em to the themes version
         strpos($file, 'toolbar.theme.css') == FALSE AND
-        strpos($file, 'shortcut.theme.css') == FALSE 
+        strpos($file, 'shortcut.theme.css') == FALSE
       ) {
         if (strpos($file, '.theme.css') !== FALSE) {
           unset($css[$file]);
@@ -81,7 +78,7 @@ function mothership_css_alter(&$css) {
       //first check those css files we DONT wanna remove
       if (
         strpos($file, '.base.css') == FALSE
-      ){  
+      ){
         if (strpos($file, '/modules/') !== FALSE) {
           unset($css[$file]);
         }
@@ -89,7 +86,7 @@ function mothership_css_alter(&$css) {
     }
   }
 
-  //modules: all modules 
+  //modules: all modules
   if(theme_get_setting('mothership_css_nuke_module_all')){
     foreach ($css as $file => $value) {
       //first check those css files we DONT wanna remove
@@ -98,13 +95,13 @@ function mothership_css_alter(&$css) {
         strpos($file, '.base.css') == FALSE AND
         strpos($file, 'contextual.css') == FALSE AND
         strpos($file, 'overlay-parent.css') == FALSE AND
-        strpos($file, 'overlay-child.css') == FALSE AND        
+        strpos($file, 'overlay-child.css') == FALSE AND
         strpos($file, 'system.base.css') == FALSE AND
         strpos($file, 'system.messages.css') == FALSE AND
         strpos($file, 'system.menus.css') == FALSE AND
         strpos($file, 'system.theme.css') == FALSE AND
         strpos($file, 'shortcut.css') == FALSE AND
-        strpos($file, 'toolbar.css') == FALSE 
+        strpos($file, 'toolbar.css') == FALSE
 
       ) {
         if (strpos($file, 'modules/') !== FALSE) {
@@ -118,8 +115,8 @@ function mothership_css_alter(&$css) {
   if(theme_get_setting('mothership_css_nuke_systemtoolbar')){
     foreach ($css as $file => $value) {
       if (
-        strpos($file, 'shortcut.css') !== FALSE OR 
-        strpos($file, 'toolbar.css') !== FALSE 
+        strpos($file, 'shortcut.css') !== FALSE OR
+        strpos($file, 'toolbar.css') !== FALSE
       ) {
         unset($css[$file]);
       }
@@ -143,7 +140,16 @@ function mothership_css_alter(&$css) {
       }
     }
   }
-  
+  //system theme
+  if(theme_get_setting('mothership_css_nuke_system_theme')){
+    foreach ($css as $file => $value) {
+      if (strpos($file, 'system.theme.css') !== FALSE) {
+        unset($css[$file]);
+      }
+    }
+  }
+
+
   //vertical tabs
   if(theme_get_setting('mothership_css_nuke_vertical')){
     foreach ($css as $file => $value) {
@@ -166,30 +172,8 @@ function mothership_css_alter(&$css) {
         }
       }
     }
-
   }
 
-  //  dsm(array_keys($css));
+
 }
-
-
-/*
-Nukes the js from drupal core
-*/
-function mothership_js_alter(&$js) {
- if (theme_get_setting('mothership_nuke_js')){
-  foreach ($js as $file => $value) {
-   if (strpos($file, 'modules/') !== FALSE) {
-    unset($js[$file]);
-   }
-  }
-  foreach ($js as $file => $value) {
-   if (strpos($file, 'misc/') !== FALSE) {
-    unset($js[$file]);
-   }
-  }
- }
-}
-
-
 

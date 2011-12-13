@@ -1,6 +1,6 @@
 <?php
 /*
-* dsm($variables['template_files']);
+* kpr($variables['template_files']);
 */
 
 

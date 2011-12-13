@@ -1,14 +1,14 @@
 <?php
-//dsm(get_defined_vars());
-//dsm($theme_hook_suggestions);
-// template naming
+//kpr(get_defined_vars());
+//kpr($theme_hook_suggestions);
+//template naming
 //page--[CONTENT TYPE].tpl.php
 ?>
 <!--page.tpl.php-->
 <?php print $mothership_poorthemers_helper; ?>
 
 <header class="cf">
-  
+
   <?php if ($logo): ?>
     <figure>
     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
@@ -34,12 +34,12 @@
       <?php print render($page['header_menu']); ?>
     </div>
   <?php endif; ?>
-  
+
 </header>
-  
+
 <div class="page cf">
   <?php if ($page['sidebar_first']): ?>
-    <div class="sidebar-first">
+    <div class="sidebar-one">
     <?php print render($page['sidebar_first']); ?>
     </div>
   <?php endif; ?>
@@ -51,13 +51,12 @@
     <?php endif; ?>
     <?php print render($title_suffix); ?>
 
-
     <?php print $breadcrumb; ?>
-  
+
     <?php if ($action_links): ?>
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
-  
+
     <?php if ($tabs): ?>
       <nav class="tabs"><?php print render($tabs); ?></nav>
     <?php endif; ?>
@@ -79,7 +78,7 @@
   </div><!--/main-->
 
   <?php if ($page['sidebar_second']): ?>
-    <div class="sidebar-second">
+    <div class="sidebar-two">
       <?php print render($page['sidebar_second']); ?>
     </div>
   <?php endif; ?>

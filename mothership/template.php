@@ -3,7 +3,8 @@
 /**
  * include template overwrites
  */
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.inc';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/js.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
@@ -24,14 +25,14 @@ function mothership_preprocess(&$vars, $hook) {
   print_r($hook);
   print "</pre>";
 */
-   
+
   //Faveicon
   global $theme;
   $path = drupal_get_path('theme', $theme);
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
-  
+
   //selectivizr
   $selectivizr = '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
   $selectivizr .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
@@ -58,16 +59,16 @@ function mothership_preprocess(&$vars, $hook) {
 
   if ($hook == "html") {
   // =======================================| HTML |========================================
- 
+
     //custom 403/404
     $headers = drupal_get_http_header();
-    
+
     if(theme_get_setting('mothership_404')){
       if($headers['status'] == '404 Not Found'){
         $vars['theme_hook_suggestions'][] = 'html__404';
       }
     }
-    
+
     /*
     if(theme_get_setting('mothership_403')){
       if($headers['status'] == '403 Forbidden'){
@@ -94,7 +95,7 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     if (theme_get_setting('mothership_css_default')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
+      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
     if (theme_get_setting('mothership_css_mothershipstyles')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
@@ -217,9 +218,9 @@ function mothership_preprocess(&$vars, $hook) {
 
 
     //unset regions in the frontpage
-    if (drupal_is_front_page() AND theme_get_setting('mothership_frontpage_regions')) {
+//    if (drupal_is_front_page() AND theme_get_setting('mothership_frontpage_regions')) {
     //  unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
-    }
+  //  }
 
     //remove the content not found on the frontpage
     if(theme_get_setting('mothership_frontpage_default_message')){
@@ -269,10 +270,10 @@ function mothership_preprocess(&$vars, $hook) {
 
     //add a theme suggestion to block--menu.tpl so we dont have create a ton of blocks with <nav>
     if(
-      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "navigation") OR 
-      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "main-menu") OR 
-      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "user-menu") OR 
-      ($vars['elements']['#block']->module == "admin" AND $vars['elements']['#block']->delta == "menu") OR 
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "navigation") OR
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "main-menu") OR
+      ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "user-menu") OR
+      ($vars['elements']['#block']->module == "admin" AND $vars['elements']['#block']->delta == "menu") OR
       $vars['elements']['#block']->module == "menu_block"
     ){
       $vars['theme_hook_suggestions'][] = 'block__menu';
@@ -281,9 +282,9 @@ function mothership_preprocess(&$vars, $hook) {
     print "<pre>";
     print_r($vars['elements']['#block']->module);
     print "<br>";
-    print_r($vars['elements']['#block']->delta);    
+    print_r($vars['elements']['#block']->delta);
     print_r($vars['theme_hook_suggestions']);
-    print "</pre>";    
+    print "</pre>";
 */
   } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
@@ -312,12 +313,27 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_classes_node_id')) {
       $vars['id_node'] =  'node-'. $vars['nid'];
     }
-   
-    //remove inline class from the ul links
+
+    /*
+    remove class from the ul that holds the links
+    <ul class="inline links">
+    this is generated in the node_build_content() function in the node.module
+    */
     if (theme_get_setting('mothership_classes_node_links_inline')) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
     }
-    
+
+    if (theme_get_setting('mothership_classes_node_links_links')) {
+      $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('links')));
+    }
+    // TODO: add a field to push in whatever class names we want to
+    // $vars['content']['links']['#attributes']['class'][] = "hardrock hallelulia";
+
+    //  remove the class attribute it its empty
+    if(!$vars['content']['links']['#attributes']['class']){
+      unset($vars['content']['links']['#attributes']['class']);
+    }
+
 
   } elseif ( $hook == "comment" ) {
     // =======================================| COMMENT |========================================
@@ -331,19 +347,19 @@ function mothership_preprocess(&$vars, $hook) {
       if (theme_get_setting('mothership_classes_node_links_inline')) {
         $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
       }
-      
-      
+
+
 
   }elseif ( $hook == "field" ) {
     // =======================================| FIELD |========================================
     if (theme_get_setting('mothership_classes_field_field')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
     }
-    
+
     //freeform css class killing
     $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
-  
+
     //type
     if (theme_get_setting('mothership_classes_field_type')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text')));
@@ -354,14 +370,14 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-taxonomy-term-reference')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field')));
     }
-  
+
     //label
     if (theme_get_setting('mothership_classes_field_label')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
-  
+
     }
 
 
@@ -369,12 +385,12 @@ function mothership_preprocess(&$vars, $hook) {
 
   }elseif ( $hook == "maintenance_page" ) {
 
-    // =======================================| maintenance page |========================================    
+    // =======================================| maintenance page |========================================
 
     $vars['path'] = $path;
     $vars['appletouchicon'] = $appletouchicon;
     $vars['selectivizr'] = $selectivizr;
-    
+
     $vars['theme_hook_suggestions'][] = 'static__maintenance';
 
 
@@ -395,7 +411,7 @@ function mothership_preprocess_field(&$vars, $hook) {
   if (theme_get_setting('mothership_classes_field_field')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
   }
-  
+
   //freeform css class killing
   $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));

@@ -1,5 +1,5 @@
 /*
-Default styles
+Mothership Default Drupal Styles
 * ------------------------------------- */
 a {outline: none;}
 a img {border:none;}
@@ -12,55 +12,42 @@ em, i{font-style: italic;}
 .active, .active-trail{font-weight:bold;}
 ul li{list-style: none}
 
-/*clearfix*/
-.cf:before,.cf:after { 
+/* clearfix */
+.cf:before,.cf:after {
   content:""; display:table;
 }
 .cf:after { clear:both;}
 .cf { zoom:1;}
 
-.clearfix{
-  background-color: pink;
-}
 /*
 Layout
 ----------------------------*/
 body{ background-color: #fcfcfc;}
 
-body > header{
-  background-color: #f8f8f8;
-  width: 90%;
-  margin: 20px auto;
-  border-bottom: 1px solid #eee;    
-}
-body > header figure{float: left; width: 20%}  
-body > header hgroup{float: left; width: 40%}
-body > header .header{float: left;width: 40%}
-body > header .header-menu{width: 100%; float: left;}
-body > header nav ul li{ display: inline-block;}  
-body > footer{ background-color: #eee;}
+body > header{background-color: #f8f8f8; width: 90%; margin: 20px auto; border-bottom: 1px solid #eee;}
+  body > header figure{float: left; width: 20%}
+  body > header hgroup{float: left; width: 40%}
+  body > header .header{float: left;width: 40%}
+  body > header .header-menu{width: 100%; float: left;}
+  body > header nav ul li{ display: inline-block;}
 
-
-.page{
-  background-color: #fff;
-  border-left: 1px solid #eee;  
-  border-right: 1px solid #eee;    
-  width: 90%;
-  margin: 0 auto;
-}
-.sidebar-first{ width: 20%; float: left; padding:0 0 0 1%}
+.page{ background-color: #fff;  border-left: 1px solid #eee;  border-right: 1px solid #eee;  width: 90%;  margin: 0 auto;}
+.sidebar-one{ width: 20%; float: left; padding:0 0 0 1%}
+.sidebar-first .main{width:75%;}
+.sidebar-second .main{width:75%;}
 .main{ width: 50%;  float: left;  border-left: 1px solid #eee; border-right: 1px solid #eee; padding:0 1%}
-.sidebar-second{ width: 20%; float: left;  padding:0 1% 0 1%}
-footer{  width: 100%;  }
+.sidebar-two{ width: 20%; float: left;  padding:0 1% 0 1%}
+body > footer{background-color: #eee; width: 90%;}
 
-
-/* menu */
+/* menus */
 nav ul{ margin: 0; padding: 0;}
 nav ul li{ padding-left: 20px;}
 nav ul li:first-child{padding-left: 0px;}
 
-/* pager */
-.pager li{float:left;}
+/* Default list for body content */
+.field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
+.field-name-body ul li {list-style: square inside}
+
 
 /*Tabs*/
 .tabs li{display:inline; padding:0 10px}
@@ -68,17 +55,15 @@ nav ul li:first-child{padding-left: 0px;}
 .primary li{}
 .secondary li{}
 
-/* Default list for body content */
-.field-name-body ol, .field-name-body ul {margin: 0 0 0 10px;}
-.field-name-body ul li {list-style: square inside}
-.links li{display: inline;}
+/* pager */
+.pager li{display:inline-block;}
 
 
 /*breadcrumb*/
 .breadcrumb {margin:0;}
   ul.breadcrumb li{display:inline; margin:0 0 0 10px;}
 
-/* 
+/*
   FORMS
 * ------------------------------------- */
 .form-type-textfield{}
@@ -90,35 +75,53 @@ nav ul li:first-child{padding-left: 0px;}
 fieldset{}
 label {display: inline; font-weight: bold;}
 textarea{}
-
+input{}
   input[type="radio"]     { vertical-align: middle; }
   input[type="checkbox"]  { vertical-align: middle}
-    .ie7 input[type="checkbox"] { vertical-align: baseline; }
+  .ie7 input[type="checkbox"] { vertical-align: baseline; }
   input[type="file"]     { vertical-align: middle; }
   input[type="search"]   {-webkit-appearance: textfield;}
-
 form small, form .description{font-size:12px; color:#444; display:block; text-align: left;}
 
+.date-no-float div{display:inline-block;}
+/* */
 .form-field-required {}
-.form-field-required:after{content:" * "}  
+.form-field-required:after{content:" * "}
 
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
 
 /* FIELDSETS & LEGEND */
 fieldset legend{
-  .ie7 margin-left:-7px; 
+  .ie7 margin-left:-7px;
   width:100%;
 }
 
-html.js fieldset.collapsible .fieldset-legend, 
+html.js fieldset.collapsible .fieldset-legend,
 a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
 
+/*
+Block clearfix - yup its a recap of the clearfix trick, no reason to do class="clearfix" all over
+----------------------------*/
+.block .content:before,.block .content:after {
+  content:"";
+  display:table;
+}
+.block .content:after { clear:both;}
+.block .content { zoom:1;}
 
 
-/* 
+/*
+admin toolbar fix if its used with the toolbar
+----------------------------*/
+body.toolbar div#admin-toolbar.vertical {top:130px;}
+body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
+#admin-toolbar{top: 20px!important;}
+
+
+/*
   admin styles for blocks
 * ------------------------------------- */
 .page-admin-structure-block-demo .block-region {
@@ -132,32 +135,4 @@ a:link.fieldset-title, .fieldset-legend{
   text-shadow: none;
 }
 
-
-/*
-yup its a recap of the clearfix trick, 
-but we dont wanna go an do class="clearfix" all over again the <div blocks
-----------------------------*/
-.block .content:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-/* IE7 */
-*:first-child + html .block {
-  min-height: 1%;
-}
-
-
-/*
-MODULES
-----------------------------*/
-
-/*
-admin toolbar fix if its used with the toolbar
-----------------------------*/
-body.toolbar div#admin-toolbar.vertical {top:130px;}
-body.toolbar-drawer div#admin-toolbar.vertical {top:66px;}
-#admin-toolbar{top: 20px!important;}
+.clearfix{background:pink;}

@@ -35,7 +35,7 @@
    <h1>Epic Fail! 404</h1>
   
     <p>
-      göggle check? 
+      This wasnt the nodes you were looking for
     </p>
     <script>
       var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),

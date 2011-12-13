@@ -9,29 +9,75 @@
                                                                            \/_/
 
 #the Mothership
-The mothership theme is a basetheme that once and for all will drop Drupals obscure love for wrapping everything into divs & slapping on 3 css classes everywhere its possible.
-This theme will not make your site look neat - but it will clean up the html that Drupal provides out of the box, give you tools so you can remove the css classes that you dont need, without using countless of hours to clean up.
+The mothership is a HTML5 basetheme that drop Drupals obscure love for wrapping everything into 2 divs & slapping on 3 css classes everywhere its possible.   
+This theme will NOT make your site look neat - but it will clean up the markup Drupal provides out of the box, provide settings to remove css classes in the markup.   
+This should make you daily work as a frontend developer much easier, and remove a lot of the frustration in plowing through the ton of unused css & markup.
 
-If you really like the markup & css options that Drupal Provides - This theme is probably not for you, and thats perfectly ok, this theme won't do anything for you.
-If you on the other hand cares about the markup & css This could be a good start solution.
+If you really like the markup & css options that Drupal Provides - This theme is probably not for you, and thats perfectly ok, this theme won't do anything for you.   
+If you on the other hand cares about clean markup & css -  This could be a good solution.
 
-## Basic concept
+# Basic Mothership concepts:
+The mothership dosnt want to be the theme for everything & everybody - This is a much a proof of concept & playground to push the limits & ways that we define the Drupal Themes.
 
-* Remove div wrappers   
-if you are tired of the   
-`<div><div><div><div><div><div><div><div>huh….`
-* Remove class overload   
-`<div class="baseclass anotherbaseclass yetanotherclass andonemorejustbecausewemightneedit "`
-* Remove css file overload   
-* Removal of hardcoded image files
+
+### Fixing the Divitis 
+`<div><div><div><div><div><div><div><div>$foo….`
+I didn't ask for 3 div wrappers so don't add them Drupal
+
+### Class war   
+No reason to load in classes that isn't need.
+`<div class="baseclass anotherbaseclass yetanotherclass andonemorejustbecausewemightneedit "` 
+That makes it even worse to read the markup & gives us endless amount of css overwriting
+settings are provided to remove those that are not needed.
+Saves us from surprices later in the process. if a module changes its css
+
+### .css file overload 
+Be nice to the web (and the mobile's to) - don't load css files, that the theme don't need & will be overwriting anyways.  
+Control which css files should be used. All the Way down from Drupal core.
+
+### Hardcoded image files
 Drupal7 still comes with harcoded image files (omgwtfbbq)  
 `<img src="wtf-is-this.png">`   
-Change images directly in the markup is off course not ideal - it should be in the css instead.
-* Fix everything thats wrong (™)   
+Change images directly in the markup is cumbersome - its now be in css. (css/mothership.css)
+
+### No visual fluff
+Don't do anything visually- We don't wanna have to deal with more css that isn't needed (is comes with a design.css for some common defaults but can be turned off)
+
+### HTML5 öwesome
+Mothership is (bustard alert) now a HTL5 only theme 
+
+
+### Drupal8 pre ready ;)
+As the Drupal8 platform is being developed & discussed 
+The mothership will look for better implementations & will add them as we see fit.
+
+### Easy CSS resets. 
+Don't bring you own ;)  3 of the standard resets are included: the Eric meyer reset.css, html5 Doctor's reset & the normalizer outta the box.
+
+### Tons of Settings : /
+So we don't end up breaking backwards compability with existing modules & functionality. - All the css fixes are quickly undone by changing the settings.
+That means theres a lot of settings :(
+
+
+###Plays well with others
+Motherships role & concept is not to make it Pretty to Look at but pretty to work with.
+
+### Fix everything thats wrong (™)   
 this is a tool for theme development for those that really cares about the markup & not quick n "easy" solutions & at the same time digg through the drupalcore,clean up so it can be easy for new frontend developers to use drupal & less wtf why is that div doing there.    
 
+##Whats in there:
 
-#Installation
+* documentation   
+This file* mothership   
+the mothership base theme - where the cleanup happens* mothershipstark   
+For  testing purpose - yup gonna move it out someday* NEWTHEME   
+a Vanilla theme based on mothership* README.txt
+* resources   
+Graphic files for the screenshots & icons* tema    
+am example theme thats pretty soon it gonna be moved to its own project.
+
+
+##Get you theme to use Motherships settings
 The Mothership is a basetheme so you can build themes on top of it & inherit all the glorious cleanup that the mothership brings you.
 
 themename.info   
@@ -40,8 +86,16 @@ themename.info
 ![image](5-info-file.png)   
 _tema.info file_
 
-#Set up a new theme
+##Create a new theme with Möthership
+install the mothership in you theme all folder  **sites/all/themes/mothership/**
+alternative install it in the **sites/[sitename]/themes/mothership**
 
+1. copy the NEWTHEME folder **mothership/NEWTHEME**
+2. move it to the site folder **sites/[sitename]/themes/NEWTHEME**
+4. Rename from NEWTHEME to what-ever-you-want--the-theme-to-be-called both folder & .info + the content
+3. Do the Raji :)
+
+The theme now uses the default settings that mothership uses. 
 
 #Settings
 The heart of the mothership is the markup & css cleaning.  
@@ -67,18 +121,6 @@ Thank you zen theme for providing this cool little feature
 **.test class**   
 It can be very practical during developerment to have a test class in the body tag for showing a grid.png etc, so you can quickly remove it again if so needed.   
 body.test{ background:pink }
-
-
-##HTML5 Settings
-![image](7-html5.png) 
-**HTML5**
-This will change the &lt;!doctype&gt; and make sure that we load a shiv (html5.js) so lesser browsers can understand nav, header, footer etc. 
-
-**viewport**    
-Info about the viewport:
-
-* http://www.html5rocks.com/en/mobile/mobifying.html#toc-meta-viewport
-* http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html
 
 
 
@@ -182,27 +224,37 @@ Options for removing the .block class and change the id to a class
 ![image](4-node-control.png)
 
 ###Fields
-_**Insert markup screenshot from 2 fields**_
+_**Insert markup screenshot from the fields**_
 ![image](fields.png)
 
 ###Forms
 _**Insert markup screenshot from a form field**_
 ![image](forms.png)    
+      
 
 ** Markup changes: **   
 
 * Removed the inner div from the forms:   
 `<form><div>…</div></form>` -> `<form><div>…`    
-In HTML5 theres no need for an inner div it to validate.
+In HTML5 theres no need for an inner div it to validate (yeah)
 
 ###Menus
 _**Insert markup screenshot from menu**_
 ![image](menus.png)
-** Markup changes: **   
+** Markup changes: **    
 uses the `<nav> … </nav>` as wrappers instead of `<div class="….">`
 
 ###Misc
 ![image](misc.png)
+
+**viewport**    
+More info about the viewport:
+
+* [html5 Rocs](http://www.html5rocks.com/en/mobile/mobifying.html#toc-meta-viewport)
+* [Apple developer](http://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html)
+
+
+
 
 #Requirements
 Mothership don't have any hardcoded variable inside the tpl files.
@@ -217,10 +269,15 @@ To enable tabs, messages, search, rss feeds, titles, logo & menus (phew)
 
 #&lt;/&gt; markup changes
 
-### book
-markup & css cleaned up (the same as in Drupal8)
+###Menus 
+all menus are wrapped in a &lt;nav&gt;  instead of the &lt;div&gt;
+including the awesome menu-block module
 
-* aggregator-item.tpl.php* block--blocktheme--clean.tpl.php* block--blocktheme--minimal.tpl.php* block.tpl.php* book-navigation.tpl.php* comment-wrapper.tpl.php* comment.tpl.php* eva-display-entity-view.tpl.php* field.tpl.php* html.tpl.php* menu-block-wrapper.tpl.php* node--nodeblock.tpl.php* node.tpl.php* page.tpl.php* region.tpl.php* taxonomy-term.tpl.php* views-view-list.tpl.php* views-view.tpl.php
+### Book
+markup & css cleaned up (the same as in Drupal8)
+* book-navigation.tpl.php
+
+* aggregator-item.tpl.php* block.tpl.php* comment-wrapper.tpl.php* comment.tpl.php* eva-display-entity-view.tpl.php* field.tpl.php* html.tpl.php* menu-block-wrapper.tpl.php* node--nodeblock.tpl.php* node.tpl.php* page.tpl.php* region.tpl.php* taxonomy-term.tpl.php* views-view-list.tpl.php* views-view.tpl.php
 
 ###html.tpl
 
@@ -262,10 +319,49 @@ Right now theres a lot of work going in to make it a lean n mean markup machine.
 
 Some of the things that are going into the theme layer in Drupal8 is gonna be back ported here asap 
 
+##known Problems
+
+###Mothership Dominates LESS module
+Mothership doesn't make sweet love to the LESS module. They both do their magick with the $css and there can only be one actually mothership brutly overwrites whatever the less module wanna do 
+
+This is because LESS module wanna compile the .less files into .css files as the $css is built & mothership tries to clean out all the crap *ahem*
+
+A workaround is to begin to do the compiling locally with code kit (was less.app before) or man up and compile it with the terminal & ruby
+… or join the grownups and begin to use SASS & compass - which also is compiled locally before added to you css 
+
 
 ## Bug Reports etc
-Just to make it clear the Mothership is NEVER to blame - its always drupals fault (this haven't been confirmed 101% yet by the @drupalthruth though)   
+Just to make it clear the Mothership is **NEVER** to blame!   
+Its always Drupals fault (this haven't been confirmed 101% yet by the @drupalthruth though)   
 … if it should happend that theres actually a bug somewhere, please use the mothership issueque for this. 
 I won't answer emails about it only in the issueque
 
 [Mothership issues](http://drupal.org/project/issues/mothership)
+
+
+## Todo
+This is a list of things that are on the table for the next couple of releases.
+other things that are missing post it in the [issueque](http://drupal.org/project/issues/mothership)
+* taxonomy classnames in <body> 
+* Clearfix removal to the max
+* split out TEMA into its own separate theme
+* js file removing options as we do the css files
+* Unified Pagers
+* Panels support 
+* Breadcrumb setting
+* Feeds love
+* css/style-[conntent-type].css file suggestion
+* Better documentation
+
+
+
+#History
+The mothership project was startet based on sheer frustration of the huge amount of markup & css that drupal puts outta the box.
+
+
+
+
+
+
+
+
