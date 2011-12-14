@@ -2,11 +2,10 @@
 /**
  * Contextual links regions.
  */
-
 .contextual-links-region-active {
-  outline: #666 dashed 1px;
+  outline: #606 dashed 1px;
   background:#eee;
-  background:rgba(250,250,250,.4);  
+  background:rgba(250,250,250,.4);
 }
 
 /**
@@ -15,6 +14,8 @@
 a.contextual-links-trigger {
   background: #fff url(../images/gear-select.png) no-repeat 2px 0;
   border: 1px solid transparent;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   display: none;
   height: 18px;
   margin: 0;
@@ -23,16 +24,12 @@ a.contextual-links-trigger {
   text-indent: 34px; /* LTR */
   width: 28px;
   overflow: hidden;
-  -khtml-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
 }
 a.contextual-links-trigger:hover,
-div.contextual-links-active a.contextual-links-trigger {
+.contextual-links-active a.contextual-links-trigger {
   background-position: 2px -18px;
 }
-div.contextual-links-active a.contextual-links-trigger {
+.contextual-links-region .contextual-links-active .contextual-links-trigger {
   background-position: 2px -18px;
   background-color: #fff;
   border-color: #ccc;
@@ -40,11 +37,10 @@ div.contextual-links-active a.contextual-links-trigger {
   position: relative;
   z-index: 1;
   -moz-border-radius: 4px 4px 0 0;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
   border-radius: 4px 4px 0 0;
 }
-div.contextual-links-wrapper ul.contextual-links {
+
+.contextual-links-region .contextual-links-wrapper .contextual-links {
   background-color: #fff;
   border: 1px solid #ccc;
   display: none;
@@ -56,30 +52,30 @@ div.contextual-links-wrapper ul.contextual-links {
   top: 18px;
   white-space: nowrap;
   -moz-border-radius: 4px 0 4px 4px; /* LTR */
-  -webkit-border-bottom-left-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  -webkit-border-top-right-radius: 0; /* LTR */
-  -webkit-border-top-left-radius: 4px; /* LTR */
   border-radius: 4px 0 4px 4px; /* LTR */
 }
 
 
-ul.contextual-links li {
-  line-height: 100%;
+.contextual-links-region .contextual-links-wrapper .contextual-links li {
+  float:none;
+  height:auto;
+  line-height: normal;
   list-style: none;
   list-style-image: none;
   margin: 0;
   padding: 0;
 }
-div.contextual-links-wrapper a {
-  text-decoration: none;
-}
-ul.contextual-links li a {
-  color: #333 !important;
+
+.contextual-links-region .contextual-links-wrapper .contextual-links li a {
+  background:#ddd;
+  color: #333;
   display: block;
   margin: 0.25em 0;
   padding: 0.25em 1em 0.25em 0.5em;
+  font-size:11px;
+  font-weight:normal;
+  text-decoration: none;
 }
-ul.contextual-links li a:hover {
+.contextual-links-region .contextual-links-wrapper .contextual-links li a:hover {
   background-color: #bfdcee;
 }

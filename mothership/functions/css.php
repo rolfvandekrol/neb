@@ -25,7 +25,6 @@ function mothership_css_alter(&$css) {
 
 
   //book
-  //add base
   $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
   $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
   foreach ($css as $file => $value) {

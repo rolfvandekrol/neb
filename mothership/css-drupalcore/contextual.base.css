@@ -29,7 +29,7 @@ html.js div.contextual-links-wrapper {
 }
 
 .contextual-links-region:hover a.contextual-links-trigger,
-div.contextual-links-active a.contextual-links-trigger,
-div.contextual-links-active ul.contextual-links {
+.contextual-links-active a.contextual-links-trigger,
+.contextual-links-active .contextual-links {
   display: block;
 }

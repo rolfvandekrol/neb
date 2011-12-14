@@ -16,12 +16,12 @@ This should make you daily work as a frontend developer much easier, and remove 
 If you really like the markup & css options that Drupal Provides - This theme is probably not for you, and thats perfectly ok, this theme won't do anything for you.   
 If you on the other hand cares about clean markup & css -  This could be a good solution.
 
-# Basic Mothership concepts:
-The mothership dosnt want to be the theme for everything & everybody - This is a much a proof of concept & playground to push the limits & ways that we define the Drupal Themes.
+# Basic Mothership plan:
+The mothership dosnt want to be the theme for everything & everybody - This is a much a proof of concept & playground to push the limits & ways that we build Drupal Themes.
 
 
 ### Fixing the Divitis 
-`<div><div><div><div><div><div><div><div>$foo….`
+`<div><div><div><div><div><div><div><div>$foo….`   
 I didn't ask for 3 div wrappers so don't add them Drupal
 
 ### Class war   
@@ -44,14 +44,13 @@ Change images directly in the markup is cumbersome - its now be in css. (css/mot
 Don't do anything visually- We don't wanna have to deal with more css that isn't needed (is comes with a design.css for some common defaults but can be turned off)
 
 ### HTML5 öwesome
-Mothership is now a HTL5 only theme 7.x-2.0
-
+Mothership is now (since 7.x-2.0) a HTL5 only theme
 
 ### Drupal8 pre ready ;)
 As the Drupal8 platform is being developed & discussed 
 The mothership will look for better implementations & will add them as we see fit.
 
-### Easy CSS resets. 
+### Quick & easy CSS resets. 
 Don't bring you own ;)  3 of the standard resets are included: the Eric meyer reset.css, html5 Doctor's reset & the normalizer outta the box.
 
 ### Tons of Settings : /
@@ -60,7 +59,7 @@ That means theres a lot of settings :(
 
 
 ###Plays well with others
-Motherships role & concept is not to make it Pretty to Look at but pretty to work with.
+Motherships role is not to make it Pretty to Look at but pretty to work with - should work 
 
 ### Fix everything thats wrong (™)   
 this is a tool for theme development for those that really cares about the markup & not quick n "easy" solutions & at the same time digg through the drupalcore,clean up so it can be easy for new frontend developers to use drupal & less wtf why is that div doing there.    
@@ -83,10 +82,10 @@ The Mothership is a basetheme so you can build themes on top of it & inherit all
 themename.info   
 **base theme = mothership **   
 
-![image](files/5-info-file.png)   
+![image](5-info-file.png)   
 _tema.info file_
 
-##Create a new theme with Möthership
+##Create a "new theme"
 install the mothership in you theme all folder  **sites/all/themes/mothership/**
 alternative install it in the **sites/[sitename]/themes/mothership**
 
@@ -99,9 +98,9 @@ The theme now uses the default settings that mothership uses.
 
 #Settings
 The heart of the mothership is the markup & css cleaning.  
-Lets be honest here, if every class & wrapper div was removed it would end up with basic functionality that didn't work. 
+If every class & wrapper div was removed it would end up with a lot of Drupals basic functionality that now simply didn't work. 
 You would have to do a lot of work every time you had to identify any element on the site (actually back tracking into the center of drupal & you would never  come back from) 
-So to make it a bit easier for me (and hopefully also you) to remove, or add, class's & markup that we might need all this is done in the settings.
+So to make it a bit easier to remove, or add, class's & markup that we might need all this is done in the settings.
 
 These settings will be global in you drupal theme, but as always you can overwrite these with theme functions or .tpl files. 
 Look in the theme suggestion for those (more about that in the theme development settings)
@@ -124,7 +123,7 @@ body.test{ background:pink }
 
 
 
-##Adding Libraries for browserfixing
+##External Libraries
 ![image](8-libraries.png)
 
 Quick & easy loading of libraries that can be very helpfull
@@ -140,12 +139,9 @@ Its loaded from a CDN so we don't have to carry it around.
 
 
 ##CSS Files 
-A Drupal site usually have many css files (its probably only Drupal sites that breaks the 31 css file max in ie8 & lower)
-Usually a Module comes with a couple of files containing defaults & other goodies, its not always that the default css is something that the theme needs.    
-It can be a "little bit" annoying to use time & resources to overwrite each modules css, just to keep you theme clean. 
-Not to mention the unpleasant surprise if a module comes with badly writing css 
+A Drupal site usually have many css files (its probably only Drupal sites that breaks the 31 css file max in ie8 & lower) 
+Usually a Module comes with a couple of files containing defaults & other goodies, its not always that the default css is something that the theme needs.   It can be a "little bit" annoying to use time & resources to overwrite each modules css, just to keep you theme clean. Not to mention the unpleasant surprise if a module comes with badly writing css.
 
-Therefor the Mothership comes with a couple of tools to clean the amount of css files.
 
 ###Reset options
 Quick options for the lazy themer choose you favorite css reset:
@@ -162,14 +158,19 @@ the css needed for the Administration
 the css to make it look pretty
 
 Unfortunately this was introduced very late in the Drupal7 development, so it was only the system module that really made it before the final release - oooh well the mothership takes care of business ;)
-All core css files are copied over & split up for quick cleanup.
+core css files are copied over & split up for quick cleanup.
 
-In Drupal8 theres a huge effort to get this in as clean n mean as possible.
+In Drupal8 theres a huge effort to get this in as clean n mean as possible. for 
 
-* http://drupal.org/html5
-* http://morten.dk/blog/bat-naming-scheme
+* [Drupal HTML5 landing page](http://drupal.org/html5)
+* [mortendk's post about BAT](http://morten.dk/blog/bat-naming-scheme)
 
 ![image](cssfile-bat.png)
+
+In the future more core modules will be split and added to the mothership
+
+* book
+* contextual
 
 ####Stylestripper
 Not all modules do the BAT thing (yet!)    
