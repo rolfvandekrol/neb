@@ -3,7 +3,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   /* ----------------------------- DEVELOPMENT ----------------------------- */
 $form['mothership_info'] = array(
-  '#prefix' => '<h2>The M&#9881;thership</h2> ',
+  '#prefix' => '<h3>M&#9881;thership</h3> ',
   '#weight'=> -20
 );
 
