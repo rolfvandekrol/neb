@@ -2,9 +2,15 @@
 function mothership_form_system_theme_settings_alter(&$form, $form_state) {
 
   /* ----------------------------- DEVELOPMENT ----------------------------- */
+$form['mothership_info'] = array(
+  '#prefix' => '<h2>The M&#9881;thership</h2> ',
+  '#weight'=> -20
+);
+
+
   $form['development'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Theme Development'),
+    '#title'         => '<b>&#9874;</b> ' . t('Theme Development'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#weight'=> -20
@@ -35,7 +41,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //libaries stuff
   $form['Libraries'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('External Libraries'),
+    '#title'         => '&#10006; ' .t('External JS Libraries'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#description'   => t('External libs quickly into you theme - hurray for CDN'),
@@ -68,7 +74,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   /* ----------------------------- CSS FILES  ----------------------------- */
   $form['css'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('CSS Files'),
+    '#title'         => '&#9985; ' . t('.CSS Files'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#description'   => t('control the css loaded '),
@@ -253,9 +259,9 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
     /* ----------------------------- CSS FILES DEFAULTS ----------------------------- */
     $form['css']['defaults'] = array(
        '#type'          => 'fieldset',
-       '#title'         => t('CSS Defaults'),
+       '#title'         => t('CSS Default files'),
        '#collapsible' => TRUE,
-       '#collapsed' => TRUE,
+       '#collapsed' => FALSE,
      );
 
     $form['css']['defaults']['mothership_css_default'] = array(
@@ -285,7 +291,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   /* ----------------------------- JS files ----------------------------- */
     $form['js'] = array(
         '#type'          => 'fieldset',
-        '#title'         => t('Javascript'),
+        '#title'         => '&#9985; ' . t('.js files'),
         '#description'   => t('Settings to remove js files from Drupal'),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
@@ -364,7 +370,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   /* ----------------------------- CSS CLASSES ----------------------------- */
   $form['classes'] = array(
       '#type'          => 'fieldset',
-      '#title'         => t('Classes & Markup'),
+      '#title'         => '&#9881; ' . t('Classes & Markup'),
       '#description'   => t('Settings to change / remove classes that Drupal puts out'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
@@ -374,7 +380,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //---------------- BODY
   $form['classes']['body'] = array(
       '#type'          => 'fieldset',
-      '#title'         => t('body'),
+      '#title'         => t('body classes'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
       '#description'   => t('Modifies the css in the body tag <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b> html.tpl.php'),
@@ -440,7 +446,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //---------------- Region
   $form['classes']['region'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Region'),
+    '#title'         => t('Region Wrapper'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description'   => t('Settings for region.tpl.php ( <b> &lt;div class="region"&gt; ...</b> )')
@@ -470,7 +476,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //---------------- Block
   $form['classes']['block'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('block'),
+    '#title'         => t('block wrapper'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
@@ -513,7 +519,7 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   //---------------- NODE
   $form['classes']['node'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Node'),
+    '#title'         => t('Node Classes & $links'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
     '#description'   => t('Modify the styles <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b> node.tpl.php')
@@ -559,12 +565,10 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   );
 
 
-
-
   //--------------------- FIELD
   $form['classes']['field'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('Fields'),
+    '#title'         => t('Field classes'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
@@ -747,13 +751,13 @@ function mothership_form_system_theme_settings_alter(&$form, $form_state) {
   $form['classes']['view']['mothership_classes_view_row_rename'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Rename .view-row-$count,  .view-row-first & .view-row-last to : count-$count, .first & .last'),
-    '#description'   => t('The reason for this is so we have .first & .last all over the site'),
+    '#description'   => t('To make sure that we use .first & .last classes all over the site'),
     '#default_value' => theme_get_setting('mothership_classes_view_row_rename')
   );
 
   $form['misc'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('other stuff'),
+    '#title'         => '&#9733; ' . t('Motherships Misc goodie bag'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#weight'=> -10
