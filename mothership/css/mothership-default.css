@@ -74,12 +74,12 @@ fieldset legend{
   .ie7 margin-left:-7px;
   width:100%;
 }
-
+/*
 html.js fieldset.collapsible .fieldset-legend,
 a:link.fieldset-title, .fieldset-legend{
   display:block; height:25px; font-weight:bold; padding-bottom:0;
 }
-
+*/
 /*
 Block clearfix - yup its a recap of the clearfix trick, no reason to do class="clearfix" all over
 ----------------------------*/
