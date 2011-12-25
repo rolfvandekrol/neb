@@ -29,7 +29,7 @@
  */
 ?>
 <?php if ($tree || $has_links): ?>
-  <nav id="book-navigation-<?php print $book_id; ?>" class="book-navigation">
+  <nav id="book-navigation-<?php print $book_id; ?>" class="book-navigation" role="navigation">
     <?php print $tree; ?>
     <?php if ($has_links): ?>
       <h2 class="element-invisible"><?php print t('Book Navigation'); ?></h2>

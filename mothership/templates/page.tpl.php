@@ -7,7 +7,7 @@
 <!--page.tpl.php-->
 <?php print $mothership_poorthemers_helper; ?>
 
-<header class="cf">
+<header class="cf" role="banner">
 
   <?php if ($logo): ?>
     <figure>
@@ -29,11 +29,7 @@
     </div>
   <?php endif; ?>
 
-  <?php if ($page['header_menu']): ?>
-    <div class="header-menu">
-      <?php print render($page['header_menu']); ?>
-    </div>
-  <?php endif; ?>
+
 
 </header>
 
@@ -84,7 +80,7 @@
   <?php endif; ?>
 </div><!--/page-->
 
-<footer>
+<footer role="contentinfo">
   <?php print render($page['footer']); ?>
 </footer>
 

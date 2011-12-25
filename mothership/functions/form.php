@@ -7,6 +7,7 @@ original can be found in /includes/form.inc
 
 /* removes the <div> wrapper inside the form */
 function mothership_form($variables) {
+
   $element = $variables['element'];
   if (isset($element['#action'])) {
     $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
@@ -16,7 +17,8 @@ function mothership_form($variables) {
     $element['#attributes']['accept-charset'] = "UTF-8";
   }
 
-  return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
+	return '<form' . drupal_attributes($element['#attributes']) . ' role="form">' . $element['#children'] . '</form>';
+  
 }
 
 /*
@@ -44,8 +46,10 @@ function mothership_form_element($variables) {
   if(! theme_get_setting('mothership_classes_form_wrapper_formitem')){
     $attributes['class'] = array('form-item');
   }
+
+
   //date selects need the form-item for the show/hide end date
-  if ($element['#type'] == 'date_select' AND theme_get_setting('mothership_classes_form_wrapper_formitem') ){
+  if ($element['#type'] == 'date_select' OR $element['#type'] == 'date_text' OR $element['#type'] == 'date_popup' ){ //AND 
     $attributes['class'] = array('form-item');
   }
 
@@ -322,6 +326,38 @@ function mothership_select($variables) {
   return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
 }
 
+/*
+Link module 
+link fields removes the clearfix 
+*/
+function mothership_link_field($vars) {
+  drupal_add_css(drupal_get_path('module', 'link') .'/link.css');
+
+  $element = $vars['element'];
+  // Prefix single value link fields with the name of the field.
+  if (empty($element['#field']['multiple'])) {
+    if (isset($element['url']) && !isset($element['title'])) {
+      unset($element['url']['#title']);
+    }
+  }
+
+  $output = 'mothership';
+ // $output .= '<div class="link-field-subrow">';
+  if (isset($element['title'])) {
+    $output .= '<div class="link-field-title link-field-column">'. drupal_render($element['title']) .'</div>';
+  }
+  $output .= '<div class="link-field-url'. (isset($element['title']) ? ' link-field-column' : '') .'">'. drupal_render($element['url']) .'</div>';
+ // $output .= '</div>';
+  if (!empty($element['attributes']['target'])) {
+    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['target']) .'</div>';
+  }
+  if (!empty($element['attributes']['title'])) {
+    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['title']) .'</div>';
+  }
+  return $output;
+}
+
+
 /*remove form-textarea*/
 function mothership_textarea($variables) {
   $element = $variables['element'];
@@ -425,10 +461,88 @@ function mothership_container($variables) {
 }
 
 /*
-
+adds placeholder
 */
 function mothership_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
 }
+
+/*
+overwrite the fields edit modes multiple elements
+adds a nother class in besides the form-item as a wrapper so theres something to work with 
+	
+*/
+
+function mothership_field_multiple_value_form($variables) {
+  $element = $variables['element'];
+  $output = 'theme_field_multiple_value_form';
+
+  if ($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) {
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $order_class = $element['#field_name'] . '-delta-order';
+    $required = !empty($element['#required']) ? theme('form_required_marker', $variables) : '';
+
+    $header = array(
+      array(
+        'data' => '<label>' . t('!title: !required', array('!title' => $element['#title'], '!required' => $required)) . "</label>",
+        'colspan' => 2,
+        'class' => array('field-label'),
+      ),
+      t('Order'),
+    );
+    $rows = array();
+
+    // Sort items according to '_weight' (needed when the form comes back after
+    // preview or failed validation)
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      $item['_weight']['#attributes']['class'] = array($order_class);
+      $delta_element = drupal_render($item['_weight']);
+      $cells = array(
+        array('data' => '', 'class' => array('field-multiple-drag')),
+        drupal_render($item),
+        array('data' => $delta_element, 'class' => array('delta-order')),
+      );
+      $rows[] = array(
+        'data' => $cells,
+        'class' => array('draggable'),
+      );
+    }
+	/*
+	adds form-item-multiple
+	*/
+    $output = '<div class="form-item form-item-multiple">';
+    $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => $table_id, 'class' => array('field-multiple-table'))));
+    $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
+	/*removes the clearfix*/
+   // $output .= '<div class="clearfix">' . drupal_render($add_more_button) . '</div>';
+    $output .=  drupal_render($add_more_button);
+
+    $output .= '</div>';
+
+    drupal_add_tabledrag($table_id, 'order', 'sibling', $order_class);
+  }
+  else {
+    foreach (element_children($element) as $key) {
+      $output .= drupal_render($element[$key]);
+    }
+  }
+
+  return $output;
+}
+
+
+

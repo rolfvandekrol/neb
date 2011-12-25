@@ -22,8 +22,7 @@ features[] = comment_user_verification
 regions[page_top] = Page Top
 regions[page_bottom] = Page Bottom
 
-regions[header] = Header First
-regions[header_menu] = Header Menu
+regions[header] = Header
 
 regions[sidebar_first] = Sidebar First
 regions[sidebar_second] = Sidebar Second

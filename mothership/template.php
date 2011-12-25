@@ -18,23 +18,15 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-  //kpr($vars['classes_array']);
 
-/*
-  print "<br><pre>";
-  print_r($hook);
-  print "</pre>";
-*/
-
-  //Faveicon
+  //--- Faveicon
   global $theme;
   $path = drupal_get_path('theme', $theme);
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
-
-  //---POOR THEMERS HELPER
+  //--- POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
     //theme hook suggestions
@@ -44,14 +36,14 @@ function mothership_preprocess(&$vars, $hook) {
         $value = str_replace('_','-',$value);
         $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl.php \n" ;
     }
-
     $vars['mothership_poorthemers_helper'] .= "-->";
   }else{
     $vars['mothership_poorthemers_helper'] ="";
   }
-  //---/POOR THEMERS HELPER
 
-
+  /*
+    Go through all the hooks of drupal and give it epic love 
+  */
 
   if ($hook == "html") {
   // =======================================| HTML |========================================
@@ -103,12 +95,12 @@ function mothership_preprocess(&$vars, $hook) {
     //LIBS
     //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
 
-    //modernizr love CDN style for the lazy ones
+    //--- modernizr love CDN style for the lazy ones
     if (theme_get_setting('mothership_modernizr')) {
       drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js', 'external');
     }
 
-    //selectivizr
+    //---- selectivizr
     $vars['selectivizr'] = '';
     if(theme_get_setting('mothership_selectivizr')) {
       $vars['selectivizr'] .= '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
@@ -117,8 +109,7 @@ function mothership_preprocess(&$vars, $hook) {
 
     }
 
-
-    //html5 fix
+    //---html5 fix
     $vars['html5iefix'] = '';
     if(theme_get_setting('mothership_html5')) {
       $vars['html5iefix'] .= '<!--[if lt IE 9]>';
@@ -127,12 +118,13 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     $vars['appletouchicon'] = $appletouchicon;
-//    <!-- For Nokia -->
-//    <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
+    //    <!-- For Nokia -->
+    //    <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
 
 
     //----- C S S CLASSES  -----------------------------------------------------------------------------------------------
     //Remove & add cleasses body
+
     if (theme_get_setting('mothership_classes_body_html')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('html')));
     }
@@ -190,6 +182,8 @@ function mothership_preprocess(&$vars, $hook) {
     // =======================================| PAGE |========================================
 
     //Test for expected modules
+    // we really love blockify 
+    //TODO: should this be an option to remove annoing options?
     if (theme_get_setting('mothership_expectedmodules')) {
       //test to see if blockify is installed
       if(!module_exists('blockify')){
@@ -197,8 +191,9 @@ function mothership_preprocess(&$vars, $hook) {
       }
     }
 
+    //NEw template suggestions
 
-    //template suggestion: page--nodetype.tpl.php
+    // page--nodetype.tpl.php
     if ( isset($vars['node']) ){
       $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
     }
@@ -212,12 +207,18 @@ function mothership_preprocess(&$vars, $hook) {
       }
 
     }
+   
+    //remove the "theres no content default yadi yadi" from the frontpage
+    if(theme_get_setting('mothership_frontpage_default_message')){
+      unset($vars['page']['content']['system_main']['default_message']);
+    }
 
-
+	
     // Remove the block template wrapper from the main content block.
-    if (!empty($vars['page']['content']['system_main']) AND
-        theme_get_setting('mothership_content_block_wrapper') AND
-        is_array($vars['page']['content']['system_main']['#theme_wrappers'])
+    if (theme_get_setting('mothership_content_block_wrapper') AND
+        !empty($vars['page']['content']['system_main']) AND
+		$vars['page']['content']['system_main']['#theme_wrappers'] AND
+		is_array($vars['page']['content']['system_main']['#theme_wrappers'])
     ) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
@@ -228,10 +229,6 @@ function mothership_preprocess(&$vars, $hook) {
     //  unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
   //  }
 
-    //remove the content not found on the frontpage
-    if(theme_get_setting('mothership_frontpage_default_message')){
-      unset($vars['page']['content']['system_main']['default_message']);
-    }
 
 
 
@@ -404,8 +401,6 @@ function mothership_preprocess(&$vars, $hook) {
 }
 
 
-
-
 /*
 Remove the standard classes from a field
 TODO remove all classes
@@ -454,9 +449,6 @@ function mothership_class_killer(&$vars){
 //  kpr($vars['classes_array']);
  // return $vars;
 }
-
-
-
 
 /**
  * Implements hook_theme_registry_alter().

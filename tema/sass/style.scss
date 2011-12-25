@@ -1,23 +1,18 @@
-@import "_base";
+@import "base";
 
-header {background: #fff; }
 
-@media screen and (min-width: 480px){
-  header {background: #F9C; }
-}
-@media screen and (min-width: 600px){
-  header {background: $blueDark;}
-}
-@media screen and (min-width: 768px){
-  header {background: $red;}
-}
-@media screen and (min-width: 992px){
-  header {background: $green;}
-}
 
-@media print {
+@media (min-width:320px) {
+    @import "320-up"; }
+@media (min-width:480px) {
+    @import "480-up"; }
+@media (min-width:780px) {
+    @import "780-up"; }
+@media (min-width:960px) {
+    @import "960-up"; }
+@media (min-width:1100px) {
+    @import "1100-up"; }
 
-}
 
 
 @import "layout";

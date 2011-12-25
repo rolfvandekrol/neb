@@ -7,7 +7,7 @@ if ($classes) {
 }
 ?>
 
-<nav <?php print $id_block . $classes .  $attributes; ?>>
+<nav <?php print $id_block . $classes .  $attributes; ?> role="navigation">
   <?php print $mothership_poorthemers_helper;  ?>
 
   <?php print render($title_prefix); ?>
@@ -20,6 +20,7 @@ if ($classes) {
   <?php if (!theme_get_setting('mothership_classes_block_contentdiv') AND $block->module == "block"): ?>
   <div <?php print $content_attributes; ?>>
   <?php endif ?>
+
 
   <?php print $content ?>
 

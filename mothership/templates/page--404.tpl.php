@@ -19,12 +19,6 @@
       <?php print render($page['header']); ?>
     </div>
   <?php endif; ?>
-
-  <?php if ($page['header_menu']): ?>
-    <div class="header-menu">
-      <?php print render($page['header_menu']); ?>
-    </div>
-  <?php endif; ?>
   
 </header>
   

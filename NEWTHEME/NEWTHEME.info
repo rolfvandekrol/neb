@@ -1,5 +1,5 @@
-name = STARTERKIT
-description = Hi im Starterkit for mothership
+name = NEWTHEME
+description = Hi im a NEWTHEME based on mothership - you should really rename me :)
 screenshot = screenshot.png
 engine = phptemplate
 core = 7.x
