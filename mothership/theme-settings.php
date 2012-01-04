@@ -709,34 +709,34 @@ $form['mothership_info'] = array(
     '#default_value' => theme_get_setting('mothership_classes_form_description')
   );
   
+  $form['classes']['form']['placeholder'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Placeholders'),
+    '#description'   => t(''),
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+  );
+	
+	
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_label'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('use field title in the placeholder'),
+    '#title'         => t('Use the field Label as placeholder content'),
     '#default_value' => theme_get_setting('mothership_classes_form_placeholder_label')
   );
 
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_link'] = array(
     '#type'          => 'textfield',
     '#title'         => t('links:'),
+    '#description'   => t('custom placeholder text for link fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),		
     '#default_value' => theme_get_setting('mothership_classes_form_placeholder_link')
   );
 
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_email'] = array(
     '#type'          => 'textfield',
     '#title'         => t('email:'),
+    '#description'   => t('custom text for email fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),		
     '#default_value' => theme_get_setting('mothership_classes_form_placeholder_email')
   );
-
-
-
-
-/*
-  $form['classes']['form']['mothership_form_labelwrap'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Wrap checkboxes & radios into the label tag &lt;label&gt;foo &lt;item&gt;&lt;/label&gt;'),
-    '#default_value' => theme_get_setting('mothership_form_labelwrap')
-  );
-*/
 
 
   $form['classes']['menu'] = array(

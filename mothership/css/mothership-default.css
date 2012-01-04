@@ -61,13 +61,14 @@ input{}
   input[type="search"]   {-webkit-appearance: textfield;}
 form small, form .description{font-size:12px; color:#444; display:block; text-align: left;}
 
-.date-no-float div{display:inline-block;}
-/* */
+
+/* .date-no-float div{display:inline-block;} */
 .form-field-required {}
 .form-field-required:after{content:" * "}
-
+/*
 input:focus   { border: 2px solid #6C6; }
 input:invalid { border: 2px solid #900; }
+*/
 
 /* FIELDSETS & LEGEND */
 fieldset legend{
