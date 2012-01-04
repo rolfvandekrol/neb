@@ -1,7 +1,7 @@
 <?php
 //kpr(get_defined_vars());
  ?>
-<article <?php if($classes){ ?>class="<?php print $classes;?>"<?php } ?>>
+<article <?php if($classes){ ?>class="<?php print $classes;?>"<?php } ?> role="article">
   <?php
     if (isset($title_suffix['contextual_links'])){
        print render($title_suffix['contextual_links']);
@@ -25,6 +25,10 @@
     <?php if($top_classes){ ?></div><?php } ?>
   <?php endif; ?>
 
+  <?php if ($main_nowrapper): ?>
+      <?php print $main_nowrapper; ?>  
+  <?php endif; ?>
+  
   <?php if ($main): ?>
     <div <?php if($main_classes){ ?>class="<?php print $main_classes; ?>"<?php } ?>>
       <?php print $main; ?>

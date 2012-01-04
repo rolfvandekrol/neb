@@ -12,6 +12,7 @@ function ds_mothership_html5_1col_stacked() {
       'hgroup' => t('hgroup (only h1-h6)'),
       'top' => t('top'),
       'main' => t('main'), 
+      'main_nowrapper' => t('main no div wrapper'), 
       'bottom' => t('bottom'),
       'footer' => t('footer'), 
     ),

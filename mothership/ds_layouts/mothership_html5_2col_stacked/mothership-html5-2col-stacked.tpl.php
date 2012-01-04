@@ -1,7 +1,7 @@
 <?php
 //kpr(get_defined_vars());
  ?>
-<article <?php if($classes){ ?>class="<?php print $classes;?>"<?php } ?>>
+<article <?php if($classes){ ?>class="<?php print $classes;?>"<?php } ?> role="article">
   <?php
     if (isset($title_suffix['contextual_links'])){
        print render($title_suffix['contextual_links']);
