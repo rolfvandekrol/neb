@@ -11,6 +11,12 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.p
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
 
+//goodies
+if (theme_get_setting('mothership_goodies_login')) {
+	include_once './' . drupal_get_path('theme', 'mothership') . '/goodies/login.inc';
+}
+
+
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('mothership_rebuild_registry')) {
   system_rebuild_theme_data();

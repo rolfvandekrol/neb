@@ -871,6 +871,12 @@ $form['mothership_info'] = array(
     '#description'   => t('remove the &lt;div class=&quot;block-system &quot;&gt; around our $content region in the page.tpl.php'),
   );
 
+  $form['misc']['mothership_goodies_login'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('<del>Alternative</del> Better! user login block'),
+    '#description'   => t('Changes the design of the login block: puts register link first, then the username / password, then forgot password & last submit button'),
+    '#default_value' => theme_get_setting('mothership_goodies_login'),
+  );
 
 
 }

@@ -645,29 +645,49 @@ function mothership_field_multiple_value_form($variables) {
 
 
 /*
-Placeholder for blocks n stuff
+more Placeholder sweetness
 */
 function mothership_form_alter(&$form, &$form_state, $form_id) {
-
+/*
+	print "<pre>";
+	print_r($form_id);
+	print_r($form);
+	print "</pre>";	
+*/	
+	
+	//seach
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
-
+	//login block
   if ($form_id == 'user_login_block') {
-
+	  $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+	  $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
 	}		
+
+	//login Register
+	if($form_id == 'user_register_form'){
+		//placeholder
+		if(theme_get_setting('mothership_classes_form_placeholder_email')){
+			$mail_placeholder = theme_get_setting('mothership_classes_form_placeholder_email');
+		}else{
+			$mail_placeholder = $form['account']['mail']['#title'];
+		}
+		$form['account']['name']['#attributes']['placeholder'] = $form['account']['name']['#title'];
+		$form['account']['mail']['#attributes']['placeholder'] = $mail_placeholder;
+	}
+
+	//login 
+	if($form_id == 'user_login'){
+		$form['name']['#attributes']['placeholder'] = $form['name']['#title'];		
+		$form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];		
+	}
+
+	//login forgotten password
+	if($form_id == 'user_pass'){
+		$form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+	}
+
+
 }
 
-function mothership_form_user_login_block_alter(&$form, &$form_state, $form_id) {
-	//yum placeholders
-  $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
-  $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-	//password reminder
-  $form['pass']['#description'] = l(t('Forgot password?'),'user/password');
-	//register 
-  $form['info']['#markup'] = '<div class="register">' . l(t('Register'),'user/register') . "</div>" ;
-	$form['info']['#weight'] = -1;
-
-	//hide the links
-	$form['links']['#access'] = FALSE ;
-}	
