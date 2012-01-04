@@ -16,7 +16,7 @@ hide($content['links']);
 ?>
 
 <!--node-->
-<article <?php print $id_node . $classes .  $attributes; ?>>
+<article <?php print $id_node . $classes .  $attributes; ?> role="article">
   <?php print $mothership_poorthemers_helper; ?>
 
   <?php print render($title_prefix); ?>

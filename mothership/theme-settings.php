@@ -57,8 +57,10 @@ $form['mothership_info'] = array(
     <br>
     You should offcourse build a custom modernizr js file for you site! <br>
     Were all about removing the crap- remember...<br>
+		<a hre="http://www.modernizr.com/news/modernizr-and-cdns">modenizr.com: modernizr-and-cdns</a>
+		<br>
     anyway this will enable<br>
-    <a href="!link">Custom Build modernizr</a>', array('!link' => 'http://modernizr.com')),
+    <a href="http://modernizr.com">Custom Build modernizr</a>'),
   );
 
   $form['Libraries']['mothership_selectivizr'] = array(
@@ -371,9 +373,9 @@ $form['mothership_info'] = array(
   $form['classes'] = array(
       '#type'          => 'fieldset',
       '#title'         => '&#9881; ' . t('Classes & Markup'),
-      '#description'   => t('Settings to change / remove classes that Drupal puts out'),
+      '#description'   => t('Settings to change classes & markup that Drupal drags around'),
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
+      '#collapsed' => FALSE,
       '#weight'=> -11
   );
 
@@ -382,7 +384,7 @@ $form['mothership_info'] = array(
       '#type'          => 'fieldset',
       '#title'         => t('body classes'),
       '#collapsible' => TRUE,
-      '#collapsed' => FALSE,
+      '#collapsed' => TRUE,
       '#description'   => t('Modifies the css in the body tag <b> &lt;body class="html logged-in front sidebar toolbar page-node"&gt; </b> html.tpl.php'),
   );
 
@@ -448,7 +450,7 @@ $form['mothership_info'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Region Wrapper'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#description'   => t('Settings for region.tpl.php ( <b> &lt;div class="region"&gt; ...</b> )')
   );
 
@@ -458,7 +460,6 @@ $form['mothership_info'] = array(
     '#description'   => t('&lt;div class="region ..."&gt; ...&lt;/div&gt; thats defined in region.tpl<br> This means that we remove the region wrapper completely -yea :)'),
     '#default_value' => theme_get_setting('mothership_region_wrapper')
   );
-
 
   $form['classes']['region']['mothership_classes_region'] = array(
     '#type'          => 'checkbox',
@@ -478,7 +479,7 @@ $form['mothership_info'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('block wrapper'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#description'   => t('Modify the div wrappers style <b> &lt;div id="#block-id" class="block  contextual-links-region block-id"&gt; </b> ')
   );
 
@@ -521,7 +522,7 @@ $form['mothership_info'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Node Classes & $links'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#description'   => t('Modify the styles <b> &lt;div id="#node-id" class="node  node-[status] "&gt; </b> node.tpl.php')
   );
 
@@ -570,7 +571,7 @@ $form['mothership_info'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Field classes'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
   );
 
   $form['classes']['field']['mothership_classes_field_field'] = array(
@@ -603,29 +604,79 @@ $form['mothership_info'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Forms'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
   );
 
-  $form['classes']['form']['mothership_classes_form_wrapper_formitem'] = array(
+
+	//--- containers
+
+	$form['classes']['form']['container'] = array(
+	  '#type'          => 'fieldset',
+	  '#title'         => t('Outer Field Container'),
+	  '#description'   => t('the div thats wrapped around each of the form field(s) div label & input'),
+	  '#collapsible' => FALSE,
+	);
+
+  $form['classes']['form']['container']['mothership_classes_form_container_wrapper'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .form-wrapper class'),
+    '#default_value' => theme_get_setting('mothership_classes_form_container_wrapper')
+  );
+
+
+	$form['classes']['form']['container']['mothership_classes_form_container_type'] = array(
+	  '#type'          => 'checkbox',
+	  '#title'         => t('Remove .field-type-[...]'),
+	  '#default_value' => theme_get_setting('mothership_classes_form_container_type')
+	);
+	
+	$form['classes']['form']['container']['mothership_classes_form_container_name'] = array(
+		'#type'          => 'checkbox',
+		'#title'         => t('Remove .field-name-field-[fieldname] '),
+		'#default_value' => theme_get_setting('mothership_classes_form_container_name')
+	);
+
+  $form['classes']['form']['container']['mothership_classes_form_container_widget'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove .field-widget-[...]'),
+    '#default_value' => theme_get_setting('mothership_classes_form_container_widget')
+  );
+	
+
+  $form['classes']['form']['container']['mothership_classes_form_container_id'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the #id of the wrapper'),
+    '#default_value' => theme_get_setting('mothership_classes_form_container_id')
+  );
+
+
+	$form['classes']['form']['wrap'] = array(
+	  '#type'          => 'fieldset',
+	  '#title'         => t('Field Wrapper'),
+	  '#description'   => t('control the classes in the div thats wrapped around the label & input'),
+	  '#collapsible' => FALSE,
+	);
+
+  $form['classes']['form']['wrap']['mothership_classes_form_wrapper_formitem'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .form-item  '),
     '#prefix'         => t('Form field wrapper classes:<br>'),
     '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formitem')
   );
 
-  $form['classes']['form']['mothership_classes_form_wrapper_formtype'] = array(
+  $form['classes']['form']['wrap']['mothership_classes_form_wrapper_formtype'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .form-type-[type]'),
     '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formtype')
   );
 
-  $form['classes']['form']['mothership_classes_form_wrapper_formname'] = array(
+  $form['classes']['form']['wrap']['mothership_classes_form_wrapper_formname'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove .form-type-[name]-x'),
     '#default_value' => theme_get_setting('mothership_classes_form_wrapper_formname')
   );
 
-  $form['classes']['form']['mothership_classes_form_freeform'] = array(
+  $form['classes']['form']['wrap']['mothership_classes_form_freeform'] = array(
     '#type'          => 'textarea',
     '#title'         => t('Kill the css classes:'),
     '#default_value' => theme_get_setting('mothership_classes_form_freeform'),
@@ -648,7 +699,7 @@ $form['mothership_info'] = array(
 
   $form['classes']['form']['mothership_form_required'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t(' Field required. remove the * and add a class field-required to the label instead'),
+    '#title'         => t('Field required: Removes the hardcoded "*" - add it with css magic () in the class .field-required to the label instead'),
     '#default_value' => theme_get_setting('mothership_form_required')
   );
 
@@ -657,6 +708,26 @@ $form['mothership_info'] = array(
     '#title'         => t('change the &lt;div class=&quot;description&quot;&gt; to &lt;small&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_form_description')
   );
+  
+	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_label'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('use field title in the placeholder'),
+    '#default_value' => theme_get_setting('mothership_classes_form_placeholder_label')
+  );
+
+	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_link'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('links:'),
+    '#default_value' => theme_get_setting('mothership_classes_form_placeholder_link')
+  );
+
+	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_email'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('email:'),
+    '#default_value' => theme_get_setting('mothership_classes_form_placeholder_email')
+  );
+
+
 
 
 /*
@@ -673,7 +744,7 @@ $form['mothership_info'] = array(
     '#title'         => t('Menus'),
    '#description'   => t('Modifies the stuff that drupal wraps around the menu ul & li tags'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
   );
 
   $form['classes']['menu']['mothership_classes_menu_wrapper'] = array(
@@ -712,9 +783,9 @@ $form['mothership_info'] = array(
   //---------------- Views
   $form['classes']['view'] = array(
     '#type'          => 'fieldset',
-    '#title'         => t('view classes (views-view.tpl.php)'),
+    '#title'         => t('view classes '),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
   );
   $form['classes']['view']['mothership_classes_view'] = array(
     '#type'          => 'checkbox',

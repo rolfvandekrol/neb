@@ -21,7 +21,9 @@
       <?php foreach ($items as $delta => $item) : ?>
         <figure>
           <?php print render($item); ?>
-           <figcaption><?php print $item['#item']['title']; ?></figcaption>
+           <figcaption>
+			   <?php print $item['#item']['title']; ?>
+		   </figcaption>
          </figure>
       <?php endforeach; ?>      
   <?php } ?>

@@ -1,5 +1,4 @@
 <?php
-
 /*
 changes to the form elements
 original can be found in /includes/form.inc
@@ -22,10 +21,13 @@ function mothership_form($variables) {
 }
 
 /*
+
 changes the classes from the div wrapper around each field
 change the div class="description" to <small>
+adds form-required 
 */
 function mothership_form_element($variables) {
+	
   $element = &$variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
@@ -67,6 +69,12 @@ function mothership_form_element($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-disabled';
   }
+
+	//if the form element is reguired add a form-required class
+	if($element['#required']){
+	  $attributes['class'][] = 'form-required';
+	}
+  
 
   //freeform css class killing \m/
   if($attributes['class']){
@@ -125,7 +133,6 @@ function mothership_form_element($variables) {
 
   return $output;
 }
-
 
 /*
 Remove the class="option" from the label
@@ -206,22 +213,6 @@ function mothership_form_element_label($variables) {
 
 }
 
-function mothership_checkbox($variables) {
-  $element = $variables['element'];
-  $t = get_t();
-  $element['#attributes']['type'] = 'checkbox';
-  element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
-
-  // Unchecked checkbox has #value of integer 0.
-  if (!empty($element['#checked'])) {
-    $element['#attributes']['checked'] = 'checked';
-  }
-  if(!theme_get_setting('mothership_classes_form_input')){
-    _form_set_class($element, array('form-checkbox'));
-  }
-  return '<input' . drupal_attributes($element['#attributes']) . ' />';
-}
-
 /*
 * remove form-text class
 * remove text type if its html5
@@ -232,19 +223,16 @@ function mothership_textfield($variables) {
   $element['#size'] = '30';
 
   //is this element requred then lest add the required element into the input
-  if(theme_get_setting('mothership_html5')){
-    $required = !empty($element['#required']) ? ' required' : '';
-  }else{
-    $required ="";
-  }
+   $required = !empty($element['#required']) ? ' required' : '';
 
   //dont need to set type in html5 its default so lets remove it because we can
   //  $element['#attributes']['type'] = 'text';
 
-  //html5 plceholder love
-  //if (!empty($element['#description']) ) {
-  //  $element['#attributes']['placeholder'] = $element['#description'];
-  //}
+	//placeholder
+  if (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+    $element['#attributes']['placeholder'] =  $element['#title'];
+  }
+
 
   element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength'));
 
@@ -271,7 +259,147 @@ function mothership_textfield($variables) {
   return $output . $extra;
 }
 
-/*remove the form-radio class*/
+/* Link module  link fields removes the clearfix */
+function mothership_link_field($vars) {
+  drupal_add_css(drupal_get_path('module', 'link') .'/link.css');
+
+  $element = $vars['element'];
+  // Prefix single value link fields with the name of the field.
+  if (empty($element['#field']['multiple'])) {
+    if (isset($element['url']) && !isset($element['title'])) {
+      unset($element['url']['#title']);
+    }
+  }
+
+	//placeholder
+	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');	
+	}
+	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+   $element['#attributes']['placeholder'] = $element['#title'];
+  }
+
+  
+	$output = '';
+//  $output .= '<div class="link-field-subrow">WTF';
+  if (!empty($element['attributes']['target'])) {
+    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['target']) .'</div>';
+  }
+  if (!empty($element['attributes']['title'])) {
+    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['title']) .'</div>';
+  }
+//	$output .= '</div>';
+  return $output;
+}
+
+
+/*
+module: elements 
+file: elements.theme.inc
+*/
+function mothership_emailfield($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'email';
+  element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength', 'placeholder'));
+  _form_set_class($element, array('form-text', 'form-email'));
+
+
+	//placeholder
+	if( theme_get_setting('mothership_classes_form_placeholder_email') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_email');	
+	}
+	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+   $element['#attributes']['placeholder'] = $element['#title'];
+  }
+
+  //is this element requred then lest add the required element into the input
+   $required = !empty($element['#required']) ? ' required' : '';
+		
+
+  $extra = elements_add_autocomplete($element);
+  $output = '<input' . drupal_attributes($element['#attributes']) . $required . ' />';
+
+  return $output . $extra;
+}
+
+function mothership_urlfield($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'url';
+  element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength', 'placeholder'));
+  _form_set_class($element, array('form-text', 'form-url'));
+
+
+	//placeholder
+	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');	
+	}
+	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+   $element['#attributes']['placeholder'] = $element['#title'];
+  }
+
+  //is this element requred then lest add the required element into the input
+   $required = !empty($element['#required']) ? ' required' : '';
+
+
+  $extra = elements_add_autocomplete($element);
+  $output = '<input' . drupal_attributes($element['#attributes']) . $required . ' />';
+
+  return $output . $extra;
+}
+
+
+
+/*remove form-textarea*/
+function mothership_textarea($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
+  if(!theme_get_setting('mothership_classes_form_input')){
+    _form_set_class($element, array('form-textarea'));
+  }
+  $wrapper_attributes = array(
+    'class' => array('form-textarea-wrapper'),
+  );
+
+
+
+  if (!empty($element['#title'])  AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+    $element['#attributes']['placeholder'] = $element['#title'];
+  }
+
+  // Add resizable behavior.
+  if (!empty($element['#resizable'])) {
+    drupal_add_library('system', 'drupal.textarea');
+    $wrapper_attributes['class'][] = 'resizable';
+  }
+  
+	//is this element requred then lest add the required element into the input
+   $required = !empty($element['#required']) ? ' required' : '';
+
+
+  $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
+  $output .= '<textarea' . drupal_attributes($element['#attributes']) . $required .'>' . check_plain($element['#value']) . '</textarea>';
+  $output .= '</div>';
+  return $output;
+}
+
+
+function mothership_checkbox($variables) {
+  $element = $variables['element'];
+  $t = get_t();
+  $element['#attributes']['type'] = 'checkbox';
+  element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
+
+  // Unchecked checkbox has #value of integer 0.
+  if (!empty($element['#checked'])) {
+    $element['#attributes']['checked'] = 'checked';
+  }
+  if(!theme_get_setting('mothership_classes_form_input')){
+    _form_set_class($element, array('form-checkbox'));
+  }
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+}
+
+/* remove the form-radio class */
 function mothership_radio($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'radio';
@@ -311,10 +439,20 @@ function mothership_password($variables) {
     _form_set_class($element, array('form-text'));
   }
 
+  //html5 plceholder love ? //substr(,0, 20);
+  if (!empty($element['#description'])  AND  theme_get_setting('mothership_classes_form_placeholder_description') ) {
+    $element['#attributes']['placeholder'] = $element['#description'];
+  }
+
+  if (theme_get_setting('mothership_classes_form_placeholder_label') ) {
+    $element['#attributes']['placeholder'] = $element['#title'];
+  }
+
+
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
-/*removed form-select*/
+/* removed form-select */
 function mothership_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
@@ -324,61 +462,6 @@ function mothership_select($variables) {
   }
 
   return '<select' . drupal_attributes($element['#attributes']) . '>' . form_select_options($element) . '</select>';
-}
-
-/*
-Link module 
-link fields removes the clearfix 
-*/
-function mothership_link_field($vars) {
-  drupal_add_css(drupal_get_path('module', 'link') .'/link.css');
-
-  $element = $vars['element'];
-  // Prefix single value link fields with the name of the field.
-  if (empty($element['#field']['multiple'])) {
-    if (isset($element['url']) && !isset($element['title'])) {
-      unset($element['url']['#title']);
-    }
-  }
-
-  $output = 'mothership';
- // $output .= '<div class="link-field-subrow">';
-  if (isset($element['title'])) {
-    $output .= '<div class="link-field-title link-field-column">'. drupal_render($element['title']) .'</div>';
-  }
-  $output .= '<div class="link-field-url'. (isset($element['title']) ? ' link-field-column' : '') .'">'. drupal_render($element['url']) .'</div>';
- // $output .= '</div>';
-  if (!empty($element['attributes']['target'])) {
-    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['target']) .'</div>';
-  }
-  if (!empty($element['attributes']['title'])) {
-    $output .= '<div class="link-attributes">'. drupal_render($element['attributes']['title']) .'</div>';
-  }
-  return $output;
-}
-
-
-/*remove form-textarea*/
-function mothership_textarea($variables) {
-  $element = $variables['element'];
-  element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
-  if(!theme_get_setting('mothership_classes_form_input')){
-    _form_set_class($element, array('form-textarea'));
-  }
-  $wrapper_attributes = array(
-    'class' => array('form-textarea-wrapper'),
-  );
-
-  // Add resizable behavior.
-  if (!empty($element['#resizable'])) {
-    drupal_add_library('system', 'drupal.textarea');
-    $wrapper_attributes['class'][] = 'resizable';
-  }
-
-  $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
-  $output .= '<textarea' . drupal_attributes($element['#attributes']) . '>' . check_plain($element['#value']) . '</textarea>';
-  $output .= '</div>';
-  return $output;
 }
 
 /*
@@ -453,20 +536,35 @@ function mothership_container($variables) {
     if (!isset($element['#attributes']['id'])) {
       $element['#attributes']['id'] = $element['#id'];
     }
+
     // Add the 'form-wrapper' class.
-//    $element['#attributes']['class'][] = 'form-wrapper';
+		if(!theme_get_setting('mothership_classes_form_container_wrapper')){
+    	$element['#attributes']['class'][] = 'form-wrapper';
+		}
+
+		//remove the field-type-...  yup this is but ugly
+		if(theme_get_setting('mothership_classes_form_container_type')){
+			$element['#attributes']['class']['0'] = "";
+		}
+
+		//remove the field-name-field...  yup this is but ugly
+		if(theme_get_setting('mothership_classes_form_container_name')){
+			$element['#attributes']['class']['1'] = "";
+		}
+		
+		//remove the field-widget-....
+		if(theme_get_setting('mothership_classes_form_container_widget')){
+			$element['#attributes']['class']['2'] = "";
+		}
+
+		//remove the id
+		if(theme_get_setting('mothership_classes_form_container_id')){
+			unset($element['#attributes']['id']);
+		}
+
   }
 
   return '<div' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</div>';
-}
-
-/*
-adds placeholder
-*/
-function mothership_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'search_block_form') {
-    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
-  }
 }
 
 /*
@@ -477,7 +575,7 @@ adds a nother class in besides the form-item as a wrapper so theres something to
 
 function mothership_field_multiple_value_form($variables) {
   $element = $variables['element'];
-  $output = 'theme_field_multiple_value_form';
+	$output = '';
 
   if ($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) {
     $table_id = drupal_html_id($element['#field_name'] . '_values');
@@ -524,7 +622,7 @@ function mothership_field_multiple_value_form($variables) {
 	/*
 	adds form-item-multiple
 	*/
-    $output = '<div class="form-item form-item-multiple">';
+    $output .= '<div class="form-item form-item-multiple">';
     $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => $table_id, 'class' => array('field-multiple-table'))));
     $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
 	/*removes the clearfix*/
@@ -546,3 +644,30 @@ function mothership_field_multiple_value_form($variables) {
 
 
 
+/*
+Placeholder for blocks n stuff
+*/
+function mothership_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form_id == 'search_block_form') {
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+  }
+
+  if ($form_id == 'user_login_block') {
+
+	}		
+}
+
+function mothership_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+	//yum placeholders
+  $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+  $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
+	//password reminder
+  $form['pass']['#description'] = l(t('Forgot password?'),'user/password');
+	//register 
+  $form['info']['#markup'] = '<div class="register">' . l(t('Register'),'user/register') . "</div>" ;
+	$form['info']['#weight'] = -1;
+
+	//hide the links
+	$form['links']['#access'] = FALSE ;
+}	

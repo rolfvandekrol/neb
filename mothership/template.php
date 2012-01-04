@@ -26,6 +26,7 @@ function mothership_preprocess(&$vars, $hook) {
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
+
   //--- POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
     $vars['mothership_poorthemers_helper'] = "<!--";
@@ -41,6 +42,8 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] ="";
   }
 
+
+
   /*
     Go through all the hooks of drupal and give it epic love 
   */
@@ -50,8 +53,7 @@ function mothership_preprocess(&$vars, $hook) {
 
     //custom 403/404
     $headers = drupal_get_http_header();
-
-    if(theme_get_setting('mothership_404')){
+    if(theme_get_setting('mothership_404') AND isset($headers['status']) ){
       if($headers['status'] == '404 Not Found'){
         $vars['theme_hook_suggestions'][] = 'html__404';
       }
@@ -281,14 +283,8 @@ function mothership_preprocess(&$vars, $hook) {
     ){
       $vars['theme_hook_suggestions'][] = 'block__menu';
     }
-/*
-    print "<pre>";
-    print_r($vars['elements']['#block']->module);
-    print "<br>";
-    print_r($vars['elements']['#block']->delta);
-    print_r($vars['theme_hook_suggestions']);
-    print "</pre>";
-*/
+
+
   } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
 
@@ -354,6 +350,7 @@ function mothership_preprocess(&$vars, $hook) {
 
 
   }elseif ( $hook == "field" ) {
+
     // =======================================| FIELD |========================================
     if (theme_get_setting('mothership_classes_field_field')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
@@ -398,48 +395,12 @@ function mothership_preprocess(&$vars, $hook) {
 
 
   }
-}
 
-
-/*
-Remove the standard classes from a field
-TODO remove all classes
-TODO remove the "field-name-" prefix from a styles name
-*/
-/*
-function mothership_preprocess_field(&$vars, $hook) {
-
-  if (theme_get_setting('mothership_classes_field_field')) {
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
-  }
-
-  //freeform css class killing
-  $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
-  $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
-
-  //type
-  if (theme_get_setting('mothership_classes_field_type')) {
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text-with-summary')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-ds')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-image')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-email')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-taxonomy-term-reference')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field')));
-  }
-
-  //label
-  if (theme_get_setting('mothership_classes_field_label')) {
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
-    $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
-
-  }
 
 
 }
-*/
+
+
 
 function mothership_class_killer(&$vars){
   $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
