@@ -22,6 +22,9 @@ if (theme_get_setting('mothership_rebuild_registry')) {
   system_rebuild_theme_data();
 }
 
+/*
+	all the preprocess magic 
+*/
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
 
@@ -89,7 +92,6 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_css_normalize')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-
     if (theme_get_setting('mothership_css_default')) {
       drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
@@ -114,7 +116,6 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['selectivizr'] .= '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
       $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
       $vars['selectivizr'] .= '<![endif]-->' . "\n";;
-
     }
 
     //---html5 fix
@@ -130,7 +131,7 @@ function mothership_preprocess(&$vars, $hook) {
     //    <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
 
 
-    //----- C S S CLASSES  -----------------------------------------------------------------------------------------------
+    //-----<body> C S S CLASSES  -----------------------------------------------------------------------------------------------
     //Remove & add cleasses body
 
     if (theme_get_setting('mothership_classes_body_html')) {
@@ -180,6 +181,10 @@ function mothership_preprocess(&$vars, $hook) {
     if (theme_get_setting('mothership_test')) {
         $vars['classes_array'][] = "test";
     }
+
+    if(isset($headers['status']) AND theme_get_setting('mothership_classes_body_status') ){
+		$vars['classes_array'][] = "status-". $headers['status'];
+	}	
 
     //freeform css class killing
     $remove_class_body = explode(", ", theme_get_setting('mothership_classes_body_freeform'));
@@ -406,8 +411,9 @@ function mothership_preprocess(&$vars, $hook) {
 
 }
 
-
-
+/*
+freeform class killing
+*/
 function mothership_class_killer(&$vars){
   $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
@@ -416,6 +422,25 @@ function mothership_class_killer(&$vars){
 //  kpr($vars['classes_array']);
  // return $vars;
 }
+
+
+/*
+	// Purge needless XHTML stuff.
+	nathan ftw! -> http://sonspring.com/journal/html5-in-drupal-7
+*/
+function mothership_process_html_tag(&$vars) {
+  $el = &$vars['element'];
+
+  // Remove type="..." and CDATA prefix/suffix.
+  unset($el['#attributes']['type'], $el['#value_prefix'], $el['#value_suffix']);
+
+  // Remove media="all" but leave others unaffected.
+  if (isset($el['#attributes']['media']) && $el['#attributes']['media'] === 'all') {
+    unset($el['#attributes']['media']);
+  }
+}
+
+
 
 /**
  * Implements hook_theme_registry_alter().
