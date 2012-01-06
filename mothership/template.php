@@ -1,5 +1,4 @@
 <?php
-
 /**
  * include template overwrites
  */
@@ -10,10 +9,13 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.ph
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/system.php';
 
-//goodies
+
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/blockify.php';
+//load in the goodies?
 if (theme_get_setting('mothership_goodies_login')) {
-	include_once './' . drupal_get_path('theme', 'mothership') . '/goodies/login.inc';
+  include_once './' . drupal_get_path('theme', 'mothership') . '/goodies/login.inc';
 }
 
 
@@ -23,7 +25,7 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 }
 
 /*
-	all the preprocess magic 
+  all the preprocess magic
 */
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
@@ -54,7 +56,7 @@ function mothership_preprocess(&$vars, $hook) {
 
 
   /*
-    Go through all the hooks of drupal and give it epic love 
+    Go through all the hooks of drupal and give it epic love
   */
 
   if ($hook == "html") {
@@ -77,7 +79,7 @@ function mothership_preprocess(&$vars, $hook) {
     */
 
     /*
-      Adds reset css files that the sub themes might wanna use.
+      Adds optional reset css files that the sub themes might wanna use.
       reset.css - eric meyer ftw
       reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
       defaults.css cleans some of the defaults from drupal
@@ -183,8 +185,8 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     if(isset($headers['status']) AND theme_get_setting('mothership_classes_body_status') ){
-		$vars['classes_array'][] = "status-". $headers['status'];
-	}	
+    $vars['classes_array'][] = "status-". $headers['status'];
+  }
 
     //freeform css class killing
     $remove_class_body = explode(", ", theme_get_setting('mothership_classes_body_freeform'));
@@ -195,7 +197,7 @@ function mothership_preprocess(&$vars, $hook) {
     // =======================================| PAGE |========================================
 
     //Test for expected modules
-    // we really love blockify 
+    // we really love blockify
     //TODO: should this be an option to remove annoing options?
     if (theme_get_setting('mothership_expectedmodules')) {
       //test to see if blockify is installed
@@ -220,18 +222,18 @@ function mothership_preprocess(&$vars, $hook) {
       }
 
     }
-   
+
     //remove the "theres no content default yadi yadi" from the frontpage
     if(theme_get_setting('mothership_frontpage_default_message')){
       unset($vars['page']['content']['system_main']['default_message']);
     }
 
-	
+
     // Remove the block template wrapper from the main content block.
     if (theme_get_setting('mothership_content_block_wrapper') AND
         !empty($vars['page']['content']['system_main']) AND
-		$vars['page']['content']['system_main']['#theme_wrappers'] AND
-		is_array($vars['page']['content']['system_main']['#theme_wrappers'])
+    $vars['page']['content']['system_main']['#theme_wrappers'] AND
+    is_array($vars['page']['content']['system_main']['#theme_wrappers'])
     ) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
@@ -412,21 +414,8 @@ function mothership_preprocess(&$vars, $hook) {
 }
 
 /*
-freeform class killing
-*/
-function mothership_class_killer(&$vars){
-  $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
-  $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
-  $vars['classes'] = "";
-
-//  kpr($vars['classes_array']);
- // return $vars;
-}
-
-
-/*
-	// Purge needless XHTML stuff.
-	nathan ftw! -> http://sonspring.com/journal/html5-in-drupal-7
+  // Purge needless XHTML stuff.
+  nathan ftw! -> http://sonspring.com/journal/html5-in-drupal-7
 */
 function mothership_process_html_tag(&$vars) {
   $el = &$vars['element'];
@@ -438,6 +427,18 @@ function mothership_process_html_tag(&$vars) {
   if (isset($el['#attributes']['media']) && $el['#attributes']['media'] === 'all') {
     unset($el['#attributes']['media']);
   }
+}
+
+/*
+freeform class killing
+*/
+function mothership_class_killer(&$vars){
+  $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
+  $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
+  $vars['classes'] = "";
+
+//  kpr($vars['classes_array']);
+ // return $vars;
 }
 
 

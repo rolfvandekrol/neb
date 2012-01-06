@@ -25,17 +25,20 @@ function mothership_css_alter(&$css) {
 
 
   //book
-  $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
-  $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
-  foreach ($css as $file => $value) {
-    if (strpos($file, 'book.css') !== FALSE) {
-      unset($css[$file]);
-    }
-  }
+	if( theme_get_setting('mothership_css_nuke_book') AND module_exists('book') ) {
+
+	  $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
+	  $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
+	  foreach ($css as $file => $value) {
+	    if (strpos($file, 'book.css') !== FALSE) {
+	      unset($css[$file]);
+	    }
+	  }
+	
+	}
 
   //contectual
-  if(theme_get_setting('mothership_css_nuke_contextual')){
-    //add base
+  if(theme_get_setting('mothership_css_nuke_contextual') AND module_exists('contextual')){
     $css = drupal_add_css($mothership_csscore_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
     $css = drupal_add_css($mothership_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
     foreach ($css as $file => $value) {
@@ -43,7 +46,6 @@ function mothership_css_alter(&$css) {
         unset($css[$file]);
       }
     }
-
   }
 
   //theme.css

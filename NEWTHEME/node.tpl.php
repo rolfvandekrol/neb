@@ -28,11 +28,12 @@ hide($content['links']);
   <footer>
     <?php print $user_picture; ?>
     <span class="author"><?php print t('Written by'); ?> <?php print $name; ?></span>
-    <span class="date"><?php print t('On the'); ?> <time><?php print $date; ?></time></span>
+    <span class="date"><?php print t('Date'); ?> <time><?php print $date; ?></time></span>
     <span class="changed"><?php print t('Last'); ?> <time><?php print $changed; ?></time></span>
 
-	  <?php if(module_exists('comment')): ?>
-      <span class="comments"><?php print $comment_count; ?> Comments</span>
+    <span class="type"><?php print t('Type'); ?> <?php print $type; ?> </span>
+    <?php if(module_exists('comment')): ?>
+      <div class="comments">Comments: <?php print $comment_count; ?></div>
     <?php endif; ?>
   </footer>
 

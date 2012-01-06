@@ -74,9 +74,9 @@ function mothership_form_element($variables) {
   }
 
 	//if the form element is reguired add a form-required class
-	if(isset($element['#required'])){
-	  $attributes['class'][] = 'form-required';
-	}
+	//if(isset($element['#required'])){
+	//  $attributes['class'][] = 'form-required';
+	//}
   
 
   //freeform css class killing \m/
@@ -661,6 +661,7 @@ function mothership_form_alter(&$form, &$form_state, $form_id) {
 	//seach
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+    $form['search_block_form']['#attributes']['type'] = 'search';
   }
 	//login block
   if ($form_id == 'user_login_block') {

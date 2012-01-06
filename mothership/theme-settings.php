@@ -134,6 +134,12 @@ $form['mothership_info'] = array(
     '#collapsed'    => FALSE,
   );
 
+  $form['css']['nuke']['mothership_css_nuke_book'] = array(
+     '#type'          => 'checkbox',
+     '#title'         => t('change book.css & use contextual .base.css & .theme.css'),
+     '#default_value' => theme_get_setting('mothership_css_nuke_book')
+   );
+
   $form['css']['nuke']['mothership_css_nuke_contextual'] = array(
      '#type'          => 'checkbox',
      '#title'         => t('change contextual.css & use contextual .base.css & .theme.css'),
@@ -365,10 +371,6 @@ $form['mothership_info'] = array(
       global $base_url;
 
 
-
-
-
-
   /* ----------------------------- CSS CLASSES ----------------------------- */
   $form['classes'] = array(
       '#type'          => 'fieldset',
@@ -436,6 +438,16 @@ $form['mothership_info'] = array(
     '#default_value' => theme_get_setting('mothership_classes_body_path_first'),
     '#description'   => t('This will add the first path of the url. If you path looks like sitename.com/foo/bar then it will add .pathone-foo'),
   );
+
+  $form['classes']['body']['mothership_classes_body_status'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Adds a .status-[headerstatus] class'),
+    '#default_value' => theme_get_setting('mothership_classes_body_status'),
+    '#description'   => t('Adds status-404'),
+  );
+
+
+
 
   $form['classes']['body']['mothership_classes_body_freeform'] = array(
     '#type'          => 'textfield',
