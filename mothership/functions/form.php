@@ -51,9 +51,12 @@ function mothership_form_element($variables) {
 
 
   //date selects need the form-item for the show/hide end date
-  if ($element['#type'] == 'date_select' OR $element['#type'] == 'date_text' OR $element['#type'] == 'date_popup' ){ //AND 
-    $attributes['class'] = array('form-item');
-  }
+	if(isset($element['#type'])){
+	  if ($element['#type'] == 'date_select' OR $element['#type'] == 'date_text' OR $element['#type'] == 'date_popup' ){ //AND 
+	    $attributes['class'] = array('form-item');
+	  }
+		
+	}
 
   if (!empty($element['#type'])) {
     if(!theme_get_setting('mothership_classes_form_wrapper_formtype')){
@@ -71,7 +74,7 @@ function mothership_form_element($variables) {
   }
 
 	//if the form element is reguired add a form-required class
-	if($element['#required']){
+	if(isset($element['#required'])){
 	  $attributes['class'][] = 'form-required';
 	}
   
