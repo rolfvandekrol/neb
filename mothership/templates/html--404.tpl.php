@@ -17,6 +17,7 @@
 
 <article>
  <h1>These are not the nodes you are looking for</h1>
+<?php print $search; ?>
 
  <script>
    var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),

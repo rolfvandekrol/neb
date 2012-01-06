@@ -1,5 +1,14 @@
-<header class="cf">
-  
+<?php
+//kpr(get_defined_vars());
+//kpr($theme_hook_suggestions);
+//template naming
+//page--[CONTENT TYPE].tpl.php
+?>
+<!--page.tpl.php-->
+<?php print $mothership_poorthemers_helper; ?>
+
+<header class="cf" role="banner">
+
   <?php if ($logo): ?>
     <figure>
     <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
@@ -19,9 +28,10 @@
       <?php print render($page['header']); ?>
     </div>
   <?php endif; ?>
-  
+ 
 </header>
-  
+ 
+
 <div class="page cf">
 
   <article>
@@ -40,3 +50,7 @@
   </article>
 
 </div>
+
+<footer role="contentinfo">
+  <?php print render($page['footer']); ?>
+</footer>
