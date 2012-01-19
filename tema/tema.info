@@ -7,29 +7,29 @@ php = 4.2
 base theme = mothership
 
 ;-------------- F E A T U R E S -------------
-features[] = logo
-features[] = favicon
-features[] = name
-;features[] = slogan
-features[] = node_user_picture
-features[] = comment_user_picture
-features[] = comment_user_verification
+features[] 	= logo
+features[] 	= favicon
+features[] 	= name
+features[] 	= slogan
+features[] 	= node_user_picture
+features[] 	= comment_user_picture
+features[] 	= comment_user_verification
 ;features[] = main_menu
 ;features[] = secondary_menu
 
 ;-------------- R E G I O N S -------------
-regions[header] = Header
-regions[header_second] = Header Second
+regions[header] 		= Header
+regions[menu] 			= Header menu
 regions[sidebar_first]  = Sidebar First
 regions[sidebar_second] = Sidebar Second
-regions[content_pre]  = Content Pre
-regions[content]      = Content
-regions[content_post] = Content Post
-regions[half_first]   = 1. Half column
-regions[half_second]  = 2. Half column
-regions[third_firstcolumn]  = Content 1. column
-regions[third_secondcolum]  = Content 2. column
-regions[third_thirdcolumn]  = Content 3. column
+regions[content_pre]  	= Content Pre
+regions[content]      	= Content
+regions[content_post] 	= Content Post
+regions[half_first]   	= content 2 - 1. column
+regions[half_second]  	= content 2 - 2 column
+regions[third_firstcolumn]  = Content 3 - 1. column
+regions[third_secondcolum]  = Content 3 - 2. column
+regions[third_thirdcolumn]  = Content 3 - 3. column
 regions[footer_firstcolumn]   = Footer 1. column
 regions[footer_secondcolumn]  = Footer 2. column
 regions[footer_thirdcolumn]   = Footer 3. column
@@ -42,10 +42,26 @@ regions[page_bottom] = Page Bottom
 regions[highlighted] = Highlighted
 regions[help] = Help
 
-
 ;-------------- C S S -------------
 stylesheets[all][] = css/style.css
+stylesheets[print][] = css/print.css
+
+;-------------- CSS FOAD -------------
+;stylesheets[all][] = whatever....css
+;stylesheets[all][] = system.base.css
+stylesheets[all][] = system.messages.css
+stylesheets[all][] = comment.css
+stylesheets[all][] = node.css
+stylesheets[all][] = user.css
+stylesheets[all][] = aggregator.css
+stylesheets[all][] = field.css
+stylesheets[all][] = menu.css
+stylesheets[all][] = profile.css
+stylesheets[all][] = search.css
+stylesheets[all][] = image.css
+stylesheets[all][] = field_ui.css
 
 ;-------------- JS -------------
-scripts[] = js/slides.min.jquery.js
-scripts[] = js/tema.js
+scripts[] = js/script.js
+scripts[] = js/jquery.tablesorter.js
+;scripts[] = js/modernizr.custom.js

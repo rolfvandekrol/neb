@@ -1,0 +1,285 @@
+/* ------------------------------------------------------------------------------------------------------------
+	Drupal elements
+------------------------------------------------------------------------------------------------------------ */
+
+/* ----------------1 admin ------------------- */
+//admin
+body.admin-menu{
+  background-position: 0 21px!important;
+}
+
+/* 1 Messages  */
+@mixin  messagebox($color){
+  background: $color;
+  border-color: darken($color, 30%);
+  color:desaturate(darken($color, 50%), 60%);
+  
+  a{ 
+    color:desaturate(darken($color, 50%), 60%);    
+  }
+  li{ 
+    border-color:desaturate(darken($color, 50%), 60%);
+  }
+
+}
+
+.warning{
+  @include messagebox(#fef5f1)
+}
+
+.messages{
+	width: 90%;
+	margin: $baseline/2 auto;
+	clear: both;
+  padding: $baseline/2 20px ;
+	font-size: $basefont; 
+  border:1px dotted;
+  //background: #eee url('../images/message-24-error.png') no-repeat 10px 10px ;
+  @include border-radius(3px);
+	li{
+		border-bottom:1px dashed;
+		padding:5px 0;
+    width:95%;
+    list-style: none inside;
+	}
+	a{font-weight:bold;}
+	
+	//green	
+	&.status{
+    @include messagebox(#f8fff0 );
+  }
+  //yello
+	&.warning{
+    @include messagebox(#fffce5);
+  }
+  //red
+	&.error{
+    @include messagebox(#fef5f1);  
+  }
+
+}
+
+/* status */
+.node-unpublished{
+	background-color:#fddfde;
+	background-color:rgba(253, 223, 222,.7);
+	@include box-shadow(inset 0px 0px 1px 0px #eab8b6); //sneaky border
+	float:left;
+}
+
+/* 2 Tabs */
+nav.tabs{
+	border-top:1px solid #444;
+	border-bottom:1px solid #444;
+	padding:0px 10px;
+	margin:5px 10px;
+
+	li{
+		display:inline-block;
+	}
+  .active{
+    font-weight:bold;
+    background:#ededed;
+  }
+	.primary{
+		border-bottom:1px solid #666;
+ }
+ .secondary{
+
+ }
+}
+
+/* 3 Contextual  */
+
+/* 4 Pager  */
+.item-list-pager {
+  padding:5px 0;
+  text-align:center;
+
+}
+.pager{
+  display:inline-block;
+  li{
+		float:left; 
+		display:inline-block;
+		//set the base for each element
+    a,
+		&.current,
+		&.ellipsis {
+			padding:5px 10px;
+			border:1px solid #ddd;
+			border-right:none;
+			background:#efefef;		
+		}
+    a{
+      display:block;
+    }
+    a:hover{
+			background:#ececec;
+			cursor: pointer;
+			@include text-shadow(rbga(1,50,50,0.9), 0px, 0px, 2px);
+			text-decoration:none;
+		}
+    &.first a{
+			@include border-radius(3px 0 0 3px);			
+    }
+    &.last a{
+			@include border-radius(0 3px 3px 0);			
+			border-right:1px solid #ddd;
+    }
+    &.current{
+			background-color:#eaeaea;	
+			font-weight:bold;	
+			color:#666;
+		}
+		
+		&.ellipsis {
+			color:#ccc;
+			padding:5px;
+		}
+
+    &.next{
+
+    }
+
+    &.last{
+
+    }
+
+    &.previous{
+
+    }
+  }
+
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------
+5 Drupal widgets
+------------------------------------------------------------------------------------------------------------ */
+
+/* block */
+.block{
+  margin-bottom:5px;
+  padding-bottom:5px;
+  border-bottom:2px solid #444;
+
+  .title{
+	  font-size:$basefont * 1;
+    line-height:$baseline; 
+    margin:0;
+    text-transform: uppercase;
+  }  
+}
+
+.status-404{
+//	background-color:pink;
+}
+
+.site-slogan{
+  color:#aaa;
+  width:160px;
+  display:block;
+  font-weight:700;
+  font-size:11px;
+  line-height:12px;
+  float:left;
+}
+
+/* ----------------------------- drupal widgets: user login.------------------------------------------------ */
+#user-login-form{
+	.form-type-textfield, 
+	.form-type-password{
+		padding:5px 0;
+		text-align:right;
+	} 
+
+
+	label{display:none;}
+	input{width:90%;}
+	.oldie & label{	width:40%; display: inline}
+	.oldie & input{	width:50%;}
+	.ie9 & label{	width:40%; display: inline}
+	.ie9 & input{	width:50%;}
+
+	.form-actions{
+		text-align:right;
+	}
+	input[type=submit]{
+		width:auto;
+	}
+
+	small{
+		text-align:right
+	}
+
+	.register{
+	text-align:center;
+	}
+}
+
+/*--------------- user  login  ----*/
+#user-login{
+	label{
+		width:40%;
+	}
+	input{
+		width:52%;	
+	}
+}
+
+/*--------------- user register */
+#edit-account{
+	label{
+	
+	}
+	input{
+	
+	}
+}
+
+/*--------------- user request password */
+#user-pass{
+	label{
+	
+	}
+	input{
+	
+	}
+}
+
+
+/* ----------------------------- drupal widgets: search.------------------------------------------------ */
+.search{
+  input[type="search"]{
+    @include boxwidth(125px, 10px);
+    height:23px;
+    background: url(../images/search.png) no-repeat;
+    border:none;
+    float:left;
+		@include box-shadow(0px 0px 0px 0px rgba(82, 168, 236, 1) );	
+		@include border-radius(0px);			
+  }
+
+  input[type="submit"], input[type="submit"]#edit-submit{
+    @include boxwidth(28px);
+		padding:0;
+		margin:0;
+    height:23px;
+		background-image:none;
+		background-color: transparent;
+    background: transparent url(../images/search-submit.png) no-repeat;
+		
+    @include hide-text;
+    float:left;
+    border:none;
+		@include border-radius(0px);		
+		@include box-shadow(0px 0px 0px 0px rgba(82, 168, 236, 1) );
+  }
+
+	.form-actions{
+		float:none;
+	}
+}
+
+

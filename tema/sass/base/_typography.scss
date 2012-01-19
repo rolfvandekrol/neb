@@ -1,0 +1,83 @@
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:	$basefont; 
+	line-height: $baseline;
+  color:#444;
+}
+h1,h2, h3, h4, h5, h6{
+  font-weight: bold;
+	margin:0;
+}
+h1{
+  font-size:$basefont * 5;
+	line-height:$basefont * 4; 
+  margin-bottom:$baseline / 2 ;
+	text-transform: uppercase;
+}
+h2{
+  font-size:	$basefont * 3;
+	line-height:$baseline * 1.5; 
+	margin: 0 0 $baseline / 2 0;		
+}
+h3{
+  font-size:$basefont * 2;
+	line-height:$baseline * 2; 
+}
+h4{
+	font-size:$basefont * 1.5;
+	line-height:$baseline; 
+}
+h5, h6{
+	font-size:$basefont;
+	line-height:$baseline; 
+}
+p, ol, ul, dl, address {
+	margin:0 0 $baseline / 2 0;		
+}
+
+ul,ol { }
+li ul, li ol { }
+dl{ 
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+dt {
+	font-weight:bold; 
+  color:#488AB2; 
+	margin-top:$basefont / 2;			
+  font-size:$basefont * 1;			
+}
+dd {
+  margin-left:0px;
+}
+
+blockquote  { margin : 0 0 1.5em -24px; padding-left : 24px; border-left : 1px solid #666; font-style : italic; }
+blockquote:before, blockquote:after, q:before, q:after {content : ''; content : none; }
+q { quotes : none; }
+q:before, q:after { content : ""; content : none; }
+
+abbr[title] { border-bottom : 1px dotted; cursor : help; }
+b, strong { font-weight : bold; }
+dfn { font-style : italic; }
+hr { display : block; margin : 1em 0; padding : 0;height : 1px; border : 0; border-top : 1px solid #666}
+ins { }
+mark {}
+pre, code, kbd, samp { 
+	font-family : monospace, monospace;  
+	_font-family : 'courier new', monospace; 
+	line-height : 1.5;
+	background:#FEE9CC;
+	text-shadow: 0 1px 0 rgba(250,250,250,.9);
+  @include border-radius(2px);
+	border:1px solid #E0CEB6;
+	@include box-shadow(inset 0px 0px 5px 0px rgba(255, 255, 255, 0.3), 0px 0px 4px 0px rgba(50, 50, 50, .5) );
+	padding:10px 20px;
+}
+pre { white-space : pre;  white-space : pre-wrap;  word-wrap : break-word;}
+/*
+small { font-size : 1em; }
+sub, sup { font-size : 75%; line-height : 0; position : relative; vertical-align : baseline; }
+sup { top : -.5em; }
+sub { bottom : -.25em; }
+*/
+
