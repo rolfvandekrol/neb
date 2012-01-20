@@ -259,7 +259,7 @@ input, textarea, select{
 		@include box-shadow(0px 0px 5px 0px #DA5E42 );
 	}
 	&[required]{
-		border-color:#444;
+//		border-color:#444;
 		&:hover{
 			border-color:#DA5E42;
 			@include box-shadow(0px 0px 2px 0px #DA5E42 );
@@ -987,114 +987,11 @@ form .filter-guidelines{float:left; display: none}
 }
 
 
-/* ----------------------------- drupal widgets: password gen.------------------------------------------------ */
-//wonder why these class names seems to stick no matter what we do oooh well lets use em
-input.username{
-  width:30%;
-}
-#edit-mail{
-  width:30%;
-}
-
-
-
-.confirm-parent, .password-parent {
-	width:auto
-}
-.form-type-password{
-  input{
-
-  }
-  small, .description{
-  
-	}
-}
-
-.form-type-password-confirm{
-	position:relative;
-
-  .password-suggestions {
-    background: #efefef url(../images/bijou/left.png) no-repeat  5px 5px;
-    position:absolute;
-    top:0px;
-    left:420px;
-    border:1px solid #ddd;
-    padding:0px 10px 5px 20px ;
-		@include border-radius(3px);    
-    &:first-line{
-      font-weight:bold
-    }
-    ul{
-      padding-left:0;
-      list-style: none inside;
-    }
-  }
-
-  .description, small{
-    width:30%;
-
-  }
-
-}
-
-//strength indicator
-.password-strength{
-  position:absolute;
- 	left:340px;
-	top:-15px;
-
-  //hide the password text indicator weak/stong etc
-  .password-strength-text{
-    display:none;
-  }
-  .password-strength-title{
-		text-indent:-900em;
-  }
-	.password-indicator{
-	  background-color: #eee;
-	  height: 15px;
-	  width: 60px;
-		@include border-radius(3px);
-	}
-
-	//succes bar  
-  .password-indicator div {
-    height: 100%;
-    width: 0%;
-    background-color:#ddd;
-    @include border-radius(3px);  
-  } 
-
-}
-
-//confirm icon
-div.password-confirm{
-  text-indent:-999em;
-	position:absolute;
-  top:38px;
-  left:380px;
-
-  .ok{
-    display:block;
-    width:20px;
-    height:20px;
-    background: transparent url(../images/bijou/like.png) no-repeat  center center;
-  }
-  .error{
-    display:block;
-    width:20px;
-    height:20px;
-    background: transparent url(../images/bijou/remove.png) no-repeat center center;
-  }
-}
-
-//status for user
-#edit-status{
-  padding-left:19%;
-}
-
+/* ----------------------------- drupal widgets: user contact file ------------------------------------------------ */
 .contact-form{
-  .form-type-checkbox{padding-left:19%}
+  .form-type-checkbox{
+    padding-left:19%
+  }
 }
 /* ----------------------------- drupal widgets: image file ------------------------------------------------ */
 

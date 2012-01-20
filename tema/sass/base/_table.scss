@@ -51,26 +51,6 @@ table.sticky-header {
   margin-top: 0;
 }
 
-.draggable a.tabledrag-handle {
-  cursor: move;
-  float: left; /* LTR */
-  height: 1.7em;
-  margin: -0.4em 0 -0.4em -0.5em; /* LTR */
-  padding: 0.42em 1.5em 0.42em 0.5em; /* LTR */
-  text-decoration: none;
-}
-a.tabledrag-handle:hover {
-  text-decoration: none;
-}
-a.tabledrag-handle .handle {
-  background: url(../images/draggable.png) no-repeat 0 0;
-  height: 13px;
-  margin-top: 4px;
-  width: 13px;
-}
-a.tabledrag-handle-hover .handle {
-  background-position: 0 -20px;
-}
 
 /* ----------------------------- Tablesort JQuery  ------------------------------------------------ */	
 .tablesort th{padding-right:15px; color:#129AC2;}
