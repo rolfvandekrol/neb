@@ -187,6 +187,7 @@ nav.tabs{
 }
 
 /* ----------------------------- drupal widgets: user login.------------------------------------------------ */
+//block
 #user-login-form{
 	.form-type-textfield, 
 	.form-type-password{
@@ -218,25 +219,13 @@ nav.tabs{
 	}
 }
 
-/*--------------- user  login  ----*/
-#user-login{
-	label{
-		width:40%;
-	}
-	input{
-		width:52%;	
-	}
-}
+
 
 /*--------------- user register */
-#edit-account{
-	label{
-	
-	}
-	input{
-	
-	}
+#user-register-form{
+ 
 }
+
 
 /*--------------- user request password */
 #user-pass{
@@ -246,6 +235,199 @@ nav.tabs{
 	input{
 	
 	}
+}
+
+/*--------------- user  login  ----*/
+body.page-user .tabs{
+  display:none
+}
+
+
+#user-login{
+ width:250px;
+ margin:10px auto;
+ text-align:center;
+ background:#eee;
+ border:1px solid #ddd;
+ @include border-radius(5px);
+ padding:10px;
+
+ label{
+   text-align:left;
+   width:0px;
+   text-indent: -9999px;
+   padding:0;
+   margin:0;
+ }
+
+ input{
+   width:200px;
+ }
+ #edit-name{
+  background: #fff url(../images/bijou/Person.png) no-repeat  5px center;
+  padding-left:20px;
+ }
+ input[type="password"]{
+  background: #fff url(../images/bijou/key.png) no-repeat  5px center;
+  padding-left:20px;
+ }
+
+ .form-type-textfield,
+ .form-type-password{
+   padding:3px 0; 
+   margin:0;
+  }
+ .register,
+ .password{
+    font-size:$basefont * 0.5;
+    font-size:$baseline * 0.5;
+    a{  
+      text-decoration: none
+    }
+  }
+
+  .form-actions{
+  padding-bottom:0px;
+  }
+
+}
+
+
+/* skin form tooltips */
+//tooltips
+form.tooltip{
+  small,
+  .description{
+    text-align:left;
+    width:200px;
+    color: white;
+    background: #666;
+    @include border-radius(2px);    
+    margin-left:8px;
+    padding: 1px 6px;
+    z-index: 999;
+    position: absolute; 
+    display: none;
+  }
+  small:before,
+  .description:before {
+      content: "\25C0"; 
+      color:#666;
+      position: absolute;
+      top:1px;
+      left:-6px;
+   }
+  //activate the tooltop
+  input:focus + small,
+  input:focus + .description {
+    display: inline;
+  }
+
+}
+
+/* ----------------------------- drupal widgets: login.------------------------------------------------ */
+
+/* ----------------------------- drupal widgets: password gen.------------------------------------------------ */
+//wonder why these class names seems to stick no matter what we do oooh well lets use em
+input.username{
+  width:30%;
+}
+#edit-mail{
+  width:30%;
+}
+.confirm-parent, .password-parent {
+	width:auto
+}
+.form-type-password{
+  input{
+
+  }
+  small, .description{
+  
+	}
+}
+
+.form-type-password-confirm{
+	position:relative;
+
+  .password-suggestions {
+    background: #efefef url(../images/bijou/left.png) no-repeat  5px 5px;
+    position:absolute;
+    top:0px;
+    left:420px;
+    border:1px solid #ddd;
+    padding:0px 10px 5px 20px ;
+		@include border-radius(3px);    
+    &:first-line{
+      font-weight:bold
+    }
+    ul{
+      padding-left:0;
+      list-style: none inside;
+    }
+  }
+
+  .description, small{
+    width:30%;
+
+  }
+
+}
+
+//strength indicator
+.password-strength{
+  position:absolute;
+ 	left:340px;
+	top:-15px;
+
+  //hide the password text indicator weak/stong etc
+  .password-strength-text{
+    display:none;
+  }
+  .password-strength-title{
+		text-indent:-900em;
+  }
+	.password-indicator{
+	  background-color: #eee;
+	  height: 15px;
+	  width: 60px;
+		@include border-radius(3px);
+	}
+
+	//succes bar  
+  .password-indicator div {
+    height: 100%;
+    width: 0%;
+    background-color:#ddd;
+    @include border-radius(3px);  
+  } 
+
+}
+
+//confirm icon
+div.password-confirm{
+  text-indent:-999em;
+	position:absolute;
+  top:38px;
+  left:380px;
+
+  .ok{
+    display:block;
+    width:20px;
+    height:20px;
+    background: transparent url(../images/bijou/like.png) no-repeat  center center; 
+  }
+  .error{
+    display:block;
+    width:20px;
+    height:20px;
+    background: transparent url(../images/bijou/remove.png) no-repeat center center;
+  }
+}
+
+//status for user
+#edit-status{
+  padding-left:19%;
 }
 
 
