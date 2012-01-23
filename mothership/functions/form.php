@@ -431,11 +431,15 @@ function mothership_file($variables) {
   }
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
-
+/*
+  adds a comment field under the 2password
+  
+*/
 function mothership_password($variables) {
   $element = $variables['element'];
   $element['#size'] = '30';
   $element['#attributes']['type'] = 'password';
+
   element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
 //  element_set_attributes($element, array('id', 'name',  'maxlength'));
   if(!theme_get_setting('mothership_classes_form_input')){
@@ -452,7 +456,16 @@ function mothership_password($variables) {
   }
 
 
-  return '<input' . drupal_attributes($element['#attributes']) . ' />';
+
+  
+  if($variables['element']['#id'] == "edit-pass-pass1"){
+     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Enter a password').'</small>' ;  
+  }elseif($variables['element']['#id'] == "edit-pass-pass2"){
+     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Repeat the password').'</small>' ;      
+  }else{
+    return '<input' . drupal_attributes($element['#attributes']) . ' />' ;  
+  }
+
 }
 
 /* removed form-select */
