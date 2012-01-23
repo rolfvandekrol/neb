@@ -48,8 +48,8 @@ input,textarea,select {
 }
 input{
   font-size: $basefont;
-  height: $baseline;
-  line-height: $baseline;
+  height: $baseline * 1.5;
+  line-height: $baseline * 1.5;
 	width:78%;
 	display:inline-block;	
 }
@@ -330,8 +330,6 @@ input[type=checkbox] ~ label:hover{
 .field-type-node-reference,
 .field-type-user-reference 
 {
-//	@extend .cf;
-//	@extend .shade;	
   padding:5px 0;	
 	margin:5px 0;
 }
@@ -339,6 +337,9 @@ input[type=checkbox] ~ label:hover{
 //item wrappers 
 .form-item{
 
+}
+.form-radios{
+  display:inline-block;
 }
 .form-type-link-field,
 .form-type-urlfield,
@@ -450,9 +451,7 @@ form .field-type-text-long{
 
 }
 form .form-type-link-field{
-
 	& > div	{
-		@extend .shade;
 		margin:5px;
 		padding:5px;
 	}
@@ -886,9 +885,6 @@ tr .ajax-progress .throbber {
 .ajax-progress-bar {
   width: 16em;
 }
-
-
-
 
 /* ----------------------------- Drupal widget:  text input Filter selector ------------------------------------------------ */
 form .filter-wrapper{
