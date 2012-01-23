@@ -238,11 +238,31 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
 
+    
 
-    //unset regions in the frontpage
-//    if (drupal_is_front_page() AND theme_get_setting('mothership_frontpage_regions')) {
-    //  unset($vars['page']['sidebar_first'], $vars['page']['sidebar_second'], $vars['page']['content']);
-  //  }
+    /*-
+      USER ACCOUNT     
+      Removes the tabs from user  login, register & password
+      fixes the titles to so no more "user account" all over
+    */
+    switch (current_path()) {
+      case 'user':
+        $vars[title] = t('Login');
+        unset( $vars[tabs] );
+        break;
+      case 'user/register':
+        $vars[title] = t('New account');
+        unset( $vars[tabs] ); 
+        break;
+      case 'user/password':
+        $vars[title] = t('DOH! I forgot my password');
+        unset( $vars[tabs] );
+        break;
+      
+      default:
+        # code...
+        break;
+    }
 
 
 
