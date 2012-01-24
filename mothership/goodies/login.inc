@@ -25,9 +25,7 @@ adds links from the tabs to the login page
 */
 
 function mothership_form_user_login_alter(&$form, &$form_state, $form_id) {
-  kpr($form);
-
-//$form['name']['#prefix'] =  '<b>' . l(t('Register a new account'), 'user/register', array('attributes' => array('class' => 'login-register', 'title' => t('Create a new user account')))) . '</b>';	
+  //$form['name']['#prefix'] =  '<b>' . l(t('Register a new account'), 'user/register', array('attributes' => array('class' => 'login-register', 'title' => t('Create a new user account')))) . '</b>';	
 	$form['pass']['#suffix'] = '<b>' . l(t('Forgot password?'), 'user/password', array('attributes' => array('class' => 'login-password', 'title' => t('Get a new password')))) . '</b>';	
 }
 
