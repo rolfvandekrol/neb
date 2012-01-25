@@ -7,25 +7,28 @@ if ($classes) {
 <!-- comments -->
 <article<?php print $classes; ?><?php print $attributes; ?>>
 
-  <?php print render($title_prefix); ?>
-  <?php if ($title): ?>
-    <h2<?php print $title_attributes; ?>>
-      <?php print $title; ?>
-    </h2>
-    <?php endif; ?>
-  <?php print render($title_suffix); ?>
-
-  <footer class="meta">
+  <footer>
     <?php if ($new): ?>
       <mark><?php print $new; ?></mark>
     <?php endif; ?>
+    <figure>
+      <?php print $picture; ?>
+      <figcaption><?php print $author; ?></figcaption>
+    </figure>
 
-    author: <?php print $author; ?>
-    created: <time><?php print $created; ?></time>
-    changed: <time><?php print $changed; ?></time>
+    <span class="date"><?php print t('Date'); ?> <time><?php print $created; ?></time></span>
+    <span class="changed"><?php print t('Last'); ?> <time><?php print $changed; ?></time></span>
+    
     <?php print $permalink; ?>
-    <?php print $picture; ?>      
   </footer>
+
+  <?php print render($title_prefix); ?>
+  <?php if ($title): ?>
+    <h3<?php print $title_attributes; ?>>
+      <?php print $title; ?>
+    </h3>
+    <?php endif; ?>
+  <?php print render($title_suffix); ?>
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
@@ -40,6 +43,7 @@ if ($classes) {
       </aside>
     <?php endif; ?>
   </div>
+
 
   <?php print render($content['links']) ?>
 </article> <!-- /.comment -->

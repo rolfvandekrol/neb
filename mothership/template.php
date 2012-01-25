@@ -320,7 +320,8 @@ function mothership_preprocess(&$vars, $hook) {
 
   } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
-
+//    kpr($vars['status']);
+    
     $vars['id_node'] ="";
 
     if (theme_get_setting('mothership_classes_node')) {
@@ -332,10 +333,32 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-unpublished')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-promoted')));
     }
+    /*
+      change node-xxx to a more generalised name so we can use the same class other places
+      fx in the comments
+    */
+
+  //    kpr($vars);
+
+    if (theme_get_setting('mothership_classes_state')) {
+      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky','node-unpublished', 'node-promoted')));
+      if($vars['promote']){
+        $vars['classes_array'][] = 'promote';
+      }
+      if($vars['sticky']){
+        $vars['classes_array'][] = 'sticky';
+      }
+
+      if($vars['status'] =!"0"){
+        $vars['classes_array'][] = 'unpublished';
+      }
+      
+    }
 
     if (isset($vars['preview'])) {
       $vars['classes_array'][] = 'node-preview';
     }
+
 
     //freeform css class killing
     $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
@@ -369,10 +392,12 @@ function mothership_preprocess(&$vars, $hook) {
 
   } elseif ( $hook == "comment" ) {
     // =======================================| COMMENT |========================================
-      $vars['classes_array'][] = 'wooho';
-
       if ($vars['elements']['#comment']->new){
-        $vars['classes_array'][] = ' comment-unpublished';
+        $vars['classes_array'][] = ' new';
+      }
+
+      if ($vars['status'] == "comment-unpublished"){
+         $vars['classes_array'][] = ' unpublished';
       }
 
       //remove inline class from the ul links

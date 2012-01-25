@@ -546,9 +546,16 @@ $form['mothership_info'] = array(
 
   $form['classes']['node']['mothership_classes_node_state'] = array(
     '#type'          => 'checkbox',
-    '#title'         => t('Remove the node publishing classes (.node-sticky | .node-unpublished | .node-promoted)'),
+    '#title'         => t('Remove the node publishing state classes (.node-sticky | .node-unpublished | .node-promoted)'),
     '#default_value' => theme_get_setting('mothership_classes_node_state')
   );
+
+  $form['classes']['node']['mothership_classes_state'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the node- prefix from stat (.sticky | .unpublished | .promoted) ') ,
+    '#default_value' => theme_get_setting('mothership_classes_state')
+  );
+
 
   $form['classes']['node']['mothership_classes_node_id'] = array(
     '#type'          => 'checkbox',
