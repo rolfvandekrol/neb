@@ -10,7 +10,7 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.p
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/system.php';
-
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/date.php';
 
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/blockify.php';
 //load in the goodies?
@@ -349,7 +349,7 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['classes_array'][] = 'sticky';
       }
 
-      if($vars['status'] =!"0"){
+      if($vars['status'] =="0"){
         $vars['classes_array'][] = 'unpublished';
       }
       
