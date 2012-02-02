@@ -550,13 +550,6 @@ $form['mothership_info'] = array(
     '#default_value' => theme_get_setting('mothership_classes_node_state')
   );
 
-  $form['classes']['node']['mothership_classes_state'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Remove the node- prefix from stat (.sticky | .unpublished | .promoted) ') ,
-    '#default_value' => theme_get_setting('mothership_classes_state')
-  );
-
-
   $form['classes']['node']['mothership_classes_node_id'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Add the node-id as an id (#node-$id)'),
@@ -852,6 +845,14 @@ $form['mothership_info'] = array(
     '#collapsed' => TRUE,
     '#weight'=> -10
   );
+
+
+  $form['misc']['mothership_classes_state'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the node- prefix from stat classes (.sticky | .unpublished | .promoted) can be used in the comment. This will give us one class for inpublished that is not tainted by beeing node') ,
+    '#default_value' => theme_get_setting('mothership_classes_state')
+  );
+
 
   $form['misc']['mothership_viewport'] = array(
     '#type'          => 'checkbox',
