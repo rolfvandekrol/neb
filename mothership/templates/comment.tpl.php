@@ -1,11 +1,19 @@
 <?php
-
 if ($classes) {
   $classes = ' class="'. $classes . ' "';
 }
 ?>
 <!-- comments -->
 <article<?php print $classes; ?><?php print $attributes; ?>>
+
+  <?php print render($title_prefix); ?>
+  <?php if ($title): ?>
+    <h3<?php print $title_attributes; ?>>
+      <?php print $title; ?>
+    </h3>
+  <?php endif; ?>
+  <?php print render($title_suffix); ?>
+
 
   <footer>
     <?php if ($new): ?>
@@ -16,19 +24,13 @@ if ($classes) {
       <figcaption><?php print $author; ?></figcaption>
     </figure>
 
-    <span class="date"><?php print t('Date'); ?> <time><?php print $created; ?></time></span>
-    <span class="changed"><?php print t('Last'); ?> <time><?php print $changed; ?></time></span>
+    <span class="date"><time><?php print $created; ?></time></span>
+    <span class="changed">(<?php print t('changed'); ?> <time><?php print $changed; ?></time>)</span>
     
-    <?php print $permalink; ?>
+    <?php // print $permalink; ?>
   </footer>
 
-  <?php print render($title_prefix); ?>
-  <?php if ($title): ?>
-    <h3<?php print $title_attributes; ?>>
-      <?php print $title; ?>
-    </h3>
-    <?php endif; ?>
-  <?php print render($title_suffix); ?>
+
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php

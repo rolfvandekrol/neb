@@ -28,17 +28,17 @@
  */
 ?>
 <!-- comments-wrapper -->
-<div id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<aside id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
-  <?php if ($node->type != 'forum'): ?>
-    <h3><?php print t('Comments'); ?></h3>
-  <?php endif; ?>
+<?php if ($node->type != 'forum'): ?>
+  <h2><?php print t('Comments'); ?></h2>
+<?php endif; ?>
 
-  <?php print render($content['comments']); ?>
+<?php print render($content['comments']); ?>
 
-  <?php if ($content['comment_form']): ?>
-    <h3><?php print t('Add new comment'); ?></h3>
-    <?php print render($content['comment_form']); ?>
-  <?php endif; ?>
+<?php if ($content['comment_form']): ?>
+  <h3><?php print t('Add new comment'); ?></h3>
+  <?php print render($content['comment_form']); ?>
+<?php endif; ?>
 
-</div>
+</aside>
