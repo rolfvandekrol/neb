@@ -17,17 +17,17 @@ function mothership_form($variables) {
   }
 
 	return '<form' . drupal_attributes($element['#attributes']) . ' role="form">' . $element['#children'] . '</form>';
-  
+
 }
 
 /*
 
 changes the classes from the div wrapper around each field
 change the div class="description" to <small>
-adds form-required 
+adds form-required
 */
 function mothership_form_element($variables) {
-	
+
   $element = &$variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
@@ -52,10 +52,10 @@ function mothership_form_element($variables) {
 
   //date selects need the form-item for the show/hide end date
 	if(isset($element['#type'])){
-	  if ($element['#type'] == 'date_select' OR $element['#type'] == 'date_text' OR $element['#type'] == 'date_popup' ){ //AND 
+	  if ($element['#type'] == 'date_select' OR $element['#type'] == 'date_text' OR $element['#type'] == 'date_popup' ){ //AND
 	    $attributes['class'] = array('form-item');
 	  }
-		
+
 	}
 
   if (!empty($element['#type'])) {
@@ -74,10 +74,10 @@ function mothership_form_element($variables) {
   }
 
 	//if the form element is reguired add a form-required class
-	//if(isset($element['#required'])){
-	//  $attributes['class'][] = 'form-required';
-	//}
-  
+	if(isset($element['#required'])){
+	  $attributes['class'][] = 'form-required';
+	}
+
 
   //freeform css class killing \m/
   if($attributes['class']){
@@ -276,13 +276,13 @@ function mothership_link_field($vars) {
 
 	//placeholder
 	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');	
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');
 	}
 	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
   }
 
-  
+
 	$output = '';
 //  $output .= '<div class="link-field-subrow">WTF';
   if (!empty($element['attributes']['target'])) {
@@ -297,7 +297,7 @@ function mothership_link_field($vars) {
 
 
 /*
-module: elements 
+module: elements
 file: elements.theme.inc
 */
 function mothership_emailfield($variables) {
@@ -309,7 +309,7 @@ function mothership_emailfield($variables) {
 
 	//placeholder
 	if( theme_get_setting('mothership_classes_form_placeholder_email') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_email');	
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_email');
 	}
 	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
@@ -317,7 +317,7 @@ function mothership_emailfield($variables) {
 
   //is this element requred then lest add the required element into the input
    $required = !empty($element['#required']) ? ' required' : '';
-		
+
 
   $extra = elements_add_autocomplete($element);
   $output = '<input' . drupal_attributes($element['#attributes']) . $required . ' />';
@@ -334,7 +334,7 @@ function mothership_urlfield($variables) {
 
 	//placeholder
 	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');	
+    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');
 	}
 	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
@@ -374,7 +374,7 @@ function mothership_textarea($variables) {
     drupal_add_library('system', 'drupal.textarea');
     $wrapper_attributes['class'][] = 'resizable';
   }
-  
+
 	//is this element requred then lest add the required element into the input
    $required = !empty($element['#required']) ? ' required' : '';
 
@@ -433,7 +433,7 @@ function mothership_file($variables) {
 }
 /*
   adds a comment field under the 2password
-  
+
 */
 function mothership_password($variables) {
   $element = $variables['element'];
@@ -457,13 +457,13 @@ function mothership_password($variables) {
 
 
 
-  
+
   if($variables['element']['#id'] == "edit-pass-pass1"){
-     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Enter a password').'</small>' ;  
+     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Enter a password').'</small>' ;
   }elseif($variables['element']['#id'] == "edit-pass-pass2"){
-     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Repeat the password').'</small>' ;      
+     return '<input' . drupal_attributes($element['#attributes']) . ' /><small>'. t('Repeat the password').'</small>' ;
   }else{
-    return '<input' . drupal_attributes($element['#attributes']) . ' />' ;  
+    return '<input' . drupal_attributes($element['#attributes']) . ' />' ;
   }
 
 }
@@ -567,7 +567,7 @@ function mothership_container($variables) {
 		if(theme_get_setting('mothership_classes_form_container_name')){
 			$element['#attributes']['class']['1'] = "";
 		}
-		
+
 		//remove the field-widget-....
 		if(theme_get_setting('mothership_classes_form_container_widget')){
 			$element['#attributes']['class']['2'] = "";
@@ -585,8 +585,8 @@ function mothership_container($variables) {
 
 /*
 overwrite the fields edit modes multiple elements
-adds a nother class in besides the form-item as a wrapper so theres something to work with 
-	
+adds a nother class in besides the form-item as a wrapper so theres something to work with
+
 */
 
 function mothership_field_multiple_value_form($variables) {
@@ -664,13 +664,13 @@ function mothership_field_multiple_value_form($variables) {
 more Placeholder sweetness
 */
 function mothership_form_alter(&$form, &$form_state, $form_id) {
-/*  
+/*
 	print "<pre>";
 	print_r($form_id);
 	print_r($form);
-	print "</pre>";	
-*/	
-	
+	print "</pre>";
+*/
+
 	//seach
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#attributes']['placeholder'] = t('Search');
@@ -680,7 +680,7 @@ function mothership_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login_block') {
 	  $form['name']['#attributes']['placeholder'] = $form['name']['#title'];
 	  $form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
-	}		
+	}
 
 	//login Register
 	if($form_id == 'user_register_form'){
@@ -694,10 +694,10 @@ function mothership_form_alter(&$form, &$form_state, $form_id) {
 		$form['account']['mail']['#attributes']['placeholder'] = $mail_placeholder;
 	}
 
-	//login 
+	//login
 	if($form_id == 'user_login'){
-		$form['name']['#attributes']['placeholder'] = $form['name']['#title'];		
-		$form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];		
+		$form['name']['#attributes']['placeholder'] = $form['name']['#title'];
+		$form['pass']['#attributes']['placeholder'] = $form['pass']['#title'];
 	}
 
 	//login forgotten password
