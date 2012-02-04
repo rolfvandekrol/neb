@@ -1,7 +1,11 @@
 <?php
 //kpr(get_defined_vars());
 //http://drupalcontrib.org/api/drupal/drupal--modules--node--node.tpl.php
+
+
+//tpl variations:
 //node--[CONTENT TYPE].tpl.php
+//node--view--[CONTENT TYPE].tpl.php
 
 if ($classes) {
   $classes = ' class="'. $classes . ' "';
@@ -42,6 +46,6 @@ hide($content['links']);
   </div>
 
   <?php print render($content['links']); ?>
-  
+
   <?php print render($content['comments']); ?>
 </article>

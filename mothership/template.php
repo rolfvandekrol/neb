@@ -53,8 +53,6 @@ function mothership_preprocess(&$vars, $hook) {
     $vars['mothership_poorthemers_helper'] ="";
   }
 
-
-
   /*
     Go through all the hooks of drupal and give it epic love
   */
@@ -238,10 +236,10 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
 
-    
+
 
     /*-
-      USER ACCOUNT     
+      USER ACCOUNT
       Removes the tabs from user  login, register & password
       fixes the titles to so no more "user account" all over
     */
@@ -252,13 +250,13 @@ function mothership_preprocess(&$vars, $hook) {
         break;
       case 'user/register':
         $vars[title] = t('New account');
-        unset( $vars[tabs] ); 
+        unset( $vars[tabs] );
         break;
       case 'user/password':
         $vars[title] = t('DOH! I forgot my password');
         unset( $vars[tabs] );
         break;
-      
+
       default:
         # code...
         break;
@@ -321,7 +319,7 @@ function mothership_preprocess(&$vars, $hook) {
   } elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
 //    kpr($vars['status']);
-    
+
     $vars['id_node'] ="";
 
     if (theme_get_setting('mothership_classes_node')) {
@@ -352,7 +350,7 @@ function mothership_preprocess(&$vars, $hook) {
       if($vars['status'] =="0"){
         $vars['classes_array'][] = 'unpublished';
       }
-      
+
     }
 
     if (isset($vars['preview'])) {
@@ -387,6 +385,20 @@ function mothership_preprocess(&$vars, $hook) {
     //  remove the class attribute it its empty
     if(!$vars['content']['links']['#attributes']['class']){
       unset($vars['content']['links']['#attributes']['class']);
+    }
+
+    //HELPERS
+    //print out all the fields that we can hide/render
+    if(theme_get_setting('mothership_poorthemers_helper')){
+      print "<!-- \n themers little helper: node fields: \n -->";
+
+      foreach ($vars['content'] as $key => $value){
+        print "<!-- hide(\$content['". $key ."']); \n -->";
+
+        print "<!-- render(\$content['". $key ."']); \n -->";
+      }
+
+      print "\r <!-- / -->";
     }
 
 
