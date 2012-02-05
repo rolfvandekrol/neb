@@ -73,10 +73,10 @@ function mothership_form_element($variables) {
     $attributes['class'][] = 'form-disabled';
   }
 
-	//if the form element is reguired add a form-required class
-	if(isset($element['#required'])){
-	  $attributes['class'][] = 'form-required';
-	}
+//if the form element is reguired add a form-required class
+if( isset($element['#required']) ) {
+  $attributes['class'][] = 'form-required';
+}
 
 
   //freeform css class killing \m/
