@@ -390,12 +390,13 @@ function mothership_preprocess(&$vars, $hook) {
     //HELPERS
     //print out all the fields that we can hide/render
     if(theme_get_setting('mothership_poorthemers_helper')){
-      print "<!-- \n themers little helper: node fields: \n -->";
+      $vars['mothership_poorthemers_helper'] = "<!--";
+      $vars['mothership_poorthemers_helper'] .= "\n hide -rendernode fields:";
+      $vars['mothership_poorthemers_helper'] .= "\n \n themers little helper: node fields: \n -->";
 
       foreach ($vars['content'] as $key => $value){
-        print "<!-- hide(\$content['". $key ."']); \n -->";
-
-        print "<!-- render(\$content['". $key ."']); \n -->";
+        $vars['mothership_poorthemers_helper'] .= "\n <!-- hide(\$content['". $key ."']); \n -->";
+        $vars['mothership_poorthemers_helper'] .= "\n <!-- render(\$content['". $key ."']); \n -->";
       }
 
       print "\r <!-- / -->";
