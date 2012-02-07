@@ -11,6 +11,7 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.p
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/system.php';
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/date.php';
+include_once './' . drupal_get_path('theme', 'mothership') . '/functions/misc.php';
 
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/blockify.php';
 //load in the goodies?
@@ -40,15 +41,15 @@ function mothership_preprocess(&$vars, $hook) {
 
   //--- POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
-    $vars['mothership_poorthemers_helper'] = "<!--";
+    $vars['mothership_poorthemers_helper'] = "";
     //theme hook suggestions
-    $vars['mothership_poorthemers_helper'] .= "\n theme hook suggestions:";
-    $vars['mothership_poorthemers_helper'] .= "\n hook:" . $hook ." \n ";
+    $vars['mothership_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
+    $vars['mothership_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
     foreach ($vars['theme_hook_suggestions'] as $key => $value){
         $value = str_replace('_','-',$value);
-        $vars['mothership_poorthemers_helper'] .= " * " . $value . ".tpl.php \n" ;
+        $vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
     }
-    $vars['mothership_poorthemers_helper'] .= "-->";
+    $vars['mothership_poorthemers_helper'] .= "";
   }else{
     $vars['mothership_poorthemers_helper'] ="";
   }

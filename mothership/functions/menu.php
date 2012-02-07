@@ -18,7 +18,7 @@ walk through each menu link and kill the classes we dont want
 function mothership_menu_link(array $variables) {
   //clean up the classes
 
-//  $remove = array('first','last','leaf','collapsed','expanded','expandable');
+  //  $remove = array('first','last','leaf','collapsed','expanded','expandable');
   $remove = array();
   if(theme_get_setting('mothership_classes_menu_items_firstlast')){
     $remove[] .= "first";
@@ -277,7 +277,7 @@ the item list haves an idea of what it is
 function mothership_item_list($variables) {
   $items = $variables['items'];
   $title = $variables['title'];
-  $type = $variables['type'];
+  $type  = $variables['type'];
   $attributes = $variables['attributes'];
 
   //get the daddy if its set and add it is item-list-$daddy
