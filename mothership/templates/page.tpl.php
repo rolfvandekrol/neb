@@ -27,14 +27,12 @@
     <?php endif; ?>
   </hgroup>
   <?php endif; ?>
-	
+
   <?php if ($page['header']): ?>
     <div class="header">
       <?php print render($page['header']); ?>
     </div>
   <?php endif; ?>
-
-
 
 </header>
 
@@ -45,7 +43,7 @@
     </div>
   <?php endif; ?>
 
-  <div role="main">
+  <div role="main" id="#main-content">
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
       <h1><?php print $title; ?></h1>
