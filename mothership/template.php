@@ -501,7 +501,6 @@ function mothership_class_killer(&$vars){
 }
 
 
-
 /**
  * Implements hook_theme_registry_alter().
  */

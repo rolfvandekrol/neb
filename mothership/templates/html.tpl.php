@@ -1,5 +1,4 @@
 <!doctype html<?php print $rdf_header; ?>>
-<!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
 <!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
 <!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
 <!--[if IE 9 ]>    <html class="no-js ie9" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->

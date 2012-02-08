@@ -46,8 +46,7 @@
       <li>an out-of-date link</li>
     </ul>
 
-
-    <a href="/search/">search</a>
+    <a href="/search/">search ?</a>
 
     <script>
       var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
