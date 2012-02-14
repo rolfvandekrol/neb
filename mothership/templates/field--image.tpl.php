@@ -33,7 +33,9 @@ if($classes){
      </div>
     <?php } ?>
 
-  <?php }else{ ?>
+  <?php }else{
+    /* only one image */
+  ?>
 
       <?php foreach ($items as $delta => $item) : ?>
 
