@@ -1,14 +1,9 @@
-<?php if(theme_get_setting('mothership_html5')){  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="<?php print $language->language; ?>"> <!--<![endif]-->
-<?php }else{ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
-  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
-<?php } ?>
+
 <?php print $mothership_poorthemers_helper; ?>
 
 <?php if(theme_get_setting('mothership_html5')){  ?>
