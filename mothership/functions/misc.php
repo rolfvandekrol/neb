@@ -13,7 +13,7 @@ function mothership_comment_block() {
     //kpr($comment->changed);
     //print date('Y-m-d H:i', $comment->changed);
     $items[] =
-    l($comment->subject, 'comment/' . $comment->cid, array('fragment' => 'comment-' . $comment->cid)) .
+    '<h3>' . l($comment->subject, 'comment/' . $comment->cid, array('fragment' => 'comment-' . $comment->cid)) . '</h3>' .
     ' <time datetime="'.date('Y-m-d H:i', $comment->changed).'">' . t('@time ago', array('@time' => format_interval(REQUEST_TIME - $comment->changed))) . '</time>';
   }
 
