@@ -13,7 +13,7 @@ if($variables['block_html_id'] == "block-search-form"){
 $role = '';
 }
 ?>
-
+<!--block-->
 <div <?php print $id_block . $classes .  $attributes . $role; ?>>
   <?php print $mothership_poorthemers_helper;  ?>
 
