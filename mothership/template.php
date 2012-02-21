@@ -406,13 +406,14 @@ function mothership_preprocess(&$vars, $hook) {
     //HELPERS
     //print out all the fields that we can hide/render
     if(theme_get_setting('mothership_poorthemers_helper')){
-      $vars['mothership_poorthemers_helper'] = "<!--";
 
       foreach ($vars['theme_hook_suggestions'] as $key => $value){
         $value = str_replace('_','-',$value);
         $vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
       }
 
+
+      $vars['mothership_poorthemers_helper'] = "<!--";
       $vars['mothership_poorthemers_helper'] .= "\n hide -rendernode fields:";
       $vars['mothership_poorthemers_helper'] .= "\n \n themers little helper: node fields: \n -->";
 
@@ -456,24 +457,19 @@ function mothership_preprocess(&$vars, $hook) {
     $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
 
-    //type
+    //kill the field-name-xxxx class
+    if (theme_get_setting('mothership_classes_field_name')) {
+      $vars['classes_array'] = preg_grep('/^field-name-/', $vars['classes_array'], PREG_GREP_INVERT);
+    }
+    //kill the field-type-xxxx class
     if (theme_get_setting('mothership_classes_field_type')) {
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-text-with-summary')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-ds')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-image')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-email')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-taxonomy-term-reference')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-type-link-field')));
+      $vars['classes_array'] = preg_grep('/^field-type-/', $vars['classes_array'], PREG_GREP_INVERT);
     }
 
     //label
     if (theme_get_setting('mothership_classes_field_label')) {
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-hidden')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-above')));
-      $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field-label-inline')));
+      $vars['classes_array'] = preg_grep('/^field-label-/', $vars['classes_array'], PREG_GREP_INVERT);
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
-
     }
 
 

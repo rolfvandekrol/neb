@@ -97,6 +97,7 @@ settings[mothership_classes_view_row_count] = 1
 settings[mothership_classes_view_row_first_last] = 1
 settings[mothership_classes_view_row_rename] = 0
 
+settings[mothership_classes_field_name] = 1
 settings[mothership_classes_field_field] = 0
 settings[mothership_classes_field_type] = 0
 settings[mothership_classes_field_label] = 1

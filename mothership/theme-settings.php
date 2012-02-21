@@ -592,6 +592,14 @@ $form['mothership_info'] = array(
     '#default_value' => theme_get_setting('mothership_classes_field_field')
   );
 
+
+  $form['classes']['field']['mothership_classes_field_name'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Remove the field name class: .field-name-whatever'),
+    '#default_value' => theme_get_setting('mothership_classes_field_type')
+  );
+
+
   $form['classes']['field']['mothership_classes_field_type'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove type class: .field-type-text, .field-type-image ...'),
@@ -641,7 +649,7 @@ $form['mothership_info'] = array(
 	  '#title'         => t('Remove .field-type-[...]'),
 	  '#default_value' => theme_get_setting('mothership_classes_form_container_type')
 	);
-	
+
 	$form['classes']['form']['container']['mothership_classes_form_container_name'] = array(
 		'#type'          => 'checkbox',
 		'#title'         => t('Remove .field-name-field-[fieldname] '),
@@ -653,7 +661,7 @@ $form['mothership_info'] = array(
     '#title'         => t('Remove .field-widget-[...]'),
     '#default_value' => theme_get_setting('mothership_classes_form_container_widget')
   );
-	
+
 
   $form['classes']['form']['container']['mothership_classes_form_container_id'] = array(
     '#type'          => 'checkbox',
@@ -720,7 +728,7 @@ $form['mothership_info'] = array(
     '#title'         => t('change the &lt;div class=&quot;description&quot;&gt; to &lt;small&gt; '),
     '#default_value' => theme_get_setting('mothership_classes_form_description')
   );
-  
+
   $form['classes']['form']['placeholder'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Placeholders'),
@@ -728,8 +736,8 @@ $form['mothership_info'] = array(
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   );
-	
-	
+
+
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_label'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Use the field Label as placeholder content'),
@@ -739,14 +747,14 @@ $form['mothership_info'] = array(
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_link'] = array(
     '#type'          => 'textfield',
     '#title'         => t('links:'),
-    '#description'   => t('custom placeholder text for link fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),		
+    '#description'   => t('custom placeholder text for link fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),
     '#default_value' => theme_get_setting('mothership_classes_form_placeholder_link')
   );
 
 	$form['classes']['form']['placeholder']['mothership_classes_form_placeholder_email'] = array(
     '#type'          => 'textfield',
     '#title'         => t('email:'),
-    '#description'   => t('custom text for email fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),		
+    '#description'   => t('custom text for email fields -requires a <a href="http://drupal.org/project/html5_tools">html5 tools</a>'),
     '#default_value' => theme_get_setting('mothership_classes_form_placeholder_email')
   );
 
