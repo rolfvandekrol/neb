@@ -43,8 +43,8 @@ function mothership_preprocess(&$vars, $hook) {
   global $theme;
   $path = drupal_get_path('theme', $theme);
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
-  $appletouchicon .= '  <link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
-  $appletouchicon .= '  <link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
+  $appletouchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
+  $appletouchicon .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
 
   //--- POOR THEMERS HELPER
@@ -329,6 +329,13 @@ function mothership_preprocess(&$vars, $hook) {
     // =======================================| NODE |========================================
 //    kpr($vars['status']);
 
+    //TEmplate suggestions
+    //addmin new theme hook suggestions based on type & wiewmode
+    // a default catch all theaser are set op as node--nodeteaser.tpl.php
+    $vars['theme_hook_suggestions'][] = 'node__nodeteaser';
+    //fx node--gallery--teaser.tpl
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] . '__' . $vars['view_mode'];
+
     $vars['id_node'] ="";
 
     if (theme_get_setting('mothership_classes_node')) {
@@ -400,6 +407,12 @@ function mothership_preprocess(&$vars, $hook) {
     //print out all the fields that we can hide/render
     if(theme_get_setting('mothership_poorthemers_helper')){
       $vars['mothership_poorthemers_helper'] = "<!--";
+
+      foreach ($vars['theme_hook_suggestions'] as $key => $value){
+        $value = str_replace('_','-',$value);
+        $vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
+      }
+
       $vars['mothership_poorthemers_helper'] .= "\n hide -rendernode fields:";
       $vars['mothership_poorthemers_helper'] .= "\n \n themers little helper: node fields: \n -->";
 
@@ -407,6 +420,9 @@ function mothership_preprocess(&$vars, $hook) {
         $vars['mothership_poorthemers_helper'] .= "\n <!-- hide(\$content['". $key ."']); \n -->";
         $vars['mothership_poorthemers_helper'] .= "\n <!-- render(\$content['". $key ."']); \n -->";
       }
+
+
+
 
       print "\r <!-- / -->";
     }
