@@ -596,7 +596,7 @@ $form['mothership_info'] = array(
   $form['classes']['field']['mothership_classes_field_name'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Remove the field name class: .field-name-whatever'),
-    '#default_value' => theme_get_setting('mothership_classes_field_type')
+    '#default_value' => theme_get_setting('mothership_classes_field_name')
   );
 
 

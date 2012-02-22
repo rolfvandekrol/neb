@@ -15,19 +15,12 @@ include_once './' . drupal_get_path('theme', 'mothership') . '/functions/misc.ph
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/forum.php';
 
 include_once './' . drupal_get_path('theme', 'mothership') . '/functions/blockify.php';
-//load in the goodies?
+
+//load in the goodies
 if (theme_get_setting('mothership_goodies_login')) {
   include_once './' . drupal_get_path('theme', 'mothership') . '/goodies/login.inc';
 }
 
-/*
-Register new theme love
-*/
-/*
-function mothership_theme(){
-
-}
-*/
 // Auto-rebuild the theme registry during theme development.
 if (theme_get_setting('mothership_rebuild_registry')) {
   system_rebuild_theme_data();
@@ -46,28 +39,12 @@ function mothership_preprocess(&$vars, $hook) {
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
 
-
-  //--- POOR THEMERS HELPER
-  if(theme_get_setting('mothership_poorthemers_helper')){
-    $vars['mothership_poorthemers_helper'] = "";
-    //theme hook suggestions
-    $vars['mothership_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
-    $vars['mothership_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
-    foreach ($vars['theme_hook_suggestions'] as $key => $value){
-        $value = str_replace('_','-',$value);
-        $vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
-    }
-    $vars['mothership_poorthemers_helper'] .= "";
-  }else{
-    $vars['mothership_poorthemers_helper'] ="";
-  }
-
   /*
     Go through all the hooks of drupal and give it epic love
   */
 
-  if ($hook == "html") {
-  // =======================================| HTML |========================================
+  if ( $hook == "html" ) {
+    // =======================================| HTML |========================================
 
     //custom 403/404
     $headers = drupal_get_http_header();
@@ -136,9 +113,6 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     $vars['appletouchicon'] = $appletouchicon;
-    //    <!-- For Nokia -->
-    //    <link rel="shortcut icon" href="img/l/apple-touch-icon.png">
-
 
     //-----<body> C S S CLASSES  -----------------------------------------------------------------------------------------------
     //Remove & add cleasses body
@@ -188,19 +162,18 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     if (theme_get_setting('mothership_test')) {
-        $vars['classes_array'][] = "test";
+      $vars['classes_array'][] = "test";
     }
 
     if(isset($headers['status']) AND theme_get_setting('mothership_classes_body_status') ){
-    $vars['classes_array'][] = "status-". $headers['status'];
-  }
+      $vars['classes_array'][] = "status-". $headers['status'];
+    }
 
     //freeform css class killing
     $remove_class_body = explode(", ", theme_get_setting('mothership_classes_body_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_body));
 
-  }
-  elseif ( $hook == "page" ) {
+  }elseif ( $hook == "page" ) {
     // =======================================| PAGE |========================================
 
     //Test for expected modules
@@ -235,7 +208,6 @@ function mothership_preprocess(&$vars, $hook) {
       unset($vars['page']['content']['system_main']['default_message']);
     }
 
-
     // Remove the block template wrapper from the main content block.
     if (theme_get_setting('mothership_content_block_wrapper') AND
         !empty($vars['page']['content']['system_main']) AND
@@ -244,8 +216,6 @@ function mothership_preprocess(&$vars, $hook) {
     ) {
       $vars['page']['content']['system_main']['#theme_wrappers'] = array_diff($vars['page']['content']['system_main']['#theme_wrappers'], array('block'));
     }
-
-
 
     /*-
       USER ACCOUNT
@@ -262,7 +232,7 @@ function mothership_preprocess(&$vars, $hook) {
         unset( $vars[tabs] );
         break;
       case 'user/password':
-        $vars[title] = t('DOH! I forgot my password');
+        $vars[title] = t('I forgot my password');
         unset( $vars[tabs] );
         break;
 
@@ -271,16 +241,12 @@ function mothership_preprocess(&$vars, $hook) {
         break;
     }
 
-
-
-
   }elseif ( $hook == "region" ) {
     // =======================================| region |========================================
 
     if (theme_get_setting('mothership_classes_region')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));
     }
-
 
   }elseif ( $hook == "block" ) {
 
@@ -308,7 +274,6 @@ function mothership_preprocess(&$vars, $hook) {
     $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
 
-
     //adds title class to the block ... OMG!
     $vars['title_attributes_array']['class'][] = 'title';
     $vars['content_attributes_array']['class'][] = 'block-content';
@@ -319,22 +284,28 @@ function mothership_preprocess(&$vars, $hook) {
       ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "main-menu") OR
       ($vars['elements']['#block']->module == "system" AND $vars['elements']['#block']->delta == "user-menu") OR
       ($vars['elements']['#block']->module == "admin" AND $vars['elements']['#block']->delta == "menu") OR
-      $vars['elements']['#block']->module == "menu_block"
+       $vars['elements']['#block']->module == "menu_block"
     ){
       $vars['theme_hook_suggestions'][] = 'block__menu';
     }
 
-
-  } elseif ( $hook == "node" ) {
+  }elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
-//    kpr($vars['status']);
+    // kpr($vars['status']);
 
-    //TEmplate suggestions
-    //addmin new theme hook suggestions based on type & wiewmode
+    //Template suggestions
+    //add new theme hook suggestions based on type & wiewmode
     // a default catch all theaser are set op as node--nodeteaser.tpl.php
-    $vars['theme_hook_suggestions'][] = 'node__nodeteaser';
+    //kpr($vars['theme_hook_suggestions']);
+
     //fx node--gallery--teaser.tpl
     $vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] . '__' . $vars['view_mode'];
+
+    if($vars['view_mode'] == "teaser"){
+      $vars['theme_hook_suggestions'][] = 'node__nodeteaser';
+    }
+
+    //$vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] ;
 
     $vars['id_node'] ="";
 
@@ -352,8 +323,6 @@ function mothership_preprocess(&$vars, $hook) {
       fx in the comments
     */
 
-  //    kpr($vars);
-
     if (theme_get_setting('mothership_classes_state')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky','node-unpublished', 'node-promoted')));
       if($vars['promote']){
@@ -362,17 +331,13 @@ function mothership_preprocess(&$vars, $hook) {
       if($vars['sticky']){
         $vars['classes_array'][] = 'sticky';
       }
-
       if($vars['status'] =="0"){
         $vars['classes_array'][] = 'unpublished';
       }
-
     }
-
     if (isset($vars['preview'])) {
       $vars['classes_array'][] = 'node-preview';
     }
-
 
     //freeform css class killing
     $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
@@ -388,66 +353,56 @@ function mothership_preprocess(&$vars, $hook) {
     <ul class="inline links">
     this is generated in the node_build_content() function in the node.module
     */
-    if (theme_get_setting('mothership_classes_node_links_inline')) {
+    if (theme_get_setting('mothership_classes_node_links_inline') AND isset($vars['content']['links']['#attributes']['class'])) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
     }
 
-    if (theme_get_setting('mothership_classes_node_links_links')) {
+    if (theme_get_setting('mothership_classes_node_links_links') AND (isset($vars['content']['links']['#attributes']['class']))) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('links')));
     }
     // TODO: add a field to push in whatever class names we want to
     // $vars['content']['links']['#attributes']['class'][] = "hardrock hallelulia";
 
     //  remove the class attribute it its empty
-    if(!$vars['content']['links']['#attributes']['class']){
-      unset($vars['content']['links']['#attributes']['class']);
+    if(isset($vars['content']['links']['#attributes']['class'])){
+      if(!$vars['content']['links']['#attributes']['class'] ){
+        unset($vars['content']['links']['#attributes']['class']);
+      }
     }
 
     //HELPERS
     //print out all the fields that we can hide/render
     if(theme_get_setting('mothership_poorthemers_helper')){
-
-      foreach ($vars['theme_hook_suggestions'] as $key => $value){
-        $value = str_replace('_','-',$value);
-        $vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
-      }
-
-
-      $vars['mothership_poorthemers_helper'] = "<!--";
-      $vars['mothership_poorthemers_helper'] .= "\n hide -rendernode fields:";
-      $vars['mothership_poorthemers_helper'] .= "\n \n themers little helper: node fields: \n -->";
+      $vars['mothership_poorthemers_helper'] = " ";
+      //foreach ($vars['theme_hook_suggestions'] as $key => $value){
+        // $value = str_replace('_','-',$value);
+        //$vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
+      //}
 
       foreach ($vars['content'] as $key => $value){
         $vars['mothership_poorthemers_helper'] .= "\n <!-- hide(\$content['". $key ."']); \n -->";
         $vars['mothership_poorthemers_helper'] .= "\n <!-- render(\$content['". $key ."']); \n -->";
       }
-
-
-
-
-      print "\r <!-- / -->";
     }
 
+   // kpr($vars['theme_hook_suggestions']);
 
-  } elseif ( $hook == "comment" ) {
+  }elseif ( $hook == "comment" ) {
     // =======================================| COMMENT |========================================
-      if ($vars['elements']['#comment']->new){
-        $vars['classes_array'][] = ' new';
-      }
+    if ($vars['elements']['#comment']->new){
+      $vars['classes_array'][] = ' new';
+    }
 
-      if ($vars['status'] == "comment-unpublished"){
-         $vars['classes_array'][] = ' unpublished';
-      }
+    if ($vars['status'] == "comment-unpublished"){
+       $vars['classes_array'][] = ' unpublished';
+    }
 
-      //remove inline class from the ul links
-      if (theme_get_setting('mothership_classes_node_links_inline')) {
-        $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
-      }
-
-
+    //remove inline class from the ul links
+    if (theme_get_setting('mothership_classes_node_links_inline')) {
+      $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
+    }
 
   }elseif ( $hook == "field" ) {
-
     // =======================================| FIELD |========================================
     if (theme_get_setting('mothership_classes_field_field')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
@@ -472,25 +427,39 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
     }
 
-
-
-
   }elseif ( $hook == "maintenance_page" ) {
-
     // =======================================| maintenance page |========================================
 
     $vars['path'] = $path;
     $vars['appletouchicon'] = $appletouchicon;
     $vars['selectivizr'] = $selectivizr;
-
     $vars['theme_hook_suggestions'][] = 'static__maintenance';
-
 
   }
 
+//--- POOR THEMERS HELPER
+  if(theme_get_setting('mothership_poorthemers_helper')){
+    $vars['mothership_poorthemers_helper'] = "";
+    //theme hook suggestions
+    $vars['mothership_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
+    $vars['mothership_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
+    foreach ($vars['theme_hook_suggestions'] as $key => $value){
+        $value = str_replace('_','-',$value);
+        $vars['mothership_poorthemers_helper'] .= "<!-- TPL:* " . $value . ".tpl.php -->\n" ;
+    }
+    $vars['mothership_poorthemers_helper'] .= "";
+  }else{
+    $vars['mothership_poorthemers_helper'] ="";
+  }
 
 
 }
+
+
+
+
+
+
 
 /*
   // Purge needless XHTML stuff.
