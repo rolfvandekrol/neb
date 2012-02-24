@@ -31,7 +31,7 @@ if (theme_get_setting('mothership_rebuild_registry')) {
 */
 function mothership_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-
+  $vars['mothership_poorthemers_helper'] = "";
   //--- Faveicon
   global $theme;
   $path = drupal_get_path('theme', $theme);
@@ -291,7 +291,7 @@ function mothership_preprocess(&$vars, $hook) {
 
   }elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
-    // kpr($vars['status']);
+ //    kpr($vars);
 
     //Template suggestions
     //add new theme hook suggestions based on type & wiewmode
@@ -301,9 +301,20 @@ function mothership_preprocess(&$vars, $hook) {
     //fx node--gallery--teaser.tpl
     $vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] . '__' . $vars['view_mode'];
 
+    //one unified node teaser template
     if($vars['view_mode'] == "teaser"){
       $vars['theme_hook_suggestions'][] = 'node__nodeteaser';
     }
+
+    if($vars['view_mode'] == "teaser" AND $vars['promote']){
+      $vars['theme_hook_suggestions'][] = 'node__nodeteaser__promote';
+    }
+
+    if($vars['view_mode'] == "teaser" AND $vars['sticky']){
+      $vars['theme_hook_suggestions'][] = 'node__nodeteaser__sticky';
+    }
+    //promote
+    //sticky
 
     //$vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] ;
 
@@ -373,7 +384,7 @@ function mothership_preprocess(&$vars, $hook) {
     //HELPERS
     //print out all the fields that we can hide/render
     if(theme_get_setting('mothership_poorthemers_helper')){
-      $vars['mothership_poorthemers_helper'] = " ";
+      $vars['mothership_poorthemers_helper'] .= " ";
       //foreach ($vars['theme_hook_suggestions'] as $key => $value){
         // $value = str_replace('_','-',$value);
         //$vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
@@ -439,7 +450,7 @@ function mothership_preprocess(&$vars, $hook) {
 
 //--- POOR THEMERS HELPER
   if(theme_get_setting('mothership_poorthemers_helper')){
-    $vars['mothership_poorthemers_helper'] = "";
+    $vars['mothership_poorthemers_helper'] .= "";
     //theme hook suggestions
     $vars['mothership_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
     $vars['mothership_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
