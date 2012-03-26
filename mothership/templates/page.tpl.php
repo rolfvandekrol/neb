@@ -17,9 +17,9 @@
     </figure>
   <?php endif; ?>
 
-	<?php if($site_name OR $site_slogan ): ?>
+  <?php if($site_name OR $site_slogan ): ?>
   <hgroup>
-		<?php if($site_name): ?>
+    <?php if($site_name): ?>
     <h1><?php print $site_name; ?></h1>
     <?php endif; ?>
     <?php if ($site_slogan): ?>
@@ -56,7 +56,7 @@
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
 
-    <?php if ($tabs): ?>
+    <?php if (isset($tabs)): ?>
       <nav class="tabs"><?php print render($tabs); ?></nav>
     <?php endif; ?>
 
