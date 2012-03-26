@@ -291,7 +291,7 @@ function mothership_preprocess(&$vars, $hook) {
 
   }elseif ( $hook == "node" ) {
     // =======================================| NODE |========================================
- //    kpr($vars);
+    // kpr($vars);
 
     //Template suggestions
     //add new theme hook suggestions based on type & wiewmode
@@ -313,8 +313,12 @@ function mothership_preprocess(&$vars, $hook) {
     if($vars['view_mode'] == "teaser" AND $vars['sticky']){
       $vars['theme_hook_suggestions'][] = 'node__nodeteaser__sticky';
     }
-    //promote
-    //sticky
+
+    if($vars['view_mode'] == "teaser" AND $vars['is_front']){
+      $vars['theme_hook_suggestions'][] = 'node__nodeteaser__front';
+    }
+
+
 
     //$vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] ;
 
@@ -419,6 +423,8 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
     }
 
+
+
     //freeform css class killing
     $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
@@ -437,6 +443,8 @@ function mothership_preprocess(&$vars, $hook) {
       $vars['classes_array'] = preg_grep('/^field-label-/', $vars['classes_array'], PREG_GREP_INVERT);
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
     }
+
+   // $vars['theme_hook_suggestions'][] = 'node__' . $vars['type'] . '__' . $vars['view_mode'];
 
   }elseif ( $hook == "maintenance_page" ) {
     // =======================================| maintenance page |========================================
