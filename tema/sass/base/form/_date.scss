@@ -1,0 +1,68 @@
+/* ----------------------------- drupal widgets: date ------------------------------------------------ */
+.date-clear {
+  clear: auto;
+  display: block-inline;
+  float: none;
+}
+.date-no-float {
+  clear: none;
+  float: auto;
+  width: 100%;
+}
+.date-float {
+  clear: auto;
+//  float: left;
+  width: auto;
+}
+
+.container-inline-date > .form-item {
+	border:none
+}
+.container-inline-date {
+	display:inline-block;
+	 div{
+		display:inline-block;
+
+	}
+}
+.container-inline-date .date-padding {
+  padding:0;
+}
+
+//date select drop down
+.form-type-date-select .form-type-select {
+	display:inline-block;
+	 div{
+			display:inline-block;
+	}
+	label{
+		width:auto
+	}
+}
+.form-type-date-popup{
+	small, .description{
+		padding:0;
+	}
+	label{
+		width:auto
+	}
+	.form-type-textfield{
+		display:inline-block;
+	}
+}
+/*
+.form-type-date-popup .form-type-textfield{
+	background:green;
+	width:40%;
+	display:inline-block;
+}
+*/
+/* fix the float */
+.form-type-date-popup  input.date-clear{
+	clear:none;
+	display:inline-block;
+	float:auto;
+	width:200px;
+}
+.form-type-date-select{
+}

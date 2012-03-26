@@ -1,0 +1,27 @@
+/* ----------------------------- Drupal widget: text input Filter selector ------------------------------------------------ */
+form .filter-wrapper{
+	@extend .cf;
+	padding:0 ;
+	width:99%;
+}
+form .filter-wrapper label{
+	width:120px;
+	text-align:right;
+	font-weight:normal;
+  font-size: $basefont * 1;
+	vertical-align:medium;
+	color:lightgray;
+}
+form .filter-wrapper .fieldset-wrapper{
+	border:none;
+	padding:0;
+	margin:0;
+}
+form .filter-wrapper .form-type-select{
+	@include box-shadow(0px 0px 0px 0px rgba(50, 50, 50, 0) );
+	border:none;
+	float:right;
+}
+form .filter-help{float:right; display:none}
+form .filter-guidelines{float:left; display: none}
+

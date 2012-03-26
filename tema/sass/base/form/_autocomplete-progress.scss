@@ -1,0 +1,78 @@
+/* ----------------------------- Drupal widget: autocomplete  ------------------------------------------------ */
+#autocomplete {
+  border: 1px solid #eee;
+  overflow: hidden;
+  position: absolute;
+  z-index: 100;
+	@include box-shadow(0px 0px 5px 0px rgba(120, 120, 120, 0.7) );
+  @include border-radius(3px);
+}
+#autocomplete ul {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+#autocomplete li {
+  background: #fff;
+  color: #000;
+  cursor: default;
+  white-space: pre;
+	border-bottom:1px solid #eee;
+	padding:3px;
+	cursor:pointer;
+}
+#autocomplete li:hover{
+	background:#eee;
+	font-weight:bold;
+}
+.field-widget-taxonomy-autocomplete input{
+	font-weight:bold;
+}
+
+/* ----------------------------- Drupal widget autocomplete Animated throbber  ------------------------------------------------ */
+html.js input.form-autocomplete {
+  background-image: url(../images/throbber.gif);
+  background-position: 100% 10px; /* LTR */
+  background-repeat: no-repeat;
+}
+html.js input.throbbing {
+  background-position: 100% -18px; /* LTR */
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------
+Progress bar
+------------------------------------------------------------------------------------------------------------ */
+.progress .bar {
+  background-color: #fff;
+  border: 1px solid;
+}
+.progress .filled {
+  background-color: #000;
+  height: 1.5em;
+  width: 5px;
+}
+.progress .percentage {
+  float: right; /* LTR */
+}
+/* Throbber */
+.ajax-progress {
+  display: inline-block;
+}
+.ajax-progress .throbber {
+  background: transparent url(../../misc/throbber.gif) no-repeat 0px -18px;
+  float: left; /* LTR */
+  height: 15px;
+  margin: 2px;
+  width: 15px;
+}
+.ajax-progress .message {
+  padding-left: 20px;
+}
+tr .ajax-progress .throbber {
+  margin: 0 2px;
+}
+.ajax-progress-bar {
+  width: 16em;
+}

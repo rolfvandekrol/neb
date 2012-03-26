@@ -1,0 +1,26 @@
+
+/* ----------------------------- Drupal widget: textarea grippie  ------------------------------------------------ */
+//TODO: needs work
+.form-textarea-wrapper textarea {
+  display: block;
+  margin: 0;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.resizable-textarea .grippie {
+  background: #eee url(../images/grippie.png) no-repeat center 2px;
+  border: 1px solid #ddd;
+  border-top-width: 0;
+  cursor: s-resize;
+  height: 9px;
+  overflow: hidden;
+}
+.resizable-textarea .grippie{
+	background:none;
+	border:none;
+}
+.resizable-textarea .grippie:hover{
+
+}

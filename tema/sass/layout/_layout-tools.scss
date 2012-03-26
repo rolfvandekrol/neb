@@ -1,0 +1,46 @@
+//Layout helpers for quick adding
+.left  { text-align:left; }
+.right { text-align:right; }
+.center{ text-align:center; }
+
+
+//Horizontal display of a list
+.layout-horizontal{
+	//inline block how do we remove the spacing ?
+	ul{
+		letter-spacing:-.25em
+	}
+	li{
+		display:inline-block;
+		letter-spacing:normal;
+		margin:0;
+		padding:0;
+
+	}
+
+}
+
+.layout-horizontal-2{
+	li{
+		width: 50%;
+	}
+}
+
+.layout-horizontal-3{
+	li{
+		width: 33%;
+	}
+}
+
+.layout-horizontal-4{
+	li{
+		width: 25%;
+	}
+}
+
+.layout-horizontal-5{
+	li{
+		width: 20%;
+	}
+}
+

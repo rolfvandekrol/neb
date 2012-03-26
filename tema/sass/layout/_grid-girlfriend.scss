@@ -6,9 +6,12 @@
   //first grid base
   .g1{
     float:#{$direction};
-    min-height:1%;
+    min-height:1px;
     word-wrap: break-word;  //word break
     margin-#{$direction}: $gutter-width;
+    //overflow-x: hidden;
+	//overflow-y: auto;
+
   }
 
 
@@ -66,9 +69,10 @@
 
   .gf{ margin-#{$direction}: 0!important; clear: #{$direction}; }
   .clear{float:none;}
-  .left{ text-align:left; }
-  .right{ text-align:right; }
-  .center{ margin:0px auto; float:none; text-align:center; }
+
+  .left  { text-align:left; }
+  .right { text-align:right; }
+  .center{ text-align:center; }
 
   // clearfix...
   .cf:before,.cf:after {content:""; display:table;}
@@ -82,4 +86,7 @@
   width: ( ($column-width * $grid-count) + ($gutter-width * ($grid-count - 1) ) ) ;
 }
 
+@function pagewidth($grid-count, $column-width,$gutter-width){
+  @return  ($column-width * $grid-count) + ($gutter-width * ($grid-count - 1) ) ;
+}
 

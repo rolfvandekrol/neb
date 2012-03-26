@@ -13,18 +13,18 @@ body.admin-menu{
   background: $color;
   border-color: darken($color, 30%);
   color:desaturate(darken($color, 50%), 60%);
-  
-  a{ 
-    color:desaturate(darken($color, 50%), 60%);    
+
+  a{
+    color:desaturate(darken($color, 50%), 60%);
   }
-  li{ 
+  li{
     border-color:desaturate(darken($color, 50%), 60%);
   }
 
 }
 
 .warning{
-  @include messagebox(#fef5f1)
+	@include messagebox(#fef5f1)
 }
 
 .messages{
@@ -32,7 +32,7 @@ body.admin-menu{
 	margin: $baseline/2 auto;
 	clear: both;
   padding: $baseline/2 20px ;
-	font-size: $basefont; 
+	font-size: $basefont;
   border:1px dotted;
   //background: #eee url('../images/message-24-error.png') no-repeat 10px 10px ;
   @include border-radius(3px);
@@ -43,8 +43,8 @@ body.admin-menu{
     list-style: none inside;
 	}
 	a{font-weight:bold;}
-	
-	//green	
+
+	//green
 	&.status{
     @include messagebox(#f8fff0 );
   }
@@ -54,42 +54,43 @@ body.admin-menu{
   }
   //red
 	&.error{
-    @include messagebox(#fef5f1);  
+    @include messagebox(#fef5f1);
   }
 
 }
 
-/* status */
-.node-unpublished{
+/* status
+.node-unpublished, .comment-unpublished
+*/
+.unpublished{
 	background-color:#fddfde;
 	background-color:rgba(253, 223, 222,.7);
 	@include box-shadow(inset 0px 0px 1px 0px #eab8b6); //sneaky border
-	float:left;
 }
 
 /* 2 Tabs */
 nav.tabs{
-	border-top:1px solid #444;
-	border-bottom:1px solid #444;
-	padding:0px 10px;
-	margin:5px 10px;
+	padding:0px 10px 0 0;
+	margin:5px 10px 5px 0;
 
 	li{
 		display:inline-block;
 	}
-  .active{
-    font-weight:bold;
-    background:#ededed;
-  }
+  	.active{
+	   font-weight:bold;
+		  background:#ededed;
+		  text-decoration:none;
+  	}
 	.primary{
-		border-bottom:1px solid #666;
- }
- .secondary{
 
- }
+ 	}
+ 	.secondary{
+
+ 	}
 }
 
 /* 3 Contextual  */
+
 
 /* 4 Pager  */
 .item-list-pager {
@@ -100,39 +101,40 @@ nav.tabs{
 .pager{
   display:inline-block;
   li{
-		float:left; 
+		float:left;
 		display:inline-block;
 		//set the base for each element
     a,
 		&.current,
 		&.ellipsis {
 			padding:5px 10px;
-			border:1px solid #ddd;
+			border:1px solid #000;
 			border-right:none;
-			background:#efefef;		
+		//	background:#efefef;
+      @extend .bg-gray;
 		}
     a{
       display:block;
     }
     a:hover{
-			background:#ececec;
+			background:#000;
 			cursor: pointer;
 			@include text-shadow(rbga(1,50,50,0.9), 0px, 0px, 2px);
 			text-decoration:none;
 		}
     &.first a{
-			@include border-radius(3px 0 0 3px);			
+			@include border-radius(3px 0 0 3px);
     }
     &.last a{
-			@include border-radius(0 3px 3px 0);			
-			border-right:1px solid #ddd;
+			@include border-radius(0 3px 3px 0);
+			border-right:1px solid #000;
     }
     &.current{
-			background-color:#eaeaea;	
-			font-weight:bold;	
+			background-color:#000;
+			font-weight:bold;
 			color:#666;
 		}
-		
+
 		&.ellipsis {
 			color:#ccc;
 			padding:5px;
@@ -153,7 +155,11 @@ nav.tabs{
 
 }
 
-
+.breadcrumb{
+	border-bottom:1px solid #ddd;
+	padding-bottom:5px;
+	margin-bottom:5px;
+}
 /* ------------------------------------------------------------------------------------------------------------
 5 Drupal widgets
 ------------------------------------------------------------------------------------------------------------ */
@@ -162,31 +168,36 @@ nav.tabs{
 .block{
   margin-bottom:5px;
   padding-bottom:5px;
-  border-bottom:2px solid #444;
 
   .title{
-	  font-size:$basefont * 1;
-    line-height:$baseline; 
-    margin:0;
-    text-transform: uppercase;
-  }  
+    font-size:$basefont * 1.2;
+    line-height:$baseline;
+  }
+  h2{
+    font-size:$basefont * 1.2;
+    line-height:$baseline;
+  }
+  h3{
+    font-size:$basefont * 1;
+    line-height:$baseline;
+  }
 }
 
 .status-404{
-//	background-color:pink;
+
+}
+
+.logo{
+
 }
 
 .site-slogan{
-  color:#aaa;
-  width:160px;
   display:block;
-  font-weight:700;
-  font-size:11px;
-  line-height:12px;
   float:left;
 }
 
 /* ----------------------------- drupal widgets: user login.------------------------------------------------ */
+
 /*--------------- user  login  ----*/
 #user-login, #user-register-form, #user-pass{
   width:385px;
@@ -196,7 +207,7 @@ nav.tabs{
   padding:10px;
   @include border-radius(5px);
 
-  a{ 
+  a{
    font-size:$basefont * 0.5;
    font-size:$baseline * 0.5;
    text-decoration: none;
@@ -228,7 +239,7 @@ nav.tabs{
   input[type="email"], input[name="conf_mail"]{
     background: #fff url(../images/bijou/Email.png) no-repeat  5px center;
   }
- 
+
   #edit-mollom-captcha{
     display:inline-block;
     background: #fff url(../images/bijou/tv.png) no-repeat  5px center;
@@ -236,7 +247,7 @@ nav.tabs{
 
   .form-type-textfield,
   .form-type-password{
-     padding:3px 0; 
+     padding:3px 0;
      margin:0;
   }
 
@@ -245,11 +256,11 @@ nav.tabs{
     float:none;
     padding:0px;
     text-align:left;
-    
+
     input{
       margin:0
     }
-    
+
   }
 
 }
@@ -270,7 +281,7 @@ input.username{
 .form-type-password-confirm{
 	position:relative;
   display:block;
-  
+
   .password-suggestions {
     position: relative!important;
     ul{
@@ -280,7 +291,6 @@ input.username{
   }
 
 }
-
 
 //strength indicator
 .password-strength{
@@ -302,14 +312,13 @@ input.username{
 		@include border-radius(3px);
 	}
 
-	//succes bar  
+	//succes bar
   .password-indicator div {
     height: 100%;
     width: 0%;
     background-color:#ddd;
-    @include border-radius(3px);  
-  } 
-
+    @include border-radius(3px);
+  }
 }
 
 //confirm icon
@@ -323,7 +332,7 @@ div.password-confirm{
     display:block;
     width:20px;
     height:20px;
-    background: transparent url(../images/bijou/like.png) no-repeat  center center; 
+    background: transparent url(../images/bijou/like.png) no-repeat  center center;
   }
   .error{
     display:block;
@@ -340,11 +349,11 @@ div.password-confirm{
 
 //block
 #user-login-form{
-	.form-type-textfield, 
+	.form-type-textfield,
 	.form-type-password{
 		padding:5px 0;
 		text-align:right;
-	} 
+	}
 
 
 	label{display:none;}
@@ -370,8 +379,6 @@ div.password-confirm{
 	}
 }
 
-
-
 /* ----------------------------- drupal widgets: search.------------------------------------------------ */
 .search{
   input[type="search"]{
@@ -380,8 +387,8 @@ div.password-confirm{
     background: url(../images/search.png) no-repeat;
     border:none;
     float:left;
-		@include box-shadow(0px 0px 0px 0px rgba(82, 168, 236, 1) );	
-		@include border-radius(0px);			
+		@include box-shadow(0px 0px 0px 0px rgba(82, 168, 236, 1) );
+		@include border-radius(0px);
   }
 
   input[type="submit"], input[type="submit"]#edit-submit{
@@ -392,11 +399,11 @@ div.password-confirm{
 		background-image:none;
 		background-color: transparent;
     background: transparent url(../images/search-submit.png) no-repeat;
-		
+
     @include hide-text;
     float:left;
     border:none;
-		@include border-radius(0px);		
+		@include border-radius(0px);
 		@include box-shadow(0px 0px 0px 0px rgba(82, 168, 236, 1) );
   }
 

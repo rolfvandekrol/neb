@@ -6,64 +6,45 @@
 
 @import "mixin";
 
-//GirlFriend 
+//GirlFriend settings?
 $grid-count     : 12;
-$column-width   : 54px;
-$gutter-width   : 30px;
+$column-width   : 80px;
+$gutter-width   : 20px;
 $direction      : left; //left or right
 
 //------------------------------------------------
 //typography
 //------------------------------------------------
-$basefont : 16px ;
-$baseline : 24px ;
-$grid-background-baseline-color : #ddd;
-$fontsmall: 11px ;
+$basefont 	: 18px;
+$baseline 	: 24px;
+$fontsmall	: 11px;
 
+// define fonts
+$sans-serif		:	"Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif			  :	Georgia, "Times New Roman", Times, serif;
+$monospace		:	"Monaco", "Courier New", monospace;
 
 //basefont
-$font-base            : "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-alternative     : "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-header          : "Georgia", Times New Roman, Times, serif;
-$font-monospace       : "Monaco", Courier New, monospace;
-
+$font-base      : $sans-serif;
+$font-header    : $serif;
+$font-blocks		: $sans-serif;
+$font-monospace : $monospace;
 
 //------------------------------------------------
 //colors
 //------------------------------------------------
-$color_blue : #00d3f6;
-$color_orange: #cc6633;
-
-//color
-$link-color         : #0069d6;
-$link-color-hover   : darken($link-color, 30);
-$link-bgcolor-hover : lighten($link-color, 50);
-$link-color-clicked : darken($link-color, 30);
-$link-bgcolor-clicked : darken($link-color, 30);
-
-//grays
-$black  : #000;
-$gray25 : lighten($black, 25%);
-$gray50 : lighten($black, 50%);
-$gray75 : lighten($black, 75%);
-$gray90 : lighten($black, 90%);
-$white  : #fff;
+$grid-background-baseline-color : #ddd;
 
 //------------------------------------------------
 //Forms
 //------------------------------------------------
-$form-color-label 				: $gray25;
-$form-color-label-hover 	: $gray25;
+$form-color-label 				: #ddd;
+$form-color-label-hover 	: #ccc;
+
 $form-collapsible-height	:	30px;
 $form-collapsible-fontsize: $basefont * 1.2;
-$form-collapsible-link 		: $gray50;
-$form-collapsible-bg-open	: $gray90;
-$form-collapsible-bg-close:	$gray90;
+$form-collapsible-link 		: #ccc;
+$form-collapsible-bg-open	: #eee;
+$form-collapsible-bg-close:	#eee;
 
 
-
-
-
-
-$form-label-width : grid-width(2);
-$form-radios-push : grid-width(0.25);

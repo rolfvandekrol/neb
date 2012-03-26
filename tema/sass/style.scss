@@ -1,366 +1,91 @@
 
 /*________________________________________________________________________________________________
-project:	TEMA
-company:	geek Röyale | http://geekroyale.com
-Author:		mortendk 
-URL:		http://mothershipthe.me
-Version: beta 5
-*/
-
+project:  TEMA
+Author:   mortendk
+_______________________________________________________________________________________________ */
 @import "base";
-@import "grid/girlfriend"; //the grid is generated at the bottom of this page
+@import "layout/helpers";
+@import "layout/layout-tools";
+@import "layout/grid-girlfriend"; //the grid is generated at the bottom of this page
 
-/* -------------------------------------------  * * * -------------------------------------------  
-1. Background 
-------------------------------------------------------------------------------------------------- */
-//pattern: http://ptrn.it/yCbBWe
-body{
-	background-color:#f0f1f3;
-}
-body.test .page{
-  @include grid-background($grid-count, $column-width, $gutter-width, 0,0, #ececec, #f2f2f2, #c9e2e8); /*, #f2f2f2,#ececec, #c9e2e8*/
-//  grid-background($total, $column, $gutter, $baseline, $offset, $column-color, $gutter-color, $baseline-color, $force-fluid)
-}
-.page{
-  @include pagewidth($grid-count, $column-width, $gutter-width);
-  margin:20px auto;
-}
 
-/* -------------------------------------------  * * * -------------------------------------------  
+/* -------------------------------------------  * * * -------------------------------------------
 2. Typography & Colors
 ------------------------------------------------------------------------------------------------- */
-@import "base/typography"; //TODO: helvetica set, garamon set etc.
+@import "base/typography";
 
-a{ 
-	color: #129ac2;
-	text-decoration: underline;
-	&:visited {	color: #129ac2;}
-	&:focus { color: #cccccc; text-decoration: none;}
-	&:hover { color: #cccccc; text-decoration: none;}
-}
-h1{color: #e3e4bb;}
-h2 a{ 
-	color: #e3e4bb;
-	text-decoration: none;
-	text-transform: uppercase;
-	&:visited{ color: #e3e4bb; }
-	&:focus  { color: #444; }
-	&:hover  { color: #cccccc; }
-}
 
-:focus{
-outline:0;
-}
-
-::-moz-selection { background: #ddd; color: #666; text-shadow: none; }
-::selection { background: #ddd; color: #666; text-shadow: none; }
-
-/* -------------------------------------------  * * * -------------------------------------------  
+/* -------------------------------------------  * * * -------------------------------------------
 4. Images
 ------------------------------------------------------------------------------------------------- */
 @import "base/image";
 
-/* -------------------------------------------  * * * -------------------------------------------  
-5. Tables 
+/* -------------------------------------------  * * * -------------------------------------------
+5. Tables
 ------------------------------------------------------------------------------------------------- */
 @import "base/table";
 
-/* -------------------------------------------  * * * -------------------------------------------  
-6. Forms 
+/* -------------------------------------------  * * * -------------------------------------------
+6. Forms
 ------------------------------------------------------------------------------------------------- */
-@import "base/form";
+@import "base/form/form";
+@import "base/form/draggable";
+@import "base/form/fieldset";
+@import "base/form/autocomplete-progress";
+@import "base/form/grippie";
+@import "base/form/date";
+@import "base/form/views-exposed";
+@import "base/form/inputformatfilter";
 
-/* -------------------------------------------  * * * -------------------------------------------  
-7. nav  
+/* -------------------------------------------  * * * -------------------------------------------
+7. nav
 ------------------------------------------------------------------------------------------------- */
 @import "base/nav";
 
-/* -------------------------------------------  * * * -------------------------------------------  
-8. Layout  
+/* -------------------------------------------  * * * -------------------------------------------
+7. list
 ------------------------------------------------------------------------------------------------- */
-header[role="banner"]{
-	background-color:#333;
-	width:100%;
-	
-	.logo{
-		float:left;
-    width: image-width("../logo.png");
-    height: image-height("../logo.png");    
+@import "base/list";
 
-		img{
-      margin-left:-20px;
-    }
-
-	}
-
-	hgroup{
-		float:left;
-		background:white;
-    height: image-height("../logo.png");   
-    
-    h1{
-      font-size:20px;
-      line-height:20p;
-    }
-
-    h2{
-      font-size:20px;
-      line-height:20px;
-
-    } 
-	}
-
-	.header{
-		float:left;
-	}
-
-}
-
-	/* --------------------- Layout: main ----------------------------------------------- */
-.page{
-	background:white;
-	padding:10px 20px 0 20px;
-  @include box-shadow(0px 0px 5px 0px rgba(0, 0, 0, 0.1));
-	@include border-radius(2px);
-}
-div[role="main"]{ 
-	@extend .g12; 
-	background:rgba(250,250,250,0.5);
-}
-body.two-sidebars div[role="main"]{
-	@extend .g8; 
-}
-body.one-sidebar.sidebar-first div[role="main"]{
-	@extend .g10; 
-}
-body.one-sidebar.sidebar-second div[role="main"]{
-  @extend .gf;
-	@extend .g10; 
-}
-
-.sidebar-one{
-  @extend .gf;
-  @extend .g2;
-	overflow:hidden;
-}
-.sidebar-two{
-  @extend .g2;
-}	
-	/* --------------------- Layout: Footer ------------------------------------ */
-footer[role="contentinfo"]{
-	@extend .g12;
-}
-
-	/* --------------------- Layout: Pages------------------------- */
-
-	/* --------------------- Layout: page front -------------------------------------------*/
-
-	/* --------------------- Layout: page types -------------------------------------------*/
-
-/* -------------------------------------------  * * * -------------------------------------------  
-Elements Default 
+/* -------------------------------------------  * * * -------------------------------------------
+8. Layout
 ------------------------------------------------------------------------------------------------- */
+@import "layout";
 
-	/* --------------------- Elements Default: Header ------------------------------------*/
-header[role="banner"]{
-	.block .title{
-		display:none;
-	}
-  input{ 
-		padding:0; 
-		margin:0; 
-	}
-  nav li{ 
-		float:left; 
-	}
-  a{
-		text-transform: uppercase;
-	}
-	figure {
-		border:none;
-	}
-	img{
-		border:none;
-	}
-
-}
-
-	/* --------------------- Elements Default: Main ------------------------------------ */
-
-	/* --------------------- Elements Default: Sidebars --------------------------------*/
-.sidebar{
-  h2{
-    font-size:14px;
-  }
-
-  nav{
-
-  }
-
-  ul li{
-    display:block;
-  }
-	
-	form{
-		label{
-			display:block;
-			width:90%;
-			text-align:left;
-		}
-		input{
-			width:90%;
-		}
-	}
-
-
-
-}
-
-	/* --------------------- Elements Default: Footer --------------------------------------- */
-footer[role="contentinfo"]{
-}
-
-/* --------------------- Elements node   ----------------------------------*/
-@import "modules/node";
-
-/* --------------------- Elements Menu   ----------------------------------*/
-//@import "modules/menu_dropdown";
-
-/* -------------------------------------------  * * * -------------------------------------------  
-14  Widgets 
+/* -------------------------------------------  * * * -------------------------------------------
+14  Widgets
 ------------------------------------------------------------------------------------------------- */
-.thumpnail-list{
-  margin-bottom:5px;
-  @extend .cf;
-  li{
-    padding:5px 0;
-    @extend .g2;
-	
-    &:first-child{
-      @extend .gf;
-    }
-
-  }
-	
-	article{
-		padding-bottom:5px;
-	}
-
-  a{
-    display:block;
-    margin:0 4px;
-  }
-  img{
-    @include image-shadow(132px, 0 0 0 2px, 2px solid white, gray, 0, 0, 5px, 0);
-    margin:0 0 5px 0px;
-  	z-index:1;
-	}
-  a img{
-    @include image-shadow(132px, 0 0 0 2px, 2px solid white, gray, 0, 0, 5px, 0);
-    margin:0 0 5px -4px;
-		&:hover{
-			@include image-shadow(132px, 0 0 0 1px, 2px solid white, gray, 0, 0, 3px, 0);			
-    	margin:0 0 5px -4px;
-		}
-		
-		
-  }
-	h3 a{
-		color:#fff;
-		font-size:11px;
-		line-height:20px;
-
-		height:22px;
-		width:130px;
-		margin: -32px 0 0 2px;
-		padding:3px 1px 0;
-		background-color:#444\9; /* IE*/
-		background-color:rgba(50, 50, 50, .9);
-		overflow:hidden;
-		position:absolute;
-		z-index:100;
-			
-		text-transform: none;
-		text-align:center;
-		
-		&:hover{
-			text-decoration: none;
-			color:#ddd;
-		}
-		
-	}
-	h4{
-		text-align:center;
-		text-transform: none;
-		font-size:10px;
-		line-height:11px;	
-	}
-
-}
-.thumpnail-list-small{
-  padding:5px 0;
-  @extend .shade;
-  @extend .cf;
-
-  h2{
-    margin:10px 0;
-    @extend .shade;
-  }
-
-  ul li{
-    @extend .g1;
-		a{
-			font-size: $basefont * 0.9;
-			line-heigth:$baseline * 0.7;
-		}
-    img{
-      margin:0 0 0 1px;
-      width:50px; //138
-      border:1px solid #ccc;
-      @include single-box-shadow(#444, 0px, 0px, 4px, 0);
-    }
-
-  }
-
-
-}
-.shade{
-  .boxshadow &{
-    @include box-shadow(0px 1px 0px 0px rgba(219, 219, 219, 1),0px 2px 0px 0px rgba(255, 255, 255, 1));
-  }
-  .no-boxshadow &{
-    border-bottom:1px solid #ddd;
-  }
-}
 
 /* --------------- Drupal widgets ------------------------------------- */
-@import "modules/drupal";
-@import "modules/admin";
+@import "module/node";
+@import "module/comment";
+@import "module/drupal";
+@import "module/admin";
+@import "module/forum";
 
-/* -------------------------------------------  * * * -------------------------------------------  
+
+/* -------------------------------------------  * * * -------------------------------------------
 Effects
 ------------------------------------------------------------------------------------------------- */
-@import "effect/tooltip";
+//@import "effect/menu_dropdown";
 
-
-/* -------------------------------------------  * * * -------------------------------------------  
-15 Icons 
+/* -------------------------------------------  * * * -------------------------------------------
+15 Icons
 ------------------------------------------------------------------------------------------------- */
 //sprites
-//@import "icon/*.png"; 
+//@import "icon/*.png";
 //@include all-icon-sprites;
+//@import "module/icons";
 
-//@import "modules/icons";
-
-/* -------------------------------------------  * * * -------------------------------------------  
+/* -------------------------------------------  * * * -------------------------------------------
 GRID
 ------------------------------------------------------------------------------------------------- */
 //the grid is defined down here so we have a chance to use firebug ;)
 @include gridgenerator($grid-count, $column-width,$gutter-width, $direction);
-@import "base/helpers";
 
-/* -------------------------------------------  * * * -------------------------------------------  
+
+/* -------------------------------------------  * * * -------------------------------------------
 Here be dragons ...
 ------------------------------------------------------------------------------------------------- */
-//@import "bourbon/addons/button";
+
 

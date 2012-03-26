@@ -3,7 +3,7 @@ company: geek Röyale
 Author: mortendk
 URL: http://geekroyale.com
 Build: SASS, Compass - Girlfriend & Tema
-Version: beta 4
+Version: beta 5
 
 ----------------------------
 Structure:

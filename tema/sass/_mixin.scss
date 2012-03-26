@@ -12,6 +12,9 @@
   @return mix(black, $color, $percent);
 }
 
+@function calculate-em($target-px, $context) {
+  @return ($target-px / $context) * 1em;
+}
 
 //Shade til images
 @mixin image-shadow($width : '100px', $margin: '0 0 0 20px', $border: '1px solid white', $color:'', $hoff:'', $voff:'', $blur:'', $spread:''){
