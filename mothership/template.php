@@ -380,7 +380,7 @@ function mothership_preprocess(&$vars, $hook) {
 
     //  remove the class attribute it its empty
     if(isset($vars['content']['links']['#attributes']['class'])){
-      if(!$vars['content']['links']['#attributes']['class'] ){
+      if(isset($vars['content']['links']['#attributes']['class']) && !$vars['content']['links']['#attributes']['class']){
         unset($vars['content']['links']['#attributes']['class']);
       }
     }
