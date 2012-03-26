@@ -25,22 +25,24 @@ hide($content['links']);
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
+  <?php if ($display_submitted): ?>
   <footer>
     <?php print $user_picture; ?>
     <span class="author"><?php print t('Written by'); ?> <?php print $name; ?></span>
     <span class="date"><?php print t('On the'); ?> <time><?php print $date; ?></time></span>
     <span class="changed"><?php print t('Last'); ?> <time><?php print $changed; ?></time></span>
 
-	  <?php if(module_exists('comment')): ?>
+    <?php if(module_exists('comment')): ?>
       <span class="comments"><?php print $comment_count; ?> Comments</span>
     <?php endif; ?>
   </footer>
+  <?php endif; ?>
 
   <div class="content">
     <?php print render($content);?>
   </div>
 
   <?php print render($content['links']); ?>
-  
+
   <?php print render($content['comments']); ?>
 </article>
