@@ -38,7 +38,7 @@ function mothership_preprocess(&$vars, $hook) {
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
-
+  $appletouchicon .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $path . '/apple-touch-icon-ipad-retina.png">';
   /*
     Go through all the hooks of drupal and give it epic love
   */
@@ -224,16 +224,16 @@ function mothership_preprocess(&$vars, $hook) {
     */
     switch (current_path()) {
       case 'user':
-        $vars[title] = t('Login');
-        unset( $vars[tabs] );
+        $vars['title'] = t('Login');
+        unset( $vars['tabs'] );
         break;
       case 'user/register':
-        $vars[title] = t('New account');
-        unset( $vars[tabs] );
+        $vars['title'] = t('New account');
+        unset( $vars['tabs'] );
         break;
       case 'user/password':
-        $vars[title] = t('I forgot my password');
-        unset( $vars[tabs] );
+        $vars['title'] = t('I forgot my password');
+        unset( $vars['tabs'] );
         break;
 
       default:
