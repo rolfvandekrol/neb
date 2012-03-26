@@ -18,32 +18,39 @@ features[] 	= comment_user_verification
 ;features[] = secondary_menu
 
 ;-------------- R E G I O N S -------------
-regions[header] 		= Header
-regions[menu] 			= Header menu
+regions[header] 		= Header Region
+regions[menu] 			= Menu
 regions[sidebar_first]  = Sidebar First
 regions[sidebar_second] = Sidebar Second
-regions[content_pre]  	= Content Pre
-regions[content]      	= Content
-regions[content_post] 	= Content Post
-regions[half_first]   	= content 2 - 1. column
-regions[half_second]  	= content 2 - 2 column
-regions[third_firstcolumn]  = Content 3 - 1. column
-regions[third_secondcolum]  = Content 3 - 2. column
-regions[third_thirdcolumn]  = Content 3 - 3. column
+
+regions[featured] 						= Featured
+regions[content_pre]  				= Content Pre
+regions[content]			      	= Content
+regions[content_post] 				= Content Post
+
+regions[half_first]   				= content 2 - 1. column
+regions[half_second]  				= content 2 - 2 column
+
+regions[triptych_first] 			= Triptych first
+regions[triptych_middle]			= Triptych middle
+regions[triptych_last] 				= Triptych last
+
 regions[footer_firstcolumn]   = Footer 1. column
 regions[footer_secondcolumn]  = Footer 2. column
 regions[footer_thirdcolumn]   = Footer 3. column
 regions[footer_fourthcolumn]  = Footer 4. column
 regions[footer] = Footer
 
+
 ;-- Required Regions
-regions[page_top] = Page Top
-regions[page_bottom] = Page Bottom
-regions[highlighted] = Highlighted
+regions[page_top] 						= Page Top
+regions[page_bottom] 					= Page Bottom
+regions[highlighted] 					= Highlighted
 regions[help] = Help
 
 ;-------------- C S S -------------
 stylesheets[all][] = css/style.css
+stylesheets[all][] = fix.css
 stylesheets[print][] = css/print.css
 
 ;-------------- CSS FOAD -------------
