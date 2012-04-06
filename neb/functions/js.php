@@ -3,9 +3,9 @@
 /*
 Nukes the js
 */
-function mothership_js_alter(&$js) {
+function neb_js_alter(&$js) {
   //js from core modules
-  if (theme_get_setting('mothership_js_nuke_module')){
+  if (theme_get_setting('neb_js_nuke_module')){
     foreach ($js as $file => $value) {
       if (strpos($file, 'modules/') !== FALSE) {
         unset($js[$file]);
@@ -13,7 +13,7 @@ function mothership_js_alter(&$js) {
     }
   }
   //js from contrib
-  if (theme_get_setting('mothership_js_nuke_module_contrib')){
+  if (theme_get_setting('neb_js_nuke_module_contrib')){
     foreach ($js as $file => $value) {
       if (strpos($file, '/modules/') !== FALSE) {
         unset($js[$file]);
@@ -21,7 +21,7 @@ function mothership_js_alter(&$js) {
     }
   }
 
-  if (theme_get_setting('mothership_js_nuke_misc')){
+  if (theme_get_setting('neb_js_nuke_misc')){
     foreach ($js as $file => $value) {
       if (strpos($file, 'misc/') !== FALSE) {
         unset($js[$file]);
@@ -31,10 +31,10 @@ function mothership_js_alter(&$js) {
 
 
   //freeform css class killing :)
-  $js_kill_list = explode("\n", theme_get_setting('mothership_js_freeform'));
+  $js_kill_list = explode("\n", theme_get_setting('neb_js_freeform'));
 
   //grap the css and run through em
-  if(theme_get_setting('mothership_js_freeform')){
+  if(theme_get_setting('neb_js_freeform')){
     foreach ($js as $file => $value) {
       //grap the kill list and do that on each file
       foreach ($js_kill_list as $key => $jsfilemustdie) {

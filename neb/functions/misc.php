@@ -17,7 +17,7 @@ comments blocks
 changes the span to <time> adds a datetime
 changes the item-list class to item-list-comments
 */
-function mothership_comment_block() {
+function neb_comment_block() {
   $items = array();
   $number = variable_get('comment_block_count', 10);
 

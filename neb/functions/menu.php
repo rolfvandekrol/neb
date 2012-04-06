@@ -4,8 +4,8 @@
 
 //kill of the <ul class="menu" around the menues
 //we already have the menu-block-wrapper that adds a <nav tag
-function mothership_menu_tree($variables) {
-  if(theme_get_setting('mothership_classes_menu_wrapper')){
+function neb_menu_tree($variables) {
+  if(theme_get_setting('neb_classes_menu_wrapper')){
     return '<ul>' . $variables['tree'] . '</ul>';
   }else{
     return '<ul class="menu">' . $variables['tree'] . '</ul>';
@@ -15,25 +15,25 @@ function mothership_menu_tree($variables) {
 /*
 walk through each menu link and kill the classes we dont want
 */
-function mothership_menu_link(array $variables) {
+function neb_menu_link(array $variables) {
   //clean up the classes
 
   //  $remove = array('first','last','leaf','collapsed','expanded','expandable');
   $remove = array();
-  if(theme_get_setting('mothership_classes_menu_items_firstlast')){
+  if(theme_get_setting('neb_classes_menu_items_firstlast')){
     $remove[] .= "first";
     $remove[] .= "last";
   }
-  if(theme_get_setting('mothership_classes_menu_leaf')){
+  if(theme_get_setting('neb_classes_menu_leaf')){
     $remove[] .= "leaf";
   }
-  if(theme_get_setting('mothership_classes_menu_collapsed')){
+  if(theme_get_setting('neb_classes_menu_collapsed')){
     $remove[] .= "collapsed";
     $remove[] .= "expanded";
     $remove[] .= "expandable";
   }
 
-  if(theme_get_setting('mothership_classes_menu_items_active')){
+  if(theme_get_setting('neb_classes_menu_items_active')){
     $remove[] .= "active-trail";
     $remove[] .= "active";
   }
@@ -47,7 +47,7 @@ function mothership_menu_link(array $variables) {
 
 
   //if we wanna remove the class for realz so nozing passes
-  if(theme_get_setting('mothership_classes_menu_items')){
+  if(theme_get_setting('neb_classes_menu_items')){
     unset($variables['element']['#attributes']['class']);
   }
 //  dpr($variables['element']['#attributes']);
@@ -80,7 +80,7 @@ pager-first & pager-last removed we use the css :first-child instead
 we add a daddy item (whos your daddy) so the wrapper item_list gets an idea who called it
 */
 
-function mothership_pager($variables) {
+function neb_pager($variables) {
 
   $tags = $variables['tags'];
   $element = $variables['element'];
@@ -198,7 +198,7 @@ views pagers
   original: /views/theme/theme.inc
 */
 
-function mothership_views_mini_pager($vars) {
+function neb_views_mini_pager($vars) {
   global $pager_page_array, $pager_total;
 
   $tags = $vars['tags'];
@@ -274,7 +274,7 @@ so if the theme that calls the itemlist adds an 'daddy' => '-pager' to the theme
 the item list haves an idea of what it is
 */
 
-function mothership_item_list($variables) {
+function neb_item_list($variables) {
   $items = $variables['items'];
   $title = $variables['title'];
   $type  = $variables['type'];

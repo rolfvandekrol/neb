@@ -2,7 +2,7 @@
 /*
 Removes the <strong>that wraps the <label> .. 
 */
-function mothership_system_modules_fieldset($variables) {
+function neb_system_modules_fieldset($variables) {
   $form = $variables['form'];
 
   // Individual table headers.
@@ -44,7 +44,7 @@ function mothership_system_modules_fieldset($variables) {
 Removes the <strong>that wraps the <label> ..
 */
 
-function mothership_system_modules_uninstall($variables) {
+function neb_system_modules_uninstall($variables) {
   $form = $variables['form'];
 
   // No theming for the confirm form.

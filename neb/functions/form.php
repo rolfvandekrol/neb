@@ -5,7 +5,7 @@ original can be found in /includes/form.inc
 */
 
 /* removes the <div> wrapper inside the form */
-function mothership_form($variables) {
+function neb_form($variables) {
 
   $element = $variables['element'];
   if (isset($element['#action'])) {
@@ -26,7 +26,7 @@ changes the classes from the div wrapper around each field
 change the div class="description" to <small>
 adds form-required
 */
-function mothership_form_element($variables) {
+function neb_form_element($variables) {
 
   $element = &$variables['element'];
   // This is also used in the installer, pre-database setup.
@@ -45,7 +45,7 @@ function mothership_form_element($variables) {
   // Add element's #type and #name as class to aid with JS/CSS selectors.
 
   $attributes['class'] = array();
-  if(! theme_get_setting('mothership_classes_form_wrapper_formitem')){
+  if(! theme_get_setting('neb_classes_form_wrapper_formitem')){
     $attributes['class'] = array('form-item');
   }
 
@@ -59,12 +59,12 @@ function mothership_form_element($variables) {
 	}
 
   if (!empty($element['#type'])) {
-    if(!theme_get_setting('mothership_classes_form_wrapper_formtype')){
+    if(!theme_get_setting('neb_classes_form_wrapper_formtype')){
       $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
     }
   }
   if (!empty($element['#name'])) {
-    if(!theme_get_setting('mothership_classes_form_wrapper_formname')){
+    if(!theme_get_setting('neb_classes_form_wrapper_formname')){
       $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
     }
   }
@@ -81,7 +81,7 @@ if( isset($element['#required']) ) {
 
   //freeform css class killing \m/
   if($attributes['class']){
-    $remove_class_form = explode(", ", theme_get_setting('mothership_classes_form_freeform'));
+    $remove_class_form = explode(", ", theme_get_setting('neb_classes_form_freeform'));
     $attributes['class'] = array_values(array_diff($attributes['class'],$remove_class_form));
   }
 
@@ -123,7 +123,7 @@ if( isset($element['#required']) ) {
     /*
     changes the description <div class="description"> to <small>
     */
-    if(!theme_get_setting('mothership_classes_form_description')){
+    if(!theme_get_setting('neb_classes_form_description')){
       $output .= "\n" . '<div class="description">' . $element['#description'] . "</div>\n";
     }else{
       $output .= "\n" . '<small>' . $element['#description'] . "</small>\n";
@@ -143,7 +143,7 @@ remove the * from a required element and add it in  class instead
 if required its added as a class to the label dont add a * to the markup we can take care of business in the css
 Removed the for="#id"  for  html5 if its an item,  radios, checkboxes or managed file cause they arent needed there
 */
-function mothership_form_element_label($variables) {
+function neb_form_element_label($variables) {
   $element = $variables['element'];
 
   // This is also used in the installer, pre-database setup.
@@ -158,7 +158,7 @@ function mothership_form_element_label($variables) {
 
   // If the element is required, a required marker is appended to the label.
   // We dont cause we belive in the power of css and less crap in the markup so we add it in a class instead.
-  if(!theme_get_setting('mothership_form_required')){
+  if(!theme_get_setting('neb_form_required')){
     $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
   }else{
     if(!empty($element['#required'])){
@@ -171,7 +171,7 @@ function mothership_form_element_label($variables) {
 
   // Style the label as class option to display inline with the element.
   if ($element['#title_display'] == 'after') {
-    if(!theme_get_setting('mothership_classes_form_label')){
+    if(!theme_get_setting('neb_classes_form_label')){
       $attributes['class'] = 'option';
     }
   }
@@ -187,7 +187,7 @@ function mothership_form_element_label($variables) {
     // AND
     if(
       //if its html5 & is not an item, checkboxradios or manged file
-      theme_get_setting('mothership_html5') AND
+      theme_get_setting('neb_html5') AND
       $element['#type'] != "item" &&
       $element['#type'] != "checkboxes" &&
       $element['#type'] != "radios" &&
@@ -201,13 +201,13 @@ function mothership_form_element_label($variables) {
 
   // The leading whitespace helps visually separate fields from inline labels.
   if($attributes){
-    if(!theme_get_setting('mothership_form_required')){
+    if(!theme_get_setting('neb_form_required')){
       return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
     }else{
       return ' <label' . drupal_attributes($attributes) . '>' . $t('!title', array('!title' => $title )) . "</label>\n";
     }
   }else{
-    if(!theme_get_setting('mothership_form_required')){
+    if(!theme_get_setting('neb_form_required')){
       return ' <label>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
     }else{
       return ' <label>' . $t('!title', array('!title' => $title )) . "</label>\n";
@@ -221,7 +221,7 @@ function mothership_form_element_label($variables) {
 * remove text type if its html5
 * add placeholder in html5
 */
-function mothership_textfield($variables) {
+function neb_textfield($variables) {
   $element = $variables['element'];
   $element['#size'] = '30';
 
@@ -232,7 +232,7 @@ function mothership_textfield($variables) {
   //  $element['#attributes']['type'] = 'text';
 
 	//placeholder
-  if (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+  if (!empty($element['#title']) AND theme_get_setting('neb_classes_form_placeholder_label') ) {
     $element['#attributes']['placeholder'] =  $element['#title'];
   }
 
@@ -240,7 +240,7 @@ function mothership_textfield($variables) {
   element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength'));
 
   //remove the form-text class
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-text'));
   }
   $extra = '';
@@ -263,7 +263,7 @@ function mothership_textfield($variables) {
 }
 
 /* Link module  link fields removes the clearfix */
-function mothership_link_field($vars) {
+function neb_link_field($vars) {
   drupal_add_css(drupal_get_path('module', 'link') .'/link.css');
 
   $element = $vars['element'];
@@ -275,10 +275,10 @@ function mothership_link_field($vars) {
   }
 
 	//placeholder
-	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');
+	if( theme_get_setting('neb_classes_form_placeholder_link') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('neb_classes_form_placeholder_link');
 	}
-	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+	elseif (!empty($element['#title']) AND theme_get_setting('neb_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
   }
 
@@ -300,7 +300,7 @@ function mothership_link_field($vars) {
 module: elements
 file: elements.theme.inc
 */
-function mothership_emailfield($variables) {
+function neb_emailfield($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'email';
   element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength', 'placeholder'));
@@ -308,10 +308,10 @@ function mothership_emailfield($variables) {
 
 
 	//placeholder
-	if( theme_get_setting('mothership_classes_form_placeholder_email') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_email');
+	if( theme_get_setting('neb_classes_form_placeholder_email') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('neb_classes_form_placeholder_email');
 	}
-	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+	elseif (!empty($element['#title']) AND theme_get_setting('neb_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
   }
 
@@ -325,7 +325,7 @@ function mothership_emailfield($variables) {
   return $output . $extra;
 }
 
-function mothership_urlfield($variables) {
+function neb_urlfield($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'url';
   element_set_attributes($element, array('id', 'name', 'value', 'size', 'maxlength', 'placeholder'));
@@ -333,10 +333,10 @@ function mothership_urlfield($variables) {
 
 
 	//placeholder
-	if( theme_get_setting('mothership_classes_form_placeholder_link') ){
-    $element['#attributes']['placeholder'] = theme_get_setting('mothership_classes_form_placeholder_link');
+	if( theme_get_setting('neb_classes_form_placeholder_link') ){
+    $element['#attributes']['placeholder'] = theme_get_setting('neb_classes_form_placeholder_link');
 	}
-	elseif (!empty($element['#title']) AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+	elseif (!empty($element['#title']) AND theme_get_setting('neb_classes_form_placeholder_label') ) {
    $element['#attributes']['placeholder'] = $element['#title'];
   }
 
@@ -353,10 +353,10 @@ function mothership_urlfield($variables) {
 
 
 /*remove form-textarea*/
-function mothership_textarea($variables) {
+function neb_textarea($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-textarea'));
   }
   $wrapper_attributes = array(
@@ -365,7 +365,7 @@ function mothership_textarea($variables) {
 
 
 
-  if (!empty($element['#title'])  AND theme_get_setting('mothership_classes_form_placeholder_label') ) {
+  if (!empty($element['#title'])  AND theme_get_setting('neb_classes_form_placeholder_label') ) {
     $element['#attributes']['placeholder'] = $element['#title'];
   }
 
@@ -386,7 +386,7 @@ function mothership_textarea($variables) {
 }
 
 
-function mothership_checkbox($variables) {
+function neb_checkbox($variables) {
   $element = $variables['element'];
   $t = get_t();
   $element['#attributes']['type'] = 'checkbox';
@@ -396,14 +396,14 @@ function mothership_checkbox($variables) {
   if (!empty($element['#checked'])) {
     $element['#attributes']['checked'] = 'checked';
   }
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-checkbox'));
   }
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
 /* remove the form-radio class */
-function mothership_radio($variables) {
+function neb_radio($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'radio';
   element_set_attributes($element, array('id', 'name', '#return_value' => 'value'));
@@ -414,19 +414,19 @@ function mothership_radio($variables) {
     $element['#attributes']['checked'] = 'checked';
   }
 
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
   _form_set_class($element, array('form-radio'));
   }
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
-function mothership_file($variables) {
+function neb_file($variables) {
   $element = $variables['element'];
 //  $element['#size'] = '30';
   $element['#attributes']['type'] = 'file';
 //  element_set_attributes($element, array('id', 'name', 'size'));
   element_set_attributes($element, array('id', 'name'));
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-file'));
   }
   return '<input' . drupal_attributes($element['#attributes']) . ' />';
@@ -435,23 +435,23 @@ function mothership_file($variables) {
   adds a comment field under the 2password
 
 */
-function mothership_password($variables) {
+function neb_password($variables) {
   $element = $variables['element'];
   $element['#size'] = '30';
   $element['#attributes']['type'] = 'password';
 
   element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
 //  element_set_attributes($element, array('id', 'name',  'maxlength'));
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-text'));
   }
 
   //html5 plceholder love ? //substr(,0, 20);
-  if (!empty($element['#description'])  AND  theme_get_setting('mothership_classes_form_placeholder_description') ) {
+  if (!empty($element['#description'])  AND  theme_get_setting('neb_classes_form_placeholder_description') ) {
     $element['#attributes']['placeholder'] = $element['#description'];
   }
 
-  if (theme_get_setting('mothership_classes_form_placeholder_label') ) {
+  if (theme_get_setting('neb_classes_form_placeholder_label') ) {
     $element['#attributes']['placeholder'] = $element['#title'];
   }
 
@@ -469,11 +469,11 @@ function mothership_password($variables) {
 }
 
 /* removed form-select */
-function mothership_select($variables) {
+function neb_select($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
 
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-select'));
   }
 
@@ -486,7 +486,7 @@ http://api.drupal.org/api/drupal/includes--form.inc/function/theme_textfield
 set the size to 30 instead of 60
 remove form-text class
 */
-function mothership_text_format_wrapper($variables) {
+function neb_text_format_wrapper($variables) {
   $element = $variables['element'];
   $output = '<div class="text-format-wrapper">';
   $output .= $element['#children'];
@@ -499,12 +499,12 @@ function mothership_text_format_wrapper($variables) {
 }
 
 
-function mothership_button($variables) {
+function neb_button($variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'submit';
   element_set_attributes($element, array('id', 'name', 'value'));
 
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
     if (!empty($element['#attributes']['disabled'])) {
       $element['#attributes']['class'][] = 'form-button-disabled';
@@ -517,11 +517,11 @@ function mothership_button($variables) {
 /*
 remove form-wrapper
 */
-function mothership_fieldset($variables) {
+function neb_fieldset($variables) {
   $element = $variables['element'];
   element_set_attributes($element, array('id'));
 
-  if(!theme_get_setting('mothership_classes_form_input')){
+  if(!theme_get_setting('neb_classes_form_input')){
     _form_set_class($element, array('form-wrapper'));
   }
 
@@ -543,7 +543,7 @@ function mothership_fieldset($variables) {
   return $output;
 }
 
-function mothership_container($variables) {
+function neb_container($variables) {
   $element = $variables['element'];
 
   // Special handling for form elements.
@@ -554,27 +554,27 @@ function mothership_container($variables) {
     }
 
     // Add the 'form-wrapper' class.
-		if(!theme_get_setting('mothership_classes_form_container_wrapper')){
+		if(!theme_get_setting('neb_classes_form_container_wrapper')){
     	$element['#attributes']['class'][] = 'form-wrapper';
 		}
 
 		//remove the field-type-...  yup this is but ugly
-		if(theme_get_setting('mothership_classes_form_container_type')){
+		if(theme_get_setting('neb_classes_form_container_type')){
 			$element['#attributes']['class']['0'] = "";
 		}
 
 		//remove the field-name-field...  yup this is but ugly
-		if(theme_get_setting('mothership_classes_form_container_name')){
+		if(theme_get_setting('neb_classes_form_container_name')){
 			$element['#attributes']['class']['1'] = "";
 		}
 
 		//remove the field-widget-....
-		if(theme_get_setting('mothership_classes_form_container_widget')){
+		if(theme_get_setting('neb_classes_form_container_widget')){
 			$element['#attributes']['class']['2'] = "";
 		}
 
 		//remove the id
-		if(theme_get_setting('mothership_classes_form_container_id')){
+		if(theme_get_setting('neb_classes_form_container_id')){
 			unset($element['#attributes']['id']);
 		}
 
@@ -589,7 +589,7 @@ adds a nother class in besides the form-item as a wrapper so theres something to
 
 */
 
-function mothership_field_multiple_value_form($variables) {
+function neb_field_multiple_value_form($variables) {
   $element = $variables['element'];
 	$output = '';
 
@@ -663,7 +663,7 @@ function mothership_field_multiple_value_form($variables) {
 /*
 more Placeholder sweetness
 */
-function mothership_form_alter(&$form, &$form_state, $form_id) {
+function neb_form_alter(&$form, &$form_state, $form_id) {
 /*
 	print "<pre>";
 	print_r($form_id);
@@ -685,8 +685,8 @@ function mothership_form_alter(&$form, &$form_state, $form_id) {
 	//login Register
 	if($form_id == 'user_register_form'){
 		//placeholder
-		if(theme_get_setting('mothership_classes_form_placeholder_email')){
-			$mail_placeholder = theme_get_setting('mothership_classes_form_placeholder_email');
+		if(theme_get_setting('neb_classes_form_placeholder_email')){
+			$mail_placeholder = theme_get_setting('neb_classes_form_placeholder_email');
 		}else{
 			$mail_placeholder = $form['account']['mail']['#title'];
 		}

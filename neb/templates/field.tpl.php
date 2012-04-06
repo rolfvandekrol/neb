@@ -48,7 +48,7 @@
 <!-- field.tpl -->
 
 <div <?php if($classes) {?>class="<?php print $classes; ?>"<?php } ?><?php print $attributes; ?>>
-  <?php print $mothership_poorthemers_helper;  ?>
+  <?php print $neb_poorthemers_helper;  ?>
 
   <?php if (!$label_hidden) : ?>
     <label<?php print $title_attributes; ?>><?php print $label ?></label>

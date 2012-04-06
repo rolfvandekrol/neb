@@ -5,7 +5,7 @@ overwrites all the blocks from blockify
 */
 
 //change the id to a class instead
-function mothership_blockify_logo($variables) {
+function neb_blockify_logo($variables) {
 	$site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
 
 	// Strip the base_path from the beginning of the logo path.
@@ -36,7 +36,7 @@ function mothership_blockify_logo($variables) {
  *
  * @ingroup themeable
  */
-function mothership_blockify_site_name($variables) {
+function neb_blockify_site_name($variables) {
   $title = drupal_get_title();
   $site_name = $variables['site_name'];
 
@@ -68,7 +68,7 @@ function mothership_blockify_site_name($variables) {
  *
  * @ingroup themeable
  */
-function mothership_blockify_site_slogan($variables) {
+function neb_blockify_site_slogan($variables) {
   return '<span class="site-slogan">' . $variables['site_slogan'] . '</span>';
 }
 
@@ -78,7 +78,7 @@ function mothership_blockify_site_slogan($variables) {
  * @ingroup themeable
  */
 // remove the  id & title 
-function mothership_blockify_page_title($variables) {
+function neb_blockify_page_title($variables) {
   if ($variables['page_title'] !== '') {
     $title_attributes_array = array(
  //     'class' => array('title'),
@@ -95,7 +95,7 @@ function mothership_blockify_page_title($variables) {
  *
  * @ingroup themeable
  */
-function mothership_blockify_breadcrumb($variables) {
+function neb_blockify_breadcrumb($variables) {
   return theme('breadcrumb', $variables);
 }
 
@@ -105,7 +105,7 @@ function mothership_blockify_breadcrumb($variables) {
  * @ingroup themeable
  */
 //removed the clearfix
-function mothership_blockify_local_actions($variables) {
+function neb_blockify_local_actions($variables) {
   $actions = render($variables['menu_local_actions']);
   if (!empty($actions)) {
     return '<ul class="action-links">' . $actions . '</ul>';
@@ -117,7 +117,7 @@ function mothership_blockify_local_actions($variables) {
  *
  * @ingroup themeable
  */
-function mothership_blockify_feed_icons($variables) {
+function neb_blockify_feed_icons($variables) {
   return $variables['feed_icons'];
 }
 
@@ -128,7 +128,7 @@ function mothership_blockify_feed_icons($variables) {
  */
 
  //removed the clearfix
-function mothership_blockify_menu_local_tasks($variables) {
+function neb_blockify_menu_local_tasks($variables) {
   $tabs = theme('menu_local_tasks', $variables);
   if (!empty($tabs)) {
     return '<div id="tabs">' . $tabs . '</div>';

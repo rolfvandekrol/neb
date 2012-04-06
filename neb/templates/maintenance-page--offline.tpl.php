@@ -1,12 +1,12 @@
 <?php  
 /*
-  * Need to add mothership as you maintenance_theme in settings.php :(
-  * #$conf['maintenance_theme'] = 'mothership';
+  * Need to add neb as you maintenance_theme in settings.php :(
+  * #$conf['maintenance_theme'] = 'neb';
   *
 */
 
 ?>
-<?php if(theme_get_setting('mothership_html5')){  ?>
+<?php if(theme_get_setting('neb_html5')){  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="<?php print $language->language; ?>"><![endif]-->
@@ -17,9 +17,9 @@
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 <?php } ?>
-<?php print $mothership_poorthemers_helper; ?>
+<?php print $neb_poorthemers_helper; ?>
 
-<?php if(theme_get_setting('mothership_html5')){  ?>
+<?php if(theme_get_setting('neb_html5')){  ?>
 <head>
 <?php }else{ ?>
   <head profile="<?php print $grddl_profile; ?>">
@@ -29,7 +29,7 @@
   <?php print $appletouchicon; ?>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<?php if(theme_get_setting('mothership_viewport')){  ?>
+<?php if(theme_get_setting('neb_viewport')){  ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php } ?>
 
@@ -37,9 +37,9 @@
     @import url("/<?php print $path; ?>/css/style.css");
   </style>
 
-<?php if(theme_get_setting('mothership_html5')){  ?>
+<?php if(theme_get_setting('neb_html5')){  ?>
 <!--[if lt IE 9]>
-  <script src="<?php print drupal_get_path('theme', 'mothership'); ?>/js/html5.js"></script>
+  <script src="<?php print drupal_get_path('theme', 'neb'); ?>/js/html5.js"></script>
 <![endif]-->
 <?php } ?>
 <?php print $selectivizr; ?>

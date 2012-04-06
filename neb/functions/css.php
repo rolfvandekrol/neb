@@ -1,34 +1,34 @@
 <?php
 
 /* Nukes the css from drupal core */
-function mothership_css_alter(&$css) {
-  $mothership_csscore_path = drupal_get_path('theme', 'mothership') . '/css-drupalcore/';
-  $mothership_cssmodules_path = drupal_get_path('theme', 'mothership') . '/css-modules/';
+function neb_css_alter(&$css) {
+  $neb_csscore_path = drupal_get_path('theme', 'neb') . '/css-drupalcore/';
+  $neb_cssmodules_path = drupal_get_path('theme', 'neb') . '/css-modules/';
 
 /*
     if(module_exists('field')){
-      $css = drupal_add_css($mothership_csscore_path . 'field.theme.css', array('group' => CSS_SYSTEM));
-      $css = drupal_add_css($mothership_csscore_path . 'field_ui.admin.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'field.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'field_ui.admin.css', array('group' => CSS_SYSTEM));
     }
 
     if(module_exists('openid')){
-      $css = drupal_add_css($mothership_csscore_path . 'openid.base.css', array('group' => CSS_SYSTEM));
-      $css = drupal_add_css($mothership_csscore_path . 'openid.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'openid.base.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'openid.theme.css', array('group' => CSS_SYSTEM));
     }
 
     if(module_exists('poll')){
-      $css = drupal_add_css($mothership_csscore_path . 'poll.admin.css', array('group' => CSS_SYSTEM));
-      $css = drupal_add_css($mothership_csscore_path . 'poll.theme.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'poll.admin.css', array('group' => CSS_SYSTEM));
+      $css = drupal_add_css($neb_csscore_path . 'poll.theme.css', array('group' => CSS_SYSTEM));
     }
 
 */
 
 
   //book
-	if( theme_get_setting('mothership_css_nuke_book') AND module_exists('book') ) {
+	if( theme_get_setting('neb_css_nuke_book') AND module_exists('book') ) {
 
-	  $css = drupal_add_css($mothership_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
-	  $css = drupal_add_css($mothership_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
+	  $css = drupal_add_css($neb_csscore_path . 'book.admin.css', array('group' => CSS_SYSTEM));
+	  $css = drupal_add_css($neb_csscore_path . 'book.theme.css', array('group' => CSS_SYSTEM));
 	  foreach ($css as $file => $value) {
 	    if (strpos($file, 'book.css') !== FALSE) {
 	      unset($css[$file]);
@@ -38,9 +38,9 @@ function mothership_css_alter(&$css) {
 	}
 
   //contectual
-  if(theme_get_setting('mothership_css_nuke_contextual') AND module_exists('contextual')){
-    $css = drupal_add_css($mothership_csscore_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
-    $css = drupal_add_css($mothership_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
+  if(theme_get_setting('neb_css_nuke_contextual') AND module_exists('contextual')){
+    $css = drupal_add_css($neb_csscore_path . 'contextual.base.css', array('group' => CSS_SYSTEM));
+    $css = drupal_add_css($neb_csscore_path . 'contextual.theme.css', array('group' => CSS_SYSTEM));
     foreach ($css as $file => $value) {
       if (strpos($file, 'contextual.css') !== FALSE) {
         unset($css[$file]);
@@ -49,7 +49,7 @@ function mothership_css_alter(&$css) {
   }
 
   //theme.css
-  if(theme_get_setting('mothership_css_nuke_theme')){
+  if(theme_get_setting('neb_css_nuke_theme')){
     foreach ($css as $file => $value) {
       //first check those css files we DONT wanna remove
       if (
@@ -65,7 +65,7 @@ function mothership_css_alter(&$css) {
   }
 
   //admin.css
-  if(theme_get_setting('mothership_css_nuke_admin')){
+  if(theme_get_setting('neb_css_nuke_admin')){
     foreach ($css as $file => $value) {
       if (strpos($file, '.admin.css') !== FALSE) {
         unset($css[$file]);
@@ -74,7 +74,7 @@ function mothership_css_alter(&$css) {
   }
 
   //modules: contrib module
-  if(theme_get_setting('mothership_css_nuke_module_contrib')){
+  if(theme_get_setting('neb_css_nuke_module_contrib')){
     foreach ($css as $file => $value) {
       //first check those css files we DONT wanna remove
       if (
@@ -88,7 +88,7 @@ function mothership_css_alter(&$css) {
   }
 
   //modules: all modules
-  if(theme_get_setting('mothership_css_nuke_module_all')){
+  if(theme_get_setting('neb_css_nuke_module_all')){
     foreach ($css as $file => $value) {
       //first check those css files we DONT wanna remove
       if (
@@ -114,7 +114,7 @@ function mothership_css_alter(&$css) {
   }
 
   //system message folder
-  if(theme_get_setting('mothership_css_nuke_systemtoolbar')){
+  if(theme_get_setting('neb_css_nuke_systemtoolbar')){
     foreach ($css as $file => $value) {
       if (
         strpos($file, 'shortcut.css') !== FALSE OR
@@ -126,7 +126,7 @@ function mothership_css_alter(&$css) {
   }
 
   //system message folder
-  if(theme_get_setting('mothership_css_nuke_system_message')){
+  if(theme_get_setting('neb_css_nuke_system_message')){
     foreach ($css as $file => $value) {
       if (strpos($file, 'system.messages.css') !== FALSE) {
         unset($css[$file]);
@@ -135,7 +135,7 @@ function mothership_css_alter(&$css) {
   }
 
   //system menu
-  if(theme_get_setting('mothership_css_nuke_system_menus')){
+  if(theme_get_setting('neb_css_nuke_system_menus')){
     foreach ($css as $file => $value) {
       if (strpos($file, 'system.menus.css') !== FALSE) {
         unset($css[$file]);
@@ -143,7 +143,7 @@ function mothership_css_alter(&$css) {
     }
   }
   //system theme
-  if(theme_get_setting('mothership_css_nuke_system_theme')){
+  if(theme_get_setting('neb_css_nuke_system_theme')){
     foreach ($css as $file => $value) {
       if (strpos($file, 'system.theme.css') !== FALSE) {
         unset($css[$file]);
@@ -153,7 +153,7 @@ function mothership_css_alter(&$css) {
 
 
   //vertical tabs
-  if(theme_get_setting('mothership_css_nuke_vertical')){
+  if(theme_get_setting('neb_css_nuke_vertical')){
     foreach ($css as $file => $value) {
       if (strpos($file, 'vertical-tabs.css') !== FALSE) {
         unset($css[$file]);
@@ -162,10 +162,10 @@ function mothership_css_alter(&$css) {
   }
 
   //freeform css class killing :)
-  $css_kill_list = explode("\n", theme_get_setting('mothership_css_freeform'));
+  $css_kill_list = explode("\n", theme_get_setting('neb_css_freeform'));
 
   //grap the css and run through em
-  if(theme_get_setting('mothership_css_freeform')){
+  if(theme_get_setting('neb_css_freeform')){
     foreach ($css as $file => $value) {
       //grap the kill list and do that on each file
       foreach ($css_kill_list as $key => $cssfilemustdie) {

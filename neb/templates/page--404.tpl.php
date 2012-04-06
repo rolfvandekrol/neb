@@ -5,7 +5,7 @@
 //page--[CONTENT TYPE].tpl.php
 ?>
 <!--page.tpl.php-->
-<?php print $mothership_poorthemers_helper; ?>
+<?php print $neb_poorthemers_helper; ?>
 
 <header class="cf" role="banner">
 

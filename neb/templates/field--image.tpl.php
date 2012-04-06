@@ -5,7 +5,7 @@ if($classes){
   $class = " class=\"$classes\" ";
 }
 ?>
-  <?php print $mothership_poorthemers_helper;  ?>
+  <?php print $neb_poorthemers_helper;  ?>
 
   <?php if(count($items) > 1 ){ ?>
 

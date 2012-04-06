@@ -5,7 +5,7 @@ adds a row variable for adding a css counter to the forum list
 we need this to support ie8 that dont understand :nth-type
 originates from system/forum/forum.module
 */
-function mothership_preprocess_forum_list(&$variables) {
+function neb_preprocess_forum_list(&$variables) {
 
   global $user;
   $row = 0;
@@ -70,7 +70,7 @@ function mothership_preprocess_forum_list(&$variables) {
 /*
 
 */
-function mothership_preprocess_forum_topic_list(&$variables) {
+function neb_preprocess_forum_topic_list(&$variables) {
   if (!empty($variables['topics'])) {
 
     $row = 0;

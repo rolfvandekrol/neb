@@ -4,9 +4,9 @@
 <!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="<?php print $language->language; ?>"> <!--<![endif]-->
 
-<?php print $mothership_poorthemers_helper; ?>
+<?php print $neb_poorthemers_helper; ?>
 
-<?php if(theme_get_setting('mothership_html5')){  ?>
+<?php if(theme_get_setting('neb_html5')){  ?>
 <head>
 <?php }else{ ?>
   <head profile="<?php print $grddl_profile; ?>">
@@ -16,7 +16,7 @@
   <?php print $appletouchicon; ?>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<?php if(theme_get_setting('mothership_viewport')){  ?>
+<?php if(theme_get_setting('neb_viewport')){  ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php } ?>
 
@@ -24,9 +24,9 @@
     @import url("/<?php print $path; ?>/css/style.css");
   </style>
 
-<?php if(theme_get_setting('mothership_html5')){  ?>
+<?php if(theme_get_setting('neb_html5')){  ?>
 <!--[if lt IE 9]>
-  <script src="<?php print drupal_get_path('theme', 'mothership'); ?>/js/html5.js"></script>
+  <script src="<?php print drupal_get_path('theme', 'neb'); ?>/js/html5.js"></script>
 <![endif]-->
 <?php } ?>
 <?php print $selectivizr; ?>

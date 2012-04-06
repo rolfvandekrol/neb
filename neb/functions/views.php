@@ -4,34 +4,34 @@
 template_preprocess_views_view
 options to remove css classes from the view
 */
-function mothership_preprocess_views_view(&$vars){
+function neb_preprocess_views_view(&$vars){
 //    kpr($vars['classes_array']);
 
-  if (theme_get_setting('mothership_classes_view')) {
+  if (theme_get_setting('neb_classes_view')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('view')));
   }
-  if (theme_get_setting('mothership_classes_view_name')) {
+  if (theme_get_setting('neb_classes_view_name')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('view-'.$vars['name'])));
   }
-  if (theme_get_setting('mothership_classes_view_view_id')) {
+  if (theme_get_setting('neb_classes_view_view_id')) {
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('view-id-'.$vars['name'])));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('view-display-id-'.$vars['display_id'])));
   }
 }
 
 /*removes the classes from the list*/
-function mothership_preprocess_views_view_list(&$vars){
+function neb_preprocess_views_view_list(&$vars){
   //we need to go down to the unformatted preprocess to rip out the individual classes
-  mothership_preprocess_views_view_unformatted($vars);
+  neb_preprocess_views_view_unformatted($vars);
 }
 
 /*
   views list css classes
   options for renaming classes & removing em
 */
-function mothership_preprocess_views_view_unformatted(&$vars) {
+function neb_preprocess_views_view_unformatted(&$vars) {
   //renaming classes
-  if(theme_get_setting('mothership_classes_view_row_rename')){
+  if(theme_get_setting('neb_classes_view_row_rename')){
     $row_first = "first";
     $row_last  = "last";
     $row_count = "count-";
@@ -53,18 +53,18 @@ function mothership_preprocess_views_view_unformatted(&$vars) {
   foreach ($rows as $id => $row) {
     $count++;
 
-    if (!theme_get_setting('mothership_classes_view_row')) {
+    if (!theme_get_setting('neb_classes_view_row')) {
       $vars['classes'][$id][] = 'views-row';
     }
-    if (!theme_get_setting('mothership_classes_view_row_count')) {
+    if (!theme_get_setting('neb_classes_view_row_count')) {
       $vars['classes'][$id][] = $row_count . $count;
-      if(theme_get_setting('mothership_classes_view_row_rename')){
+      if(theme_get_setting('neb_classes_view_row_rename')){
         $vars['classes'][$id][] =  '' . ($count % 2 ? 'odd' : 'even');
       }else{
         $vars['classes'][$id][] = $row_count . ($count % 2 ? 'odd' : 'even');
       }
     }
-    if (!theme_get_setting('mothership_classes_view_row_first_last')) {
+    if (!theme_get_setting('neb_classes_view_row_first_last')) {
       if ($count == 1) {
         $vars['classes'][$id][] = $row_first;
       }
@@ -93,7 +93,7 @@ function mothership_preprocess_views_view_unformatted(&$vars) {
 }
 
 /*
-function mothership_preprocess_views_view_field(&$vars) {
+function neb_preprocess_views_view_field(&$vars) {
  // kpr($vars);
  $vars['output'] = $vars['field']->advanced_render($vars['row']);
 }

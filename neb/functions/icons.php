@@ -2,20 +2,20 @@
 /*
 removes the <img> tag and puts the icon into a css class
 */
-function mothership_feed_icon($variables) {
+function neb_feed_icon($variables) {
   $text = t('Subscribe to @feed-title', array('@feed-title' => $variables['title']));
   return '<div class="feed">' . l($text, $variables['url'], array('html' => TRUE, 'attributes' => array('class' => array('feed-icon'), 'title' => $text))) . '</div>';
 }
 
 /*Calendar module evil hardcoded gif begone!*/
-function mothership_calendar_ical_icon($vars) {
+function neb_calendar_ical_icon($vars) {
   $url = $vars['url'];
   return '<a href="' . check_url($url) . '" class="ical-icon" title="ical"><div>iCal luv</div></a>';
 }
 
 
 /*file icons*/
-function mothership_file_link($variables) {
+function neb_file_link($variables) {
   $file = $variables['file'];
  // $icon_directory = $variables['icon_directory'];
 
@@ -47,7 +47,7 @@ function mothership_file_link($variables) {
 }
 
 /*
-function mothership_file_icon($variables) {
+function neb_file_icon($variables) {
   $file = $variables['file'];
   $mime = drupal_html_class($file->filemime);
   return '<div class="file-icon mime-' . $mime . '"></div>';  

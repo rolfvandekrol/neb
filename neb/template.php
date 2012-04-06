@@ -2,36 +2,36 @@
 /**
  * include template overwrites
  */
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/css.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/js.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/icons.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/form.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/table.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/views.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/menu.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/system.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/date.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/misc.php';
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/forum.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/css.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/js.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/icons.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/form.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/table.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/views.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/menu.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/system.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/date.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/misc.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/forum.php';
 
-include_once './' . drupal_get_path('theme', 'mothership') . '/functions/blockify.php';
+include_once './' . drupal_get_path('theme', 'neb') . '/functions/blockify.php';
 
 //load in the goodies
-if (theme_get_setting('mothership_goodies_login')) {
-  include_once './' . drupal_get_path('theme', 'mothership') . '/goodies/login.inc';
+if (theme_get_setting('neb_goodies_login')) {
+  include_once './' . drupal_get_path('theme', 'neb') . '/goodies/login.inc';
 }
 
 // Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('mothership_rebuild_registry')) {
+if (theme_get_setting('neb_rebuild_registry')) {
   system_rebuild_theme_data();
 }
 
 /*
   all the preprocess magic
 */
-function mothership_preprocess(&$vars, $hook) {
+function neb_preprocess(&$vars, $hook) {
   //http://api.drupal.org/api/drupal/includes--theme.inc/function/template_preprocess_html/7
-  $vars['mothership_poorthemers_helper'] = "";
+  $vars['neb_poorthemers_helper'] = "";
   //--- Faveicon
   global $theme;
   $path = drupal_get_path('theme', $theme);
@@ -48,14 +48,14 @@ function mothership_preprocess(&$vars, $hook) {
 
     //custom 403/404
     $headers = drupal_get_http_header();
-    if(theme_get_setting('mothership_404') AND isset($headers['status']) ){
+    if(theme_get_setting('neb_404') AND isset($headers['status']) ){
       if($headers['status'] == '404 Not Found'){
         $vars['theme_hook_suggestions'][] = 'html__404';
       }
     }
 
     /*
-    if(theme_get_setting('mothership_403')){
+    if(theme_get_setting('neb_403')){
       if($headers['status'] == '403 Forbidden'){
         $vars['theme_hook_suggestions'][] = 'html__403';
       }
@@ -67,38 +67,38 @@ function mothership_preprocess(&$vars, $hook) {
       reset.css - eric meyer ftw
       reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
       defaults.css cleans some of the defaults from drupal
-      mothership.css - adds css for use with icons & other markup fixes
+      neb.css - adds css for use with icons & other markup fixes
     */
-    if (theme_get_setting('mothership_css_reset')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    if (theme_get_setting('neb_css_reset')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-    if (theme_get_setting('mothership_css_reset_html5')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/reset-html5.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    if (theme_get_setting('neb_css_reset_html5')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/reset-html5.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-    if (theme_get_setting('mothership_css_normalize')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    if (theme_get_setting('neb_css_normalize')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
     }
-    if (theme_get_setting('mothership_css_default')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
+    if (theme_get_setting('neb_css_default')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
     }
-    if (theme_get_setting('mothership_css_layout')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership-layout.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -14));
+    if (theme_get_setting('neb_css_layout')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb-layout.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -14));
     }
-    if (theme_get_setting('mothership_css_mothershipstyles')) {
-      drupal_add_css(drupal_get_path('theme', 'mothership') . '/css/mothership.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
+    if (theme_get_setting('neb_css_nebstyles')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
     }
 
     //LIBS
     //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
 
     //--- modernizr love CDN style for the lazy ones
-    if (theme_get_setting('mothership_modernizr')) {
+    if (theme_get_setting('neb_modernizr')) {
       drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js', 'external');
     }
 
     //---- selectivizr
     $vars['selectivizr'] = '';
-    if(theme_get_setting('mothership_selectivizr')) {
+    if(theme_get_setting('neb_selectivizr')) {
       $vars['selectivizr'] .= '<!--[if (gte IE 6)&(lte IE 8)]>' . "\n";;
       $vars['selectivizr'] .= '<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>' . "\n";;
       $vars['selectivizr'] .= '<![endif]-->' . "\n";;
@@ -106,9 +106,9 @@ function mothership_preprocess(&$vars, $hook) {
 
     //---html5 fix
     $vars['html5iefix'] = '';
-    if(theme_get_setting('mothership_html5')) {
+    if(theme_get_setting('neb_html5')) {
       $vars['html5iefix'] .= '<!--[if lt IE 9]>';
-      $vars['html5iefix'] .= '<script src="' . drupal_get_path('theme', 'mothership') . '/js/html5.js"></script>';
+      $vars['html5iefix'] .= '<script src="' . drupal_get_path('theme', 'neb') . '/js/html5.js"></script>';
       $vars['html5iefix'] .= '<![endif]-->';
     }
 
@@ -117,60 +117,60 @@ function mothership_preprocess(&$vars, $hook) {
     //-----<body> C S S CLASSES  -----------------------------------------------------------------------------------------------
     //Remove & add cleasses body
 
-    if (theme_get_setting('mothership_classes_body_html')) {
+    if (theme_get_setting('neb_classes_body_html')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('html')));
     }
 
-    if (theme_get_setting('mothership_classes_body_front')) {
+    if (theme_get_setting('neb_classes_body_front')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('not-front')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('front')));
     }
 
-    if (theme_get_setting('mothership_classes_body_loggedin')) {
+    if (theme_get_setting('neb_classes_body_loggedin')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('logged-in')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('not-logged-in')));
     }
 
-    if (theme_get_setting('mothership_classes_body_layout')) {
+    if (theme_get_setting('neb_classes_body_layout')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('two-sidebars')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('one-sidebar sidebar-first')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('one-sidebar sidebar-second')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('no-sidebars')));
     }
 
-    if (theme_get_setting('mothership_classes_body_toolbar')) {
+    if (theme_get_setting('neb_classes_body_toolbar')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('toolbar')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('toolbar-drawer')));
     }
 
-    if (theme_get_setting('mothership_classes_body_pagenode')) {
+    if (theme_get_setting('neb_classes_body_pagenode')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node-')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('page-node-1')));
     }
 
-    if (theme_get_setting('mothership_classes_body_path')) {
+    if (theme_get_setting('neb_classes_body_path')) {
       $path_all = drupal_get_path_alias($_GET['q']);
       $vars['classes_array'][] = drupal_html_class('path-' . $path_all);
     }
 
-    if (theme_get_setting('mothership_classes_body_path_first')) {
+    if (theme_get_setting('neb_classes_body_path_first')) {
       $path = explode('/', $_SERVER['REQUEST_URI']);
       if($path['1']){
         $vars['classes_array'][] = drupal_html_class('pathone-' . $path['1']);
       }
     }
 
-    if (theme_get_setting('mothership_test')) {
+    if (theme_get_setting('neb_test')) {
       $vars['classes_array'][] = "test";
     }
 
-    if(isset($headers['status']) AND theme_get_setting('mothership_classes_body_status') ){
+    if(isset($headers['status']) AND theme_get_setting('neb_classes_body_status') ){
       $vars['classes_array'][] = "status-". $headers['status'];
     }
 
     //freeform css class killing
-    $remove_class_body = explode(", ", theme_get_setting('mothership_classes_body_freeform'));
+    $remove_class_body = explode(", ", theme_get_setting('neb_classes_body_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_body));
 
   }elseif ( $hook == "page" ) {
@@ -179,7 +179,7 @@ function mothership_preprocess(&$vars, $hook) {
     //Test for expected modules
     // we really love blockify
     //TODO: should this be an option to remove annoing options?
-    if (theme_get_setting('mothership_expectedmodules')) {
+    if (theme_get_setting('neb_expectedmodules')) {
       //test to see if blockify is installed
       if(!module_exists('blockify')){
         print_r('Tema use the blockify module - so you can move the logo, title, taps where you wants to & makes the page.tpl easier to work with: <a href="http://drupal.org/project/blockify">Download</a>');
@@ -204,12 +204,12 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     //remove the "theres no content default yadi yadi" from the frontpage
-    if(theme_get_setting('mothership_frontpage_default_message')){
+    if(theme_get_setting('neb_frontpage_default_message')){
       unset($vars['page']['content']['system_main']['default_message']);
     }
 
     // Remove the block template wrapper from the main content block.
-    if (theme_get_setting('mothership_content_block_wrapper') AND
+    if (theme_get_setting('neb_content_block_wrapper') AND
         !empty($vars['page']['content']['system_main']) AND
     $vars['page']['content']['system_main']['#theme_wrappers'] AND
     is_array($vars['page']['content']['system_main']['#theme_wrappers'])
@@ -244,7 +244,7 @@ function mothership_preprocess(&$vars, $hook) {
   }elseif ( $hook == "region" ) {
     // =======================================| region |========================================
 
-    if (theme_get_setting('mothership_classes_region')) {
+    if (theme_get_setting('neb_classes_region')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('region')));
     }
 
@@ -254,24 +254,24 @@ function mothership_preprocess(&$vars, $hook) {
     //block-subject should be called title so it actually makes sence...
     //  $vars['title'] = $block->subject;
     $vars['id_block'] = "";
-    if (theme_get_setting('mothership_classes_block')) {
+    if (theme_get_setting('neb_classes_block')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('block')));
     }
 
-    if (theme_get_setting('mothership_classes_block_contextual')) {
+    if (theme_get_setting('neb_classes_block_contextual')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('contextual-links-region')));
     }
 
-    if (!theme_get_setting('mothership_classes_block_id')) {
+    if (!theme_get_setting('neb_classes_block_id')) {
       $vars['id_block'] = ' id="' . $vars['block_html_id'] . '"';
     }
 
-    if (theme_get_setting('mothership_classes_block_id_as_class')) {
+    if (theme_get_setting('neb_classes_block_id_as_class')) {
       $vars['classes_array'][] = $vars['block_html_id'];
     }
 
     //freeform css class killing
-    $remove_class_block = explode(", ", theme_get_setting('mothership_classes_block_freeform'));
+    $remove_class_block = explode(", ", theme_get_setting('neb_classes_block_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_block));
 
     //adds title class to the block ... OMG!
@@ -324,11 +324,11 @@ function mothership_preprocess(&$vars, $hook) {
 
     $vars['id_node'] ="";
 
-    if (theme_get_setting('mothership_classes_node')) {
+    if (theme_get_setting('neb_classes_node')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node')));
     }
 
-    if (theme_get_setting('mothership_classes_node_state')) {
+    if (theme_get_setting('neb_classes_node_state')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-unpublished')));
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-promoted')));
@@ -338,7 +338,7 @@ function mothership_preprocess(&$vars, $hook) {
       fx in the comments
     */
 
-    if (theme_get_setting('mothership_classes_state')) {
+    if (theme_get_setting('neb_classes_state')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('node-sticky','node-unpublished', 'node-promoted')));
       if($vars['promote']){
         $vars['classes_array'][] = 'promote';
@@ -355,11 +355,11 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     //freeform css class killing
-    $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
+    $remove_class_node = explode(", ", theme_get_setting('neb_classes_node_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
 
     // css id for the node
-    if (theme_get_setting('mothership_classes_node_id')) {
+    if (theme_get_setting('neb_classes_node_id')) {
       $vars['id_node'] =  'node-'. $vars['nid'];
     }
 
@@ -368,11 +368,11 @@ function mothership_preprocess(&$vars, $hook) {
     <ul class="inline links">
     this is generated in the node_build_content() function in the node.module
     */
-    if (theme_get_setting('mothership_classes_node_links_inline') AND isset($vars['content']['links']['#attributes']['class'])) {
+    if (theme_get_setting('neb_classes_node_links_inline') AND isset($vars['content']['links']['#attributes']['class'])) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
     }
 
-    if (theme_get_setting('mothership_classes_node_links_links') AND (isset($vars['content']['links']['#attributes']['class']))) {
+    if (theme_get_setting('neb_classes_node_links_links') AND (isset($vars['content']['links']['#attributes']['class']))) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('links')));
     }
     // TODO: add a field to push in whatever class names we want to
@@ -387,16 +387,16 @@ function mothership_preprocess(&$vars, $hook) {
 
     //HELPERS
     //print out all the fields that we can hide/render
-    if(theme_get_setting('mothership_poorthemers_helper')){
-      $vars['mothership_poorthemers_helper'] .= " ";
+    if(theme_get_setting('neb_poorthemers_helper')){
+      $vars['neb_poorthemers_helper'] .= " ";
       //foreach ($vars['theme_hook_suggestions'] as $key => $value){
         // $value = str_replace('_','-',$value);
-        //$vars['mothership_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
+        //$vars['neb_poorthemers_helper'] .= "<!-- * " . $value . ".tpl.php -->\n" ;
       //}
 
       foreach ($vars['content'] as $key => $value){
-        $vars['mothership_poorthemers_helper'] .= "\n <!-- hide(\$content['". $key ."']); \n -->";
-        $vars['mothership_poorthemers_helper'] .= "\n <!-- render(\$content['". $key ."']); \n -->";
+        $vars['neb_poorthemers_helper'] .= "\n <!-- hide(\$content['". $key ."']); \n -->";
+        $vars['neb_poorthemers_helper'] .= "\n <!-- render(\$content['". $key ."']); \n -->";
       }
     }
 
@@ -413,33 +413,33 @@ function mothership_preprocess(&$vars, $hook) {
     }
 
     //remove inline class from the ul links
-    if (theme_get_setting('mothership_classes_node_links_inline')) {
+    if (theme_get_setting('neb_classes_node_links_inline')) {
       $vars['content']['links']['#attributes']['class'] = array_values(array_diff($vars['content']['links']['#attributes']['class'],array('inline')));
     }
 
   }elseif ( $hook == "field" ) {
     // =======================================| FIELD |========================================
-    if (theme_get_setting('mothership_classes_field_field')) {
+    if (theme_get_setting('neb_classes_field_field')) {
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('field')));
     }
 
 
 
     //freeform css class killing
-    $remove_class_field = explode(", ", theme_get_setting('mothership_classes_field_freeform'));
+    $remove_class_field = explode(", ", theme_get_setting('neb_classes_field_freeform'));
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_field));
 
     //kill the field-name-xxxx class
-    if (theme_get_setting('mothership_classes_field_name')) {
+    if (theme_get_setting('neb_classes_field_name')) {
       $vars['classes_array'] = preg_grep('/^field-name-/', $vars['classes_array'], PREG_GREP_INVERT);
     }
     //kill the field-type-xxxx class
-    if (theme_get_setting('mothership_classes_field_type')) {
+    if (theme_get_setting('neb_classes_field_type')) {
       $vars['classes_array'] = preg_grep('/^field-type-/', $vars['classes_array'], PREG_GREP_INVERT);
     }
 
     //label
-    if (theme_get_setting('mothership_classes_field_label')) {
+    if (theme_get_setting('neb_classes_field_label')) {
       $vars['classes_array'] = preg_grep('/^field-label-/', $vars['classes_array'], PREG_GREP_INVERT);
       $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('clearfix')));
     }
@@ -457,18 +457,18 @@ function mothership_preprocess(&$vars, $hook) {
   }
 
 //--- POOR THEMERS HELPER
-  if(theme_get_setting('mothership_poorthemers_helper')){
-    $vars['mothership_poorthemers_helper'] .= "";
+  if(theme_get_setting('neb_poorthemers_helper')){
+    $vars['neb_poorthemers_helper'] .= "";
     //theme hook suggestions
-    $vars['mothership_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
-    $vars['mothership_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
+    $vars['neb_poorthemers_helper'] .= "\n <!-- theme hook suggestions: -->";
+    $vars['neb_poorthemers_helper'] .= "\n <!-- hook:" . $hook ."--> \n  ";
     foreach ($vars['theme_hook_suggestions'] as $key => $value){
         $value = str_replace('_','-',$value);
-        $vars['mothership_poorthemers_helper'] .= "<!-- TPL:* " . $value . ".tpl.php -->\n" ;
+        $vars['neb_poorthemers_helper'] .= "<!-- TPL:* " . $value . ".tpl.php -->\n" ;
     }
-    $vars['mothership_poorthemers_helper'] .= "";
+    $vars['neb_poorthemers_helper'] .= "";
   }else{
-    $vars['mothership_poorthemers_helper'] ="";
+    $vars['neb_poorthemers_helper'] ="";
   }
 
 
@@ -484,7 +484,7 @@ function mothership_preprocess(&$vars, $hook) {
   // Purge needless XHTML stuff.
   nathan ftw! -> http://sonspring.com/journal/html5-in-drupal-7
 */
-function mothership_process_html_tag(&$vars) {
+function neb_process_html_tag(&$vars) {
   $el = &$vars['element'];
 
   // Remove type="..." and CDATA prefix/suffix.
@@ -499,8 +499,8 @@ function mothership_process_html_tag(&$vars) {
 /*
 freeform class killing
 */
-function mothership_class_killer(&$vars){
-  $remove_class_node = explode(", ", theme_get_setting('mothership_classes_node_freeform'));
+function neb_class_killer(&$vars){
+  $remove_class_node = explode(", ", theme_get_setting('neb_classes_node_freeform'));
   $vars['classes_array'] = array_values(array_diff($vars['classes_array'],$remove_class_node));
   $vars['classes'] = "";
 
@@ -512,10 +512,10 @@ function mothership_class_killer(&$vars){
 /**
  * Implements hook_theme_registry_alter().
  */
-function mothership_theme_registry_alter(&$theme_registry) {
+function neb_theme_registry_alter(&$theme_registry) {
 //  kpr($theme_registry);
   //enough of this bull lets kill em classes
-  $theme_registry['node']['preprocess functions'][] = 'mothership_class_killer';
+  $theme_registry['node']['preprocess functions'][] = 'neb_class_killer';
 
 /*
   // Kill the next/previous forum topic navigation links.

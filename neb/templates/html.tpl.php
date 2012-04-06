@@ -3,20 +3,20 @@
 <!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
 <!--[if IE 9 ]>    <html class="no-js ie9" lang="<?php print $language->language; ?>" <?php print $rdf_namespaces; ?>><![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js" lang="<?php print $language->language; ?>"> <!--<![endif]-->
-<?php print $mothership_poorthemers_helper; ?>
+<?php print $neb_poorthemers_helper; ?>
 <head profile="<?php print $grddl_profile; ?>">
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <?php print $appletouchicon; ?>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<?php if(theme_get_setting('mothership_viewport')){  ?>
+<?php if(theme_get_setting('neb_viewport')){  ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php } ?>
 
 <?php print $styles; ?>
 <?php print $scripts; ?>
 <!--[if lt IE 9]>
-  <script src="<?php print drupal_get_path('theme', 'mothership'); ?>/js/html5.js"></script>
+  <script src="<?php print drupal_get_path('theme', 'neb'); ?>/js/html5.js"></script>
 <![endif]-->
 <?php print $selectivizr; ?>
 </head>

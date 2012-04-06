@@ -28,9 +28,9 @@
  */
 ?>
 
-<?php if ($content AND (!theme_get_setting('mothership_region_wrapper'))){ ?>
+<?php if ($content AND (!theme_get_setting('neb_region_wrapper'))){ ?>
   <div class="<?php print $classes; ?>">
-    <?php print $mothership_poorthemers_helper;  ?>
+    <?php print $neb_poorthemers_helper;  ?>
     <?php print $content; ?>
   </div>
 <?php }else{ ?>

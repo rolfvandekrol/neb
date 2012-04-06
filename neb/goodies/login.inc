@@ -5,7 +5,7 @@
   password forgotten link is placed after the password field
 */
 
-function mothership_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+function neb_form_user_login_block_alter(&$form, &$form_state, $form_id) {
   //hide the orignal links
   $form['links']['#access'] = FALSE ;
 
@@ -25,7 +25,7 @@ login form on /user
 adds links from the tabs to the login page
 */
 
-function mothership_form_user_login_alter(&$form, &$form_state, $form_id) {
+function neb_form_user_login_alter(&$form, &$form_state, $form_id) {
   $form['name']['#prefix'] =  '<b>' . l(t('Register a new account'), 'user/register', array('attributes' => array('class' => 'login-register', 'title' => t('Create a new user account')))) . '</b>';
   $form['pass']['#suffix'] = '<b>' . l(t('Forgot password?'), 'user/password', array('attributes' => array('class' => 'login-password', 'title' => t('Get a new password')))) . '</b>';
 }
@@ -34,7 +34,7 @@ function mothership_form_user_login_alter(&$form, &$form_state, $form_id) {
 adds links from the tabs to the remember password page
 */
 
-function mothership_form_user_pass_alter(&$form, &$form_state, $form_id) {
+function neb_form_user_pass_alter(&$form, &$form_state, $form_id) {
   $form['name']['#description'] =t('Enter your username or your e-mail address');
   $form['actions']['#suffix'] = '<b>' . l(t('Login'), 'user', array('attributes' => array('class' => 'login', 'title' => t('Login')))) . '</b>';
 }
@@ -43,7 +43,7 @@ function mothership_form_user_pass_alter(&$form, &$form_state, $form_id) {
 adds links from the tabs to the remember password page
 */
 
-function mothership_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+function neb_form_user_register_form_alter(&$form, &$form_state, $form_id) {
 //  kpr($form);
    $form['actions']['#suffix'] = '<b>' . l(t('Login'), 'user', array('attributes' => array('class' => 'login', 'title' => t('Login')))) . '</b>';
 }

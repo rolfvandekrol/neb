@@ -1,5 +1,5 @@
 <?php	
-function mothership_date_display_single($vars) {
+function neb_date_display_single($vars) {
   $date = $vars['date'];
   $timezone = $vars['timezone'];
 
