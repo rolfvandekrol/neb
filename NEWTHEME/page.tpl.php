@@ -1,12 +1,3 @@
-<?php
-//kpr(get_defined_vars());
-//kpr($theme_hook_suggestions);
-//template naming
-//page--[CONTENT TYPE].tpl.php
-?>
-<!--page.tpl.php-->
-<?php print $neb_poorthemers_helper; ?>
-
 <header class="cf" role="banner">
 
   <?php if ($logo): ?>
