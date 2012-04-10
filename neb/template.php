@@ -3,7 +3,6 @@
  * include template overwrites
  */
 include_once './' . drupal_get_path('theme', 'neb') . '/functions/css.php';
-include_once './' . drupal_get_path('theme', 'neb') . '/functions/js.php';
 include_once './' . drupal_get_path('theme', 'neb') . '/functions/icons.php';
 include_once './' . drupal_get_path('theme', 'neb') . '/functions/form.php';
 include_once './' . drupal_get_path('theme', 'neb') . '/functions/table.php';
