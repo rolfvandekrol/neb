@@ -134,7 +134,7 @@ function neb_form_element_label($variables) {
   $title = filter_xss_admin($element['#title']);
 
   // Show label only to screen readers to avoid disruption in visual flows.
-  elseif ($element['#title_display'] == 'invisible') {
+  if ($element['#title_display'] == 'invisible') {
     $attributes['class'] = 'element-invisible';
   }
 

@@ -8,9 +8,10 @@ function neb_menu_tree($variables) {
 walk through each menu link and kill the classes we dont want
 */
 function neb_menu_link(array $variables) {
-  $remove = array("leaf", "collapsed", "expanded","expandable");
-  $variables['element']['#attributes']['class'] = array_diff($variables['element']['#attributes']['class'],$remove);
+  $element = $variables['element'];
 
+  $remove = array("leaf", "collapsed", "expanded","expandable");
+  $element['#attributes']['class'] = array_diff($element['#attributes']['class'], $remove);
 
   $sub_menu = '';
   if ($element['#below']) {
