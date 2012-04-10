@@ -33,8 +33,6 @@ regions[sidebar_second] = Sidebar Second
 regions[help] = Help
 regions[highlighted] = Highlighted
 
-
-
 ;-------------- C S S -------------
 stylesheets[all][] = css/style.css
 
