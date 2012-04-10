@@ -1,7 +1,6 @@
 <?php
-//alternatvie to field when we need some goddamn clean content
-//use it in a tpl file like
-//$content['field_NAME']['#theme'] = "nomarkup";
+
+
 function theme_nomarkup($variables) {
   $output = '';
   // Render the items.
@@ -12,11 +11,6 @@ function theme_nomarkup($variables) {
   return $output;
 }
 
-/*
-comments blocks
-changes the span to <time> adds a datetime
-changes the item-list class to item-list-comments
-*/
 function neb_comment_block() {
   $items = array();
   $number = variable_get('comment_block_count', 10);
