@@ -183,4 +183,38 @@ function neb_css_alter(&$css) {
     '/^.*overlay-.*\.css$/',
     /* *.admin.css files and files for admin_menu ? */
   );
+
+  foreach ($css as $file => $value) {
+    if (_neb_css_alter_match_array($file, $css_remove)) {
+      unset($css[$file]);
+    }
+  }
+
+}
+
+function _neb_css_alter_match_array($file, $patterns) {
+  foreach ($patterns as $key => $value) {
+    if (is_numeric($key)) {
+      $result = _neb_css_alter_match($file, $value);
+    } else {
+      $result = _neb_css_alter_match($file, $key, $value);
+    }
+
+    if ($result) { 
+      return TRUE; 
+    }
+  }
+
+  return FALSE;
+}
+
+
+function _neb_css_alter_match($file, $pattern, $exceptions = NULL) {
+  $match = preg_match($pattern, $file);
+
+  if (!$match || !$exceptions) {
+    return (bool) $match;
+  }
+
+  return !_neb_css_alter_match_array($file, $exceptions);
 }
