@@ -179,7 +179,7 @@ function neb_css_alter(&$css) {
 
   $css_remove['/^.*modules\/.*/'] = array(
     '/^.*\.base\.css$/',
-    '/^.*(toolbar|shortcut)\.css$/',
+    '/^.*(toolbar|shortcut|devel)\.css$/',
     '/^.*overlay-.*\.css$/',
     /* *.admin.css files and files for admin_menu ? */
   );
