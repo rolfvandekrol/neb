@@ -34,7 +34,7 @@ function neb_preprocess(&$vars, $hook) {
   $vars['neb_poorthemers_helper'] = "";
   //--- Faveicon
   global $theme;
-  $path = drupal_get_path('theme', $theme);
+  $path = '/' . drupal_get_path('theme', $theme);
   $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
   $appletouchicon .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
