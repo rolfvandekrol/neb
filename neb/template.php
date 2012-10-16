@@ -108,7 +108,7 @@ function neb_preprocess(&$vars, $hook) {
     $vars['html5iefix'] = '';
     if(theme_get_setting('neb_html5')) {
       $vars['html5iefix'] .= '<!--[if lt IE 9]>';
-      $vars['html5iefix'] .= '<script src="' . drupal_get_path('theme', 'neb') . '/js/html5.js"></script>';
+      $vars['html5iefix'] .= '<script src="/' . drupal_get_path('theme', 'neb') . '/js/html5.js"></script>';
       $vars['html5iefix'] .= '<![endif]-->';
     }
 
