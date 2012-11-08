@@ -327,6 +327,7 @@ function neb_item_list($variables) {
         //TODO remove last
         $attributes['class'][] = 'last';
       }
+      $attributes['class'][] = ($i%2) ? 'even' : 'odd';
       $output .= '<li' . drupal_attributes($attributes) . '>' . $data . "</li>\n";
     }
     $output .= "</$type>";
