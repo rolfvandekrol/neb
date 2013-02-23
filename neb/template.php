@@ -20,15 +20,75 @@ include_once './' . drupal_get_path('theme', 'neb') . '/goodies/login.inc';
 */
 function neb_preprocess(&$vars, $hook) {
   global $theme;
-  $path = drupal_get_path('theme', $theme);
-  $appletouchicon =  '<link rel="apple-touch-icon" href="' . $path . '/apple-touch-icon.png">' . "\n";
-  $appletouchicon .= '<link rel="apple-touch-icon" sizes="72x72" href="' . $path . '/apple-touch-icon-ipad.png">' . "\n";
-  $appletouchicon .= '<link rel="apple-touch-icon" sizes="114x114" href="' . $path . '/apple-touch-icon-iphone4.png">';
-  $appletouchicon .= '<link rel="apple-touch-icon" sizes="144x144" href="' . $path . '/apple-touch-icon-ipad-retina.png">';
+  $path = '/' . drupal_get_path('theme', $theme);
 
-  if ($hook == "html") {
-    $vars['appletouchicon'] = $appletouchicon;
+  /*
+    Go through all the hooks of drupal and give it epic love
+  */
+
+  if ( $hook == "html" ) {
+    // =======================================| HTML |========================================
+
+    //custom 403/404
+    $headers = drupal_get_http_header();
+    if(theme_get_setting('neb_404') AND isset($headers['status']) ){
+      if($headers['status'] == '404 Not Found'){
+        $vars['theme_hook_suggestions'][] = 'html__404';
+      }
+    }
+
+    /*
+    if(theme_get_setting('neb_403')){
+      if($headers['status'] == '403 Forbidden'){
+        $vars['theme_hook_suggestions'][] = 'html__403';
+      }
+    }
+    */
+
+    /*
+      Adds optional reset css files that the sub themes might wanna use.
+      reset.css - eric meyer ftw
+      reset-html5.css - html5doctor.com/html-5-reset-stylesheet/
+      defaults.css cleans some of the defaults from drupal
+      neb.css - adds css for use with icons & other markup fixes
+    */
+    if (theme_get_setting('neb_css_reset')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/reset.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    }
+    if (theme_get_setting('neb_css_reset_html5')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/reset-html5.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    }
+    if (theme_get_setting('neb_css_normalize')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/normalize.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -20));
+    }
+    if (theme_get_setting('neb_css_default')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb-default.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -15));
+    }
+    if (theme_get_setting('neb_css_layout')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb-layout.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -14));
+    }
+    if (theme_get_setting('neb_css_nebstyles')) {
+      drupal_add_css(drupal_get_path('theme', 'neb') . '/css/neb.css', array('group' => CSS_THEME, 'every_page' => TRUE, 'weight' => -10));
+    }
+
+    //LIBS
+    //We dont wanna add modules just to put in a goddamn js file so were adding em here instead
+
+    //--- modernizr love CDN style for the lazy ones
+    if (theme_get_setting('neb_modernizr')) {
+      drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js', 'external');
+    }
+
+    //---html5 fix
+    $vars['html5iefix'] = '';
+    if(theme_get_setting('neb_html5')) {
+      $vars['html5iefix'] .= '<!--[if lt IE 9]>';
+      $vars['html5iefix'] .= '<script src="/' . drupal_get_path('theme', 'neb') . '/js/html5.js"></script>';
+      $vars['html5iefix'] .= '<![endif]-->';
+    }
+
     $vars['classes_array'] = array_values(array_diff($vars['classes_array'],array('html', 'toolbar', 'toolbar-drawer')));
+    
   } elseif ($hook == "page") {
     // page--nodetype.tpl.php
     if (isset($vars['node'])) { $vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type; }

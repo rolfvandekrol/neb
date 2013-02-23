@@ -20,28 +20,26 @@
     <div class="sidebar-one"><?php print render($page['sidebar_first']); ?></div>
   <?php endif; ?>
 
-  <div role="main" id="#main-content">
-    <?php print render($title_prefix); 
+  <div role="main" class="main-content" id="main-content">
+    <?php print render($title_prefix); ?>
+    <?php if ($title): ?>
+      <h1><?php print $title; ?></h1>
+    <?php endif; ?>
+    <?php print render($title_suffix); ?>
 
-    if ($title): ?><h1><?php print $title; ?></h1><?php endif;
+    <?php print $breadcrumb; ?>
 
-    print render($title_suffix); 
-    print $breadcrumb; 
+    <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+    <?php if (isset($tabs)): ?><nav class="tabs"><?php print render($tabs); ?></nav><?php endif; ?>
 
-    if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; 
-    if (isset($tabs)): ?><nav class="tabs"><?php print render($tabs); ?></nav><?php endif; 
-
-    if ($page['highlighted'] OR $messages): ?>
+    <?php if ($page['highlighted'] OR $messages): ?>
       <div class="drupal-messages"><?php print render($page['highlighted']) . $messages; ?></div>
-    <?php endif; 
+    <?php endif; ?>
 
-    print render($page['content_pre']) . render($page['content']) . render($page['content_post']); ?>
+    <?php print render($page['content_pre']) . render($page['content']) . render($page['content_post']); ?>
   </div>
 
   <?php if ($page['sidebar_second']): ?><div class="sidebar-two"><?php print render($page['sidebar_second']); ?></div><?php endif; ?>
 </div>
 
 <footer role="contentinfo"><?php print render($page['footer']); ?></footer>
-
-
-
