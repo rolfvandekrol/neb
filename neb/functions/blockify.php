@@ -126,8 +126,6 @@ function neb_blockify_feed_icons($variables) {
  *
  * @ingroup themeable
  */
-
- //removed the clearfix
 function neb_blockify_menu_local_tasks($variables) {
   $tabs = theme('menu_local_tasks', $variables);
   if (!empty($tabs)) {

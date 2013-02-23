@@ -1,64 +1,19 @@
 <?php
 
-//TODO remove classes from the <a>
-
-//kill of the <ul class="menu" around the menues
-//we already have the menu-block-wrapper that adds a <nav tag
 function neb_menu_tree($variables) {
-  if(theme_get_setting('neb_classes_menu_wrapper')){
-    return '<ul>' . $variables['tree'] . '</ul>';
-  }else{
-    return '<ul class="menu">' . $variables['tree'] . '</ul>';
-  }
+  return '<ul class="menu">' . $variables['tree'] . '</ul>';
 }
 
 /*
 walk through each menu link and kill the classes we dont want
 */
 function neb_menu_link(array $variables) {
-  //clean up the classes
-
-  //  $remove = array('first','last','leaf','collapsed','expanded','expandable');
-  $remove = array();
-  if(theme_get_setting('neb_classes_menu_items_firstlast')){
-    $remove[] .= "first";
-    $remove[] .= "last";
-  }
-  if(theme_get_setting('neb_classes_menu_leaf')){
-    $remove[] .= "leaf";
-  }
-  if(theme_get_setting('neb_classes_menu_collapsed')){
-    $remove[] .= "collapsed";
-    $remove[] .= "expanded";
-    $remove[] .= "expandable";
-  }
-
-  if(theme_get_setting('neb_classes_menu_items_active')){
-    $remove[] .= "active-trail";
-    $remove[] .= "active";
-  }
-
-  if($remove){
-    $variables['element']['#attributes']['class'] = array_diff($variables['element']['#attributes']['class'],$remove);
-  }
-
-
-  //TODO: Remove thee menu-mlid-[NUMBER]
-
-
-  //if we wanna remove the class for realz so nozing passes
-  if(theme_get_setting('neb_classes_menu_items')){
-    unset($variables['element']['#attributes']['class']);
-  }
-//  dpr($variables['element']['#attributes']);
-
   $element = $variables['element'];
 
-  if($variables['element']['#attributes'])
-
+  $remove = array("leaf", "collapsed", "expanded","expandable");
+  $element['#attributes']['class'] = array_diff($element['#attributes']['class'], $remove);
 
   $sub_menu = '';
-
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
@@ -67,18 +22,6 @@ function neb_menu_link(array $variables) {
   return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
 }
 
-
-// TODO: book nav.
-//http://api.drupal.org/api/drupal/modules--book--book.module/function/template_preprocess_book_navigation/7
-
-/*
-  @hook_pager
-we rewrites this so we can get shorter class names
-Remove all the pager- prefixes classes we dont need this the pager have the pager class on the ul
-pager-first & pager-last removed we use the css :first-child instead
-
-we add a daddy item (whos your daddy) so the wrapper item_list gets an idea who called it
-*/
 
 function neb_pager($variables) {
 
@@ -146,7 +89,6 @@ function neb_pager($variables) {
       for (; $i <= $pager_last && $i <= $pager_max; $i++) {
         if ($i < $pager_current) {
           $items[] = array(
-//            'class' => array('pager-item'),
             'data' => theme('pager_previous', array('text' => $i, 'element' => $element, 'interval' => ($pager_current - $i), 'parameters' => $parameters)),
           );
         }
@@ -158,7 +100,6 @@ function neb_pager($variables) {
         }
         if ($i > $pager_current) {
           $items[] = array(
-          //  'class' => array('pager-item'),
             'data' => theme('pager_next', array('text' => $i, 'element' => $element, 'interval' => ($i - $pager_current), 'parameters' => $parameters)),
           );
         }
@@ -179,11 +120,10 @@ function neb_pager($variables) {
     }
     if ($li_last) {
       $items[] = array(
-//        'class' => array('last'),
         'data' => $li_last,
       );
     }
-  //we wrap this in *gasp* so
+
     return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
       'items' => $items,
       'attributes' => array('class' => array('pager') ),
@@ -192,11 +132,6 @@ function neb_pager($variables) {
   }
 }
 
-/*
-views pagers
-  theme_views_mini_pager
-  original: /views/theme/theme.inc
-*/
 
 function neb_views_mini_pager($vars) {
   global $pager_page_array, $pager_total;
@@ -267,12 +202,6 @@ function neb_views_mini_pager($vars) {
   }
 }
 
-
-/*
-the non saying item-list class haw now added an -daddy element
-so if the theme that calls the itemlist adds an 'daddy' => '-pager' to the theme call
-the item list haves an idea of what it is
-*/
 
 function neb_item_list($variables) {
   $items = $variables['items'];
